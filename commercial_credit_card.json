@@ -1,0 +1,583 @@
+{
+  "id": "http://localhost:8000/schemas/v0/commercial_credit_card.json#",
+  "description": "Commercial Credit Card",
+  "type": "object",
+  "properties": {
+    "Organisation": {
+      "id": "http://localhost:8000/schemas/v0/definitions/common/organisation.json#",
+      "description": "Organisation",
+      "type": "object",
+      "properties": {
+        "ParentGroupName": {
+          "description": "Parent company that owns or partially owns subsidiary organisations",
+          "type": "string"
+        },
+        "ParentGroupID": {
+          "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
+          "type": "string",
+          "pattern": "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
+        },
+        "BrandName": {
+          "description": "Name by which an organisation is known that is printed on top of the ATM",
+          "type": "string"
+        },
+        "BrandID": {
+          "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/brand.json#",
+          "type": "string"
+        }
+      },
+      "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"]
+    },
+    "ProductName": {
+      "description": "Name of the Commercial Credit Card",
+      "type": "string"
+    },
+    "ProductType": {
+      "description": "Descriptive code for the product category",
+      "id": "http://localhost:8000/schemas/v0/definitions/ccc_product_type.json#",
+      "enum": ["Commercial Credit Cards"]
+    },
+    "ProductSegment": {
+      "description": "Marketing or industry segment that the product is designed for",
+      "type": "array",
+      "items": {
+        "id": "http://localhost:8000/schemas/v0/definitions/ccc_segments.json#",
+        "description": "Marketing or industry segment that the product is designed for",
+        "enum": ["CashBack", "Rewards", "Corporate", "SME", "General"]
+      }
+    },
+    "ProductIdentifier": {
+      "description": "Identifier within the parent organisation for the product. Must be unique in the organisation",
+      "type": "string"
+    },
+    "ProductURL": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "Description": {
+      "description": "Product description",
+      "type": "string"
+    },
+    "KeyFeatures": {
+      "description": "Product key features",
+      "type": "string"
+    },
+    "PaymentHoliday": {
+      "description": "Indicates whether a payment holiday is possible",
+      "type": "boolean"
+    },
+    "PaymentHolidayDescription": {
+      "description": "Detailed description on the payment holiday if available",
+      "type": "string"
+    },
+    "OtherKeyFeatures": {
+      "description": "Additional Features of the card",
+      "type": "string"
+    },
+    "TsandCs": {
+      "description": "URL provided by the parent organisation which redirects to the current T&Cs. Only applies on live products",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "Details": {
+      "id": "http://localhost:8000/schemas/v0/definitions/ccc/ccc_group.json#",
+      "description": "Commercial Credit Card Group ",
+      "type": "object",
+      "properties": {
+        "ProductSubType": {
+          "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+          "description": "Describes if the offering is promotional, regular or a description of a future state",
+          "enum": ["Promotional", "Regular", "Future Regular Terms"]
+        },
+        "CommercialCreditCardItem": {
+          "id": "http://localhost:8000/schemas/v0/definitions/ccc/ccc_item.json#",
+          "description": "Commercial Credit Card Item ",
+          "type": "object",
+          "properties": {
+            "StartPromotionOrFutureTerms": {
+              "description": "Describes the start date",
+              "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+              "type": "string",
+              "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+            },
+            "StopPromotionOrFutureTerms": {
+              "description": "Describes the end date",
+              "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+              "type": "string",
+              "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+            },
+            "DayLengthPromotion": {
+              "description": "Describes the length if only a duration is given instead of a date",
+              "type": "integer"
+            },
+            "DateOfChange": {
+              "description": "Date of the change if it refers to future terms",
+              "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+              "type": "string",
+              "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+            },
+            "MinimumCreditLimit": {
+              "description": "Minimum £500, maximum subject to status",
+              "type": "number"
+            },
+            "RepaymentFrequency": {
+              "description": "Repayment frequency",
+              "id": "http://localhost:8000/schemas/v0/definitions/common/frequency.json#",
+              "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+            },
+            "APRRate": {
+              "description": "Annual Percentage Rate",
+              "type": "number"
+            },
+            "BalanceTransferInterestRatePeriod": {
+              "id": "http://localhost:8000/schemas/v0/definitions/ccc/ccc_interest_period.json#",
+              "description": "The period used to define the specific interest rate for balance transfers",
+              "enum": ["Monthly", "Annual"]
+            },
+            "PurchaseRate": {
+              "description": "Purchase rate",
+              "type": "number"
+            },
+            "BalanceTransferRate": {
+              "description": "Balance transfer rate",
+              "type": "number"
+            },
+            "CashAdvanceRate": {
+              "description": "Cash advance rate",
+              "type": "number"
+            },
+            "OverLimitFee": {
+              "description": "Fee applicable if the card was credited over its limit",
+              "type": "number"
+            },
+            "MaximumNumberOfCardsPermitted": {
+              "description": "The maximum numbers of cards per account",
+              "type": "integer"
+            },
+            "CardScheme": {
+              "id": "http://localhost:8000/schemas/v0/definitions/common/card_type.json#",
+              "description": "Indicates the card scheme",
+              "enum": ["Visa", "Mastercard", "Cashcard"]
+            },
+            "AbilityToSetIndividualLimits": {
+              "description": "The ability to set separate limts on different cards in one account",
+              "type": "boolean"
+            },
+            "AccessToOnlineDataReportingTool": {
+              "description": "Describes whether the account have access to an online tool for reprting on expenditure",
+              "type": "boolean"
+            },
+            "CashWithdrawalsAllowed": {
+              "description": "Describes whether cash withdrawals are allowed",
+              "type": "boolean"
+            },
+            "ConvenienceCheque": {
+              "description": "Describes whether the card account allow convenience cheques",
+              "type": "boolean"
+            },
+            "DaysInterestFreeCreditIfPaymentFull": {
+              "description": "Describes how many interest free days are given if the card is fully paid at each term",
+              "type": "integer"
+            },
+            "IssuingEmergencyCardsFees": {
+              "description": "Amount payable for issuing an emergency card",
+              "type": "number"
+            },
+            "AnnualFeeAmount": {
+              "description": "Details on annual account fee, such as non payable when there is a turnover above a certain sum",
+              "type": "number"
+            },
+            "CashbackPercent": {
+              "description": "Percent of cashback on amount spend",
+              "type": "number"
+            },
+            "FeesOnCheque": {
+              "description": "Percentage fee on a convenince cheques",
+              "type": "number"
+            },
+            "MinimumRepaymentPercent": {
+              "description": "Minimum repayment as percentage",
+              "type": "integer"
+            },
+            "MinimumRepaymentAmount": {
+              "description": "Minimum repayment amount",
+              "type": "number"
+            },
+            "PaymentDaysAfterStatement": {
+              "description": "How many days after statement is the payment expected",
+              "type": "integer"
+            },
+            "RepaymentNotes": {
+              "description": "Additional notes",
+              "type": "string"
+            },
+            "MinimumLendingAmmount": {
+              "description": "The minimum lending available",
+              "type": "number"
+            },
+            "StatementAtAccountLevel": {
+              "description": "Describes whether there is a statement at account level",
+              "type": "boolean"
+            },
+            "StatementAtPersonalLevel": {
+              "description": "Describes whether there is a statement at card level",
+              "type": "boolean"
+            },
+            "PaymentSchemeExchangeRate": {
+              "description": "The base exchange rate used in settlement of the transaction between issuer and scheme",
+              "type": "number"
+            },
+            "ExchangeRateAdjustment": {
+              "description": "The margin added, by certain card issuers, to the scheme rate in order to arrive at the exchange rate qouted as the reference exchange rate to the cardholder",
+              "type": "number"
+            },
+            "PaymentSchemeExchangeFee": {
+              "description": "Any payment network fee applied to some or all non-sterling transactions that the card issuer recover directly from the cardholder",
+              "type": "number"
+            },
+            "PaymentSchemeExchangeFeeRate": {
+              "description": "Any payment network fee rate applied to some or all non-sterling transactions that the card issuer recover directly from the cardholder",
+              "type": "number"
+            },
+            "NonSterlingTransactionFee": {
+              "description": "A fee applied to all non-Sterling card transactions",
+              "type": "number"
+            },
+            "NonSterlingTransactionFeeRate": {
+              "description": "A fee rate applied to all non-Sterling card transactions",
+              "type": "number"
+            },
+            "NonSterlingPurchaseFee": {
+              "description": "An additional fee applied to certain card retail transactions",
+              "type": "number"
+            },
+            "NonSterlingPurchaseFeeRate": {
+              "description": "An additional fee rate applied to certain card retail transactions",
+              "type": "number"
+            },
+            "NonSterlingCashFee": {
+              "description": "An additional fee applied to certain card cash withdrawals. This fee also applies to cash near fees such as gambling",
+              "type": "number"
+            },
+            "NonSterlingCashFeeRate": {
+              "description": "An additional fee rate applied to certain card cash withdrawals. This fee also applies to cash near fees such as gambling",
+              "type": "number"
+            },
+            "ForeignPurchaseFee": {
+              "description": "Additional card fee applied to sterling retail transactions made abroad",
+              "type": "number"
+            },
+            "ForeignPurchaseFeeRate": {
+              "description": "Additional card fee rate applied to sterling retail transactions made abroad",
+              "type": "number"
+            },
+            "ForeignCashFee": {
+              "description": "Additional card fee applied to sterling cash withdrawal made abroad",
+              "type": "number"
+            },
+            "ForeignCashFeeRate": {
+              "description": "Additional card fee rate applied to sterling cash withdrawal made abroad",
+              "type": "number"
+            }
+          },
+          "required": ["MinimumCreditLimit", "RepaymentFrequency", "APRRate", "PurchaseRate", "BalanceTransferRate", "CashAdvanceRate", "CardScheme", "AbilityToSetIndividualLimits", "AccessToOnlineDataReportingTool", "CashWithdrawalsAllowed", "ConvenienceCheque", "DaysInterestFreeCreditIfPaymentFull", "IssuingEmergencyCardsFees", "AnnualFeeAmount", "PaymentDaysAfterStatement", "MinimumLendingAmmount", "StatementAtAccountLevel", "StatementAtPersonalLevel", "PaymentSchemeExchangeRate", "ExchangeRateAdjustment"]
+        }
+      }
+    },
+    "Eligibility": {
+      "id": "http://localhost:8000/schemas/v0/definitions/eligibility/eligibility.json#",
+      "description": "Eligibility",
+      "type": "object",
+      "properties": {
+        "AgeRestricted": {
+          "description": "Indicates a customer's age is part of eligibility criteria",
+          "type": "boolean"
+        },
+        "MinimumAge": {
+          "description": "Minimum age, in years, required to hold an account",
+          "type": "integer"
+        },
+        "MaximumAge": {
+          "description": "Maximum age, in years, allowed to hold the account",
+          "type": "integer"
+        },
+        "MaximumAgeToOpen": {
+          "description": "Maximum age, in years, to open an account",
+          "type": "integer"
+        },
+        "OtherFinancialHoldingRequired": {
+          "description": "Indicates that it is necessary to hold another product with the bank in order to be eligible for this product or feature",
+          "type": "boolean"
+        },
+        "Description": {
+          "description": "One paragraph detailing the eligibility",
+          "type": "string"
+        },
+        "IncomeTurnoverRelated": {
+          "description": "Indicates if eligibility linked to income",
+          "type": "boolean"
+        },
+        "SingleJointIncome": {
+          "id": "http://localhost:8000/schemas/v0/definitions/eligibility/income_type.json#",
+          "description": "Minimum Income Source. For certain products a minimum income is required. This can be mandated as to the single income or to a joint income. This field describes this",
+          "enum": ["Single Income", "Joint Income", "Single or Joint Income"]
+        },
+        "MinimumIncomeTurnoverAmount": {
+          "description": "Minimum income / Turnover required to hold the product",
+          "type": "number"
+        },
+        "MinimumIncomeTurnoverCurrency": {
+          "description": "Minimum income / Turnover Currency",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
+          "type": "string",
+          "pattern": "[A-Z]{3,3}"
+        },
+        "IncomeCondition": {
+          "description": "Stipulates any particular definition of income that applies to the income eligibility and/or method by which income must paid into the account (eg Salary DD)",
+          "type": "string"
+        },
+        "MinIncomeTurnoverPaidIntoAccount": {
+          "description": "Minimum Income Amount required to paid into the account",
+          "type": "integer"
+        },
+        "MinimumIncomeFrequency": {
+          "description": "The frequency that the minimum mentioned before is deposited in the account. Yearly is very important for premium accounts",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/frequency.json#",
+          "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+        },
+        "AnnualBusinessTurnover": {
+          "description": "Annual Business Turnover",
+          "type": "integer"
+        },
+        "AnnualBusinessTurnoverCurrency": {
+          "description": "Annual Business Turnover Currency",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
+          "type": "string",
+          "pattern": "[A-Z]{3,3}"
+        },
+        "ResidencyResticted": {
+          "description": "Indicates a customer's residency forms part of the eligibility criteria",
+          "type": "boolean"
+        },
+        "ResidencyRestictedRegion": {
+          "description": "Indicates a customer must be current resident of a geographic area/country",
+          "id": "http://localhost:8000/schemas/v0/definitions/regions.json#",
+          "enum": ["UK", "EEA", "EU", "EFTA", "GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS", "IRL"]
+        },
+        "MaxNumberOfAccounts": {
+          "description": "Maximum number of the same prodcut the customer may hold",
+          "type": "string"
+        },
+        "ThirdSectorOrganisations": {
+          "description": "Is the product available to operate as a Clubs or Societies account?",
+          "type": "boolean"
+        },
+        "MinimumDeposit": {
+          "description": "A minimum deposit required to hold this account",
+          "type": "boolean"
+        },
+        "OpeningDepositMinimum": {
+          "description": "Minimum Amount to be held on account",
+          "type": "number"
+        },
+        "OpeningDepositMinimumCurrency": {
+          "description": "The currency of the Minimum Amount to be depositing at opening",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
+          "type": "string",
+          "pattern": "[A-Z]{3,3}"
+        },
+        "MinimumOperatingBalanceExists": {
+          "description": "Is there a Minimum Operating Balance?",
+          "type": "boolean"
+        },
+        "MinimumOperatingBalance": {
+          "description": "Minimum Operating Balance",
+          "type": "number"
+        },
+        "MinimumOperatingBalanceCurrency": {
+          "description": "Minimum Operating Balance currency",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
+          "type": "string",
+          "pattern": "[A-Z]{3,3}"
+        },
+        "MaximumOpeningAmount": {
+          "description": "A maximum amount to be deposited at opening",
+          "type": "boolean"
+        },
+        "OpeningDepositMaximumAmount": {
+          "description": "Maximum Amount to be depositing at opening",
+          "type": "number"
+        },
+        "OpeningDepositMaximumCurrency": {
+          "description": "The currency of the Minimum Amount to be depositing at opening",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
+          "type": "string",
+          "pattern": "[A-Z]{3,3}"
+        },
+        "EligibilityName": {
+          "description": "Free text description, denotes non standard eligibilities not included in the code list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "EligibilityType": {
+          "type": "array",
+          "items": {
+            "id": "http://localhost:8000/schemas/v0/definitions/eligibility/eligibility_type.json#",
+            "description": "List of reference data for elgibility constraints",
+            "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account"]
+          },
+          "uniqueItems": true
+        },
+        "EligibilityNotes": {
+          "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
+          "type": "string"
+        },
+        "PreviousBancruptcy": {
+          "description": "Describes if a previous bankruptcy / insolvency disqualfies for this account Details in ELI-280",
+          "type": "boolean"
+        },
+        "MarketingEligibility": {
+          "type": "array",
+          "items": {
+            "id": "http://localhost:8000/schemas/v0/definitions/eligibility/marketing_eligibility.json#",
+            "description": "Specific eligibility for marketing",
+            "enum": ["Switchers Only", "New Customers Only"]
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"]
+    },
+    "Benefits": {
+      "id": "http://localhost:8000/schemas/v0/definitions/benefits/benefit.json#",
+      "description": "Benefit",
+      "type": "object",
+      "properties": {
+        "Benefit": {
+          "description": "Describe  one or more benefits if they exist",
+          "type": "boolean"
+        },
+        "BenefitGroup": {
+          "type": "array",
+          "items": {
+            "id": "http://localhost:8000/schemas/v0/definitions/benefits/benefit_group.json#",
+            "description": "Benefit Interest Group",
+            "type": "object",
+            "properties": {
+              "ProductSubType": {
+                "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                "description": "Describes if the offering is promotional, regular or a description of a future state",
+                "enum": ["Promotional", "Regular", "Future Regular Terms"]
+              },
+              "BenefitItem": {
+                "id": "http://localhost:8000/schemas/v0/definitions/benefits/benefit_item.json#",
+                "description": "Benefit Item",
+                "type": "object",
+                "properties": {
+                  "StartPromotionOrFutureTerms": {
+                    "description": "Describes the start date",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                  },
+                  "StopPromotionOrFutureTerms": {
+                    "description": "Describes the end date",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                  },
+                  "DayLengthPromotion": {
+                    "description": "Describes the length if only a duration is given instead of a date in days",
+                    "type": "integer"
+                  },
+                  "DateOfChange": {
+                    "description": "Date of the change if it refers to future terms",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                  },
+                  "BenefitDetail": {
+                    "type": "array",
+                    "items": {
+                      "id": "http://localhost:8000/schemas/v0/definitions/benefits/benfit_detail.json#",
+                      "description": "Benefit detail",
+                      "type": "object",
+                      "properties": {
+                        "BenefitType": {
+                          "description": "Type that represents the nature of the benefit",
+                          "type": "string"
+                        },
+                        "BenefitName": {
+                          "description": "The name of the benefit",
+                          "type": "string"
+                        },
+                        "BenefitValue": {
+                          "description": "The value or values permissible for a specific benefit for an individual product representing a product characteristic",
+                          "type": "string"
+                        },
+                        "DefaultsToAccounts": {
+                          "description": "Is the benefit part of the default account",
+                          "type": "boolean"
+                        },
+                        "BenefitID": {
+                          "description": "Unique benefit identifier per organisation",
+                          "type": "string"
+                        },
+                        "CriteriaType": {
+                          "id": "http://localhost:8000/schemas/v0/definitions/benefits/benefit_criteria_type.json#",
+                          "description": "Criteria that is required in order to be eligible for the Benefit",
+                          "enum": ["Deposit", "Direct Debit", "Other"]
+                        },
+                        "MinimumCriteria": {
+                          "description": "Minimum amount for the criteria",
+                          "type": "number"
+                        },
+                        "MaximumCriteria": {
+                          "description": "Maximum amount for the criteria",
+                          "type": "number"
+                        },
+                        "Counter": {
+                          "description": "Counter for the criteria (e.g. number of DD)",
+                          "type": "integer"
+                        },
+                        "Description": {
+                          "description": "A textual explanation of what the benefit is",
+                          "type": "string"
+                        },
+                        "PromotionStartDate": {
+                          "description": "If the benefit is temporal the start date is when the benefit comes into effect",
+                          "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                          "type": "string",
+                          "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                        },
+                        "PromotionEndDate": {
+                          "description": "If the benefit is temporal the end date is when the benefit is no longer applicable",
+                          "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                          "type": "string",
+                          "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "required": ["ProductSubType", "BenefitItem"]
+          }
+        }
+      },
+      "required": ["Benefit"]
+    }
+  },
+  "required": ["Organisation", "ProductName", "ProductType", "ProductIdentifier", "ProductURL", "Description", "KeyFeatures", "PaymentHoliday", "PaymentHolidayDescription", "OtherKeyFeatures", "TsandCs", "Details", "Eligibility", "Benefits"]
+}

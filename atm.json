@@ -1,0 +1,181 @@
+{
+  "id": "http://localhost:8000/schemas/v0/atm.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ATM",
+  "type": "object",
+  "properties": {
+    "ParentGroupName": {
+      "description": "Parent company that owns or partially owns subsidiary organisations. ATM Operator Organisation.",
+      "type": "string"
+    },
+    "ParentGroupID": {
+      "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
+      "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
+      "type": "string",
+      "pattern": "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
+    },
+    "Brand": {
+      "id": "http://localhost:8000/schemas/v0/definitions/common/brand_org.json#",
+      "description": "Brand Organisation",
+      "type": "object",
+      "properties": {
+        "BrandName": {
+          "description": "Name by which an organisation is known that is printed on top of the ATM",
+          "type": "string"
+        },
+        "BrandID": {
+          "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/brand.json#",
+          "type": "string"
+        }
+      },
+      "required": ["BrandName", "BrandID"]
+    },
+    "BranchID": {
+      "description": "Unique and unambiguous identification of a retail branch of a financial institution",
+      "type": "string"
+    },
+    "AtmID": {
+      "description": "ATM terminal device identification for the acquirer and the issuer",
+      "type": "string"
+    },
+    "LocationCategory": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "id": "http://localhost:8000/schemas/v0/definitions/atm/location.json#",
+        "description": "Indicates the environment of the ATM",
+        "enum": ["Airport", "Bank Office", "Bank Specialised Outlet", "Branch", "Branch Customer Area", "Branch Lobby", "Branch Wall", "Bureau de Change", "Coach Station", "Convenience Store", "Exhibition Centre", "Factory", "Office", "Financial Institution", "Hospital", "Hotel", "House of Commons", "House of Lords", "Leisure Centre", "Ministry of Defence", "Motorway Services", "Petrol Station", "Pleasure Park", "Public House", "Railway Station", "Railway Station (Underground)", "Remote Unit", "Retailer", "Department Store", "Retailer Outlet", "Seaport", "Shopping Centre", "Supermarket", "University", "College", "Bank External", "Restricted Access", "Commercial Space"]
+      }
+    },
+    "SiteID": {
+      "description": "Site identifying code, where ATM is located",
+      "type": "string"
+    },
+    "SiteName": {
+      "description": "Site identifying name, where ATM is located",
+      "type": "string"
+    },
+    "Address": {
+      "id": "http://localhost:8000/schemas/v0/definitions/common/postal_address.json#",
+      "description": "Postal Address",
+      "type": "object",
+      "properties": {
+        "StrtNm": {
+          "description": "Name of a street or thoroughfare",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/max_70_text.json#",
+          "type": "string",
+          "maxLength": 70
+        },
+        "buidingNameOrNumber": {
+          "description": "Number or Name that identifies the position of a building on a street",
+          "type": "string"
+        },
+        "PstCd": {
+          "description": "Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/max_16_text.json#",
+          "type": "string",
+          "maxLength": 16
+        },
+        "optionalAddressField": {
+          "description": "Is required by some banks as an additional field; often directions (important for customers)",
+          "type": "string"
+        },
+        "TwnNm": {
+          "description": "Name of a built-up area, with defined boundaries, and a local government",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+          "type": "string",
+          "maxLength": 35
+        },
+        "CtrySubDvsn": {
+          "description": "Identifies a subdivision of a country such as state, region, county",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+          "type": "string",
+          "maxLength": 35
+        },
+        "Ctry": {
+          "description": "Nation with its own government",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/country_code.json#",
+          "type": "string",
+          "pattern": "[A-Z]{2,2}"
+        }
+      },
+      "required": ["StrtNm", "PstCd", "Ctry"]
+    },
+    "GPSLocation": {
+      "id": "http://localhost:8000/schemas/v0/definitions/common/geographic_coordinates.json#",
+      "description": "Geographic Coordinates",
+      "type": "object",
+      "properties": {
+        "Lat": {
+          "description": "Latitude measured in degrees, minutes and seconds, following by 'N' for North and 'S' for South of the Equator (for example 48°51'29'' N for the Eiffel Tower latitude)",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/max_16_text.json#",
+          "type": "string",
+          "maxLength": 16
+        },
+        "Long": {
+          "description": "Angular measurement of the distance of a location on the Earth East or West of the Greenwich Observatory. The longitude is measured in degrees, minutes and seconds, following by 'E' for East and 'W' for West (for example 2°17'4'' E for the Eiffel Tower longitude)",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/max_16_text.json#",
+          "type": "string",
+          "maxLength": 16
+        }
+      },
+      "required": ["Lat", "Long"]
+    },
+    "TypesOfAccessibility": {
+      "id": "http://localhost:8000/schemas/v0/definitions/common/access_type.json#",
+      "description": "Information about the accessibility",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": ["Automatic Doors", "Lower Level Counter", "Induction Loop", "Wheelchair Access", "External Ramp", "Internal Ramp", "Level Access", "Helping Hand Unit"]
+      }
+    },
+    "LanguageSupport": {
+      "description": "Languages that the ATM supports",
+      "type": "array",
+      "items": {
+        "description": "must be ISO 693-2 codes",
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "AtmServices": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": {
+        "id": "http://localhost:8000/schemas/v0/definitions/atm/services.json#",
+        "description": "Information about ATM services",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "enum": ["Cash Withdrawal", "Cash Deposits", "Mobile Banking Registration", "Pin Change", "Mobile Phone Top Up", "PingIT Registration", "Bill Payments", "Mini Statements", "Balance", "Fast Cash", "PIN Activation", "Charity Donation", "Cheque Book Request"]
+        }
+      }
+    },
+    "AtmServicesDescription": {
+      "description": "ATM Service Description",
+      "type": "string"
+    },
+    "Currency": {
+      "description": "Defines currency type available for dispense",
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": {
+        "description": "must be ISO 4217 codes",
+        "type": "string"
+      }
+    },
+    "MinimumValueDispensed": {
+      "id": "http://localhost:8000/schemas/v0/definitions/atm/notes.json#",
+      "description": "Minimum currency denominations usually available",
+      "enum": ["£ 5", "£ 10", "£ 20", "£ 50", "£ 100"]
+    }
+  },
+  "required": ["ParentGroupName", "ParentGroupID", "Brand", "AtmID", "Address", "GPSLocation", "LanguageSupport", "AtmServices", "Currency"],
+  "additionalProperties": false
+}
