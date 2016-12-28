@@ -166,13 +166,15 @@ documentation:
           "properties": {
             "ParentGroupName": {
               "description": "Parent company that owns or partially owns subsidiary organisations.",
-              "type": "string"
+              "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+              "type": "string",
+              "maxLength": 350
             },
             "ParentGroupID": {
               "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
               "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
               "type": "string",
-              "pattern": "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
+              "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
             },
             "Brand": {
               "id": "http://localhost:8000/schemas/v0/definitions/common/brand_org.json#",
@@ -191,9 +193,17 @@ documentation:
               },
               "required": ["BrandName", "BrandID"]
             },
-            "BranchID": {
+            "BranchName": {
+              "description": "Name by which a party is known and which is usually used to identify that party",
+              "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+              "type": "string",
+              "maxLength": 35
+            },
+            "BranchIdentification": {
               "description": "Unique and unambiguous identification of a retail branch of a financial institution",
-              "type": "string"
+              "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+              "type": "string",
+              "maxLength": 35
             },
             "BranchType": {
               "id": "http://localhost:8000/schemas/v0/definitions/branch/branch_type.json#",
@@ -222,7 +232,7 @@ documentation:
                   "maxLength": 16
                 },
                 "optionalAddressField": {
-                  "description": "Is required by some banks as an additional field; often directions (important for customers)",
+                  "description": "Additional field; often directions",
                   "type": "string"
                 },
                 "TwnNm": {
@@ -241,14 +251,16 @@ documentation:
                   "description": "Nation with its own government",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/country_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{2,2}"
+                  "pattern": "[A-Z]{2}"
                 }
               },
               "required": ["StrtNm", "PstCd", "Ctry"]
             },
             "BranchDescription": {
               "description": "Description of the branch",
-              "type": "string"
+              "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+              "type": "string",
+              "maxLength": 70
             },
             "BranchPhoto": {
               "description": "Image related to the branch",
@@ -257,21 +269,41 @@ documentation:
             },
             "TelephoneNumber": {
               "description": "Collection of information that identifies a phone number, as defined by telecom services.",
-              "type": "string"
+              "id": "http://localhost:8000/schemas/v0/definitions/common/phone_number.json#",
+              "type": "string",
+              "pattern": "\\+[0-9]{1,3}-[0-9()+\\-]{1,30}"
             },
-            "AlternativeTelephoneNumber": {
-              "description": "Collection of information that identifies a phone number, as defined by telecom services.",
-              "type": "string"
-            },
-            "AlternativeTelephoneNumberDescription": {
-              "description": "Description of the telephone number",
-              "type": "string"
+            "AlternatePhone": {
+              "type": "array",
+              "items": {
+                "id": "http://localhost:8000/schemas/v0/definitions/common/alternative_phone_number.json#",
+                "description": "Alternative Phone Number",
+                "type": "object",
+                "properties": {
+                  "AlternativeTelephoneNumber": {
+                    "description": "Collection of information that identifies a phone number, as defined by telecom services.",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/phone_number.json#",
+                    "type": "string",
+                    "pattern": "\\+[0-9]{1,3}-[0-9()+\\-]{1,30}"
+                  },
+                  "AlternativeTelephoneNumberDescription": {
+                    "description": "Description of the telephone number",
+                    "type": "string"
+                  }
+                }
+              }
             },
             "FaxNumber": {
               "description": "Collection of information that identifies a FAX number, as defined by telecom services.",
-              "type": "string"
+              "type": "array",
+              "items": {
+                "id": "http://localhost:8000/schemas/v0/definitions/common/phone_number.json#",
+                "description": "Collection of information that identifies a phone number, as defined by telecom services.",
+                "type": "string",
+                "pattern": "\\+[0-9]{1,3}-[0-9()+\\-]{1,30}"
+              }
             },
-            "GPSLocation": {
+            "GeographicLocation": {
               "id": "http://localhost:8000/schemas/v0/definitions/common/geographic_coordinates.json#",
               "description": "Geographic Coordinates",
               "type": "object",
@@ -357,28 +389,32 @@ documentation:
               "minItems": 1
             },
             "PlannedBranchClosure": {
-              "id": "http://localhost:8000/schemas/v0/definitions/branch/closure.json#",
               "type": "array",
               "items": {
-                "type": "object",
-                "properties": {
-                  "StartDate": {
-                    "description": "Date when a branch is due to close temporarily or permanently",
-                    "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-                    "type": "string",
-                    "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                "id": "http://localhost:8000/schemas/v0/definitions/branch/closure.json#",
+                "description": "Planned branch closure",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "StartDate": {
+                      "description": "Date when a branch is due to close temporarily or permanently",
+                      "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                      "type": "string",
+                      "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                    },
+                    "EndDate": {
+                      "description": "Date when a branch is due to re-open following temporary closure",
+                      "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                      "type": "string",
+                      "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                    }
                   },
-                  "EndDate": {
-                    "description": "Date when a branch is due to re-open following temporary closure",
-                    "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-                    "type": "string",
-                    "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-                  }
-                },
-                "required": ["StartDate", "EndDate"]
+                  "required": ["StartDate", "EndDate"]
+                }
               }
             },
-            "TypesOfAccessibility": {
+            "AccessibilityTypes": {
               "id": "http://localhost:8000/schemas/v0/definitions/common/access_type.json#",
               "description": "Information about the accessibility",
               "type": "array",
@@ -388,7 +424,7 @@ documentation:
                 "enum": ["Automatic Doors", "Lower Level Counter", "Induction Loop", "Wheelchair Access", "External Ramp", "Internal Ramp", "Level Access", "Helping Hand Unit"]
               }
             },
-            "BranchSelfServeService": {
+            "BranchSelfServeServiceName": {
               "type": "array",
               "items": {
                 "id": "http://localhost:8000/schemas/v0/definitions/branch/self_serve.json#",
@@ -397,11 +433,18 @@ documentation:
               },
               "uniqueItems": true
             },
-            "BranchSelfServiceDescription": {
+            "BranchSelfServeServiceDescription": {
               "description": "Additional information about self service branch services",
-              "type": "string"
+              "type": "array",
+              "items": {
+                "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+                "description": "maxLength 350 text",
+                "type": "string",
+                "maxLength": 350
+              }
             },
             "BranchMediatedServiceName": {
+              "description": "Information about mediated branch facilities",
               "type": "array",
               "items": {
                 "id": "http://localhost:8000/schemas/v0/definitions/mediated.json#",
@@ -412,9 +455,16 @@ documentation:
             },
             "BranchMediatedServiceDescription": {
               "description": "Additional information about mediated branch facilities, such as waiting areas with seats available for business banking (if waiting)",
-              "type": "string"
+              "type": "array",
+              "items": {
+                "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+                "description": "maxLength 350 text",
+                "type": "string",
+                "maxLength": 350
+              }
             },
             "BranchFacilitiesName": {
+              "description": "Information about branch facilities",
               "type": "array",
               "items": {
                 "id": "http://localhost:8000/schemas/v0/definitions/branch/facility.json#",
@@ -424,6 +474,7 @@ documentation:
               "uniqueItems": true
             },
             "CustomerSegment": {
+              "description": "Customer segment which the branch is able to service",
               "type": "array",
               "items": {
                 "id": "http://localhost:8000/schemas/v0/definitions/branch/segment.json#",
@@ -434,14 +485,20 @@ documentation:
             },
             "BranchFacilitiesDescription": {
               "description": "Additional information about branch facilities, such as specific lights",
-              "type": "string"
+              "type": "array",
+              "items": {
+                "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+                "description": "maxLength 350 text",
+                "type": "string",
+                "maxLength": 350
+              }
             },
-            "AtmAtBranch": {
+            "ATMAtBranch": {
               "description": "Indicated whether an ATM is at the branch",
               "type": "boolean"
             }
           },
-          "required": ["ParentGroupName", "ParentGroupID", "Brand", "BranchType", "Address", "TelephoneNumber", "GPSLocation", "OpeningTimes", "AtmAtBranch"],
+          "required": ["ParentGroupName", "ParentGroupID", "Brand", "BranchIdentification", "BranchType", "Address", "TelephoneNumber", "GeographicLocation", "OpeningTimes", "ATMAtBranch"],
           "additionalProperties": false
         }
 /atms:
@@ -457,13 +514,15 @@ documentation:
           "properties": {
             "ParentGroupName": {
               "description": "Parent company that owns or partially owns subsidiary organisations. ATM Operator Organisation.",
-              "type": "string"
+              "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+              "type": "string",
+              "maxLength": 350
             },
             "ParentGroupID": {
               "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
               "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
               "type": "string",
-              "pattern": "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
+              "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
             },
             "Brand": {
               "id": "http://localhost:8000/schemas/v0/definitions/common/brand_org.json#",
@@ -482,15 +541,20 @@ documentation:
               },
               "required": ["BrandName", "BrandID"]
             },
-            "BranchID": {
+            "BranchIdentification": {
               "description": "Unique and unambiguous identification of a retail branch of a financial institution",
-              "type": "string"
+              "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+              "type": "string",
+              "maxLength": 35
             },
-            "AtmID": {
+            "ATMID": {
               "description": "ATM terminal device identification for the acquirer and the issuer",
-              "type": "string"
+              "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+              "type": "string",
+              "maxLength": 35
             },
             "LocationCategory": {
+              "description": "Indicates the environment of the ATM",
               "type": "array",
               "uniqueItems": true,
               "items": {
@@ -501,11 +565,15 @@ documentation:
             },
             "SiteID": {
               "description": "Site identifying code, where ATM is located",
-              "type": "string"
+              "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+              "type": "string",
+              "maxLength": 35
             },
             "SiteName": {
               "description": "Site identifying name, where ATM is located",
-              "type": "string"
+              "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+              "type": "string",
+              "maxLength": 35
             },
             "Address": {
               "id": "http://localhost:8000/schemas/v0/definitions/common/postal_address.json#",
@@ -529,7 +597,7 @@ documentation:
                   "maxLength": 16
                 },
                 "optionalAddressField": {
-                  "description": "Is required by some banks as an additional field; often directions (important for customers)",
+                  "description": "Additional field; often directions",
                   "type": "string"
                 },
                 "TwnNm": {
@@ -548,12 +616,12 @@ documentation:
                   "description": "Nation with its own government",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/country_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{2,2}"
+                  "pattern": "[A-Z]{2}"
                 }
               },
               "required": ["StrtNm", "PstCd", "Ctry"]
             },
-            "GPSLocation": {
+            "GeographicLocation": {
               "id": "http://localhost:8000/schemas/v0/definitions/common/geographic_coordinates.json#",
               "description": "Geographic Coordinates",
               "type": "object",
@@ -573,9 +641,9 @@ documentation:
               },
               "required": ["Lat", "Long"]
             },
-            "TypesOfAccessibility": {
-              "id": "http://localhost:8000/schemas/v0/definitions/common/access_type.json#",
+            "AccessibilityTypes": {
               "description": "Information about the accessibility",
+              "id": "http://localhost:8000/schemas/v0/definitions/common/access_type.json#",
               "type": "array",
               "uniqueItems": true,
               "items": {
@@ -583,7 +651,7 @@ documentation:
                 "enum": ["Automatic Doors", "Lower Level Counter", "Induction Loop", "Wheelchair Access", "External Ramp", "Internal Ramp", "Level Access", "Helping Hand Unit"]
               }
             },
-            "LanguageSupport": {
+            "SupportedLanguages": {
               "description": "Languages that the ATM supports",
               "type": "array",
               "items": {
@@ -592,7 +660,8 @@ documentation:
               },
               "minItems": 1
             },
-            "AtmServices": {
+            "ATMServices": {
+              "description": "Information about ATM services",
               "type": "array",
               "uniqueItems": true,
               "minItems": 1,
@@ -607,9 +676,14 @@ documentation:
                 }
               }
             },
-            "AtmServicesDescription": {
-              "description": "ATM Service Description",
-              "type": "string"
+            "AdditionalATMServices": {
+              "type": "array",
+              "items": {
+                "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+                "description": "maxLength 350 text",
+                "type": "string",
+                "maxLength": 350
+              }
             },
             "Currency": {
               "description": "Defines currency type available for dispense",
@@ -617,17 +691,19 @@ documentation:
               "uniqueItems": true,
               "minItems": 1,
               "items": {
-                "description": "must be ISO 4217 codes",
-                "type": "string"
+                "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
+                "description": "Active or Historic Currency Code and Amount",
+                "type": "string",
+                "pattern": "[A-Z]{3}"
               }
             },
             "MinimumValueDispensed": {
-              "id": "http://localhost:8000/schemas/v0/definitions/atm/notes.json#",
               "description": "Minimum currency denominations usually available",
+              "id": "http://localhost:8000/schemas/v0/definitions/atm/notes.json#",
               "enum": ["£ 5", "£ 10", "£ 20", "£ 50", "£ 100"]
             }
           },
-          "required": ["ParentGroupName", "ParentGroupID", "Brand", "AtmID", "Address", "GPSLocation", "LanguageSupport", "AtmServices", "Currency"],
+          "required": ["ParentGroupName", "ParentGroupID", "Brand", "ATMID", "Address", "GeographicLocation", "SupportedLanguages", "ATMServices", "Currency"],
           "additionalProperties": false
         }
 /personal-current-accounts:
@@ -653,7 +729,7 @@ documentation:
                   "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
+                  "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
                 },
                 "BrandName": {
                   "description": "Name by which an organisation is known that is printed on top of the ATM",
@@ -735,7 +811,7 @@ documentation:
             "MobileWallet": {
               "description": "Mobile wallet supported by this product. A mobile wallet being any electronic device that allows an individual to make electronic commerce transactions",
               "id": "http://localhost:8000/schemas/v0/definitions/ca/wallet.json#",
-              "enum": ["Apple Pay", "Android Pay", "Samsung Pay", "Vodaphone Wallet", "Issuer Mobile App"]
+              "enum": ["Apple Pay", "Android Pay", "Samsung Pay", "Vodafone Wallet", "Issuer Mobile App"]
             },
             "CardNotes": {
               "description": "Optional additional notes to supplement the card details",
@@ -801,7 +877,7 @@ documentation:
                 "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                 "description": "Active or Historic Currency Code and Amount",
                 "type": "string",
-                "pattern": "[A-Z]{3,3}"
+                "pattern": "[A-Z]{3}"
               },
               "minItems": 1
             },
@@ -817,7 +893,7 @@ documentation:
                 "type": "object",
                 "properties": {
                   "ProductSubType": {
-                    "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                     "description": "Describes if the offering is promotional, regular or a description of a future state",
                     "enum": ["Promotional", "Regular", "Future Regular Terms"]
                   },
@@ -838,7 +914,7 @@ documentation:
                         "type": "string",
                         "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                       },
-                      "DayLengthPromotion": {
+                      "LengthPromotionalInDays": {
                         "description": "Describes the length if only a duration is given instead of a date",
                         "type": "integer"
                       },
@@ -905,7 +981,7 @@ documentation:
                   "description": "Minimum income / Turnover Currency",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "IncomeCondition": {
                   "description": "Stipulates any particular definition of income that applies to the income eligibility and/or method by which income must paid into the account (eg Salary DD)",
@@ -928,7 +1004,7 @@ documentation:
                   "description": "Annual Business Turnover Currency",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "ResidencyResticted": {
                   "description": "Indicates a customer's residency forms part of the eligibility criteria",
@@ -959,7 +1035,7 @@ documentation:
                   "description": "The currency of the Minimum Amount to be depositing at opening",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "MinimumOperatingBalanceExists": {
                   "description": "Is there a Minimum Operating Balance?",
@@ -973,7 +1049,7 @@ documentation:
                   "description": "Minimum Operating Balance currency",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "MaximumOpeningAmount": {
                   "description": "A maximum amount to be deposited at opening",
@@ -987,23 +1063,16 @@ documentation:
                   "description": "The currency of the Minimum Amount to be depositing at opening",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "EligibilityName": {
                   "description": "Free text description, denotes non standard eligibilities not included in the code list",
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                  "type": "string"
                 },
                 "EligibilityType": {
-                  "type": "array",
-                  "items": {
-                    "id": "http://localhost:8000/schemas/v0/definitions/eligibility/eligibility_type.json#",
-                    "description": "List of reference data for elgibility constraints",
-                    "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account"]
-                  },
-                  "uniqueItems": true
+                  "description": "Eligibility type",
+                  "id": "http://localhost:8000/schemas/v0/definitions/eligibility/eligibility_type.json#",
+                  "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account", "Any business customer", "ID and Verification", "Arrears on Loan, Credit Card, mortgage", "Over Overdraft for more than 30 days", "Sole UK Account or Bankrupt", "UCAS Fulltime for 2 years", "Date Limited (2 months within course start date)", "Email Address", "Sole Student Account"]
                 },
                 "EligibilityNotes": {
                   "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
@@ -1039,8 +1108,8 @@ documentation:
                   "description": "Credit Interest Group",
                   "type": "object",
                   "properties": {
-                    "ProductSubType": {
-                      "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                    "InterestSubType": {
+                      "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                       "description": "Describes if the offering is promotional, regular or a description of a future state",
                       "enum": ["Promotional", "Regular", "Future Regular Terms"]
                     },
@@ -1061,7 +1130,7 @@ documentation:
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         },
-                        "DayLengthPromotion": {
+                        "LengthPromotionalInDays": {
                           "description": "Describes the length if only a duration is given instead of a date",
                           "type": "integer"
                         },
@@ -1093,19 +1162,14 @@ documentation:
                           "description": "Credit Interest Payment Method",
                           "enum": ["Pay away", "Compound"]
                         },
-                        "InterestPaymentType": {
-                          "id": "http://localhost:8000/schemas/v0/definitions/crit/crit_interest_payment_type.json#",
+                        "InterestRateType": {
+                          "id": "http://localhost:8000/schemas/v0/definitions/crit/crit_interest_rate_type.json#",
                           "description": "Credit Interest Payment Rate Type",
                           "enum": ["Fixed", "Variable"]
                         },
-                        "FixedInterestLengthInDays": {
+                        "FixedInterestLength": {
                           "description": "Fixed interest length in days",
                           "type": "integer"
-                        },
-                        "FixedInterestUnit": {
-                          "id": "http://localhost:8000/schemas/v0/definitions/crit/crit_fixed_interest_unit.json#",
-                          "description": "Fixed Interest Unit",
-                          "enum": ["Week", "Month", "Year"]
                         },
                         "CalculationMethod": {
                           "id": "http://localhost:8000/schemas/v0/definitions/crit/crit_calculation_method.json#",
@@ -1155,7 +1219,7 @@ documentation:
                             }
                           }
                         },
-                        "Notes": {
+                        "InterestNotes": {
                           "description": "Additional notes to supplement the interest details",
                           "type": "string"
                         }
@@ -1175,7 +1239,7 @@ documentation:
                 "type": "object",
                 "properties": {
                   "InterestProductSubType": {
-                    "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                     "description": "Describes if the offering is promotional, regular or a description of a future state",
                     "enum": ["Promotional", "Regular", "Future Regular Terms"]
                   },
@@ -1191,7 +1255,7 @@ documentation:
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
-                  "DayLengthPromotion": {
+                  "LengthPromotionalInDays": {
                     "description": "Describes the length if only a duration is given instead of a date",
                     "type": "integer"
                   },
@@ -1363,8 +1427,7 @@ documentation:
                     "description": "Fee payable per term for overdraft",
                     "type": "string"
                   }
-                },
-                "required": ["InterestProductSubType"]
+                }
               }
             },
             "FeesAndCharges": {
@@ -1375,7 +1438,7 @@ documentation:
                 "type": "object",
                 "properties": {
                   "ProductSubType": {
-                    "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                     "description": "Describes if the offering is promotional, regular or a description of a future state",
                     "enum": ["Promotional", "Regular", "Future Regular Terms"]
                   },
@@ -1396,7 +1459,7 @@ documentation:
                         "type": "string",
                         "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                       },
-                      "DayLengthPromotion": {
+                      "LengthPromotionalInDays": {
                         "description": "Describes the length if only a duration is given instead of a date",
                         "type": "integer"
                       },
@@ -1461,10 +1524,10 @@ documentation:
                             },
                             "FeesAndChargesNotes": {
                               "description": "Supplementary information for fees and charges",
-                              "type": "number"
+                              "type": "string"
                             }
                           },
-                          "required": ["FeeType", "FeeFrequency", "Negotiable"]
+                          "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"]
                         },
                         "minItems": 1
                       }
@@ -1492,8 +1555,8 @@ documentation:
                     "description": "Benefit Interest Group",
                     "type": "object",
                     "properties": {
-                      "ProductSubType": {
-                        "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                      "BenefitSubType": {
+                        "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                         "description": "Describes if the offering is promotional, regular or a description of a future state",
                         "enum": ["Promotional", "Regular", "Future Regular Terms"]
                       },
@@ -1514,7 +1577,7 @@ documentation:
                             "type": "string",
                             "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                           },
-                          "DayLengthPromotion": {
+                          "LengthPromotionalInDays": {
                             "description": "Describes the length if only a duration is given instead of a date in days",
                             "type": "integer"
                           },
@@ -1543,7 +1606,7 @@ documentation:
                                   "description": "The value or values permissible for a specific benefit for an individual product representing a product characteristic",
                                   "type": "string"
                                 },
-                                "DefaultsToAccounts": {
+                                "DefaultToAccounts": {
                                   "description": "Is the benefit part of the default account",
                                   "type": "boolean"
                                 },
@@ -1568,7 +1631,7 @@ documentation:
                                   "description": "Counter for the criteria (e.g. number of DD)",
                                   "type": "integer"
                                 },
-                                "Description": {
+                                "BenefitDescription": {
                                   "description": "A textual explanation of what the benefit is",
                                   "type": "string"
                                 },
@@ -1623,7 +1686,7 @@ documentation:
                   "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
+                  "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
                 },
                 "BrandName": {
                   "description": "Name by which an organisation is known that is printed on top of the ATM",
@@ -1705,7 +1768,7 @@ documentation:
             "MobileWallet": {
               "description": "Mobile wallet supported by this product. A mobile wallet being any electronic device that allows an individual to make electronic commerce transactions",
               "id": "http://localhost:8000/schemas/v0/definitions/ca/wallet.json#",
-              "enum": ["Apple Pay", "Android Pay", "Samsung Pay", "Vodaphone Wallet", "Issuer Mobile App"]
+              "enum": ["Apple Pay", "Android Pay", "Samsung Pay", "Vodafone Wallet", "Issuer Mobile App"]
             },
             "CardNotes": {
               "description": "Optional additional notes to supplement the card details",
@@ -1771,7 +1834,7 @@ documentation:
                 "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                 "description": "Active or Historic Currency Code and Amount",
                 "type": "string",
-                "pattern": "[A-Z]{3,3}"
+                "pattern": "[A-Z]{3}"
               },
               "minItems": 1
             },
@@ -1787,7 +1850,7 @@ documentation:
                 "type": "object",
                 "properties": {
                   "ProductSubType": {
-                    "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                     "description": "Describes if the offering is promotional, regular or a description of a future state",
                     "enum": ["Promotional", "Regular", "Future Regular Terms"]
                   },
@@ -1808,7 +1871,7 @@ documentation:
                         "type": "string",
                         "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                       },
-                      "DayLengthPromotion": {
+                      "LengthPromotionalInDays": {
                         "description": "Describes the length if only a duration is given instead of a date",
                         "type": "integer"
                       },
@@ -1875,7 +1938,7 @@ documentation:
                   "description": "Minimum income / Turnover Currency",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "IncomeCondition": {
                   "description": "Stipulates any particular definition of income that applies to the income eligibility and/or method by which income must paid into the account (eg Salary DD)",
@@ -1898,7 +1961,7 @@ documentation:
                   "description": "Annual Business Turnover Currency",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "ResidencyResticted": {
                   "description": "Indicates a customer's residency forms part of the eligibility criteria",
@@ -1929,7 +1992,7 @@ documentation:
                   "description": "The currency of the Minimum Amount to be depositing at opening",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "MinimumOperatingBalanceExists": {
                   "description": "Is there a Minimum Operating Balance?",
@@ -1943,7 +2006,7 @@ documentation:
                   "description": "Minimum Operating Balance currency",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "MaximumOpeningAmount": {
                   "description": "A maximum amount to be deposited at opening",
@@ -1957,23 +2020,16 @@ documentation:
                   "description": "The currency of the Minimum Amount to be depositing at opening",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "EligibilityName": {
                   "description": "Free text description, denotes non standard eligibilities not included in the code list",
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                  "type": "string"
                 },
                 "EligibilityType": {
-                  "type": "array",
-                  "items": {
-                    "id": "http://localhost:8000/schemas/v0/definitions/eligibility/eligibility_type.json#",
-                    "description": "List of reference data for elgibility constraints",
-                    "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account"]
-                  },
-                  "uniqueItems": true
+                  "description": "Eligibility type",
+                  "id": "http://localhost:8000/schemas/v0/definitions/eligibility/eligibility_type.json#",
+                  "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account", "Any business customer", "ID and Verification", "Arrears on Loan, Credit Card, mortgage", "Over Overdraft for more than 30 days", "Sole UK Account or Bankrupt", "UCAS Fulltime for 2 years", "Date Limited (2 months within course start date)", "Email Address", "Sole Student Account"]
                 },
                 "EligibilityNotes": {
                   "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
@@ -2009,8 +2065,8 @@ documentation:
                   "description": "Credit Interest Group",
                   "type": "object",
                   "properties": {
-                    "ProductSubType": {
-                      "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                    "InterestSubType": {
+                      "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                       "description": "Describes if the offering is promotional, regular or a description of a future state",
                       "enum": ["Promotional", "Regular", "Future Regular Terms"]
                     },
@@ -2031,7 +2087,7 @@ documentation:
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         },
-                        "DayLengthPromotion": {
+                        "LengthPromotionalInDays": {
                           "description": "Describes the length if only a duration is given instead of a date",
                           "type": "integer"
                         },
@@ -2063,19 +2119,14 @@ documentation:
                           "description": "Credit Interest Payment Method",
                           "enum": ["Pay away", "Compound"]
                         },
-                        "InterestPaymentType": {
-                          "id": "http://localhost:8000/schemas/v0/definitions/crit/crit_interest_payment_type.json#",
+                        "InterestRateType": {
+                          "id": "http://localhost:8000/schemas/v0/definitions/crit/crit_interest_rate_type.json#",
                           "description": "Credit Interest Payment Rate Type",
                           "enum": ["Fixed", "Variable"]
                         },
-                        "FixedInterestLengthInDays": {
+                        "FixedInterestLength": {
                           "description": "Fixed interest length in days",
                           "type": "integer"
-                        },
-                        "FixedInterestUnit": {
-                          "id": "http://localhost:8000/schemas/v0/definitions/crit/crit_fixed_interest_unit.json#",
-                          "description": "Fixed Interest Unit",
-                          "enum": ["Week", "Month", "Year"]
                         },
                         "CalculationMethod": {
                           "id": "http://localhost:8000/schemas/v0/definitions/crit/crit_calculation_method.json#",
@@ -2125,7 +2176,7 @@ documentation:
                             }
                           }
                         },
-                        "Notes": {
+                        "InterestNotes": {
                           "description": "Additional notes to supplement the interest details",
                           "type": "string"
                         }
@@ -2145,7 +2196,7 @@ documentation:
                 "type": "object",
                 "properties": {
                   "InterestProductSubType": {
-                    "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                     "description": "Describes if the offering is promotional, regular or a description of a future state",
                     "enum": ["Promotional", "Regular", "Future Regular Terms"]
                   },
@@ -2161,7 +2212,7 @@ documentation:
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
-                  "DayLengthPromotion": {
+                  "LengthPromotionalInDays": {
                     "description": "Describes the length if only a duration is given instead of a date",
                     "type": "integer"
                   },
@@ -2333,8 +2384,7 @@ documentation:
                     "description": "Fee payable per term for overdraft",
                     "type": "string"
                   }
-                },
-                "required": ["InterestProductSubType"]
+                }
               }
             },
             "FeesAndCharges": {
@@ -2345,7 +2395,7 @@ documentation:
                 "type": "object",
                 "properties": {
                   "ProductSubType": {
-                    "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                     "description": "Describes if the offering is promotional, regular or a description of a future state",
                     "enum": ["Promotional", "Regular", "Future Regular Terms"]
                   },
@@ -2366,7 +2416,7 @@ documentation:
                         "type": "string",
                         "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                       },
-                      "DayLengthPromotion": {
+                      "LengthPromotionalInDays": {
                         "description": "Describes the length if only a duration is given instead of a date",
                         "type": "integer"
                       },
@@ -2431,10 +2481,10 @@ documentation:
                             },
                             "FeesAndChargesNotes": {
                               "description": "Supplementary information for fees and charges",
-                              "type": "number"
+                              "type": "string"
                             }
                           },
-                          "required": ["FeeType", "FeeFrequency", "Negotiable"]
+                          "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"]
                         },
                         "minItems": 1
                       }
@@ -2462,8 +2512,8 @@ documentation:
                     "description": "Benefit Interest Group",
                     "type": "object",
                     "properties": {
-                      "ProductSubType": {
-                        "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                      "BenefitSubType": {
+                        "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                         "description": "Describes if the offering is promotional, regular or a description of a future state",
                         "enum": ["Promotional", "Regular", "Future Regular Terms"]
                       },
@@ -2484,7 +2534,7 @@ documentation:
                             "type": "string",
                             "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                           },
-                          "DayLengthPromotion": {
+                          "LengthPromotionalInDays": {
                             "description": "Describes the length if only a duration is given instead of a date in days",
                             "type": "integer"
                           },
@@ -2513,7 +2563,7 @@ documentation:
                                   "description": "The value or values permissible for a specific benefit for an individual product representing a product characteristic",
                                   "type": "string"
                                 },
-                                "DefaultsToAccounts": {
+                                "DefaultToAccounts": {
                                   "description": "Is the benefit part of the default account",
                                   "type": "boolean"
                                 },
@@ -2538,7 +2588,7 @@ documentation:
                                   "description": "Counter for the criteria (e.g. number of DD)",
                                   "type": "integer"
                                 },
-                                "Description": {
+                                "BenefitDescription": {
                                   "description": "A textual explanation of what the benefit is",
                                   "type": "string"
                                 },
@@ -2592,7 +2642,7 @@ documentation:
                   "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
+                  "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
                 },
                 "BrandName": {
                   "description": "Name by which an organisation is known that is printed on top of the ATM",
@@ -2649,7 +2699,7 @@ documentation:
                 "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                 "description": "Active or Historic Currency Code and Amount",
                 "type": "string",
-                "pattern": "[A-Z]{3,3}"
+                "pattern": "[A-Z]{3}"
               },
               "minItems": 1
             },
@@ -2679,7 +2729,7 @@ documentation:
               "type": "object",
               "properties": {
                 "ProductSubType": {
-                  "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                  "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                   "description": "Describes if the offering is promotional, regular or a description of a future state",
                   "enum": ["Promotional", "Regular", "Future Regular Terms"]
                 },
@@ -2796,7 +2846,7 @@ documentation:
                   "description": "Minimum income / Turnover Currency",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "IncomeCondition": {
                   "description": "Stipulates any particular definition of income that applies to the income eligibility and/or method by which income must paid into the account (eg Salary DD)",
@@ -2819,7 +2869,7 @@ documentation:
                   "description": "Annual Business Turnover Currency",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "ResidencyResticted": {
                   "description": "Indicates a customer's residency forms part of the eligibility criteria",
@@ -2850,7 +2900,7 @@ documentation:
                   "description": "The currency of the Minimum Amount to be depositing at opening",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "MinimumOperatingBalanceExists": {
                   "description": "Is there a Minimum Operating Balance?",
@@ -2864,7 +2914,7 @@ documentation:
                   "description": "Minimum Operating Balance currency",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "MaximumOpeningAmount": {
                   "description": "A maximum amount to be deposited at opening",
@@ -2878,23 +2928,16 @@ documentation:
                   "description": "The currency of the Minimum Amount to be depositing at opening",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "EligibilityName": {
                   "description": "Free text description, denotes non standard eligibilities not included in the code list",
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                  "type": "string"
                 },
                 "EligibilityType": {
-                  "type": "array",
-                  "items": {
-                    "id": "http://localhost:8000/schemas/v0/definitions/eligibility/eligibility_type.json#",
-                    "description": "List of reference data for elgibility constraints",
-                    "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account"]
-                  },
-                  "uniqueItems": true
+                  "description": "Eligibility type",
+                  "id": "http://localhost:8000/schemas/v0/definitions/eligibility/eligibility_type.json#",
+                  "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account", "Any business customer", "ID and Verification", "Arrears on Loan, Credit Card, mortgage", "Over Overdraft for more than 30 days", "Sole UK Account or Bankrupt", "UCAS Fulltime for 2 years", "Date Limited (2 months within course start date)", "Email Address", "Sole Student Account"]
                 },
                 "EligibilityNotes": {
                   "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
@@ -2924,7 +2967,7 @@ documentation:
                 "type": "object",
                 "properties": {
                   "ProductSubType": {
-                    "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                     "description": "Describes if the offering is promotional, regular or a description of a future state",
                     "enum": ["Promotional", "Regular", "Future Regular Terms"]
                   },
@@ -2945,7 +2988,7 @@ documentation:
                         "type": "string",
                         "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                       },
-                      "DayLengthPromotion": {
+                      "LengthPromotionalInDays": {
                         "description": "Describes the length if only a duration is given instead of a date",
                         "type": "integer"
                       },
@@ -3010,10 +3053,10 @@ documentation:
                             },
                             "FeesAndChargesNotes": {
                               "description": "Supplementary information for fees and charges",
-                              "type": "number"
+                              "type": "string"
                             }
                           },
-                          "required": ["FeeType", "FeeFrequency", "Negotiable"]
+                          "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"]
                         },
                         "minItems": 1
                       }
@@ -3041,8 +3084,8 @@ documentation:
                     "description": "Benefit Interest Group",
                     "type": "object",
                     "properties": {
-                      "ProductSubType": {
-                        "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                      "BenefitSubType": {
+                        "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                         "description": "Describes if the offering is promotional, regular or a description of a future state",
                         "enum": ["Promotional", "Regular", "Future Regular Terms"]
                       },
@@ -3063,7 +3106,7 @@ documentation:
                             "type": "string",
                             "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                           },
-                          "DayLengthPromotion": {
+                          "LengthPromotionalInDays": {
                             "description": "Describes the length if only a duration is given instead of a date in days",
                             "type": "integer"
                           },
@@ -3092,7 +3135,7 @@ documentation:
                                   "description": "The value or values permissible for a specific benefit for an individual product representing a product characteristic",
                                   "type": "string"
                                 },
-                                "DefaultsToAccounts": {
+                                "DefaultToAccounts": {
                                   "description": "Is the benefit part of the default account",
                                   "type": "boolean"
                                 },
@@ -3117,7 +3160,7 @@ documentation:
                                   "description": "Counter for the criteria (e.g. number of DD)",
                                   "type": "integer"
                                 },
-                                "Description": {
+                                "BenefitDescription": {
                                   "description": "A textual explanation of what the benefit is",
                                   "type": "string"
                                 },
@@ -3171,7 +3214,7 @@ documentation:
                   "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
+                  "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
                 },
                 "BrandName": {
                   "description": "Name by which an organisation is known that is printed on top of the ATM",
@@ -3248,7 +3291,7 @@ documentation:
               "type": "object",
               "properties": {
                 "ProductSubType": {
-                  "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                  "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                   "description": "Describes if the offering is promotional, regular or a description of a future state",
                   "enum": ["Promotional", "Regular", "Future Regular Terms"]
                 },
@@ -3269,7 +3312,7 @@ documentation:
                       "type": "string",
                       "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                     },
-                    "DayLengthPromotion": {
+                    "LengthPromotionalInDays": {
                       "description": "Describes the length if only a duration is given instead of a date",
                       "type": "integer"
                     },
@@ -3493,7 +3536,7 @@ documentation:
                   "description": "Minimum income / Turnover Currency",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "IncomeCondition": {
                   "description": "Stipulates any particular definition of income that applies to the income eligibility and/or method by which income must paid into the account (eg Salary DD)",
@@ -3516,7 +3559,7 @@ documentation:
                   "description": "Annual Business Turnover Currency",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "ResidencyResticted": {
                   "description": "Indicates a customer's residency forms part of the eligibility criteria",
@@ -3547,7 +3590,7 @@ documentation:
                   "description": "The currency of the Minimum Amount to be depositing at opening",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "MinimumOperatingBalanceExists": {
                   "description": "Is there a Minimum Operating Balance?",
@@ -3561,7 +3604,7 @@ documentation:
                   "description": "Minimum Operating Balance currency",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "MaximumOpeningAmount": {
                   "description": "A maximum amount to be deposited at opening",
@@ -3575,23 +3618,16 @@ documentation:
                   "description": "The currency of the Minimum Amount to be depositing at opening",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
                   "type": "string",
-                  "pattern": "[A-Z]{3,3}"
+                  "pattern": "[A-Z]{3}"
                 },
                 "EligibilityName": {
                   "description": "Free text description, denotes non standard eligibilities not included in the code list",
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                  "type": "string"
                 },
                 "EligibilityType": {
-                  "type": "array",
-                  "items": {
-                    "id": "http://localhost:8000/schemas/v0/definitions/eligibility/eligibility_type.json#",
-                    "description": "List of reference data for elgibility constraints",
-                    "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account"]
-                  },
-                  "uniqueItems": true
+                  "description": "Eligibility type",
+                  "id": "http://localhost:8000/schemas/v0/definitions/eligibility/eligibility_type.json#",
+                  "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account", "Any business customer", "ID and Verification", "Arrears on Loan, Credit Card, mortgage", "Over Overdraft for more than 30 days", "Sole UK Account or Bankrupt", "UCAS Fulltime for 2 years", "Date Limited (2 months within course start date)", "Email Address", "Sole Student Account"]
                 },
                 "EligibilityNotes": {
                   "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
@@ -3629,8 +3665,8 @@ documentation:
                     "description": "Benefit Interest Group",
                     "type": "object",
                     "properties": {
-                      "ProductSubType": {
-                        "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+                      "BenefitSubType": {
+                        "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                         "description": "Describes if the offering is promotional, regular or a description of a future state",
                         "enum": ["Promotional", "Regular", "Future Regular Terms"]
                       },
@@ -3651,7 +3687,7 @@ documentation:
                             "type": "string",
                             "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                           },
-                          "DayLengthPromotion": {
+                          "LengthPromotionalInDays": {
                             "description": "Describes the length if only a duration is given instead of a date in days",
                             "type": "integer"
                           },
@@ -3680,7 +3716,7 @@ documentation:
                                   "description": "The value or values permissible for a specific benefit for an individual product representing a product characteristic",
                                   "type": "string"
                                 },
-                                "DefaultsToAccounts": {
+                                "DefaultToAccounts": {
                                   "description": "Is the benefit part of the default account",
                                   "type": "boolean"
                                 },
@@ -3705,7 +3741,7 @@ documentation:
                                   "description": "Counter for the criteria (e.g. number of DD)",
                                   "type": "integer"
                                 },
-                                "Description": {
+                                "BenefitDescription": {
                                   "description": "A textual explanation of what the benefit is",
                                   "type": "string"
                                 },

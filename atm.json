@@ -6,13 +6,15 @@
   "properties": {
     "ParentGroupName": {
       "description": "Parent company that owns or partially owns subsidiary organisations. ATM Operator Organisation.",
-      "type": "string"
+      "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+      "type": "string",
+      "maxLength": 350
     },
     "ParentGroupID": {
       "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
       "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
       "type": "string",
-      "pattern": "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
+      "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
     },
     "Brand": {
       "id": "http://localhost:8000/schemas/v0/definitions/common/brand_org.json#",
@@ -31,15 +33,20 @@
       },
       "required": ["BrandName", "BrandID"]
     },
-    "BranchID": {
+    "BranchIdentification": {
       "description": "Unique and unambiguous identification of a retail branch of a financial institution",
-      "type": "string"
+      "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+      "type": "string",
+      "maxLength": 35
     },
-    "AtmID": {
+    "ATMID": {
       "description": "ATM terminal device identification for the acquirer and the issuer",
-      "type": "string"
+      "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+      "type": "string",
+      "maxLength": 35
     },
     "LocationCategory": {
+      "description": "Indicates the environment of the ATM",
       "type": "array",
       "uniqueItems": true,
       "items": {
@@ -50,11 +57,15 @@
     },
     "SiteID": {
       "description": "Site identifying code, where ATM is located",
-      "type": "string"
+      "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+      "type": "string",
+      "maxLength": 35
     },
     "SiteName": {
       "description": "Site identifying name, where ATM is located",
-      "type": "string"
+      "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+      "type": "string",
+      "maxLength": 35
     },
     "Address": {
       "id": "http://localhost:8000/schemas/v0/definitions/common/postal_address.json#",
@@ -78,7 +89,7 @@
           "maxLength": 16
         },
         "optionalAddressField": {
-          "description": "Is required by some banks as an additional field; often directions (important for customers)",
+          "description": "Additional field; often directions",
           "type": "string"
         },
         "TwnNm": {
@@ -97,12 +108,12 @@
           "description": "Nation with its own government",
           "id": "http://localhost:8000/schemas/v0/definitions/common/country_code.json#",
           "type": "string",
-          "pattern": "[A-Z]{2,2}"
+          "pattern": "[A-Z]{2}"
         }
       },
       "required": ["StrtNm", "PstCd", "Ctry"]
     },
-    "GPSLocation": {
+    "GeographicLocation": {
       "id": "http://localhost:8000/schemas/v0/definitions/common/geographic_coordinates.json#",
       "description": "Geographic Coordinates",
       "type": "object",
@@ -122,9 +133,9 @@
       },
       "required": ["Lat", "Long"]
     },
-    "TypesOfAccessibility": {
-      "id": "http://localhost:8000/schemas/v0/definitions/common/access_type.json#",
+    "AccessibilityTypes": {
       "description": "Information about the accessibility",
+      "id": "http://localhost:8000/schemas/v0/definitions/common/access_type.json#",
       "type": "array",
       "uniqueItems": true,
       "items": {
@@ -132,7 +143,7 @@
         "enum": ["Automatic Doors", "Lower Level Counter", "Induction Loop", "Wheelchair Access", "External Ramp", "Internal Ramp", "Level Access", "Helping Hand Unit"]
       }
     },
-    "LanguageSupport": {
+    "SupportedLanguages": {
       "description": "Languages that the ATM supports",
       "type": "array",
       "items": {
@@ -141,7 +152,8 @@
       },
       "minItems": 1
     },
-    "AtmServices": {
+    "ATMServices": {
+      "description": "Information about ATM services",
       "type": "array",
       "uniqueItems": true,
       "minItems": 1,
@@ -156,9 +168,14 @@
         }
       }
     },
-    "AtmServicesDescription": {
-      "description": "ATM Service Description",
-      "type": "string"
+    "AdditionalATMServices": {
+      "type": "array",
+      "items": {
+        "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+        "description": "maxLength 350 text",
+        "type": "string",
+        "maxLength": 350
+      }
     },
     "Currency": {
       "description": "Defines currency type available for dispense",
@@ -166,16 +183,18 @@
       "uniqueItems": true,
       "minItems": 1,
       "items": {
-        "description": "must be ISO 4217 codes",
-        "type": "string"
+        "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
+        "description": "Active or Historic Currency Code and Amount",
+        "type": "string",
+        "pattern": "[A-Z]{3}"
       }
     },
     "MinimumValueDispensed": {
-      "id": "http://localhost:8000/schemas/v0/definitions/atm/notes.json#",
       "description": "Minimum currency denominations usually available",
+      "id": "http://localhost:8000/schemas/v0/definitions/atm/notes.json#",
       "enum": ["£ 5", "£ 10", "£ 20", "£ 50", "£ 100"]
     }
   },
-  "required": ["ParentGroupName", "ParentGroupID", "Brand", "AtmID", "Address", "GPSLocation", "LanguageSupport", "AtmServices", "Currency"],
+  "required": ["ParentGroupName", "ParentGroupID", "Brand", "ATMID", "Address", "GeographicLocation", "SupportedLanguages", "ATMServices", "Currency"],
   "additionalProperties": false
 }

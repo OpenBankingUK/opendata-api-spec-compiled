@@ -16,7 +16,7 @@
           "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
           "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
           "type": "string",
-          "pattern": "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
+          "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
         },
         "BrandName": {
           "description": "Name by which an organisation is known that is printed on top of the ATM",
@@ -98,7 +98,7 @@
     "MobileWallet": {
       "description": "Mobile wallet supported by this product. A mobile wallet being any electronic device that allows an individual to make electronic commerce transactions",
       "id": "http://localhost:8000/schemas/v0/definitions/ca/wallet.json#",
-      "enum": ["Apple Pay", "Android Pay", "Samsung Pay", "Vodaphone Wallet", "Issuer Mobile App"]
+      "enum": ["Apple Pay", "Android Pay", "Samsung Pay", "Vodafone Wallet", "Issuer Mobile App"]
     },
     "CardNotes": {
       "description": "Optional additional notes to supplement the card details",
@@ -164,7 +164,7 @@
         "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
         "description": "Active or Historic Currency Code and Amount",
         "type": "string",
-        "pattern": "[A-Z]{3,3}"
+        "pattern": "[A-Z]{3}"
       },
       "minItems": 1
     },
@@ -180,7 +180,7 @@
         "type": "object",
         "properties": {
           "ProductSubType": {
-            "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+            "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
             "description": "Describes if the offering is promotional, regular or a description of a future state",
             "enum": ["Promotional", "Regular", "Future Regular Terms"]
           },
@@ -201,7 +201,7 @@
                 "type": "string",
                 "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
               },
-              "DayLengthPromotion": {
+              "LengthPromotionalInDays": {
                 "description": "Describes the length if only a duration is given instead of a date",
                 "type": "integer"
               },
@@ -268,7 +268,7 @@
           "description": "Minimum income / Turnover Currency",
           "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
-          "pattern": "[A-Z]{3,3}"
+          "pattern": "[A-Z]{3}"
         },
         "IncomeCondition": {
           "description": "Stipulates any particular definition of income that applies to the income eligibility and/or method by which income must paid into the account (eg Salary DD)",
@@ -291,7 +291,7 @@
           "description": "Annual Business Turnover Currency",
           "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
-          "pattern": "[A-Z]{3,3}"
+          "pattern": "[A-Z]{3}"
         },
         "ResidencyResticted": {
           "description": "Indicates a customer's residency forms part of the eligibility criteria",
@@ -322,7 +322,7 @@
           "description": "The currency of the Minimum Amount to be depositing at opening",
           "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
-          "pattern": "[A-Z]{3,3}"
+          "pattern": "[A-Z]{3}"
         },
         "MinimumOperatingBalanceExists": {
           "description": "Is there a Minimum Operating Balance?",
@@ -336,7 +336,7 @@
           "description": "Minimum Operating Balance currency",
           "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
-          "pattern": "[A-Z]{3,3}"
+          "pattern": "[A-Z]{3}"
         },
         "MaximumOpeningAmount": {
           "description": "A maximum amount to be deposited at opening",
@@ -350,23 +350,16 @@
           "description": "The currency of the Minimum Amount to be depositing at opening",
           "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
-          "pattern": "[A-Z]{3,3}"
+          "pattern": "[A-Z]{3}"
         },
         "EligibilityName": {
           "description": "Free text description, denotes non standard eligibilities not included in the code list",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "EligibilityType": {
-          "type": "array",
-          "items": {
-            "id": "http://localhost:8000/schemas/v0/definitions/eligibility/eligibility_type.json#",
-            "description": "List of reference data for elgibility constraints",
-            "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account"]
-          },
-          "uniqueItems": true
+          "description": "Eligibility type",
+          "id": "http://localhost:8000/schemas/v0/definitions/eligibility/eligibility_type.json#",
+          "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account", "Any business customer", "ID and Verification", "Arrears on Loan, Credit Card, mortgage", "Over Overdraft for more than 30 days", "Sole UK Account or Bankrupt", "UCAS Fulltime for 2 years", "Date Limited (2 months within course start date)", "Email Address", "Sole Student Account"]
         },
         "EligibilityNotes": {
           "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
@@ -402,8 +395,8 @@
           "description": "Credit Interest Group",
           "type": "object",
           "properties": {
-            "ProductSubType": {
-              "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+            "InterestSubType": {
+              "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
               "description": "Describes if the offering is promotional, regular or a description of a future state",
               "enum": ["Promotional", "Regular", "Future Regular Terms"]
             },
@@ -424,7 +417,7 @@
                   "type": "string",
                   "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                 },
-                "DayLengthPromotion": {
+                "LengthPromotionalInDays": {
                   "description": "Describes the length if only a duration is given instead of a date",
                   "type": "integer"
                 },
@@ -456,19 +449,14 @@
                   "description": "Credit Interest Payment Method",
                   "enum": ["Pay away", "Compound"]
                 },
-                "InterestPaymentType": {
-                  "id": "http://localhost:8000/schemas/v0/definitions/crit/crit_interest_payment_type.json#",
+                "InterestRateType": {
+                  "id": "http://localhost:8000/schemas/v0/definitions/crit/crit_interest_rate_type.json#",
                   "description": "Credit Interest Payment Rate Type",
                   "enum": ["Fixed", "Variable"]
                 },
-                "FixedInterestLengthInDays": {
+                "FixedInterestLength": {
                   "description": "Fixed interest length in days",
                   "type": "integer"
-                },
-                "FixedInterestUnit": {
-                  "id": "http://localhost:8000/schemas/v0/definitions/crit/crit_fixed_interest_unit.json#",
-                  "description": "Fixed Interest Unit",
-                  "enum": ["Week", "Month", "Year"]
                 },
                 "CalculationMethod": {
                   "id": "http://localhost:8000/schemas/v0/definitions/crit/crit_calculation_method.json#",
@@ -518,7 +506,7 @@
                     }
                   }
                 },
-                "Notes": {
+                "InterestNotes": {
                   "description": "Additional notes to supplement the interest details",
                   "type": "string"
                 }
@@ -538,7 +526,7 @@
         "type": "object",
         "properties": {
           "InterestProductSubType": {
-            "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+            "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
             "description": "Describes if the offering is promotional, regular or a description of a future state",
             "enum": ["Promotional", "Regular", "Future Regular Terms"]
           },
@@ -554,7 +542,7 @@
             "type": "string",
             "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
           },
-          "DayLengthPromotion": {
+          "LengthPromotionalInDays": {
             "description": "Describes the length if only a duration is given instead of a date",
             "type": "integer"
           },
@@ -726,8 +714,7 @@
             "description": "Fee payable per term for overdraft",
             "type": "string"
           }
-        },
-        "required": ["InterestProductSubType"]
+        }
       }
     },
     "FeesAndCharges": {
@@ -738,7 +725,7 @@
         "type": "object",
         "properties": {
           "ProductSubType": {
-            "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+            "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
             "description": "Describes if the offering is promotional, regular or a description of a future state",
             "enum": ["Promotional", "Regular", "Future Regular Terms"]
           },
@@ -759,7 +746,7 @@
                 "type": "string",
                 "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
               },
-              "DayLengthPromotion": {
+              "LengthPromotionalInDays": {
                 "description": "Describes the length if only a duration is given instead of a date",
                 "type": "integer"
               },
@@ -824,10 +811,10 @@
                     },
                     "FeesAndChargesNotes": {
                       "description": "Supplementary information for fees and charges",
-                      "type": "number"
+                      "type": "string"
                     }
                   },
-                  "required": ["FeeType", "FeeFrequency", "Negotiable"]
+                  "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"]
                 },
                 "minItems": 1
               }
@@ -855,8 +842,8 @@
             "description": "Benefit Interest Group",
             "type": "object",
             "properties": {
-              "ProductSubType": {
-                "id": "http://localhost:8000/schemas/v0/definitions/common/product_subtype.json#",
+              "BenefitSubType": {
+                "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
                 "description": "Describes if the offering is promotional, regular or a description of a future state",
                 "enum": ["Promotional", "Regular", "Future Regular Terms"]
               },
@@ -877,7 +864,7 @@
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
-                  "DayLengthPromotion": {
+                  "LengthPromotionalInDays": {
                     "description": "Describes the length if only a duration is given instead of a date in days",
                     "type": "integer"
                   },
@@ -906,7 +893,7 @@
                           "description": "The value or values permissible for a specific benefit for an individual product representing a product characteristic",
                           "type": "string"
                         },
-                        "DefaultsToAccounts": {
+                        "DefaultToAccounts": {
                           "description": "Is the benefit part of the default account",
                           "type": "boolean"
                         },
@@ -931,7 +918,7 @@
                           "description": "Counter for the criteria (e.g. number of DD)",
                           "type": "integer"
                         },
-                        "Description": {
+                        "BenefitDescription": {
                           "description": "A textual explanation of what the benefit is",
                           "type": "string"
                         },

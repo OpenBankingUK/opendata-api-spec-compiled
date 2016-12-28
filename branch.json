@@ -6,13 +6,15 @@
   "properties": {
     "ParentGroupName": {
       "description": "Parent company that owns or partially owns subsidiary organisations.",
-      "type": "string"
+      "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+      "type": "string",
+      "maxLength": 350
     },
     "ParentGroupID": {
       "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
       "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
       "type": "string",
-      "pattern": "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
+      "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
     },
     "Brand": {
       "id": "http://localhost:8000/schemas/v0/definitions/common/brand_org.json#",
@@ -31,9 +33,17 @@
       },
       "required": ["BrandName", "BrandID"]
     },
-    "BranchID": {
+    "BranchName": {
+      "description": "Name by which a party is known and which is usually used to identify that party",
+      "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+      "type": "string",
+      "maxLength": 35
+    },
+    "BranchIdentification": {
       "description": "Unique and unambiguous identification of a retail branch of a financial institution",
-      "type": "string"
+      "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+      "type": "string",
+      "maxLength": 35
     },
     "BranchType": {
       "id": "http://localhost:8000/schemas/v0/definitions/branch/branch_type.json#",
@@ -62,7 +72,7 @@
           "maxLength": 16
         },
         "optionalAddressField": {
-          "description": "Is required by some banks as an additional field; often directions (important for customers)",
+          "description": "Additional field; often directions",
           "type": "string"
         },
         "TwnNm": {
@@ -81,14 +91,16 @@
           "description": "Nation with its own government",
           "id": "http://localhost:8000/schemas/v0/definitions/common/country_code.json#",
           "type": "string",
-          "pattern": "[A-Z]{2,2}"
+          "pattern": "[A-Z]{2}"
         }
       },
       "required": ["StrtNm", "PstCd", "Ctry"]
     },
     "BranchDescription": {
       "description": "Description of the branch",
-      "type": "string"
+      "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+      "type": "string",
+      "maxLength": 70
     },
     "BranchPhoto": {
       "description": "Image related to the branch",
@@ -97,21 +109,41 @@
     },
     "TelephoneNumber": {
       "description": "Collection of information that identifies a phone number, as defined by telecom services.",
-      "type": "string"
+      "id": "http://localhost:8000/schemas/v0/definitions/common/phone_number.json#",
+      "type": "string",
+      "pattern": "\\+[0-9]{1,3}-[0-9()+\\-]{1,30}"
     },
-    "AlternativeTelephoneNumber": {
-      "description": "Collection of information that identifies a phone number, as defined by telecom services.",
-      "type": "string"
-    },
-    "AlternativeTelephoneNumberDescription": {
-      "description": "Description of the telephone number",
-      "type": "string"
+    "AlternatePhone": {
+      "type": "array",
+      "items": {
+        "id": "http://localhost:8000/schemas/v0/definitions/common/alternative_phone_number.json#",
+        "description": "Alternative Phone Number",
+        "type": "object",
+        "properties": {
+          "AlternativeTelephoneNumber": {
+            "description": "Collection of information that identifies a phone number, as defined by telecom services.",
+            "id": "http://localhost:8000/schemas/v0/definitions/common/phone_number.json#",
+            "type": "string",
+            "pattern": "\\+[0-9]{1,3}-[0-9()+\\-]{1,30}"
+          },
+          "AlternativeTelephoneNumberDescription": {
+            "description": "Description of the telephone number",
+            "type": "string"
+          }
+        }
+      }
     },
     "FaxNumber": {
       "description": "Collection of information that identifies a FAX number, as defined by telecom services.",
-      "type": "string"
+      "type": "array",
+      "items": {
+        "id": "http://localhost:8000/schemas/v0/definitions/common/phone_number.json#",
+        "description": "Collection of information that identifies a phone number, as defined by telecom services.",
+        "type": "string",
+        "pattern": "\\+[0-9]{1,3}-[0-9()+\\-]{1,30}"
+      }
     },
-    "GPSLocation": {
+    "GeographicLocation": {
       "id": "http://localhost:8000/schemas/v0/definitions/common/geographic_coordinates.json#",
       "description": "Geographic Coordinates",
       "type": "object",
@@ -197,28 +229,32 @@
       "minItems": 1
     },
     "PlannedBranchClosure": {
-      "id": "http://localhost:8000/schemas/v0/definitions/branch/closure.json#",
       "type": "array",
       "items": {
-        "type": "object",
-        "properties": {
-          "StartDate": {
-            "description": "Date when a branch is due to close temporarily or permanently",
-            "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-            "type": "string",
-            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+        "id": "http://localhost:8000/schemas/v0/definitions/branch/closure.json#",
+        "description": "Planned branch closure",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "StartDate": {
+              "description": "Date when a branch is due to close temporarily or permanently",
+              "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+              "type": "string",
+              "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+            },
+            "EndDate": {
+              "description": "Date when a branch is due to re-open following temporary closure",
+              "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+              "type": "string",
+              "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+            }
           },
-          "EndDate": {
-            "description": "Date when a branch is due to re-open following temporary closure",
-            "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-            "type": "string",
-            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-          }
-        },
-        "required": ["StartDate", "EndDate"]
+          "required": ["StartDate", "EndDate"]
+        }
       }
     },
-    "TypesOfAccessibility": {
+    "AccessibilityTypes": {
       "id": "http://localhost:8000/schemas/v0/definitions/common/access_type.json#",
       "description": "Information about the accessibility",
       "type": "array",
@@ -228,7 +264,7 @@
         "enum": ["Automatic Doors", "Lower Level Counter", "Induction Loop", "Wheelchair Access", "External Ramp", "Internal Ramp", "Level Access", "Helping Hand Unit"]
       }
     },
-    "BranchSelfServeService": {
+    "BranchSelfServeServiceName": {
       "type": "array",
       "items": {
         "id": "http://localhost:8000/schemas/v0/definitions/branch/self_serve.json#",
@@ -237,11 +273,18 @@
       },
       "uniqueItems": true
     },
-    "BranchSelfServiceDescription": {
+    "BranchSelfServeServiceDescription": {
       "description": "Additional information about self service branch services",
-      "type": "string"
+      "type": "array",
+      "items": {
+        "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+        "description": "maxLength 350 text",
+        "type": "string",
+        "maxLength": 350
+      }
     },
     "BranchMediatedServiceName": {
+      "description": "Information about mediated branch facilities",
       "type": "array",
       "items": {
         "id": "http://localhost:8000/schemas/v0/definitions/mediated.json#",
@@ -252,9 +295,16 @@
     },
     "BranchMediatedServiceDescription": {
       "description": "Additional information about mediated branch facilities, such as waiting areas with seats available for business banking (if waiting)",
-      "type": "string"
+      "type": "array",
+      "items": {
+        "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+        "description": "maxLength 350 text",
+        "type": "string",
+        "maxLength": 350
+      }
     },
     "BranchFacilitiesName": {
+      "description": "Information about branch facilities",
       "type": "array",
       "items": {
         "id": "http://localhost:8000/schemas/v0/definitions/branch/facility.json#",
@@ -264,6 +314,7 @@
       "uniqueItems": true
     },
     "CustomerSegment": {
+      "description": "Customer segment which the branch is able to service",
       "type": "array",
       "items": {
         "id": "http://localhost:8000/schemas/v0/definitions/branch/segment.json#",
@@ -274,13 +325,19 @@
     },
     "BranchFacilitiesDescription": {
       "description": "Additional information about branch facilities, such as specific lights",
-      "type": "string"
+      "type": "array",
+      "items": {
+        "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+        "description": "maxLength 350 text",
+        "type": "string",
+        "maxLength": 350
+      }
     },
-    "AtmAtBranch": {
+    "ATMAtBranch": {
       "description": "Indicated whether an ATM is at the branch",
       "type": "boolean"
     }
   },
-  "required": ["ParentGroupName", "ParentGroupID", "Brand", "BranchType", "Address", "TelephoneNumber", "GPSLocation", "OpeningTimes", "AtmAtBranch"],
+  "required": ["ParentGroupName", "ParentGroupID", "Brand", "BranchIdentification", "BranchType", "Address", "TelephoneNumber", "GeographicLocation", "OpeningTimes", "ATMAtBranch"],
   "additionalProperties": false
 }
