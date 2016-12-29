@@ -114,6 +114,7 @@
                       "ParentGroupName": {
                         "description": "Parent company that owns or partially owns subsidiary organisations.",
                         "type": "string",
+                        "minLength": 1,
                         "maxLength": 350
                       },
                       "ParentGroupID": {
@@ -122,29 +123,21 @@
                         "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
                       },
                       "Brand": {
-                        "description": "Brand Organisation",
-                        "type": "object",
-                        "properties": {
-                          "BrandName": {
-                            "description": "Name by which an organisation is known that is printed on top of the ATM",
-                            "type": "string"
-                          },
-                          "BrandID": {
-                            "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
-                            "type": "string"
-                          }
-                        },
-                        "required": ["BrandName", "BrandID"],
-                        "additionalProperties": false
+                        "description": "maxLength 350 text",
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 350
                       },
                       "BranchName": {
                         "description": "Name by which a party is known and which is usually used to identify that party",
                         "type": "string",
+                        "minLength": 1,
                         "maxLength": 35
                       },
                       "BranchIdentification": {
                         "description": "Unique and unambiguous identification of a retail branch of a financial institution",
                         "type": "string",
+                        "minLength": 1,
                         "maxLength": 35
                       },
                       "BranchType": {
@@ -158,11 +151,14 @@
                           "StrtNm": {
                             "description": "Name of a street or thoroughfare",
                             "type": "string",
+                            "minLength": 1,
                             "maxLength": 70
                           },
                           "BuildingNameOrNumber": {
                             "description": "Number or Name that identifies the position of a building on a street",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 350
                           },
                           "PstCd": {
                             "description": "Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail",
@@ -176,11 +172,13 @@
                           "TwnNm": {
                             "description": "Name of a built-up area, with defined boundaries, and a local government",
                             "type": "string",
+                            "minLength": 1,
                             "maxLength": 35
                           },
                           "CtrySubDvsn": {
                             "description": "Identifies a subdivision of a country such as state, region, county",
                             "type": "string",
+                            "minLength": 1,
                             "maxLength": 35
                           },
                           "Ctry": {
@@ -195,6 +193,7 @@
                       "BranchDescription": {
                         "description": "Description of the branch",
                         "type": "string",
+                        "minLength": 1,
                         "maxLength": 140
                       },
                       "BranchPhoto": {
@@ -358,6 +357,7 @@
                         "items": {
                           "description": "maxLength 350 text",
                           "type": "string",
+                          "minLength": 1,
                           "maxLength": 350
                         }
                       },
@@ -376,6 +376,7 @@
                         "items": {
                           "description": "maxLength 350 text",
                           "type": "string",
+                          "minLength": 1,
                           "maxLength": 350
                         }
                       },
@@ -403,6 +404,7 @@
                         "items": {
                           "description": "maxLength 350 text",
                           "type": "string",
+                          "minLength": 1,
                           "maxLength": 350
                         }
                       },
@@ -762,6 +764,7 @@
                       "ParentGroupName": {
                         "description": "Parent company that owns or partially owns subsidiary organisations. ATM Operator Organisation.",
                         "type": "string",
+                        "minLength": 1,
                         "maxLength": 350
                       },
                       "ParentGroupID": {
@@ -775,43 +778,44 @@
                         "properties": {
                           "BrandName": {
                             "description": "Name by which an organisation is known that is printed on top of the ATM",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 350
                           },
                           "BrandID": {
                             "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
                             "type": "string"
                           }
                         },
-                        "required": ["BrandName", "BrandID"],
+                        "required": ["BrandName"],
                         "additionalProperties": false
                       },
                       "BranchIdentification": {
                         "description": "Unique and unambiguous identification of a retail branch of a financial institution",
                         "type": "string",
+                        "minLength": 1,
                         "maxLength": 35
                       },
                       "ATMID": {
                         "description": "ATM terminal device identification for the acquirer and the issuer",
                         "type": "string",
+                        "minLength": 1,
                         "maxLength": 35
                       },
                       "LocationCategory": {
                         "description": "Indicates the environment of the ATM",
-                        "type": "array",
-                        "uniqueItems": true,
-                        "items": {
-                          "description": "Indicates the environment of the ATM",
-                          "enum": ["Airport", "Bank Office", "Bank Specialised Outlet", "Branch", "Branch Customer Area", "Branch Lobby", "Branch Wall", "Bureau de Change", "Coach Station", "Convenience Store", "Exhibition Centre", "Factory", "Office", "Financial Institution", "Hospital", "Hotel", "House of Commons", "House of Lords", "Leisure Centre", "Ministry of Defence", "Motorway Services", "Petrol Station", "Pleasure Park", "Public House", "Railway Station", "Railway Station (Underground)", "Remote Unit", "Retailer", "Department Store", "Retailer Outlet", "Seaport", "Shopping Centre", "Supermarket", "University", "College", "Bank External", "Restricted Access", "Commercial Space"]
-                        }
+                        "enum": ["Airport", "Bank Office", "Bank Specialised Outlet", "Branch", "Branch Customer Area", "Branch Lobby", "Branch Wall", "Bureau de Change", "Coach Station", "Convenience Store", "Exhibition Centre", "Factory", "Office", "Financial Institution", "Hospital", "Hotel", "House of Commons", "House of Lords", "Leisure Centre", "Ministry of Defence", "Motorway Services", "Petrol Station", "Pleasure Park", "Public House", "Railway Station", "Railway Station (Underground)", "Remote Unit", "Retailer", "Department Store", "Retailer Outlet", "Seaport", "Shopping Centre", "Supermarket", "University", "College", "Bank External", "Restricted Access", "Commercial Space"]
                       },
                       "SiteID": {
                         "description": "Site identifying code, where ATM is located",
                         "type": "string",
+                        "minLength": 1,
                         "maxLength": 35
                       },
                       "SiteName": {
                         "description": "Site identifying name, where ATM is located",
                         "type": "string",
+                        "minLength": 1,
                         "maxLength": 35
                       },
                       "Address": {
@@ -821,11 +825,14 @@
                           "StrtNm": {
                             "description": "Name of a street or thoroughfare",
                             "type": "string",
+                            "minLength": 1,
                             "maxLength": 70
                           },
                           "BuildingNameOrNumber": {
                             "description": "Number or Name that identifies the position of a building on a street",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 350
                           },
                           "PstCd": {
                             "description": "Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail",
@@ -839,11 +846,13 @@
                           "TwnNm": {
                             "description": "Name of a built-up area, with defined boundaries, and a local government",
                             "type": "string",
+                            "minLength": 1,
                             "maxLength": 35
                           },
                           "CtrySubDvsn": {
                             "description": "Identifies a subdivision of a country such as state, region, county",
                             "type": "string",
+                            "minLength": 1,
                             "maxLength": 35
                           },
                           "Ctry": {
@@ -911,6 +920,7 @@
                         "items": {
                           "description": "maxLength 350 text",
                           "type": "string",
+                          "minLength": 1,
                           "maxLength": 350
                         }
                       },
@@ -1438,6 +1448,70 @@
                         "description": "Indicates whether an overdraft offered for this account",
                         "type": "boolean"
                       },
+                      "Feature": {
+                        "description": "Account Features",
+                        "type": "object",
+                        "properties": {
+                          "ExistingFeature": {
+                            "description": "Indicates whether the account has any feature",
+                            "type": "boolean"
+                          },
+                          "FeatureDetails": {
+                            "description": "Feature details",
+                            "type": "array",
+                            "items": {
+                              "description": "Feature Details",
+                              "type": "object",
+                              "properties": {
+                                "ProductSubType": {
+                                  "description": "Describes if the offering is promotional, regular or a description of a future state",
+                                  "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                                },
+                                "StartPromotionOrFutureTerms": {
+                                  "description": "Describes the start date",
+                                  "type": "string",
+                                  "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                },
+                                "StopPromotionOrFutureTerms": {
+                                  "description": "Describes the end date",
+                                  "type": "string",
+                                  "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                },
+                                "LengthPromotionalInDays": {
+                                  "description": "Describes the length if only a duration is given instead of a date",
+                                  "type": "integer"
+                                },
+                                "DateOfChange": {
+                                  "description": "Date of the change if it refers to future terms",
+                                  "type": "string",
+                                  "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                },
+                                "FeatureType": {
+                                  "description": "Type that represents the nature of the feature",
+                                  "type": "string"
+                                },
+                                "FeatureName": {
+                                  "description": "The name of the feature",
+                                  "type": "string"
+                                },
+                                "FeatureDescription": {
+                                  "description": "A textual explanation of what the feature",
+                                  "type": "string"
+                                },
+                                "FeatureValue": {
+                                  "description": "The value or values permissible for a specific feature for an individual product representing a product characteristic",
+                                  "type": "string"
+                                },
+                                "CriteriaType": {
+                                  "description": "Criteria that is required in order to be eligible for the feature",
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "required": ["ExistingFeature"]
+                      },
                       "CAPricing": {
                         "type": "array",
                         "items": {
@@ -1990,60 +2064,99 @@
                                   "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
                                   "type": "number"
                                 },
-                                "FeesDetails": {
+                                "FeeDetails": {
                                   "type": "array",
                                   "items": {
-                                    "description": "Fee Detail",
+                                    "description": "Fee Details",
                                     "type": "object",
                                     "properties": {
-                                      "FeeType": {
-                                        "description": "A description of the Fee type",
-                                        "enum": ["Account Fee", "Incoming CHAPS Fee", "Outgoing CHAPS Fee", "Foreign Currency", "Foreign Currency Withdrawal Fee (% of Tx - Min £2 - Max £5)", "Non Sterling Transaction Fee (Cash Withdrawal)", "SEPA Fee", "Stopped Cheque Fee", "Copy of Cheque Fee", "Cheque Transaction Fee", "Manual Debit Fee", "Counter Draft", "Unpaid Transaction Fee", "Special Cheque Presentation", "Court Order Fee", "Bankers Draft Fee", "Statement Copy Fee", "Bankers Reference Fee", "Personalised Card Fee", "Sterling Travellers Cheque (% of Tx - Min £2 - Max £5)", "International Payments Charge", "Other", "Cash payment In", "Cash payment Out", "Daily Monitoring", "Weekly Monitoring", "Monthly Monitoring", "Status Enquiry", "Audit Letter", "Credits paid in via night Safe", "Credit paid In via Depos ATM", "Telepay or Teledebit Item", "Balance Handlng Fee", "Late payment", "Loan arrangement", "Early Repayment charge", "Over credit limit fee", "Return payment fee", "Payment Scheme Exchange Rate", "Payment Scheme Exchange Fee", "Payment Scheme Exchange Fee Rate", "Non-Sterling Transaction fee", "Non-Sterling Transaction fee rate", "Non-Sterling Purchase Fee", "Non-Sterling Purchase Fee rate", "Non-Sterling Cash Fee", "Non-Sterling Cash Fee Rate", "Foreign Purchase Fee", "Foreign Purchase Fee Rate", "Foreign Cash Fee", "Foreign Cash Fee Rate", "Early Repayment Charges", "Tiered arrangement fees", "Monthly Account Maintenance Fee", "UK Sterling Direct Debits", "Standing order", "Business Debit card transaction (excluding ATM)", "ATM withdrawals (from a non-group ATM)", "ATM withdrawals (from a group ATM)", "Internet Bulk Payment - batch", "Automated credit", "Automated credit - Telephone and Internet Banking", "Automated credit –Faster Payments inbound", "Internet Bulk Payment –per item", "Faster Payments outbound", "Transfer to an account outside of the group", "Cheque paid in (or Postal Order)", "Cheques Out", "Cash paid in", "Cash paid out at own counter", "Other debit", "Other credit", "Credit paid in at another bank", "Cash exchanged", "Bacs –batch file submitted", "Bacs –debit or credit item", "Cardnet envelope paid in", "Credit paid in via Night Safe - up to £5K", "International payment Internet banking", "Express International Moneymover Branch", "Standard International Moneymover Branch", "Non-urgent Euro (SEPA)1 Branch", "International draft payable abroad Branch", "Electronic payments received from abroad Up to £100", "Electronic payments received from abroad over £100", "Foreign cheque/draft", "Cheques/drafts (including dividend warrants) payable in foreign currency or Sterling drawn abroad", "Cheques/drafts (including dividend warrants) payable in foreign currency drawn in the UK", "Unpaid charge (if the cheque/draft is not honoured by the paying bank)", "Status enquiries abroad", "Status enquiries abroad (if sent electronically) additional", "After an international payment has been sent abroad - Beneficiary claiming non-receipt of funds (BCNR) ", "After an international payment has been sent abroad - Recalling a payment", "First legal mortgage over a property, such as business premises", "Second or subsequent legal mortgage over a property, such as a house or business premises", "Unpaid Item", "SMS Text alerts", "SME unsecured loan fee", "World Currency Withdrawal Fee", "World Currency Purchase Fee", "Europe Currently Withdrawal Fee", "Europe Purchase Fee", "Minimum Foreign Cash Withdrawal Fee", "Maximum Foreign Cash Withdrawal Fee", "Security Fee", "Early Redemption Charge", "Paid Referral Fee", "Unpaid Referral Fee"]
+                                      "FeeSubType": {
+                                        "description": "Describes if the offering is promotional, regular or a description of a future state",
+                                        "enum": ["Promotional", "Regular", "Future Regular Terms"]
                                       },
-                                      "Other": {
-                                        "description": "Describe other fee type",
-                                        "type": "string"
-                                      },
-                                      "FeeFrequency": {
-                                        "description": "Triggering frequency of the fee",
-                                        "enum": ["Monthly", "Per Transaction - Amount", "Per Transaction - Percentage", "Per Occurrence", "Daily", "5 consecutive business days", "Weekly", "Statement Monthly", "Quarterly", "6 monthly", "Yearly", "On account anniversary", "Charging period", "Item", "Account opening", "Account Closing", "Academic Term", "One time payment at the start of the loan", "At the time of repayment", "per hour", "per sheet"]
-                                      },
-                                      "FeeAmount": {
-                                        "description": "Fee in GBP",
-                                        "type": "number"
-                                      },
-                                      "FeeRate": {
-                                        "description": "% Rate",
-                                        "type": "number"
-                                      },
-                                      "Negotiable": {
-                                        "description": "Indicates that this Fee Rate or Fee Amount is negotiable based on risk or other factor",
-                                        "type": "boolean"
-                                      },
-                                      "RepresentativeRate": {
-                                        "description": "Representative Rate",
-                                        "type": "number"
-                                      },
-                                      "FeeLowerTier": {
-                                        "description": "Lower occurrence / range boundary e.g. For returned cheques this could be 0, which means the first returned cheque fits into this range",
-                                        "type": "number"
-                                      },
-                                      "FeeHigherTier": {
-                                        "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
-                                        "type": "number"
-                                      },
-                                      "FeesAndChargesNotes": {
-                                        "description": "Supplementary information for fees and charges",
-                                        "type": "string"
+                                      "FeeDetail": {
+                                        "description": "Fee Detail",
+                                        "type": "object",
+                                        "properties": {
+                                          "FeeType": {
+                                            "description": "A description of the Fee type",
+                                            "enum": ["Account Fee", "Incoming CHAPS Fee", "Outgoing CHAPS Fee", "Foreign Currency", "Foreign Currency Withdrawal Fee (% of Tx - Min £2 - Max £5)", "Non Sterling Transaction Fee (Cash Withdrawal)", "SEPA Fee", "Stopped Cheque Fee", "Copy of Cheque Fee", "Cheque Transaction Fee", "Manual Debit Fee", "Counter Draft", "Unpaid Transaction Fee", "Special Cheque Presentation", "Court Order Fee", "Bankers Draft Fee", "Statement Copy Fee", "Bankers Reference Fee", "Personalised Card Fee", "Sterling Travellers Cheque (% of Tx - Min £2 - Max £5)", "International Payments Charge", "Other", "Cash payment In", "Cash payment Out", "Daily Monitoring", "Weekly Monitoring", "Monthly Monitoring", "Status Enquiry", "Audit Letter", "Credits paid in via night Safe", "Credit paid In via Depos ATM", "Telepay or Teledebit Item", "Balance Handlng Fee", "Late payment", "Loan arrangement", "Early Repayment charge", "Over credit limit fee", "Return payment fee", "Payment Scheme Exchange Rate", "Payment Scheme Exchange Fee", "Payment Scheme Exchange Fee Rate", "Non-Sterling Transaction fee", "Non-Sterling Transaction fee rate", "Non-Sterling Purchase Fee", "Non-Sterling Purchase Fee rate", "Non-Sterling Cash Fee", "Non-Sterling Cash Fee Rate", "Foreign Purchase Fee", "Foreign Purchase Fee Rate", "Foreign Cash Fee", "Foreign Cash Fee Rate", "Early Repayment Charges", "Tiered arrangement fees", "Monthly Account Maintenance Fee", "UK Sterling Direct Debits", "Standing order", "Business Debit card transaction (excluding ATM)", "ATM withdrawals (from a non-group ATM)", "ATM withdrawals (from a group ATM)", "Internet Bulk Payment - batch", "Automated credit", "Automated credit - Telephone and Internet Banking", "Automated credit –Faster Payments inbound", "Internet Bulk Payment –per item", "Faster Payments outbound", "Transfer to an account outside of the group", "Cheque paid in (or Postal Order)", "Cheques Out", "Cash paid in", "Cash paid out at own counter", "Other debit", "Other credit", "Credit paid in at another bank", "Cash exchanged", "Bacs –batch file submitted", "Bacs –debit or credit item", "Cardnet envelope paid in", "Credit paid in via Night Safe - up to £5K", "International payment Internet banking", "Express International Moneymover Branch", "Standard International Moneymover Branch", "Non-urgent Euro (SEPA)1 Branch", "International draft payable abroad Branch", "Electronic payments received from abroad Up to £100", "Electronic payments received from abroad over £100", "Foreign cheque/draft", "Cheques/drafts (including dividend warrants) payable in foreign currency or Sterling drawn abroad", "Cheques/drafts (including dividend warrants) payable in foreign currency drawn in the UK", "Unpaid charge (if the cheque/draft is not honoured by the paying bank)", "Status enquiries abroad", "Status enquiries abroad (if sent electronically) additional", "After an international payment has been sent abroad - Beneficiary claiming non-receipt of funds (BCNR) ", "After an international payment has been sent abroad - Recalling a payment", "First legal mortgage over a property, such as business premises", "Second or subsequent legal mortgage over a property, such as a house or business premises", "Unpaid Item", "SMS Text alerts", "SME unsecured loan fee", "World Currency Withdrawal Fee", "World Currency Purchase Fee", "Europe Currently Withdrawal Fee", "Europe Purchase Fee", "Minimum Foreign Cash Withdrawal Fee", "Maximum Foreign Cash Withdrawal Fee", "Security Fee", "Early Redemption Charge", "Paid Referral Fee", "Unpaid Referral Fee"]
+                                          },
+                                          "Other": {
+                                            "description": "Describe other fee type",
+                                            "type": "string"
+                                          },
+                                          "StartPromotionOrFutureTerms": {
+                                            "description": "Describes the start date",
+                                            "type": "string",
+                                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                          },
+                                          "StopPromotionOrFutureTerms": {
+                                            "description": "Describes the end date",
+                                            "type": "string",
+                                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                          },
+                                          "LengthPromotionalInDays": {
+                                            "description": "Describes the length if only a duration is given instead of a date",
+                                            "type": "integer"
+                                          },
+                                          "DateOfChange": {
+                                            "description": "Date of the change if it refers to future terms",
+                                            "type": "string",
+                                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                          },
+                                          "FeeSubDetails": {
+                                            "description": "Fee Sub Details",
+                                            "type": "object",
+                                            "properties": {
+                                              "FeeFrequency": {
+                                                "description": "Triggering frequency of the fee",
+                                                "enum": ["Monthly", "Per Transaction - Amount", "Per Transaction - Percentage", "Per Occurrence", "Daily", "5 consecutive business days", "Weekly", "Statement Monthly", "Quarterly", "6 monthly", "Yearly", "On account anniversary", "Charging period", "Item", "Account opening", "Account Closing", "Academic Term", "One time payment at the start of the loan", "At the time of repayment", "per hour", "per sheet"]
+                                              },
+                                              "FeeAmount": {
+                                                "description": "Fee in GBP",
+                                                "type": "number"
+                                              },
+                                              "FeeRate": {
+                                                "description": "% Rate",
+                                                "type": "number"
+                                              },
+                                              "Negotiable": {
+                                                "description": "Indicates that this Fee Rate or Fee Amount is negotiable based on risk or other factor",
+                                                "type": "boolean"
+                                              },
+                                              "RepresentativeRate": {
+                                                "description": "Representative Rate",
+                                                "type": "number"
+                                              },
+                                              "FeeLowerTier": {
+                                                "description": "Lower occurrence / range boundary e.g. For returned cheques this could be 0, which means the first returned cheque fits into this range",
+                                                "type": "number"
+                                              },
+                                              "FeeHigherTier": {
+                                                "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
+                                                "type": "number"
+                                              },
+                                              "FeesAndChargesNotes": {
+                                                "description": "Supplementary information for fees and charges",
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": ["FeeFrequency", "FeeAmount", "Negotiable"],
+                                            "additionalProperties": false
+                                          }
+                                        },
+                                        "required": ["FeeType", "FeeSubDetails"],
+                                        "additionalProperties": false
                                       }
                                     },
-                                    "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"],
+                                    "required": ["FeeSubType", "FeeDetail"],
                                     "additionalProperties": false
                                   },
                                   "minItems": 1
                                 }
                               },
-                              "required": ["FeesDetails"],
+                              "required": ["FeeDetails"],
                               "additionalProperties": false
                             }
                           },
@@ -2166,8 +2279,7 @@
                         "additionalProperties": false
                       }
                     },
-                    "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"],
-                    "additionalProperties": false
+                    "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "Feature", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"]
                   }
                 }
               },
@@ -2675,6 +2787,70 @@
                         "description": "Indicates whether an overdraft offered for this account",
                         "type": "boolean"
                       },
+                      "Feature": {
+                        "description": "Account Features",
+                        "type": "object",
+                        "properties": {
+                          "ExistingFeature": {
+                            "description": "Indicates whether the account has any feature",
+                            "type": "boolean"
+                          },
+                          "FeatureDetails": {
+                            "description": "Feature details",
+                            "type": "array",
+                            "items": {
+                              "description": "Feature Details",
+                              "type": "object",
+                              "properties": {
+                                "ProductSubType": {
+                                  "description": "Describes if the offering is promotional, regular or a description of a future state",
+                                  "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                                },
+                                "StartPromotionOrFutureTerms": {
+                                  "description": "Describes the start date",
+                                  "type": "string",
+                                  "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                },
+                                "StopPromotionOrFutureTerms": {
+                                  "description": "Describes the end date",
+                                  "type": "string",
+                                  "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                },
+                                "LengthPromotionalInDays": {
+                                  "description": "Describes the length if only a duration is given instead of a date",
+                                  "type": "integer"
+                                },
+                                "DateOfChange": {
+                                  "description": "Date of the change if it refers to future terms",
+                                  "type": "string",
+                                  "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                },
+                                "FeatureType": {
+                                  "description": "Type that represents the nature of the feature",
+                                  "type": "string"
+                                },
+                                "FeatureName": {
+                                  "description": "The name of the feature",
+                                  "type": "string"
+                                },
+                                "FeatureDescription": {
+                                  "description": "A textual explanation of what the feature",
+                                  "type": "string"
+                                },
+                                "FeatureValue": {
+                                  "description": "The value or values permissible for a specific feature for an individual product representing a product characteristic",
+                                  "type": "string"
+                                },
+                                "CriteriaType": {
+                                  "description": "Criteria that is required in order to be eligible for the feature",
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "required": ["ExistingFeature"]
+                      },
                       "CAPricing": {
                         "type": "array",
                         "items": {
@@ -3227,60 +3403,99 @@
                                   "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
                                   "type": "number"
                                 },
-                                "FeesDetails": {
+                                "FeeDetails": {
                                   "type": "array",
                                   "items": {
-                                    "description": "Fee Detail",
+                                    "description": "Fee Details",
                                     "type": "object",
                                     "properties": {
-                                      "FeeType": {
-                                        "description": "A description of the Fee type",
-                                        "enum": ["Account Fee", "Incoming CHAPS Fee", "Outgoing CHAPS Fee", "Foreign Currency", "Foreign Currency Withdrawal Fee (% of Tx - Min £2 - Max £5)", "Non Sterling Transaction Fee (Cash Withdrawal)", "SEPA Fee", "Stopped Cheque Fee", "Copy of Cheque Fee", "Cheque Transaction Fee", "Manual Debit Fee", "Counter Draft", "Unpaid Transaction Fee", "Special Cheque Presentation", "Court Order Fee", "Bankers Draft Fee", "Statement Copy Fee", "Bankers Reference Fee", "Personalised Card Fee", "Sterling Travellers Cheque (% of Tx - Min £2 - Max £5)", "International Payments Charge", "Other", "Cash payment In", "Cash payment Out", "Daily Monitoring", "Weekly Monitoring", "Monthly Monitoring", "Status Enquiry", "Audit Letter", "Credits paid in via night Safe", "Credit paid In via Depos ATM", "Telepay or Teledebit Item", "Balance Handlng Fee", "Late payment", "Loan arrangement", "Early Repayment charge", "Over credit limit fee", "Return payment fee", "Payment Scheme Exchange Rate", "Payment Scheme Exchange Fee", "Payment Scheme Exchange Fee Rate", "Non-Sterling Transaction fee", "Non-Sterling Transaction fee rate", "Non-Sterling Purchase Fee", "Non-Sterling Purchase Fee rate", "Non-Sterling Cash Fee", "Non-Sterling Cash Fee Rate", "Foreign Purchase Fee", "Foreign Purchase Fee Rate", "Foreign Cash Fee", "Foreign Cash Fee Rate", "Early Repayment Charges", "Tiered arrangement fees", "Monthly Account Maintenance Fee", "UK Sterling Direct Debits", "Standing order", "Business Debit card transaction (excluding ATM)", "ATM withdrawals (from a non-group ATM)", "ATM withdrawals (from a group ATM)", "Internet Bulk Payment - batch", "Automated credit", "Automated credit - Telephone and Internet Banking", "Automated credit –Faster Payments inbound", "Internet Bulk Payment –per item", "Faster Payments outbound", "Transfer to an account outside of the group", "Cheque paid in (or Postal Order)", "Cheques Out", "Cash paid in", "Cash paid out at own counter", "Other debit", "Other credit", "Credit paid in at another bank", "Cash exchanged", "Bacs –batch file submitted", "Bacs –debit or credit item", "Cardnet envelope paid in", "Credit paid in via Night Safe - up to £5K", "International payment Internet banking", "Express International Moneymover Branch", "Standard International Moneymover Branch", "Non-urgent Euro (SEPA)1 Branch", "International draft payable abroad Branch", "Electronic payments received from abroad Up to £100", "Electronic payments received from abroad over £100", "Foreign cheque/draft", "Cheques/drafts (including dividend warrants) payable in foreign currency or Sterling drawn abroad", "Cheques/drafts (including dividend warrants) payable in foreign currency drawn in the UK", "Unpaid charge (if the cheque/draft is not honoured by the paying bank)", "Status enquiries abroad", "Status enquiries abroad (if sent electronically) additional", "After an international payment has been sent abroad - Beneficiary claiming non-receipt of funds (BCNR) ", "After an international payment has been sent abroad - Recalling a payment", "First legal mortgage over a property, such as business premises", "Second or subsequent legal mortgage over a property, such as a house or business premises", "Unpaid Item", "SMS Text alerts", "SME unsecured loan fee", "World Currency Withdrawal Fee", "World Currency Purchase Fee", "Europe Currently Withdrawal Fee", "Europe Purchase Fee", "Minimum Foreign Cash Withdrawal Fee", "Maximum Foreign Cash Withdrawal Fee", "Security Fee", "Early Redemption Charge", "Paid Referral Fee", "Unpaid Referral Fee"]
+                                      "FeeSubType": {
+                                        "description": "Describes if the offering is promotional, regular or a description of a future state",
+                                        "enum": ["Promotional", "Regular", "Future Regular Terms"]
                                       },
-                                      "Other": {
-                                        "description": "Describe other fee type",
-                                        "type": "string"
-                                      },
-                                      "FeeFrequency": {
-                                        "description": "Triggering frequency of the fee",
-                                        "enum": ["Monthly", "Per Transaction - Amount", "Per Transaction - Percentage", "Per Occurrence", "Daily", "5 consecutive business days", "Weekly", "Statement Monthly", "Quarterly", "6 monthly", "Yearly", "On account anniversary", "Charging period", "Item", "Account opening", "Account Closing", "Academic Term", "One time payment at the start of the loan", "At the time of repayment", "per hour", "per sheet"]
-                                      },
-                                      "FeeAmount": {
-                                        "description": "Fee in GBP",
-                                        "type": "number"
-                                      },
-                                      "FeeRate": {
-                                        "description": "% Rate",
-                                        "type": "number"
-                                      },
-                                      "Negotiable": {
-                                        "description": "Indicates that this Fee Rate or Fee Amount is negotiable based on risk or other factor",
-                                        "type": "boolean"
-                                      },
-                                      "RepresentativeRate": {
-                                        "description": "Representative Rate",
-                                        "type": "number"
-                                      },
-                                      "FeeLowerTier": {
-                                        "description": "Lower occurrence / range boundary e.g. For returned cheques this could be 0, which means the first returned cheque fits into this range",
-                                        "type": "number"
-                                      },
-                                      "FeeHigherTier": {
-                                        "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
-                                        "type": "number"
-                                      },
-                                      "FeesAndChargesNotes": {
-                                        "description": "Supplementary information for fees and charges",
-                                        "type": "string"
+                                      "FeeDetail": {
+                                        "description": "Fee Detail",
+                                        "type": "object",
+                                        "properties": {
+                                          "FeeType": {
+                                            "description": "A description of the Fee type",
+                                            "enum": ["Account Fee", "Incoming CHAPS Fee", "Outgoing CHAPS Fee", "Foreign Currency", "Foreign Currency Withdrawal Fee (% of Tx - Min £2 - Max £5)", "Non Sterling Transaction Fee (Cash Withdrawal)", "SEPA Fee", "Stopped Cheque Fee", "Copy of Cheque Fee", "Cheque Transaction Fee", "Manual Debit Fee", "Counter Draft", "Unpaid Transaction Fee", "Special Cheque Presentation", "Court Order Fee", "Bankers Draft Fee", "Statement Copy Fee", "Bankers Reference Fee", "Personalised Card Fee", "Sterling Travellers Cheque (% of Tx - Min £2 - Max £5)", "International Payments Charge", "Other", "Cash payment In", "Cash payment Out", "Daily Monitoring", "Weekly Monitoring", "Monthly Monitoring", "Status Enquiry", "Audit Letter", "Credits paid in via night Safe", "Credit paid In via Depos ATM", "Telepay or Teledebit Item", "Balance Handlng Fee", "Late payment", "Loan arrangement", "Early Repayment charge", "Over credit limit fee", "Return payment fee", "Payment Scheme Exchange Rate", "Payment Scheme Exchange Fee", "Payment Scheme Exchange Fee Rate", "Non-Sterling Transaction fee", "Non-Sterling Transaction fee rate", "Non-Sterling Purchase Fee", "Non-Sterling Purchase Fee rate", "Non-Sterling Cash Fee", "Non-Sterling Cash Fee Rate", "Foreign Purchase Fee", "Foreign Purchase Fee Rate", "Foreign Cash Fee", "Foreign Cash Fee Rate", "Early Repayment Charges", "Tiered arrangement fees", "Monthly Account Maintenance Fee", "UK Sterling Direct Debits", "Standing order", "Business Debit card transaction (excluding ATM)", "ATM withdrawals (from a non-group ATM)", "ATM withdrawals (from a group ATM)", "Internet Bulk Payment - batch", "Automated credit", "Automated credit - Telephone and Internet Banking", "Automated credit –Faster Payments inbound", "Internet Bulk Payment –per item", "Faster Payments outbound", "Transfer to an account outside of the group", "Cheque paid in (or Postal Order)", "Cheques Out", "Cash paid in", "Cash paid out at own counter", "Other debit", "Other credit", "Credit paid in at another bank", "Cash exchanged", "Bacs –batch file submitted", "Bacs –debit or credit item", "Cardnet envelope paid in", "Credit paid in via Night Safe - up to £5K", "International payment Internet banking", "Express International Moneymover Branch", "Standard International Moneymover Branch", "Non-urgent Euro (SEPA)1 Branch", "International draft payable abroad Branch", "Electronic payments received from abroad Up to £100", "Electronic payments received from abroad over £100", "Foreign cheque/draft", "Cheques/drafts (including dividend warrants) payable in foreign currency or Sterling drawn abroad", "Cheques/drafts (including dividend warrants) payable in foreign currency drawn in the UK", "Unpaid charge (if the cheque/draft is not honoured by the paying bank)", "Status enquiries abroad", "Status enquiries abroad (if sent electronically) additional", "After an international payment has been sent abroad - Beneficiary claiming non-receipt of funds (BCNR) ", "After an international payment has been sent abroad - Recalling a payment", "First legal mortgage over a property, such as business premises", "Second or subsequent legal mortgage over a property, such as a house or business premises", "Unpaid Item", "SMS Text alerts", "SME unsecured loan fee", "World Currency Withdrawal Fee", "World Currency Purchase Fee", "Europe Currently Withdrawal Fee", "Europe Purchase Fee", "Minimum Foreign Cash Withdrawal Fee", "Maximum Foreign Cash Withdrawal Fee", "Security Fee", "Early Redemption Charge", "Paid Referral Fee", "Unpaid Referral Fee"]
+                                          },
+                                          "Other": {
+                                            "description": "Describe other fee type",
+                                            "type": "string"
+                                          },
+                                          "StartPromotionOrFutureTerms": {
+                                            "description": "Describes the start date",
+                                            "type": "string",
+                                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                          },
+                                          "StopPromotionOrFutureTerms": {
+                                            "description": "Describes the end date",
+                                            "type": "string",
+                                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                          },
+                                          "LengthPromotionalInDays": {
+                                            "description": "Describes the length if only a duration is given instead of a date",
+                                            "type": "integer"
+                                          },
+                                          "DateOfChange": {
+                                            "description": "Date of the change if it refers to future terms",
+                                            "type": "string",
+                                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                          },
+                                          "FeeSubDetails": {
+                                            "description": "Fee Sub Details",
+                                            "type": "object",
+                                            "properties": {
+                                              "FeeFrequency": {
+                                                "description": "Triggering frequency of the fee",
+                                                "enum": ["Monthly", "Per Transaction - Amount", "Per Transaction - Percentage", "Per Occurrence", "Daily", "5 consecutive business days", "Weekly", "Statement Monthly", "Quarterly", "6 monthly", "Yearly", "On account anniversary", "Charging period", "Item", "Account opening", "Account Closing", "Academic Term", "One time payment at the start of the loan", "At the time of repayment", "per hour", "per sheet"]
+                                              },
+                                              "FeeAmount": {
+                                                "description": "Fee in GBP",
+                                                "type": "number"
+                                              },
+                                              "FeeRate": {
+                                                "description": "% Rate",
+                                                "type": "number"
+                                              },
+                                              "Negotiable": {
+                                                "description": "Indicates that this Fee Rate or Fee Amount is negotiable based on risk or other factor",
+                                                "type": "boolean"
+                                              },
+                                              "RepresentativeRate": {
+                                                "description": "Representative Rate",
+                                                "type": "number"
+                                              },
+                                              "FeeLowerTier": {
+                                                "description": "Lower occurrence / range boundary e.g. For returned cheques this could be 0, which means the first returned cheque fits into this range",
+                                                "type": "number"
+                                              },
+                                              "FeeHigherTier": {
+                                                "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
+                                                "type": "number"
+                                              },
+                                              "FeesAndChargesNotes": {
+                                                "description": "Supplementary information for fees and charges",
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": ["FeeFrequency", "FeeAmount", "Negotiable"],
+                                            "additionalProperties": false
+                                          }
+                                        },
+                                        "required": ["FeeType", "FeeSubDetails"],
+                                        "additionalProperties": false
                                       }
                                     },
-                                    "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"],
+                                    "required": ["FeeSubType", "FeeDetail"],
                                     "additionalProperties": false
                                   },
                                   "minItems": 1
                                 }
                               },
-                              "required": ["FeesDetails"],
+                              "required": ["FeeDetails"],
                               "additionalProperties": false
                             }
                           },
@@ -3403,8 +3618,7 @@
                         "additionalProperties": false
                       }
                     },
-                    "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"],
-                    "additionalProperties": false
+                    "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "Feature", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"]
                   }
                 }
               },
@@ -3882,6 +4096,9 @@
                                 "LoanLengthIncrementUpper": {
                                   "type": "integer"
                                 },
+                                "IndicativeRate": {
+                                  "type": "string"
+                                },
                                 "RateComparisonType": {
                                   "description": "Rate Comparison Type",
                                   "enum": ["APR", "AER", "Gross"]
@@ -3890,7 +4107,7 @@
                                   "type": "boolean"
                                 }
                               },
-                              "required": ["SizeIncrement", "LoanLengthIncrement", "RepaymentFrequency", "LoanSizeBandLower", "LoanSizeBandUpper", "LoanLengthIncrementLower", "LoanLengthIncrementUpper", "Negotiable"],
+                              "required": ["SizeIncrement", "LoanLengthIncrement", "RepaymentFrequency", "LoanSizeBandLower", "LoanSizeBandUpper", "LoanLengthIncrementLower", "LoanLengthIncrementUpper", "IndicativeRate", "Negotiable"],
                               "additionalProperties": false
                             },
                             "minItems": 1
@@ -4101,60 +4318,99 @@
                                   "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
                                   "type": "number"
                                 },
-                                "FeesDetails": {
+                                "FeeDetails": {
                                   "type": "array",
                                   "items": {
-                                    "description": "Fee Detail",
+                                    "description": "Fee Details",
                                     "type": "object",
                                     "properties": {
-                                      "FeeType": {
-                                        "description": "A description of the Fee type",
-                                        "enum": ["Account Fee", "Incoming CHAPS Fee", "Outgoing CHAPS Fee", "Foreign Currency", "Foreign Currency Withdrawal Fee (% of Tx - Min £2 - Max £5)", "Non Sterling Transaction Fee (Cash Withdrawal)", "SEPA Fee", "Stopped Cheque Fee", "Copy of Cheque Fee", "Cheque Transaction Fee", "Manual Debit Fee", "Counter Draft", "Unpaid Transaction Fee", "Special Cheque Presentation", "Court Order Fee", "Bankers Draft Fee", "Statement Copy Fee", "Bankers Reference Fee", "Personalised Card Fee", "Sterling Travellers Cheque (% of Tx - Min £2 - Max £5)", "International Payments Charge", "Other", "Cash payment In", "Cash payment Out", "Daily Monitoring", "Weekly Monitoring", "Monthly Monitoring", "Status Enquiry", "Audit Letter", "Credits paid in via night Safe", "Credit paid In via Depos ATM", "Telepay or Teledebit Item", "Balance Handlng Fee", "Late payment", "Loan arrangement", "Early Repayment charge", "Over credit limit fee", "Return payment fee", "Payment Scheme Exchange Rate", "Payment Scheme Exchange Fee", "Payment Scheme Exchange Fee Rate", "Non-Sterling Transaction fee", "Non-Sterling Transaction fee rate", "Non-Sterling Purchase Fee", "Non-Sterling Purchase Fee rate", "Non-Sterling Cash Fee", "Non-Sterling Cash Fee Rate", "Foreign Purchase Fee", "Foreign Purchase Fee Rate", "Foreign Cash Fee", "Foreign Cash Fee Rate", "Early Repayment Charges", "Tiered arrangement fees", "Monthly Account Maintenance Fee", "UK Sterling Direct Debits", "Standing order", "Business Debit card transaction (excluding ATM)", "ATM withdrawals (from a non-group ATM)", "ATM withdrawals (from a group ATM)", "Internet Bulk Payment - batch", "Automated credit", "Automated credit - Telephone and Internet Banking", "Automated credit –Faster Payments inbound", "Internet Bulk Payment –per item", "Faster Payments outbound", "Transfer to an account outside of the group", "Cheque paid in (or Postal Order)", "Cheques Out", "Cash paid in", "Cash paid out at own counter", "Other debit", "Other credit", "Credit paid in at another bank", "Cash exchanged", "Bacs –batch file submitted", "Bacs –debit or credit item", "Cardnet envelope paid in", "Credit paid in via Night Safe - up to £5K", "International payment Internet banking", "Express International Moneymover Branch", "Standard International Moneymover Branch", "Non-urgent Euro (SEPA)1 Branch", "International draft payable abroad Branch", "Electronic payments received from abroad Up to £100", "Electronic payments received from abroad over £100", "Foreign cheque/draft", "Cheques/drafts (including dividend warrants) payable in foreign currency or Sterling drawn abroad", "Cheques/drafts (including dividend warrants) payable in foreign currency drawn in the UK", "Unpaid charge (if the cheque/draft is not honoured by the paying bank)", "Status enquiries abroad", "Status enquiries abroad (if sent electronically) additional", "After an international payment has been sent abroad - Beneficiary claiming non-receipt of funds (BCNR) ", "After an international payment has been sent abroad - Recalling a payment", "First legal mortgage over a property, such as business premises", "Second or subsequent legal mortgage over a property, such as a house or business premises", "Unpaid Item", "SMS Text alerts", "SME unsecured loan fee", "World Currency Withdrawal Fee", "World Currency Purchase Fee", "Europe Currently Withdrawal Fee", "Europe Purchase Fee", "Minimum Foreign Cash Withdrawal Fee", "Maximum Foreign Cash Withdrawal Fee", "Security Fee", "Early Redemption Charge", "Paid Referral Fee", "Unpaid Referral Fee"]
+                                      "FeeSubType": {
+                                        "description": "Describes if the offering is promotional, regular or a description of a future state",
+                                        "enum": ["Promotional", "Regular", "Future Regular Terms"]
                                       },
-                                      "Other": {
-                                        "description": "Describe other fee type",
-                                        "type": "string"
-                                      },
-                                      "FeeFrequency": {
-                                        "description": "Triggering frequency of the fee",
-                                        "enum": ["Monthly", "Per Transaction - Amount", "Per Transaction - Percentage", "Per Occurrence", "Daily", "5 consecutive business days", "Weekly", "Statement Monthly", "Quarterly", "6 monthly", "Yearly", "On account anniversary", "Charging period", "Item", "Account opening", "Account Closing", "Academic Term", "One time payment at the start of the loan", "At the time of repayment", "per hour", "per sheet"]
-                                      },
-                                      "FeeAmount": {
-                                        "description": "Fee in GBP",
-                                        "type": "number"
-                                      },
-                                      "FeeRate": {
-                                        "description": "% Rate",
-                                        "type": "number"
-                                      },
-                                      "Negotiable": {
-                                        "description": "Indicates that this Fee Rate or Fee Amount is negotiable based on risk or other factor",
-                                        "type": "boolean"
-                                      },
-                                      "RepresentativeRate": {
-                                        "description": "Representative Rate",
-                                        "type": "number"
-                                      },
-                                      "FeeLowerTier": {
-                                        "description": "Lower occurrence / range boundary e.g. For returned cheques this could be 0, which means the first returned cheque fits into this range",
-                                        "type": "number"
-                                      },
-                                      "FeeHigherTier": {
-                                        "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
-                                        "type": "number"
-                                      },
-                                      "FeesAndChargesNotes": {
-                                        "description": "Supplementary information for fees and charges",
-                                        "type": "string"
+                                      "FeeDetail": {
+                                        "description": "Fee Detail",
+                                        "type": "object",
+                                        "properties": {
+                                          "FeeType": {
+                                            "description": "A description of the Fee type",
+                                            "enum": ["Account Fee", "Incoming CHAPS Fee", "Outgoing CHAPS Fee", "Foreign Currency", "Foreign Currency Withdrawal Fee (% of Tx - Min £2 - Max £5)", "Non Sterling Transaction Fee (Cash Withdrawal)", "SEPA Fee", "Stopped Cheque Fee", "Copy of Cheque Fee", "Cheque Transaction Fee", "Manual Debit Fee", "Counter Draft", "Unpaid Transaction Fee", "Special Cheque Presentation", "Court Order Fee", "Bankers Draft Fee", "Statement Copy Fee", "Bankers Reference Fee", "Personalised Card Fee", "Sterling Travellers Cheque (% of Tx - Min £2 - Max £5)", "International Payments Charge", "Other", "Cash payment In", "Cash payment Out", "Daily Monitoring", "Weekly Monitoring", "Monthly Monitoring", "Status Enquiry", "Audit Letter", "Credits paid in via night Safe", "Credit paid In via Depos ATM", "Telepay or Teledebit Item", "Balance Handlng Fee", "Late payment", "Loan arrangement", "Early Repayment charge", "Over credit limit fee", "Return payment fee", "Payment Scheme Exchange Rate", "Payment Scheme Exchange Fee", "Payment Scheme Exchange Fee Rate", "Non-Sterling Transaction fee", "Non-Sterling Transaction fee rate", "Non-Sterling Purchase Fee", "Non-Sterling Purchase Fee rate", "Non-Sterling Cash Fee", "Non-Sterling Cash Fee Rate", "Foreign Purchase Fee", "Foreign Purchase Fee Rate", "Foreign Cash Fee", "Foreign Cash Fee Rate", "Early Repayment Charges", "Tiered arrangement fees", "Monthly Account Maintenance Fee", "UK Sterling Direct Debits", "Standing order", "Business Debit card transaction (excluding ATM)", "ATM withdrawals (from a non-group ATM)", "ATM withdrawals (from a group ATM)", "Internet Bulk Payment - batch", "Automated credit", "Automated credit - Telephone and Internet Banking", "Automated credit –Faster Payments inbound", "Internet Bulk Payment –per item", "Faster Payments outbound", "Transfer to an account outside of the group", "Cheque paid in (or Postal Order)", "Cheques Out", "Cash paid in", "Cash paid out at own counter", "Other debit", "Other credit", "Credit paid in at another bank", "Cash exchanged", "Bacs –batch file submitted", "Bacs –debit or credit item", "Cardnet envelope paid in", "Credit paid in via Night Safe - up to £5K", "International payment Internet banking", "Express International Moneymover Branch", "Standard International Moneymover Branch", "Non-urgent Euro (SEPA)1 Branch", "International draft payable abroad Branch", "Electronic payments received from abroad Up to £100", "Electronic payments received from abroad over £100", "Foreign cheque/draft", "Cheques/drafts (including dividend warrants) payable in foreign currency or Sterling drawn abroad", "Cheques/drafts (including dividend warrants) payable in foreign currency drawn in the UK", "Unpaid charge (if the cheque/draft is not honoured by the paying bank)", "Status enquiries abroad", "Status enquiries abroad (if sent electronically) additional", "After an international payment has been sent abroad - Beneficiary claiming non-receipt of funds (BCNR) ", "After an international payment has been sent abroad - Recalling a payment", "First legal mortgage over a property, such as business premises", "Second or subsequent legal mortgage over a property, such as a house or business premises", "Unpaid Item", "SMS Text alerts", "SME unsecured loan fee", "World Currency Withdrawal Fee", "World Currency Purchase Fee", "Europe Currently Withdrawal Fee", "Europe Purchase Fee", "Minimum Foreign Cash Withdrawal Fee", "Maximum Foreign Cash Withdrawal Fee", "Security Fee", "Early Redemption Charge", "Paid Referral Fee", "Unpaid Referral Fee"]
+                                          },
+                                          "Other": {
+                                            "description": "Describe other fee type",
+                                            "type": "string"
+                                          },
+                                          "StartPromotionOrFutureTerms": {
+                                            "description": "Describes the start date",
+                                            "type": "string",
+                                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                          },
+                                          "StopPromotionOrFutureTerms": {
+                                            "description": "Describes the end date",
+                                            "type": "string",
+                                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                          },
+                                          "LengthPromotionalInDays": {
+                                            "description": "Describes the length if only a duration is given instead of a date",
+                                            "type": "integer"
+                                          },
+                                          "DateOfChange": {
+                                            "description": "Date of the change if it refers to future terms",
+                                            "type": "string",
+                                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                                          },
+                                          "FeeSubDetails": {
+                                            "description": "Fee Sub Details",
+                                            "type": "object",
+                                            "properties": {
+                                              "FeeFrequency": {
+                                                "description": "Triggering frequency of the fee",
+                                                "enum": ["Monthly", "Per Transaction - Amount", "Per Transaction - Percentage", "Per Occurrence", "Daily", "5 consecutive business days", "Weekly", "Statement Monthly", "Quarterly", "6 monthly", "Yearly", "On account anniversary", "Charging period", "Item", "Account opening", "Account Closing", "Academic Term", "One time payment at the start of the loan", "At the time of repayment", "per hour", "per sheet"]
+                                              },
+                                              "FeeAmount": {
+                                                "description": "Fee in GBP",
+                                                "type": "number"
+                                              },
+                                              "FeeRate": {
+                                                "description": "% Rate",
+                                                "type": "number"
+                                              },
+                                              "Negotiable": {
+                                                "description": "Indicates that this Fee Rate or Fee Amount is negotiable based on risk or other factor",
+                                                "type": "boolean"
+                                              },
+                                              "RepresentativeRate": {
+                                                "description": "Representative Rate",
+                                                "type": "number"
+                                              },
+                                              "FeeLowerTier": {
+                                                "description": "Lower occurrence / range boundary e.g. For returned cheques this could be 0, which means the first returned cheque fits into this range",
+                                                "type": "number"
+                                              },
+                                              "FeeHigherTier": {
+                                                "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
+                                                "type": "number"
+                                              },
+                                              "FeesAndChargesNotes": {
+                                                "description": "Supplementary information for fees and charges",
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": ["FeeFrequency", "FeeAmount", "Negotiable"],
+                                            "additionalProperties": false
+                                          }
+                                        },
+                                        "required": ["FeeType", "FeeSubDetails"],
+                                        "additionalProperties": false
                                       }
                                     },
-                                    "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"],
+                                    "required": ["FeeSubType", "FeeDetail"],
                                     "additionalProperties": false
                                   },
                                   "minItems": 1
                                 }
                               },
-                              "required": ["FeesDetails"],
+                              "required": ["FeeDetails"],
                               "additionalProperties": false
                             }
                           },

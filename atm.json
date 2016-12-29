@@ -8,6 +8,7 @@
       "description": "Parent company that owns or partially owns subsidiary organisations. ATM Operator Organisation.",
       "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
       "type": "string",
+      "minLength": 1,
       "maxLength": 350
     },
     "ParentGroupID": {
@@ -23,7 +24,10 @@
       "properties": {
         "BrandName": {
           "description": "Name by which an organisation is known that is printed on top of the ATM",
-          "type": "string"
+          "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 350
         },
         "BrandID": {
           "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
@@ -31,41 +35,40 @@
           "type": "string"
         }
       },
-      "required": ["BrandName", "BrandID"],
+      "required": ["BrandName"],
       "additionalProperties": false
     },
     "BranchIdentification": {
       "description": "Unique and unambiguous identification of a retail branch of a financial institution",
       "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
       "type": "string",
+      "minLength": 1,
       "maxLength": 35
     },
     "ATMID": {
       "description": "ATM terminal device identification for the acquirer and the issuer",
       "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
       "type": "string",
+      "minLength": 1,
       "maxLength": 35
     },
     "LocationCategory": {
       "description": "Indicates the environment of the ATM",
-      "type": "array",
-      "uniqueItems": true,
-      "items": {
-        "id": "http://localhost:8000/schemas/v0/definitions/atm/location.json#",
-        "description": "Indicates the environment of the ATM",
-        "enum": ["Airport", "Bank Office", "Bank Specialised Outlet", "Branch", "Branch Customer Area", "Branch Lobby", "Branch Wall", "Bureau de Change", "Coach Station", "Convenience Store", "Exhibition Centre", "Factory", "Office", "Financial Institution", "Hospital", "Hotel", "House of Commons", "House of Lords", "Leisure Centre", "Ministry of Defence", "Motorway Services", "Petrol Station", "Pleasure Park", "Public House", "Railway Station", "Railway Station (Underground)", "Remote Unit", "Retailer", "Department Store", "Retailer Outlet", "Seaport", "Shopping Centre", "Supermarket", "University", "College", "Bank External", "Restricted Access", "Commercial Space"]
-      }
+      "id": "http://localhost:8000/schemas/v0/definitions/atm/location.json#",
+      "enum": ["Airport", "Bank Office", "Bank Specialised Outlet", "Branch", "Branch Customer Area", "Branch Lobby", "Branch Wall", "Bureau de Change", "Coach Station", "Convenience Store", "Exhibition Centre", "Factory", "Office", "Financial Institution", "Hospital", "Hotel", "House of Commons", "House of Lords", "Leisure Centre", "Ministry of Defence", "Motorway Services", "Petrol Station", "Pleasure Park", "Public House", "Railway Station", "Railway Station (Underground)", "Remote Unit", "Retailer", "Department Store", "Retailer Outlet", "Seaport", "Shopping Centre", "Supermarket", "University", "College", "Bank External", "Restricted Access", "Commercial Space"]
     },
     "SiteID": {
       "description": "Site identifying code, where ATM is located",
       "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
       "type": "string",
+      "minLength": 1,
       "maxLength": 35
     },
     "SiteName": {
       "description": "Site identifying name, where ATM is located",
       "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
       "type": "string",
+      "minLength": 1,
       "maxLength": 35
     },
     "Address": {
@@ -77,11 +80,15 @@
           "description": "Name of a street or thoroughfare",
           "id": "http://localhost:8000/schemas/v0/definitions/common/max_70_text.json#",
           "type": "string",
+          "minLength": 1,
           "maxLength": 70
         },
         "BuildingNameOrNumber": {
           "description": "Number or Name that identifies the position of a building on a street",
-          "type": "string"
+          "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 350
         },
         "PstCd": {
           "description": "Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail",
@@ -97,12 +104,14 @@
           "description": "Name of a built-up area, with defined boundaries, and a local government",
           "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
           "type": "string",
+          "minLength": 1,
           "maxLength": 35
         },
         "CtrySubDvsn": {
           "description": "Identifies a subdivision of a country such as state, region, county",
           "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
           "type": "string",
+          "minLength": 1,
           "maxLength": 35
         },
         "Ctry": {
@@ -138,7 +147,7 @@
     },
     "AccessibilityTypes": {
       "description": "Information about the accessibility",
-      "id": "http://localhost:8000/schemas/v0/definitions/common/access_type.json#",
+      "id": "http://localhost:8000/schemas/v0/definitions/common/accessibility_types.json#",
       "type": "array",
       "uniqueItems": true,
       "items": {
@@ -177,6 +186,7 @@
         "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
         "description": "maxLength 350 text",
         "type": "string",
+        "minLength": 1,
         "maxLength": 350
       }
     },

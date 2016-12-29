@@ -8,6 +8,7 @@
       "description": "Parent company that owns or partially owns subsidiary organisations.",
       "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
       "type": "string",
+      "minLength": 1,
       "maxLength": 350
     },
     "ParentGroupID": {
@@ -17,33 +18,24 @@
       "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
     },
     "Brand": {
-      "id": "http://localhost:8000/schemas/v0/definitions/common/brand_org.json#",
-      "description": "Brand Organisation",
-      "type": "object",
-      "properties": {
-        "BrandName": {
-          "description": "Name by which an organisation is known that is printed on top of the ATM",
-          "type": "string"
-        },
-        "BrandID": {
-          "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/brand.json#",
-          "type": "string"
-        }
-      },
-      "required": ["BrandName", "BrandID"],
-      "additionalProperties": false
+      "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+      "description": "maxLength 350 text",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 350
     },
     "BranchName": {
       "description": "Name by which a party is known and which is usually used to identify that party",
       "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
       "type": "string",
+      "minLength": 1,
       "maxLength": 35
     },
     "BranchIdentification": {
       "description": "Unique and unambiguous identification of a retail branch of a financial institution",
       "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
       "type": "string",
+      "minLength": 1,
       "maxLength": 35
     },
     "BranchType": {
@@ -60,11 +52,15 @@
           "description": "Name of a street or thoroughfare",
           "id": "http://localhost:8000/schemas/v0/definitions/common/max_70_text.json#",
           "type": "string",
+          "minLength": 1,
           "maxLength": 70
         },
         "BuildingNameOrNumber": {
           "description": "Number or Name that identifies the position of a building on a street",
-          "type": "string"
+          "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 350
         },
         "PstCd": {
           "description": "Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail",
@@ -80,12 +76,14 @@
           "description": "Name of a built-up area, with defined boundaries, and a local government",
           "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
           "type": "string",
+          "minLength": 1,
           "maxLength": 35
         },
         "CtrySubDvsn": {
           "description": "Identifies a subdivision of a country such as state, region, county",
           "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
           "type": "string",
+          "minLength": 1,
           "maxLength": 35
         },
         "Ctry": {
@@ -102,6 +100,7 @@
       "description": "Description of the branch",
       "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
       "type": "string",
+      "minLength": 1,
       "maxLength": 140
     },
     "BranchPhoto": {
@@ -192,7 +191,7 @@
       "type": "string"
     },
     "OpeningTimes": {
-      "id": "http://localhost:8000/schemas/v0/definitions/branch/opening.json#",
+      "id": "http://localhost:8000/schemas/v0/definitions/branch/opening_details.json#",
       "description": "Branch Opening Times",
       "type": "array",
       "items": {
@@ -261,7 +260,7 @@
       }
     },
     "AccessibilityTypes": {
-      "id": "http://localhost:8000/schemas/v0/definitions/common/access_type.json#",
+      "id": "http://localhost:8000/schemas/v0/definitions/common/accessibility_types.json#",
       "description": "Information about the accessibility",
       "type": "array",
       "uniqueItems": true,
@@ -286,6 +285,7 @@
         "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
         "description": "maxLength 350 text",
         "type": "string",
+        "minLength": 1,
         "maxLength": 350
       }
     },
@@ -306,6 +306,7 @@
         "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
         "description": "maxLength 350 text",
         "type": "string",
+        "minLength": 1,
         "maxLength": 350
       }
     },
@@ -336,6 +337,7 @@
         "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
         "description": "maxLength 350 text",
         "type": "string",
+        "minLength": 1,
         "maxLength": 350
       }
     },
