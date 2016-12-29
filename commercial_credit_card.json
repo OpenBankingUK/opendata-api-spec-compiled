@@ -28,7 +28,8 @@
           "type": "string"
         }
       },
-      "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"]
+      "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
+      "additionalProperties": false
     },
     "ProductName": {
       "description": "Name of the Commercial Credit Card",
@@ -288,9 +289,11 @@
               "type": "number"
             }
           },
-          "required": ["MinimumCreditLimit", "RepaymentFrequency", "APRRate", "PurchaseRate", "BalanceTransferRate", "CashAdvanceRate", "CardScheme", "AbilityToSetIndividualLimits", "AccessToOnlineDataReportingTool", "CashWithdrawalsAllowed", "ConvenienceCheque", "DaysInterestFreeCreditIfPaymentFull", "IssuingEmergencyCardsFees", "AnnualFeeAmount", "PaymentDaysAfterStatement", "MinimumLendingAmmount", "StatementAtAccountLevel", "StatementAtPersonalLevel", "PaymentSchemeExchangeRate", "ExchangeRateAdjustment"]
+          "required": ["MinimumCreditLimit", "RepaymentFrequency", "APRRate", "PurchaseRate", "BalanceTransferRate", "CashAdvanceRate", "CardScheme", "AbilityToSetIndividualLimits", "AccessToOnlineDataReportingTool", "CashWithdrawalsAllowed", "ConvenienceCheque", "DaysInterestFreeCreditIfPaymentFull", "IssuingEmergencyCardsFees", "AnnualFeeAmount", "PaymentDaysAfterStatement", "MinimumLendingAmmount", "StatementAtAccountLevel", "StatementAtPersonalLevel", "PaymentSchemeExchangeRate", "ExchangeRateAdjustment"],
+          "additionalProperties": false
         }
-      }
+      },
+      "additionalProperties": false
     },
     "Eligibility": {
       "id": "http://localhost:8000/schemas/v0/definitions/eligibility/eligibility.json#",
@@ -449,7 +452,8 @@
           "uniqueItems": true
         }
       },
-      "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"]
+      "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"],
+      "additionalProperties": false
     },
     "Benefits": {
       "id": "http://localhost:8000/schemas/v0/definitions/benefits/benefit.json#",
@@ -559,18 +563,23 @@
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         }
-                      }
+                      },
+                      "additionalProperties": false
                     }
                   }
-                }
+                },
+                "additionalProperties": false
               }
             },
-            "required": ["ProductSubType", "BenefitItem"]
+            "required": ["ProductSubType", "BenefitItem"],
+            "additionalProperties": false
           }
         }
       },
-      "required": ["Benefit"]
+      "required": ["Benefit"],
+      "additionalProperties": false
     }
   },
-  "required": ["Organisation", "ProductName", "ProductType", "ProductIdentifier", "ProductURL", "Description", "KeyFeatures", "PaymentHoliday", "PaymentHolidayDescription", "OtherKeyFeatures", "TsandCs", "Details", "Eligibility", "Benefits"]
+  "required": ["Organisation", "ProductName", "ProductType", "ProductIdentifier", "ProductURL", "Description", "KeyFeatures", "PaymentHoliday", "PaymentHolidayDescription", "OtherKeyFeatures", "TsandCs", "Details", "Eligibility", "Benefits"],
+  "additionalProperties": false
 }

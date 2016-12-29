@@ -31,7 +31,8 @@
           "type": "string"
         }
       },
-      "required": ["BrandName", "BrandID"]
+      "required": ["BrandName", "BrandID"],
+      "additionalProperties": false
     },
     "BranchName": {
       "description": "Name by which a party is known and which is usually used to identify that party",
@@ -94,7 +95,8 @@
           "pattern": "[A-Z]{2}"
         }
       },
-      "required": ["StrtNm", "PstCd", "Ctry"]
+      "required": ["StrtNm", "PstCd", "Ctry"],
+      "additionalProperties": false
     },
     "BranchDescription": {
       "description": "Description of the branch",
@@ -130,7 +132,8 @@
             "description": "Description of the telephone number",
             "type": "string"
           }
-        }
+        },
+        "additionalProperties": false
       }
     },
     "FaxNumber": {
@@ -161,7 +164,8 @@
           "maxLength": 16
         }
       },
-      "required": ["Lat", "Long"]
+      "required": ["Lat", "Long"],
+      "additionalProperties": false
     },
     "DaysOfTheWeek": {
       "description": "Number of days that the mobile branch is available",
@@ -226,7 +230,8 @@
         },
         "required": ["OpeningDay", "OpeningTime", "ClosingTime"]
       },
-      "minItems": 1
+      "minItems": 1,
+      "additionalProperties": false
     },
     "PlannedBranchClosure": {
       "type": "array",
@@ -251,7 +256,8 @@
             }
           },
           "required": ["StartDate", "EndDate"]
-        }
+        },
+        "additionalProperties": false
       }
     },
     "AccessibilityTypes": {

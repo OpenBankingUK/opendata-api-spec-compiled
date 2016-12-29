@@ -29,7 +29,8 @@
           "type": "string"
         }
       },
-      "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"]
+      "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
+      "additionalProperties": false
     },
     "ProductType": {
       "description": "Descriptive code for the product category",
@@ -216,10 +217,12 @@
                 "description": "The margin added, by certain card issuers, to the scheme rate in order to arrive at the exchange rate qouted as the reference exchange rate to the cardholder",
                 "type": "number"
               }
-            }
+            },
+            "additionalProperties": false
           }
         },
-        "required": ["ProductSubType", "CAPricingItem"]
+        "required": ["ProductSubType", "CAPricingItem"],
+        "additionalProperties": false
       },
       "minItems": 1
     },
@@ -380,7 +383,8 @@
           "uniqueItems": true
         }
       },
-      "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"]
+      "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"],
+      "additionalProperties": false
     },
     "CreditInterest": {
       "id": "http://localhost:8000/schemas/v0/definitions/crit/crit.json#",
@@ -504,20 +508,24 @@
                         "description": "AER or APR Rate for comparison",
                         "type": "number"
                       }
-                    }
+                    },
+                    "additionalProperties": false
                   }
                 },
                 "InterestNotes": {
                   "description": "Additional notes to supplement the interest details",
                   "type": "string"
                 }
-              }
+              },
+              "additionalProperties": false
             }
           },
-          "required": ["ProductSubType", "CreditInterestItem"]
+          "required": ["ProductSubType", "CreditInterestItem"],
+          "additionalProperties": false
         }
       },
-      "required": ["CreditCharged", "CreditInterestGroup"]
+      "required": ["CreditCharged", "CreditInterestGroup"],
+      "additionalProperties": false
     },
     "Overdraft": {
       "type": "array",
@@ -573,7 +581,8 @@
                     "type": "string"
                   }
                 },
-                "required": ["InterestTierSME", "InterestTierPersonal"]
+                "required": ["InterestTierSME", "InterestTierPersonal"],
+                "additionalProperties": false
               },
               "Tiers": {
                 "type": "array",
@@ -595,7 +604,8 @@
                           "description": "Unarranged overdraft interest tier",
                           "type": "integer"
                         }
-                      }
+                      },
+                      "additionalProperties": false
                     },
                     "TierValueMinimum": {
                       "description": "Lower value of interest tier",
@@ -605,7 +615,8 @@
                       "description": "Max Value of interest tier",
                       "type": "number"
                     }
-                  }
+                  },
+                  "additionalProperties": false
                 },
                 "minItems": 1
               },
@@ -684,7 +695,8 @@
                 "type": "number"
               }
             },
-            "required": ["ApplicableTo", "Tiers"]
+            "required": ["ApplicableTo", "Tiers"],
+            "additionalProperties": false
           },
           "OverdraftType": {
             "id": "http://localhost:8000/schemas/v0/definitions/ovd/overdraft_type.json#",
@@ -715,7 +727,8 @@
             "description": "Fee payable per term for overdraft",
             "type": "string"
           }
-        }
+        },
+        "additionalProperties": false
       }
     },
     "FeesAndCharges": {
@@ -815,15 +828,18 @@
                       "type": "string"
                     }
                   },
-                  "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"]
+                  "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"],
+                  "additionalProperties": false
                 },
                 "minItems": 1
               }
             },
-            "required": ["FeesDetails"]
+            "required": ["FeesDetails"],
+            "additionalProperties": false
           }
         },
-        "required": ["ProductSubType", "Fees"]
+        "required": ["ProductSubType", "Fees"],
+        "additionalProperties": false
       },
       "minItems": 1
     },
@@ -935,18 +951,23 @@
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         }
-                      }
+                      },
+                      "additionalProperties": false
                     }
                   }
-                }
+                },
+                "additionalProperties": false
               }
             },
-            "required": ["ProductSubType", "BenefitItem"]
+            "required": ["ProductSubType", "BenefitItem"],
+            "additionalProperties": false
           }
         }
       },
-      "required": ["Benefit"]
+      "required": ["Benefit"],
+      "additionalProperties": false
     }
   },
-  "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"]
+  "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"],
+  "additionalProperties": false
 }

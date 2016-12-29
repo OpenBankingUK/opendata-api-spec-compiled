@@ -134,7 +134,8 @@
                             "type": "string"
                           }
                         },
-                        "required": ["BrandName", "BrandID"]
+                        "required": ["BrandName", "BrandID"],
+                        "additionalProperties": false
                       },
                       "BranchName": {
                         "description": "Name by which a party is known and which is usually used to identify that party",
@@ -188,7 +189,8 @@
                             "pattern": "[A-Z]{2}"
                           }
                         },
-                        "required": ["StrtNm", "PstCd", "Ctry"]
+                        "required": ["StrtNm", "PstCd", "Ctry"],
+                        "additionalProperties": false
                       },
                       "BranchDescription": {
                         "description": "Description of the branch",
@@ -220,7 +222,8 @@
                               "description": "Description of the telephone number",
                               "type": "string"
                             }
-                          }
+                          },
+                          "additionalProperties": false
                         }
                       },
                       "FaxNumber": {
@@ -247,7 +250,8 @@
                             "maxLength": 16
                           }
                         },
-                        "required": ["Lat", "Long"]
+                        "required": ["Lat", "Long"],
+                        "additionalProperties": false
                       },
                       "DaysOfTheWeek": {
                         "description": "Number of days that the mobile branch is available",
@@ -304,7 +308,8 @@
                           },
                           "required": ["OpeningDay", "OpeningTime", "ClosingTime"]
                         },
-                        "minItems": 1
+                        "minItems": 1,
+                        "additionalProperties": false
                       },
                       "PlannedBranchClosure": {
                         "type": "array",
@@ -326,7 +331,8 @@
                               }
                             },
                             "required": ["StartDate", "EndDate"]
-                          }
+                          },
+                          "additionalProperties": false
                         }
                       },
                       "AccessibilityTypes": {
@@ -776,7 +782,8 @@
                             "type": "string"
                           }
                         },
-                        "required": ["BrandName", "BrandID"]
+                        "required": ["BrandName", "BrandID"],
+                        "additionalProperties": false
                       },
                       "BranchIdentification": {
                         "description": "Unique and unambiguous identification of a retail branch of a financial institution",
@@ -845,7 +852,8 @@
                             "pattern": "[A-Z]{2}"
                           }
                         },
-                        "required": ["StrtNm", "PstCd", "Ctry"]
+                        "required": ["StrtNm", "PstCd", "Ctry"],
+                        "additionalProperties": false
                       },
                       "GeographicLocation": {
                         "description": "Geographic Coordinates",
@@ -862,7 +870,8 @@
                             "maxLength": 16
                           }
                         },
-                        "required": ["Lat", "Long"]
+                        "required": ["Lat", "Long"],
+                        "additionalProperties": false
                       },
                       "AccessibilityTypes": {
                         "description": "Information about the accessibility",
@@ -1291,7 +1300,8 @@
                             "type": "string"
                           }
                         },
-                        "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"]
+                        "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
+                        "additionalProperties": false
                       },
                       "ProductType": {
                         "description": "Descriptive code for the product category",
@@ -1465,10 +1475,12 @@
                                   "description": "The margin added, by certain card issuers, to the scheme rate in order to arrive at the exchange rate qouted as the reference exchange rate to the cardholder",
                                   "type": "number"
                                 }
-                              }
+                              },
+                              "additionalProperties": false
                             }
                           },
-                          "required": ["ProductSubType", "CAPricingItem"]
+                          "required": ["ProductSubType", "CAPricingItem"],
+                          "additionalProperties": false
                         },
                         "minItems": 1
                       },
@@ -1618,7 +1630,8 @@
                             "uniqueItems": true
                           }
                         },
-                        "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"]
+                        "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"],
+                        "additionalProperties": false
                       },
                       "CreditInterest": {
                         "description": "Credit Interest",
@@ -1727,20 +1740,24 @@
                                           "description": "AER or APR Rate for comparison",
                                           "type": "number"
                                         }
-                                      }
+                                      },
+                                      "additionalProperties": false
                                     }
                                   },
                                   "InterestNotes": {
                                     "description": "Additional notes to supplement the interest details",
                                     "type": "string"
                                   }
-                                }
+                                },
+                                "additionalProperties": false
                               }
                             },
-                            "required": ["ProductSubType", "CreditInterestItem"]
+                            "required": ["ProductSubType", "CreditInterestItem"],
+                            "additionalProperties": false
                           }
                         },
-                        "required": ["CreditCharged", "CreditInterestGroup"]
+                        "required": ["CreditCharged", "CreditInterestGroup"],
+                        "additionalProperties": false
                       },
                       "Overdraft": {
                         "type": "array",
@@ -1788,7 +1805,8 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": ["InterestTierSME", "InterestTierPersonal"]
+                                  "required": ["InterestTierSME", "InterestTierPersonal"],
+                                  "additionalProperties": false
                                 },
                                 "Tiers": {
                                   "type": "array",
@@ -1808,7 +1826,8 @@
                                             "description": "Unarranged overdraft interest tier",
                                             "type": "integer"
                                           }
-                                        }
+                                        },
+                                        "additionalProperties": false
                                       },
                                       "TierValueMinimum": {
                                         "description": "Lower value of interest tier",
@@ -1818,7 +1837,8 @@
                                         "description": "Max Value of interest tier",
                                         "type": "number"
                                       }
-                                    }
+                                    },
+                                    "additionalProperties": false
                                   },
                                   "minItems": 1
                                 },
@@ -1894,7 +1914,8 @@
                                   "type": "number"
                                 }
                               },
-                              "required": ["ApplicableTo", "Tiers"]
+                              "required": ["ApplicableTo", "Tiers"],
+                              "additionalProperties": false
                             },
                             "OverdraftType": {
                               "description": "Opposite of repayable on demand",
@@ -1924,7 +1945,8 @@
                               "description": "Fee payable per term for overdraft",
                               "type": "string"
                             }
-                          }
+                          },
+                          "additionalProperties": false
                         }
                       },
                       "FeesAndCharges": {
@@ -2015,15 +2037,18 @@
                                         "type": "string"
                                       }
                                     },
-                                    "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"]
+                                    "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"],
+                                    "additionalProperties": false
                                   },
                                   "minItems": 1
                                 }
                               },
-                              "required": ["FeesDetails"]
+                              "required": ["FeesDetails"],
+                              "additionalProperties": false
                             }
                           },
-                          "required": ["ProductSubType", "Fees"]
+                          "required": ["ProductSubType", "Fees"],
+                          "additionalProperties": false
                         },
                         "minItems": 1
                       },
@@ -2124,20 +2149,25 @@
                                             "type": "string",
                                             "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                                           }
-                                        }
+                                        },
+                                        "additionalProperties": false
                                       }
                                     }
-                                  }
+                                  },
+                                  "additionalProperties": false
                                 }
                               },
-                              "required": ["ProductSubType", "BenefitItem"]
+                              "required": ["ProductSubType", "BenefitItem"],
+                              "additionalProperties": false
                             }
                           }
                         },
-                        "required": ["Benefit"]
+                        "required": ["Benefit"],
+                        "additionalProperties": false
                       }
                     },
-                    "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"]
+                    "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"],
+                    "additionalProperties": false
                   }
                 }
               },
@@ -2507,7 +2537,8 @@
                             "type": "string"
                           }
                         },
-                        "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"]
+                        "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
+                        "additionalProperties": false
                       },
                       "ProductType": {
                         "description": "Descriptive code for the product category",
@@ -2681,10 +2712,12 @@
                                   "description": "The margin added, by certain card issuers, to the scheme rate in order to arrive at the exchange rate qouted as the reference exchange rate to the cardholder",
                                   "type": "number"
                                 }
-                              }
+                              },
+                              "additionalProperties": false
                             }
                           },
-                          "required": ["ProductSubType", "CAPricingItem"]
+                          "required": ["ProductSubType", "CAPricingItem"],
+                          "additionalProperties": false
                         },
                         "minItems": 1
                       },
@@ -2834,7 +2867,8 @@
                             "uniqueItems": true
                           }
                         },
-                        "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"]
+                        "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"],
+                        "additionalProperties": false
                       },
                       "CreditInterest": {
                         "description": "Credit Interest",
@@ -2943,20 +2977,24 @@
                                           "description": "AER or APR Rate for comparison",
                                           "type": "number"
                                         }
-                                      }
+                                      },
+                                      "additionalProperties": false
                                     }
                                   },
                                   "InterestNotes": {
                                     "description": "Additional notes to supplement the interest details",
                                     "type": "string"
                                   }
-                                }
+                                },
+                                "additionalProperties": false
                               }
                             },
-                            "required": ["ProductSubType", "CreditInterestItem"]
+                            "required": ["ProductSubType", "CreditInterestItem"],
+                            "additionalProperties": false
                           }
                         },
-                        "required": ["CreditCharged", "CreditInterestGroup"]
+                        "required": ["CreditCharged", "CreditInterestGroup"],
+                        "additionalProperties": false
                       },
                       "Overdraft": {
                         "type": "array",
@@ -3004,7 +3042,8 @@
                                       "type": "string"
                                     }
                                   },
-                                  "required": ["InterestTierSME", "InterestTierPersonal"]
+                                  "required": ["InterestTierSME", "InterestTierPersonal"],
+                                  "additionalProperties": false
                                 },
                                 "Tiers": {
                                   "type": "array",
@@ -3024,7 +3063,8 @@
                                             "description": "Unarranged overdraft interest tier",
                                             "type": "integer"
                                           }
-                                        }
+                                        },
+                                        "additionalProperties": false
                                       },
                                       "TierValueMinimum": {
                                         "description": "Lower value of interest tier",
@@ -3034,7 +3074,8 @@
                                         "description": "Max Value of interest tier",
                                         "type": "number"
                                       }
-                                    }
+                                    },
+                                    "additionalProperties": false
                                   },
                                   "minItems": 1
                                 },
@@ -3110,7 +3151,8 @@
                                   "type": "number"
                                 }
                               },
-                              "required": ["ApplicableTo", "Tiers"]
+                              "required": ["ApplicableTo", "Tiers"],
+                              "additionalProperties": false
                             },
                             "OverdraftType": {
                               "description": "Opposite of repayable on demand",
@@ -3140,7 +3182,8 @@
                               "description": "Fee payable per term for overdraft",
                               "type": "string"
                             }
-                          }
+                          },
+                          "additionalProperties": false
                         }
                       },
                       "FeesAndCharges": {
@@ -3231,15 +3274,18 @@
                                         "type": "string"
                                       }
                                     },
-                                    "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"]
+                                    "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"],
+                                    "additionalProperties": false
                                   },
                                   "minItems": 1
                                 }
                               },
-                              "required": ["FeesDetails"]
+                              "required": ["FeesDetails"],
+                              "additionalProperties": false
                             }
                           },
-                          "required": ["ProductSubType", "Fees"]
+                          "required": ["ProductSubType", "Fees"],
+                          "additionalProperties": false
                         },
                         "minItems": 1
                       },
@@ -3340,20 +3386,25 @@
                                             "type": "string",
                                             "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                                           }
-                                        }
+                                        },
+                                        "additionalProperties": false
                                       }
                                     }
-                                  }
+                                  },
+                                  "additionalProperties": false
                                 }
                               },
-                              "required": ["ProductSubType", "BenefitItem"]
+                              "required": ["ProductSubType", "BenefitItem"],
+                              "additionalProperties": false
                             }
                           }
                         },
-                        "required": ["Benefit"]
+                        "required": ["Benefit"],
+                        "additionalProperties": false
                       }
                     },
-                    "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"]
+                    "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"],
+                    "additionalProperties": false
                   }
                 }
               },
@@ -3722,7 +3773,8 @@
                             "type": "string"
                           }
                         },
-                        "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"]
+                        "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
+                        "additionalProperties": false
                       },
                       "ProductName": {
                         "description": "The short product or marketing name assigned by the parent organisation",
@@ -3838,7 +3890,8 @@
                                   "type": "boolean"
                                 }
                               },
-                              "required": ["SizeIncrement", "LoanLengthIncrement", "RepaymentFrequency", "LoanSizeBandLower", "LoanSizeBandUpper", "LoanLengthIncrementLower", "LoanLengthIncrementUpper", "Negotiable"]
+                              "required": ["SizeIncrement", "LoanLengthIncrement", "RepaymentFrequency", "LoanSizeBandLower", "LoanSizeBandUpper", "LoanLengthIncrementLower", "LoanLengthIncrementUpper", "Negotiable"],
+                              "additionalProperties": false
                             },
                             "minItems": 1
                           },
@@ -3855,7 +3908,8 @@
                             "type": "boolean"
                           }
                         },
-                        "required": ["ProductSubType", "LoanPricing", "CCARegulatedEntity", "IsALowInterestRepaymentStartPossible", "IsThisAnInterestOnlyLoan", "WillTheLoanBePaidInTrancheDrawdowns"]
+                        "required": ["ProductSubType", "LoanPricing", "CCARegulatedEntity", "IsALowInterestRepaymentStartPossible", "IsThisAnInterestOnlyLoan", "WillTheLoanBePaidInTrancheDrawdowns"],
+                        "additionalProperties": false
                       },
                       "Eligibility": {
                         "description": "Eligibility",
@@ -4003,7 +4057,8 @@
                             "uniqueItems": true
                           }
                         },
-                        "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"]
+                        "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"],
+                        "additionalProperties": false
                       },
                       "FeesAndCharges": {
                         "type": "array",
@@ -4093,15 +4148,18 @@
                                         "type": "string"
                                       }
                                     },
-                                    "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"]
+                                    "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"],
+                                    "additionalProperties": false
                                   },
                                   "minItems": 1
                                 }
                               },
-                              "required": ["FeesDetails"]
+                              "required": ["FeesDetails"],
+                              "additionalProperties": false
                             }
                           },
-                          "required": ["ProductSubType", "Fees"]
+                          "required": ["ProductSubType", "Fees"],
+                          "additionalProperties": false
                         },
                         "minItems": 1
                       },
@@ -4202,20 +4260,25 @@
                                             "type": "string",
                                             "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                                           }
-                                        }
+                                        },
+                                        "additionalProperties": false
                                       }
                                     }
-                                  }
+                                  },
+                                  "additionalProperties": false
                                 }
                               },
-                              "required": ["ProductSubType", "BenefitItem"]
+                              "required": ["ProductSubType", "BenefitItem"],
+                              "additionalProperties": false
                             }
                           }
                         },
-                        "required": ["Benefit"]
+                        "required": ["Benefit"],
+                        "additionalProperties": false
                       }
                     },
-                    "required": ["Organisation", "ProductName", "ProductTypeName", "ProductSegment", "ProductDescription", "TsandCs", "CustomerAccessChannels", "Ccy", "MinimumLoanTerm", "MinimumLoanAmount", "MaximumLoanAmount", "PaymentHoliday", "LoanItem", "Eligibility", "FeesAndCharges", "Benefits"]
+                    "required": ["Organisation", "ProductName", "ProductTypeName", "ProductSegment", "ProductDescription", "TsandCs", "CustomerAccessChannels", "Ccy", "MinimumLoanTerm", "MinimumLoanAmount", "MaximumLoanAmount", "PaymentHoliday", "LoanItem", "Eligibility", "FeesAndCharges", "Benefits"],
+                    "additionalProperties": false
                   }
                 }
               },
@@ -4584,7 +4647,8 @@
                             "type": "string"
                           }
                         },
-                        "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"]
+                        "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
+                        "additionalProperties": false
                       },
                       "ProductName": {
                         "description": "Name of the Commercial Credit Card",
@@ -4833,9 +4897,11 @@
                                 "type": "number"
                               }
                             },
-                            "required": ["MinimumCreditLimit", "RepaymentFrequency", "APRRate", "PurchaseRate", "BalanceTransferRate", "CashAdvanceRate", "CardScheme", "AbilityToSetIndividualLimits", "AccessToOnlineDataReportingTool", "CashWithdrawalsAllowed", "ConvenienceCheque", "DaysInterestFreeCreditIfPaymentFull", "IssuingEmergencyCardsFees", "AnnualFeeAmount", "PaymentDaysAfterStatement", "MinimumLendingAmmount", "StatementAtAccountLevel", "StatementAtPersonalLevel", "PaymentSchemeExchangeRate", "ExchangeRateAdjustment"]
+                            "required": ["MinimumCreditLimit", "RepaymentFrequency", "APRRate", "PurchaseRate", "BalanceTransferRate", "CashAdvanceRate", "CardScheme", "AbilityToSetIndividualLimits", "AccessToOnlineDataReportingTool", "CashWithdrawalsAllowed", "ConvenienceCheque", "DaysInterestFreeCreditIfPaymentFull", "IssuingEmergencyCardsFees", "AnnualFeeAmount", "PaymentDaysAfterStatement", "MinimumLendingAmmount", "StatementAtAccountLevel", "StatementAtPersonalLevel", "PaymentSchemeExchangeRate", "ExchangeRateAdjustment"],
+                            "additionalProperties": false
                           }
-                        }
+                        },
+                        "additionalProperties": false
                       },
                       "Eligibility": {
                         "description": "Eligibility",
@@ -4983,7 +5049,8 @@
                             "uniqueItems": true
                           }
                         },
-                        "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"]
+                        "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"],
+                        "additionalProperties": false
                       },
                       "Benefits": {
                         "description": "Benefit",
@@ -5082,20 +5149,25 @@
                                             "type": "string",
                                             "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                                           }
-                                        }
+                                        },
+                                        "additionalProperties": false
                                       }
                                     }
-                                  }
+                                  },
+                                  "additionalProperties": false
                                 }
                               },
-                              "required": ["ProductSubType", "BenefitItem"]
+                              "required": ["ProductSubType", "BenefitItem"],
+                              "additionalProperties": false
                             }
                           }
                         },
-                        "required": ["Benefit"]
+                        "required": ["Benefit"],
+                        "additionalProperties": false
                       }
                     },
-                    "required": ["Organisation", "ProductName", "ProductType", "ProductIdentifier", "ProductURL", "Description", "KeyFeatures", "PaymentHoliday", "PaymentHolidayDescription", "OtherKeyFeatures", "TsandCs", "Details", "Eligibility", "Benefits"]
+                    "required": ["Organisation", "ProductName", "ProductType", "ProductIdentifier", "ProductURL", "Description", "KeyFeatures", "PaymentHoliday", "PaymentHolidayDescription", "OtherKeyFeatures", "TsandCs", "Details", "Eligibility", "Benefits"],
+                    "additionalProperties": false
                   }
                 }
               },

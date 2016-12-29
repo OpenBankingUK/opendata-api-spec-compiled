@@ -28,7 +28,8 @@
           "type": "string"
         }
       },
-      "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"]
+      "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
+      "additionalProperties": false
     },
     "ProductName": {
       "description": "The short product or marketing name assigned by the parent organisation",
@@ -155,7 +156,8 @@
                 "type": "boolean"
               }
             },
-            "required": ["SizeIncrement", "LoanLengthIncrement", "RepaymentFrequency", "LoanSizeBandLower", "LoanSizeBandUpper", "LoanLengthIncrementLower", "LoanLengthIncrementUpper", "Negotiable"]
+            "required": ["SizeIncrement", "LoanLengthIncrement", "RepaymentFrequency", "LoanSizeBandLower", "LoanSizeBandUpper", "LoanLengthIncrementLower", "LoanLengthIncrementUpper", "Negotiable"],
+            "additionalProperties": false
           },
           "minItems": 1
         },
@@ -172,7 +174,8 @@
           "type": "boolean"
         }
       },
-      "required": ["ProductSubType", "LoanPricing", "CCARegulatedEntity", "IsALowInterestRepaymentStartPossible", "IsThisAnInterestOnlyLoan", "WillTheLoanBePaidInTrancheDrawdowns"]
+      "required": ["ProductSubType", "LoanPricing", "CCARegulatedEntity", "IsALowInterestRepaymentStartPossible", "IsThisAnInterestOnlyLoan", "WillTheLoanBePaidInTrancheDrawdowns"],
+      "additionalProperties": false
     },
     "Eligibility": {
       "id": "http://localhost:8000/schemas/v0/definitions/eligibility/eligibility.json#",
@@ -331,7 +334,8 @@
           "uniqueItems": true
         }
       },
-      "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"]
+      "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"],
+      "additionalProperties": false
     },
     "FeesAndCharges": {
       "type": "array",
@@ -430,15 +434,18 @@
                       "type": "string"
                     }
                   },
-                  "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"]
+                  "required": ["FeeType", "FeeFrequency", "FeeAmount", "Negotiable"],
+                  "additionalProperties": false
                 },
                 "minItems": 1
               }
             },
-            "required": ["FeesDetails"]
+            "required": ["FeesDetails"],
+            "additionalProperties": false
           }
         },
-        "required": ["ProductSubType", "Fees"]
+        "required": ["ProductSubType", "Fees"],
+        "additionalProperties": false
       },
       "minItems": 1
     },
@@ -550,18 +557,23 @@
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         }
-                      }
+                      },
+                      "additionalProperties": false
                     }
                   }
-                }
+                },
+                "additionalProperties": false
               }
             },
-            "required": ["ProductSubType", "BenefitItem"]
+            "required": ["ProductSubType", "BenefitItem"],
+            "additionalProperties": false
           }
         }
       },
-      "required": ["Benefit"]
+      "required": ["Benefit"],
+      "additionalProperties": false
     }
   },
-  "required": ["Organisation", "ProductName", "ProductTypeName", "ProductSegment", "ProductDescription", "TsandCs", "CustomerAccessChannels", "Ccy", "MinimumLoanTerm", "MinimumLoanAmount", "MaximumLoanAmount", "PaymentHoliday", "LoanItem", "Eligibility", "FeesAndCharges", "Benefits"]
+  "required": ["Organisation", "ProductName", "ProductTypeName", "ProductSegment", "ProductDescription", "TsandCs", "CustomerAccessChannels", "Ccy", "MinimumLoanTerm", "MinimumLoanAmount", "MaximumLoanAmount", "PaymentHoliday", "LoanItem", "Eligibility", "FeesAndCharges", "Benefits"],
+  "additionalProperties": false
 }

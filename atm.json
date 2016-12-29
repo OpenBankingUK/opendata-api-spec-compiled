@@ -31,7 +31,8 @@
           "type": "string"
         }
       },
-      "required": ["BrandName", "BrandID"]
+      "required": ["BrandName", "BrandID"],
+      "additionalProperties": false
     },
     "BranchIdentification": {
       "description": "Unique and unambiguous identification of a retail branch of a financial institution",
@@ -111,7 +112,8 @@
           "pattern": "[A-Z]{2}"
         }
       },
-      "required": ["StrtNm", "PstCd", "Ctry"]
+      "required": ["StrtNm", "PstCd", "Ctry"],
+      "additionalProperties": false
     },
     "GeographicLocation": {
       "id": "http://localhost:8000/schemas/v0/definitions/common/geographic_coordinates.json#",
@@ -131,7 +133,8 @@
           "maxLength": 16
         }
       },
-      "required": ["Lat", "Long"]
+      "required": ["Lat", "Long"],
+      "additionalProperties": false
     },
     "AccessibilityTypes": {
       "description": "Information about the accessibility",
