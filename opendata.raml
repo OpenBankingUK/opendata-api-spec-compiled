@@ -96,6 +96,16 @@ traits:
             actual content is returned
 
             when this method is invoked.
+  - request-params:
+      headers:
+        If-Modified-Since:
+          description: |
+            Used for conditional request, to retrieve data
+            only if modified since a given date
+        If-None-Match:
+          description: |
+            Used for conditional request, to retrieve data only
+            if the given Etag value does not match
 resourceTypes:
   - opendata:
       head:
@@ -103,10 +113,12 @@ resourceTypes:
         is:
           - retrievable
           - http-metadata
+          - request-params
       get:
         description: Retrieve information about all <<description>>.
         is:
           - retrievable
+          - request-params
         responses:
           '200':
             body:
@@ -144,7 +156,8 @@ resourceTypes:
                         "items": <<dataSchema>>
                      }
                    },
-                   "required": [ "meta", "data" ]
+                   "required": [ "meta", "data" ],
+                   "additionalProperties": false
                    }
 documentation:
   - title: Home
@@ -221,7 +234,7 @@ documentation:
                   "type": "string",
                   "maxLength": 70
                 },
-                "buidingNameOrNumber": {
+                "BuildingNameOrNumber": {
                   "description": "Number or Name that identifies the position of a building on a street",
                   "type": "string"
                 },
@@ -231,7 +244,7 @@ documentation:
                   "type": "string",
                   "maxLength": 16
                 },
-                "optionalAddressField": {
+                "OptionalAddressField": {
                   "description": "Additional field; often directions",
                   "type": "string"
                 },
@@ -260,7 +273,7 @@ documentation:
               "description": "Description of the branch",
               "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
               "type": "string",
-              "maxLength": 70
+              "maxLength": 140
             },
             "BranchPhoto": {
               "description": "Image related to the branch",
@@ -429,7 +442,7 @@ documentation:
               "items": {
                 "id": "http://localhost:8000/schemas/v0/definitions/branch/self_serve.json#",
                 "description": "Information about self service branch services",
-                "enum": ["Internal ATM with Audio", "External ATM with Audio", "Internal ATM without Audio", "External ATM without Audio", "Online Banking Point", "Assisted Service Counter", "Quick Deposit", "External Quick Service Point", "Internal Quick Service Point", "Digital Self Service Account Opening", "Business Deposit Terminal", "Account Verification Software", "Statement Printer", "Lodgement Device", "Saturday Counter Service", "Cash and Cheque Deposit Machine (Coin)", "Cash and Cheque Deposit Machine (No Coin)"]
+                "enum": ["Internal ATM with Audio", "External ATM with Audio", "Internal ATM without Audio", "External ATM without Audio", "Online Banking Point", "Assisted Service Counter", "Quick Deposit", "External Quick Service Point", "Internal Quick Service Point", "Digital Self Service Account Opening", "Business Deposit Terminal", "Account Verification Service", "Statement Printer", "Lodgement Device", "Saturday Counter Service", "Cash and Cheque Deposit Machine (Coin)", "Cash and Cheque Deposit Machine (No Coin)"]
               },
               "uniqueItems": true
             },
@@ -449,7 +462,7 @@ documentation:
               "items": {
                 "id": "http://localhost:8000/schemas/v0/definitions/mediated.json#",
                 "description": "Information about mediated branch facilities",
-                "enum": ["Counter Service", "Mortgage Advisor", "Night Safe", "Video Banking", "Premier Counter", "Card Insurance Facilities", "Bureau de change", "Business Counter", "On Demand Currency"]
+                "enum": ["Counter Service", "Mortgage Advisor", "Night Safe", "Video Banking", "Premier Counter", "Card Insurance Facilities", "Bureau de Change", "Business Counter", "On Demand Currency"]
               },
               "uniqueItems": true
             },
@@ -586,7 +599,7 @@ documentation:
                   "type": "string",
                   "maxLength": 70
                 },
-                "buidingNameOrNumber": {
+                "BuildingNameOrNumber": {
                   "description": "Number or Name that identifies the position of a building on a street",
                   "type": "string"
                 },
@@ -596,7 +609,7 @@ documentation:
                   "type": "string",
                   "maxLength": 16
                 },
-                "optionalAddressField": {
+                "OptionalAddressField": {
                   "description": "Additional field; often directions",
                   "type": "string"
                 },
@@ -692,7 +705,7 @@ documentation:
               "minItems": 1,
               "items": {
                 "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
-                "description": "Active or Historic Currency Code and Amount",
+                "description": "Active or Historic Currency Code",
                 "type": "string",
                 "pattern": "[A-Z]{3}"
               }
@@ -875,7 +888,7 @@ documentation:
               "type": "array",
               "items": {
                 "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
-                "description": "Active or Historic Currency Code and Amount",
+                "description": "Active or Historic Currency Code",
                 "type": "string",
                 "pattern": "[A-Z]{3}"
               },
@@ -1832,7 +1845,7 @@ documentation:
               "type": "array",
               "items": {
                 "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
-                "description": "Active or Historic Currency Code and Amount",
+                "description": "Active or Historic Currency Code",
                 "type": "string",
                 "pattern": "[A-Z]{3}"
               },
@@ -2697,7 +2710,7 @@ documentation:
               "type": "array",
               "items": {
                 "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
-                "description": "Active or Historic Currency Code and Amount",
+                "description": "Active or Historic Currency Code",
                 "type": "string",
                 "pattern": "[A-Z]{3}"
               },

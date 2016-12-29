@@ -43,13 +43,13 @@
         }, {
           "name": "If-Modified-Since",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if modified since a given date",
+          "description": "Used for conditional request, to retrieve data only if modified since a given date",
           "in": "header",
           "required": false
         }, {
           "name": "If-None-Match",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if the given Etag value does not match",
+          "description": "Used for conditional request, to retrieve data only if the given Etag value does not match",
           "in": "header",
           "required": false
         }],
@@ -102,7 +102,8 @@
                       "format": "uri"
                     }
                   },
-                  "required": ["LastUpdated", "TotalResults", "License", "TermsOfUse"]
+                  "required": ["LastUpdated", "TotalResults", "License", "TermsOfUse"],
+                  "additionalProperties": false
                 },
                 "data": {
                   "type": "array",
@@ -158,7 +159,7 @@
                             "type": "string",
                             "maxLength": 70
                           },
-                          "buidingNameOrNumber": {
+                          "BuildingNameOrNumber": {
                             "description": "Number or Name that identifies the position of a building on a street",
                             "type": "string"
                           },
@@ -167,7 +168,7 @@
                             "type": "string",
                             "maxLength": 16
                           },
-                          "optionalAddressField": {
+                          "OptionalAddressField": {
                             "description": "Additional field; often directions",
                             "type": "string"
                           },
@@ -192,7 +193,7 @@
                       "BranchDescription": {
                         "description": "Description of the branch",
                         "type": "string",
-                        "maxLength": 70
+                        "maxLength": 140
                       },
                       "BranchPhoto": {
                         "description": "Image related to the branch",
@@ -341,7 +342,7 @@
                         "type": "array",
                         "items": {
                           "description": "Information about self service branch services",
-                          "enum": ["Internal ATM with Audio", "External ATM with Audio", "Internal ATM without Audio", "External ATM without Audio", "Online Banking Point", "Assisted Service Counter", "Quick Deposit", "External Quick Service Point", "Internal Quick Service Point", "Digital Self Service Account Opening", "Business Deposit Terminal", "Account Verification Software", "Statement Printer", "Lodgement Device", "Saturday Counter Service", "Cash and Cheque Deposit Machine (Coin)", "Cash and Cheque Deposit Machine (No Coin)"]
+                          "enum": ["Internal ATM with Audio", "External ATM with Audio", "Internal ATM without Audio", "External ATM without Audio", "Online Banking Point", "Assisted Service Counter", "Quick Deposit", "External Quick Service Point", "Internal Quick Service Point", "Digital Self Service Account Opening", "Business Deposit Terminal", "Account Verification Service", "Statement Printer", "Lodgement Device", "Saturday Counter Service", "Cash and Cheque Deposit Machine (Coin)", "Cash and Cheque Deposit Machine (No Coin)"]
                         },
                         "uniqueItems": true
                       },
@@ -359,7 +360,7 @@
                         "type": "array",
                         "items": {
                           "description": "Information about mediated branch facilities",
-                          "enum": ["Counter Service", "Mortgage Advisor", "Night Safe", "Video Banking", "Premier Counter", "Card Insurance Facilities", "Bureau de change", "Business Counter", "On Demand Currency"]
+                          "enum": ["Counter Service", "Mortgage Advisor", "Night Safe", "Video Banking", "Premier Counter", "Card Insurance Facilities", "Bureau de Change", "Business Counter", "On Demand Currency"]
                         },
                         "uniqueItems": true
                       },
@@ -408,7 +409,9 @@
                     "additionalProperties": false
                   }
                 }
-              }
+              },
+              "required": ["meta", "data"],
+              "additionalProperties": false
             }
           },
           "400": {
@@ -647,13 +650,13 @@
         }, {
           "name": "If-Modified-Since",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if modified since a given date",
+          "description": "Used for conditional request, to retrieve data only if modified since a given date",
           "in": "header",
           "required": false
         }, {
           "name": "If-None-Match",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if the given Etag value does not match",
+          "description": "Used for conditional request, to retrieve data only if the given Etag value does not match",
           "in": "header",
           "required": false
         }],
@@ -682,13 +685,13 @@
         }, {
           "name": "If-Modified-Since",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if modified since a given date",
+          "description": "Used for conditional request, to retrieve data only if modified since a given date",
           "in": "header",
           "required": false
         }, {
           "name": "If-None-Match",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if the given Etag value does not match",
+          "description": "Used for conditional request, to retrieve data only if the given Etag value does not match",
           "in": "header",
           "required": false
         }],
@@ -741,7 +744,8 @@
                       "format": "uri"
                     }
                   },
-                  "required": ["LastUpdated", "TotalResults", "License", "TermsOfUse"]
+                  "required": ["LastUpdated", "TotalResults", "License", "TermsOfUse"],
+                  "additionalProperties": false
                 },
                 "data": {
                   "type": "array",
@@ -812,7 +816,7 @@
                             "type": "string",
                             "maxLength": 70
                           },
-                          "buidingNameOrNumber": {
+                          "BuildingNameOrNumber": {
                             "description": "Number or Name that identifies the position of a building on a street",
                             "type": "string"
                           },
@@ -821,7 +825,7 @@
                             "type": "string",
                             "maxLength": 16
                           },
-                          "optionalAddressField": {
+                          "OptionalAddressField": {
                             "description": "Additional field; often directions",
                             "type": "string"
                           },
@@ -907,7 +911,7 @@
                         "uniqueItems": true,
                         "minItems": 1,
                         "items": {
-                          "description": "Active or Historic Currency Code and Amount",
+                          "description": "Active or Historic Currency Code",
                           "type": "string",
                           "pattern": "[A-Z]{3}"
                         }
@@ -921,7 +925,9 @@
                     "additionalProperties": false
                   }
                 }
-              }
+              },
+              "required": ["meta", "data"],
+              "additionalProperties": false
             }
           },
           "400": {
@@ -1160,13 +1166,13 @@
         }, {
           "name": "If-Modified-Since",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if modified since a given date",
+          "description": "Used for conditional request, to retrieve data only if modified since a given date",
           "in": "header",
           "required": false
         }, {
           "name": "If-None-Match",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if the given Etag value does not match",
+          "description": "Used for conditional request, to retrieve data only if the given Etag value does not match",
           "in": "header",
           "required": false
         }],
@@ -1195,13 +1201,13 @@
         }, {
           "name": "If-Modified-Since",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if modified since a given date",
+          "description": "Used for conditional request, to retrieve data only if modified since a given date",
           "in": "header",
           "required": false
         }, {
           "name": "If-None-Match",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if the given Etag value does not match",
+          "description": "Used for conditional request, to retrieve data only if the given Etag value does not match",
           "in": "header",
           "required": false
         }],
@@ -1254,7 +1260,8 @@
                       "format": "uri"
                     }
                   },
-                  "required": ["LastUpdated", "TotalResults", "License", "TermsOfUse"]
+                  "required": ["LastUpdated", "TotalResults", "License", "TermsOfUse"],
+                  "additionalProperties": false
                 },
                 "data": {
                   "type": "array",
@@ -1411,7 +1418,7 @@
                         "description": "Currency of the Account. Default to GBP at present",
                         "type": "array",
                         "items": {
-                          "description": "Active or Historic Currency Code and Amount",
+                          "description": "Active or Historic Currency Code",
                           "type": "string",
                           "pattern": "[A-Z]{3}"
                         },
@@ -2133,7 +2140,9 @@
                     "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"]
                   }
                 }
-              }
+              },
+              "required": ["meta", "data"],
+              "additionalProperties": false
             }
           },
           "400": {
@@ -2372,13 +2381,13 @@
         }, {
           "name": "If-Modified-Since",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if modified since a given date",
+          "description": "Used for conditional request, to retrieve data only if modified since a given date",
           "in": "header",
           "required": false
         }, {
           "name": "If-None-Match",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if the given Etag value does not match",
+          "description": "Used for conditional request, to retrieve data only if the given Etag value does not match",
           "in": "header",
           "required": false
         }],
@@ -2407,13 +2416,13 @@
         }, {
           "name": "If-Modified-Since",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if modified since a given date",
+          "description": "Used for conditional request, to retrieve data only if modified since a given date",
           "in": "header",
           "required": false
         }, {
           "name": "If-None-Match",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if the given Etag value does not match",
+          "description": "Used for conditional request, to retrieve data only if the given Etag value does not match",
           "in": "header",
           "required": false
         }],
@@ -2466,7 +2475,8 @@
                       "format": "uri"
                     }
                   },
-                  "required": ["LastUpdated", "TotalResults", "License", "TermsOfUse"]
+                  "required": ["LastUpdated", "TotalResults", "License", "TermsOfUse"],
+                  "additionalProperties": false
                 },
                 "data": {
                   "type": "array",
@@ -2624,7 +2634,7 @@
                         "description": "Currency of the Account. Default to GBP at present",
                         "type": "array",
                         "items": {
-                          "description": "Active or Historic Currency Code and Amount",
+                          "description": "Active or Historic Currency Code",
                           "type": "string",
                           "pattern": "[A-Z]{3}"
                         },
@@ -3346,7 +3356,9 @@
                     "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"]
                   }
                 }
-              }
+              },
+              "required": ["meta", "data"],
+              "additionalProperties": false
             }
           },
           "400": {
@@ -3585,13 +3597,13 @@
         }, {
           "name": "If-Modified-Since",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if modified since a given date",
+          "description": "Used for conditional request, to retrieve data only if modified since a given date",
           "in": "header",
           "required": false
         }, {
           "name": "If-None-Match",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if the given Etag value does not match",
+          "description": "Used for conditional request, to retrieve data only if the given Etag value does not match",
           "in": "header",
           "required": false
         }],
@@ -3620,13 +3632,13 @@
         }, {
           "name": "If-Modified-Since",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if modified since a given date",
+          "description": "Used for conditional request, to retrieve data only if modified since a given date",
           "in": "header",
           "required": false
         }, {
           "name": "If-None-Match",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if the given Etag value does not match",
+          "description": "Used for conditional request, to retrieve data only if the given Etag value does not match",
           "in": "header",
           "required": false
         }],
@@ -3679,7 +3691,8 @@
                       "format": "uri"
                     }
                   },
-                  "required": ["LastUpdated", "TotalResults", "License", "TermsOfUse"]
+                  "required": ["LastUpdated", "TotalResults", "License", "TermsOfUse"],
+                  "additionalProperties": false
                 },
                 "data": {
                   "type": "array",
@@ -3748,7 +3761,7 @@
                         "description": "Currency of the Account. Default to GBP at present",
                         "type": "array",
                         "items": {
-                          "description": "Active or Historic Currency Code and Amount",
+                          "description": "Active or Historic Currency Code",
                           "type": "string",
                           "pattern": "[A-Z]{3}"
                         },
@@ -4205,7 +4218,9 @@
                     "required": ["Organisation", "ProductName", "ProductTypeName", "ProductSegment", "ProductDescription", "TsandCs", "CustomerAccessChannels", "Ccy", "MinimumLoanTerm", "MinimumLoanAmount", "MaximumLoanAmount", "PaymentHoliday", "LoanItem", "Eligibility", "FeesAndCharges", "Benefits"]
                   }
                 }
-              }
+              },
+              "required": ["meta", "data"],
+              "additionalProperties": false
             }
           },
           "400": {
@@ -4444,13 +4459,13 @@
         }, {
           "name": "If-Modified-Since",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if modified since a given date",
+          "description": "Used for conditional request, to retrieve data only if modified since a given date",
           "in": "header",
           "required": false
         }, {
           "name": "If-None-Match",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if the given Etag value does not match",
+          "description": "Used for conditional request, to retrieve data only if the given Etag value does not match",
           "in": "header",
           "required": false
         }],
@@ -4479,13 +4494,13 @@
         }, {
           "name": "If-Modified-Since",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if modified since a given date",
+          "description": "Used for conditional request, to retrieve data only if modified since a given date",
           "in": "header",
           "required": false
         }, {
           "name": "If-None-Match",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if the given Etag value does not match",
+          "description": "Used for conditional request, to retrieve data only if the given Etag value does not match",
           "in": "header",
           "required": false
         }],
@@ -4538,7 +4553,8 @@
                       "format": "uri"
                     }
                   },
-                  "required": ["LastUpdated", "TotalResults", "License", "TermsOfUse"]
+                  "required": ["LastUpdated", "TotalResults", "License", "TermsOfUse"],
+                  "additionalProperties": false
                 },
                 "data": {
                   "type": "array",
@@ -5082,7 +5098,9 @@
                     "required": ["Organisation", "ProductName", "ProductType", "ProductIdentifier", "ProductURL", "Description", "KeyFeatures", "PaymentHoliday", "PaymentHolidayDescription", "OtherKeyFeatures", "TsandCs", "Details", "Eligibility", "Benefits"]
                   }
                 }
-              }
+              },
+              "required": ["meta", "data"],
+              "additionalProperties": false
             }
           },
           "400": {
@@ -5321,13 +5339,13 @@
         }, {
           "name": "If-Modified-Since",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if modified since a given date",
+          "description": "Used for conditional request, to retrieve data only if modified since a given date",
           "in": "header",
           "required": false
         }, {
           "name": "If-None-Match",
           "type": "string",
-          "description": "Used for conditional GET request, to retrieve data only if the given Etag value does not match",
+          "description": "Used for conditional request, to retrieve data only if the given Etag value does not match",
           "in": "header",
           "required": false
         }],

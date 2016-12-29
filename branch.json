@@ -61,7 +61,7 @@
           "type": "string",
           "maxLength": 70
         },
-        "buidingNameOrNumber": {
+        "BuildingNameOrNumber": {
           "description": "Number or Name that identifies the position of a building on a street",
           "type": "string"
         },
@@ -71,7 +71,7 @@
           "type": "string",
           "maxLength": 16
         },
-        "optionalAddressField": {
+        "OptionalAddressField": {
           "description": "Additional field; often directions",
           "type": "string"
         },
@@ -100,7 +100,7 @@
       "description": "Description of the branch",
       "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
       "type": "string",
-      "maxLength": 70
+      "maxLength": 140
     },
     "BranchPhoto": {
       "description": "Image related to the branch",
@@ -269,7 +269,7 @@
       "items": {
         "id": "http://localhost:8000/schemas/v0/definitions/branch/self_serve.json#",
         "description": "Information about self service branch services",
-        "enum": ["Internal ATM with Audio", "External ATM with Audio", "Internal ATM without Audio", "External ATM without Audio", "Online Banking Point", "Assisted Service Counter", "Quick Deposit", "External Quick Service Point", "Internal Quick Service Point", "Digital Self Service Account Opening", "Business Deposit Terminal", "Account Verification Software", "Statement Printer", "Lodgement Device", "Saturday Counter Service", "Cash and Cheque Deposit Machine (Coin)", "Cash and Cheque Deposit Machine (No Coin)"]
+        "enum": ["Internal ATM with Audio", "External ATM with Audio", "Internal ATM without Audio", "External ATM without Audio", "Online Banking Point", "Assisted Service Counter", "Quick Deposit", "External Quick Service Point", "Internal Quick Service Point", "Digital Self Service Account Opening", "Business Deposit Terminal", "Account Verification Service", "Statement Printer", "Lodgement Device", "Saturday Counter Service", "Cash and Cheque Deposit Machine (Coin)", "Cash and Cheque Deposit Machine (No Coin)"]
       },
       "uniqueItems": true
     },
@@ -289,7 +289,7 @@
       "items": {
         "id": "http://localhost:8000/schemas/v0/definitions/mediated.json#",
         "description": "Information about mediated branch facilities",
-        "enum": ["Counter Service", "Mortgage Advisor", "Night Safe", "Video Banking", "Premier Counter", "Card Insurance Facilities", "Bureau de change", "Business Counter", "On Demand Currency"]
+        "enum": ["Counter Service", "Mortgage Advisor", "Night Safe", "Video Banking", "Premier Counter", "Card Insurance Facilities", "Bureau de Change", "Business Counter", "On Demand Currency"]
       },
       "uniqueItems": true
     },

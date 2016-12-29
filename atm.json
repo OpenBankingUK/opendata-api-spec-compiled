@@ -78,7 +78,7 @@
           "type": "string",
           "maxLength": 70
         },
-        "buidingNameOrNumber": {
+        "BuildingNameOrNumber": {
           "description": "Number or Name that identifies the position of a building on a street",
           "type": "string"
         },
@@ -88,7 +88,7 @@
           "type": "string",
           "maxLength": 16
         },
-        "optionalAddressField": {
+        "OptionalAddressField": {
           "description": "Additional field; often directions",
           "type": "string"
         },
@@ -184,7 +184,7 @@
       "minItems": 1,
       "items": {
         "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
-        "description": "Active or Historic Currency Code and Amount",
+        "description": "Active or Historic Currency Code",
         "type": "string",
         "pattern": "[A-Z]{3}"
       }
