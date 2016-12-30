@@ -613,7 +613,7 @@
                 "additionalProperties": false
               }
             },
-            "required": ["ProductSubType", "BenefitItem"],
+            "required": ["BenefitSubType", "BenefitItem"],
             "additionalProperties": false
           }
         }

@@ -620,7 +620,7 @@
               "additionalProperties": false
             }
           },
-          "required": ["ProductSubType", "CreditInterestItem"],
+          "required": ["InterestSubType", "CreditInterestItem"],
           "additionalProperties": false
         }
       },
@@ -1105,7 +1105,7 @@
                 "additionalProperties": false
               }
             },
-            "required": ["ProductSubType", "BenefitItem"],
+            "required": ["BenefitSubType", "BenefitItem"],
             "additionalProperties": false
           }
         }
