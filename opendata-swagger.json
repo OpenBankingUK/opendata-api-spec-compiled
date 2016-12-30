@@ -8,8 +8,7 @@
   "host": "api.openbanking.xyz",
   "basePath": "/open-banking/v0",
   "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "produces": ["application/prs.openbanking.opendata.v0+json"],
   "tags": [{
     "name": "Branch",
     "description": "Endpoint for getting Branch data"
@@ -35,12 +34,6 @@
         "tags": ["Branch"],
         "description": "Gets a list of all `Branch` objects.",
         "parameters": [{
-          "name": "User-Agent",
-          "type": "string",
-          "description": "The client application that is making the request",
-          "in": "header",
-          "required": false
-        }, {
           "name": "If-Modified-Since",
           "type": "string",
           "description": "Used for conditional request, to retrieve data only if modified since a given date",
@@ -75,6 +68,11 @@
                 "type": "string",
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
+              },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
               }
             },
             "schema": {
@@ -434,6 +432,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -441,22 +444,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "400 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["400"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Bad request"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["You have sent a request which could not be understood."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "408": {
@@ -471,6 +473,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -478,22 +485,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "408 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["408"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Client timeout"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["Your client has failed to submit a request, and a timeout has occurred."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "429": {
@@ -508,6 +514,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -515,22 +526,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "429 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["429"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Too many requests"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["You have requested this resource too often. Slow down."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "500": {
@@ -545,6 +555,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -552,22 +567,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "500 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["500"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Internal server error"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["An error occurred on the server. No further information is available."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "503": {
@@ -582,6 +596,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -589,22 +608,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "503 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["503"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Service temporarily unavailable"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["The service is temporarily unavailable."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "default": {
@@ -619,6 +637,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -641,7 +664,9 @@
                   "description": "Further details describing the error",
                   "type": "string"
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           }
         }
@@ -650,12 +675,6 @@
         "tags": ["Branch"],
         "description": "Gets header information on the current set of `Branch` data",
         "parameters": [{
-          "name": "User-Agent",
-          "type": "string",
-          "description": "The client application that is making the request",
-          "in": "header",
-          "required": false
-        }, {
           "name": "If-Modified-Since",
           "type": "string",
           "description": "Used for conditional request, to retrieve data only if modified since a given date",
@@ -685,12 +704,6 @@
         "tags": ["ATM"],
         "description": "Gets a list of all `ATM` objects.",
         "parameters": [{
-          "name": "User-Agent",
-          "type": "string",
-          "description": "The client application that is making the request",
-          "in": "header",
-          "required": false
-        }, {
           "name": "If-Modified-Since",
           "type": "string",
           "description": "Used for conditional request, to retrieve data only if modified since a given date",
@@ -725,6 +738,11 @@
                 "type": "string",
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
+              },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
               }
             },
             "schema": {
@@ -961,6 +979,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -968,22 +991,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "400 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["400"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Bad request"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["You have sent a request which could not be understood."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "408": {
@@ -998,6 +1020,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -1005,22 +1032,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "408 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["408"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Client timeout"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["Your client has failed to submit a request, and a timeout has occurred."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "429": {
@@ -1035,6 +1061,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -1042,22 +1073,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "429 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["429"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Too many requests"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["You have requested this resource too often. Slow down."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "500": {
@@ -1072,6 +1102,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -1079,22 +1114,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "500 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["500"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Internal server error"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["An error occurred on the server. No further information is available."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "503": {
@@ -1109,6 +1143,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -1116,22 +1155,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "503 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["503"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Service temporarily unavailable"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["The service is temporarily unavailable."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "default": {
@@ -1146,6 +1184,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -1168,7 +1211,9 @@
                   "description": "Further details describing the error",
                   "type": "string"
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           }
         }
@@ -1177,12 +1222,6 @@
         "tags": ["ATM"],
         "description": "Gets header information on the current set of `ATM` data",
         "parameters": [{
-          "name": "User-Agent",
-          "type": "string",
-          "description": "The client application that is making the request",
-          "in": "header",
-          "required": false
-        }, {
           "name": "If-Modified-Since",
           "type": "string",
           "description": "Used for conditional request, to retrieve data only if modified since a given date",
@@ -1212,12 +1251,6 @@
         "tags": ["PCA"],
         "description": "Gets a list of all `Personal Current Account` objects.",
         "parameters": [{
-          "name": "User-Agent",
-          "type": "string",
-          "description": "The client application that is making the request",
-          "in": "header",
-          "required": false
-        }, {
           "name": "If-Modified-Since",
           "type": "string",
           "description": "Used for conditional request, to retrieve data only if modified since a given date",
@@ -1252,6 +1285,11 @@
                 "type": "string",
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
+              },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
               }
             },
             "schema": {
@@ -2299,6 +2337,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -2306,22 +2349,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "400 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["400"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Bad request"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["You have sent a request which could not be understood."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "408": {
@@ -2336,6 +2378,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -2343,22 +2390,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "408 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["408"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Client timeout"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["Your client has failed to submit a request, and a timeout has occurred."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "429": {
@@ -2373,6 +2419,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -2380,22 +2431,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "429 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["429"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Too many requests"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["You have requested this resource too often. Slow down."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "500": {
@@ -2410,6 +2460,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -2417,22 +2472,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "500 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["500"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Internal server error"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["An error occurred on the server. No further information is available."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "503": {
@@ -2447,6 +2501,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -2454,22 +2513,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "503 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["503"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Service temporarily unavailable"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["The service is temporarily unavailable."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "default": {
@@ -2484,6 +2542,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -2506,7 +2569,9 @@
                   "description": "Further details describing the error",
                   "type": "string"
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           }
         }
@@ -2515,12 +2580,6 @@
         "tags": ["PCA"],
         "description": "Gets header information on the current set of `Personal Current Account` data",
         "parameters": [{
-          "name": "User-Agent",
-          "type": "string",
-          "description": "The client application that is making the request",
-          "in": "header",
-          "required": false
-        }, {
           "name": "If-Modified-Since",
           "type": "string",
           "description": "Used for conditional request, to retrieve data only if modified since a given date",
@@ -2550,12 +2609,6 @@
         "tags": ["BCA"],
         "description": "Gets a list of all `Branch Current Account` objects.",
         "parameters": [{
-          "name": "User-Agent",
-          "type": "string",
-          "description": "The client application that is making the request",
-          "in": "header",
-          "required": false
-        }, {
           "name": "If-Modified-Since",
           "type": "string",
           "description": "Used for conditional request, to retrieve data only if modified since a given date",
@@ -2590,6 +2643,11 @@
                 "type": "string",
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
+              },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
               }
             },
             "schema": {
@@ -3638,6 +3696,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -3645,22 +3708,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "400 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["400"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Bad request"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["You have sent a request which could not be understood."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "408": {
@@ -3675,6 +3737,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -3682,22 +3749,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "408 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["408"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Client timeout"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["Your client has failed to submit a request, and a timeout has occurred."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "429": {
@@ -3712,6 +3778,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -3719,22 +3790,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "429 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["429"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Too many requests"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["You have requested this resource too often. Slow down."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "500": {
@@ -3749,6 +3819,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -3756,22 +3831,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "500 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["500"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Internal server error"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["An error occurred on the server. No further information is available."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "503": {
@@ -3786,6 +3860,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -3793,22 +3872,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "503 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["503"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Service temporarily unavailable"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["The service is temporarily unavailable."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "default": {
@@ -3823,6 +3901,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -3845,7 +3928,9 @@
                   "description": "Further details describing the error",
                   "type": "string"
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           }
         }
@@ -3854,12 +3939,6 @@
         "tags": ["BCA"],
         "description": "Gets header information on the current set of `Business Current Account` data",
         "parameters": [{
-          "name": "User-Agent",
-          "type": "string",
-          "description": "The client application that is making the request",
-          "in": "header",
-          "required": false
-        }, {
           "name": "If-Modified-Since",
           "type": "string",
           "description": "Used for conditional request, to retrieve data only if modified since a given date",
@@ -3889,12 +3968,6 @@
         "tags": ["SME"],
         "description": "Gets a list of all `Unsercured SME Lending` objects.",
         "parameters": [{
-          "name": "User-Agent",
-          "type": "string",
-          "description": "The client application that is making the request",
-          "in": "header",
-          "required": false
-        }, {
           "name": "If-Modified-Since",
           "type": "string",
           "description": "Used for conditional request, to retrieve data only if modified since a given date",
@@ -3929,6 +4002,11 @@
                 "type": "string",
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
+              },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
               }
             },
             "schema": {
@@ -4554,6 +4632,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -4561,22 +4644,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "400 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["400"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Bad request"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["You have sent a request which could not be understood."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "408": {
@@ -4591,6 +4673,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -4598,22 +4685,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "408 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["408"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Client timeout"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["Your client has failed to submit a request, and a timeout has occurred."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "429": {
@@ -4628,6 +4714,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -4635,22 +4726,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "429 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["429"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Too many requests"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["You have requested this resource too often. Slow down."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "500": {
@@ -4665,6 +4755,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -4672,22 +4767,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "500 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["500"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Internal server error"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["An error occurred on the server. No further information is available."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "503": {
@@ -4702,6 +4796,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -4709,22 +4808,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "503 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["503"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Service temporarily unavailable"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["The service is temporarily unavailable."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "default": {
@@ -4739,6 +4837,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -4761,7 +4864,9 @@
                   "description": "Further details describing the error",
                   "type": "string"
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           }
         }
@@ -4770,12 +4875,6 @@
         "tags": ["SME"],
         "description": "Gets header information on the current set of `Unsercured SME Lending` data",
         "parameters": [{
-          "name": "User-Agent",
-          "type": "string",
-          "description": "The client application that is making the request",
-          "in": "header",
-          "required": false
-        }, {
           "name": "If-Modified-Since",
           "type": "string",
           "description": "Used for conditional request, to retrieve data only if modified since a given date",
@@ -4805,12 +4904,6 @@
         "tags": ["CCC"],
         "description": "Gets a list of all `Commerical Credit Card` objects.",
         "parameters": [{
-          "name": "User-Agent",
-          "type": "string",
-          "description": "The client application that is making the request",
-          "in": "header",
-          "required": false
-        }, {
           "name": "If-Modified-Since",
           "type": "string",
           "description": "Used for conditional request, to retrieve data only if modified since a given date",
@@ -4845,6 +4938,11 @@
                 "type": "string",
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
+              },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
               }
             },
             "schema": {
@@ -5443,6 +5541,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -5450,22 +5553,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "400 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["400"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Bad request"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["You have sent a request which could not be understood."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "408": {
@@ -5480,6 +5582,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -5487,22 +5594,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "408 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["408"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Client timeout"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["Your client has failed to submit a request, and a timeout has occurred."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "429": {
@@ -5517,6 +5623,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -5524,22 +5635,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "429 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["429"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Too many requests"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["You have requested this resource too often. Slow down."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "500": {
@@ -5554,6 +5664,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -5561,22 +5676,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "500 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["500"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Internal server error"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["An error occurred on the server. No further information is available."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "503": {
@@ -5591,6 +5705,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -5598,22 +5717,21 @@
               }
             },
             "schema": {
-              "title": "Error object",
+              "title": "503 Error object",
               "type": "object",
               "properties": {
                 "status": {
-                  "description": "This corresponds to the HTTP status code",
-                  "type": "string"
+                  "enum": ["503"]
                 },
                 "title": {
-                  "description": "A short title of the type of error",
-                  "type": "string"
+                  "enum": ["Service temporarily unavailable"]
                 },
                 "description": {
-                  "description": "Further details describing the error",
-                  "type": "string"
+                  "enum": ["The service is temporarily unavailable."]
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           },
           "default": {
@@ -5628,6 +5746,11 @@
                 "description": "Prevent this request from being loaded in any iframes",
                 "default": "DENY"
               },
+              "X-Content-Type-Options": {
+                "type": "string",
+                "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
+                "default": "nosniff"
+              },
               "Status Code": {
                 "type": "integer",
                 "description": "The HTTP status code defining the error",
@@ -5650,7 +5773,9 @@
                   "description": "Further details describing the error",
                   "type": "string"
                 }
-              }
+              },
+              "required": ["status", "title", "description"],
+              "additionalProperties": false
             }
           }
         }
@@ -5659,12 +5784,6 @@
         "tags": ["CCC"],
         "description": "Gets header information on the current set of `Commerical Credit Card` data",
         "parameters": [{
-          "name": "User-Agent",
-          "type": "string",
-          "description": "The client application that is making the request",
-          "in": "header",
-          "required": false
-        }, {
           "name": "If-Modified-Since",
           "type": "string",
           "description": "Used for conditional request, to retrieve data only if modified since a given date",

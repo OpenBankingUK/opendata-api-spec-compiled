@@ -1,0 +1,21 @@
+{
+  "title": "500 Error object",
+  "type": "object",
+  "properties": {
+    "status": {
+      "enum": [ "500" ]
+    },
+    "title": {
+      "enum": [ "Internal server error" ]
+    },
+    "description": {
+      "enum": [ "An error occurred on the server. No further information is available." ]
+    }
+  },
+  "required": [
+    "status",
+    "title",
+    "description"
+  ],
+  "additionalProperties": false
+}

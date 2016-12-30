@@ -1,0 +1,21 @@
+{
+  "title": "400 Error object",
+  "type": "object",
+  "properties": {
+    "status": {
+      "enum": [ "400" ]
+    },
+    "title": {
+      "enum": [ "Bad request" ]
+    },
+    "description": {
+      "enum": [ "You have sent a request which could not be understood." ]
+    }
+  },
+  "required": [
+    "status",
+    "title",
+    "description"
+  ],
+  "additionalProperties": false
+}

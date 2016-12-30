@@ -1,0 +1,21 @@
+{
+  "title": "408 Error object",
+  "type": "object",
+  "properties": {
+    "status": {
+      "enum": [ "408" ]
+    },
+    "title": {
+      "enum": [ "Client timeout" ]
+    },
+    "description": {
+      "enum": [ "Your client has failed to submit a request, and a timeout has occurred." ]
+    }
+  },
+  "required": [
+    "status",
+    "title",
+    "description"
+  ],
+  "additionalProperties": false
+}

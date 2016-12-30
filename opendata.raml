@@ -29,13 +29,20 @@ traits:
                 served.
               required: true
             Content-Type:
-              default: application/vnd.openbanking-opendata.v0+json
+              default: application/prs.openbanking.opendata.v0+json
+              required: true
+            X-Content-Type-Options:
+              description: >
+                Ensures each page has a content type and prevents browsers from
+                doing MIME type sniffing
+              default: nosniff
               required: true
         '400':
           description: |
             Failure. You have sent a request which could not be understood.
           body:
             application/json:
+              schema: http-error-400
               example: |
                 {
                   "status": "400",
@@ -48,6 +55,7 @@ traits:
             has occurred.
           body:
             application/json:
+              schema: http-error-408
               example: |
                 {
                   "status": "408",
@@ -59,6 +67,7 @@ traits:
             Failure. You have requested this resource too often. Slow down.
           body:
             application/json:
+              schema: http-error-429
               example: |
                 {
                   "status": "429",
@@ -71,6 +80,7 @@ traits:
             available.
           body:
             application/json:
+              schema: http-error-500
               example: |
                 {
                   "status": "500",
@@ -82,6 +92,7 @@ traits:
             Failure. The service is temporarily unavailable.
           body:
             application/json:
+              schema: http-error-503
               example: |
                 {
                   "status": "503",
@@ -106,6 +117,117 @@ traits:
           description: |
             Used for conditional request, to retrieve data only
             if the given Etag value does not match
+schemas:
+  - http-error-400: |
+      {
+        "title": "400 Error object",
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [ "400" ]
+          },
+          "title": {
+            "enum": [ "Bad request" ]
+          },
+          "description": {
+            "enum": [ "You have sent a request which could not be understood." ]
+          }
+        },
+        "required": [
+          "status",
+          "title",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+  - http-error-408: |
+      {
+        "title": "408 Error object",
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [ "408" ]
+          },
+          "title": {
+            "enum": [ "Client timeout" ]
+          },
+          "description": {
+            "enum": [ "Your client has failed to submit a request, and a timeout has occurred." ]
+          }
+        },
+        "required": [
+          "status",
+          "title",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+  - http-error-429: |
+      {
+        "title": "429 Error object",
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [ "429" ]
+          },
+          "title": {
+            "enum": [ "Too many requests" ]
+          },
+          "description": {
+            "enum": [ "You have requested this resource too often. Slow down." ]
+          }
+        },
+        "required": [
+          "status",
+          "title",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+  - http-error-500: |
+      {
+        "title": "500 Error object",
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [ "500" ]
+          },
+          "title": {
+            "enum": [ "Internal server error" ]
+          },
+          "description": {
+            "enum": [ "An error occurred on the server. No further information is available." ]
+          }
+        },
+        "required": [
+          "status",
+          "title",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+  - http-error-503: |
+      {
+        "title": "503 Error object",
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [ "503" ]
+          },
+          "title": {
+            "enum": [ "Service temporarily unavailable" ]
+          },
+          "description": {
+            "enum": [ "The service is temporarily unavailable." ]
+          }
+        },
+        "required": [
+          "status",
+          "title",
+          "description"
+        ],
+        "additionalProperties": false
+      }
 resourceTypes:
   - opendata:
       head:

@@ -1,0 +1,21 @@
+{
+  "title": "503 Error object",
+  "type": "object",
+  "properties": {
+    "status": {
+      "enum": [ "503" ]
+    },
+    "title": {
+      "enum": [ "Service temporarily unavailable" ]
+    },
+    "description": {
+      "enum": [ "The service is temporarily unavailable." ]
+    }
+  },
+  "required": [
+    "status",
+    "title",
+    "description"
+  ],
+  "additionalProperties": false
+}

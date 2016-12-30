@@ -1,0 +1,21 @@
+{
+  "title": "429 Error object",
+  "type": "object",
+  "properties": {
+    "status": {
+      "enum": [ "429" ]
+    },
+    "title": {
+      "enum": [ "Too many requests" ]
+    },
+    "description": {
+      "enum": [ "You have requested this resource too often. Slow down." ]
+    }
+  },
+  "required": [
+    "status",
+    "title",
+    "description"
+  ],
+  "additionalProperties": false
+}
