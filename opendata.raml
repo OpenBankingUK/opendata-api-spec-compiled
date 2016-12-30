@@ -299,25 +299,33 @@ documentation:
           "title": "Branch",
           "type": "object",
           "properties": {
-            "ParentGroupName": {
-              "description": "Parent company that owns or partially owns subsidiary organisations.",
-              "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
-              "type": "string",
-              "minLength": 1,
-              "maxLength": 350
-            },
-            "ParentGroupID": {
-              "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
-              "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
-              "type": "string",
-              "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
-            },
-            "Brand": {
-              "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
-              "description": "maxLength 350 text",
-              "type": "string",
-              "minLength": 1,
-              "maxLength": 350
+            "Organisation": {
+              "id": "http://localhost:8000/schemas/v0/definitions/common/organisation.json#",
+              "description": "Organisation",
+              "type": "object",
+              "properties": {
+                "ParentGroupName": {
+                  "description": "Parent company that owns or partially owns subsidiary organisations",
+                  "type": "string"
+                },
+                "ParentGroupID": {
+                  "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
+                  "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
+                  "type": "string",
+                  "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
+                },
+                "BrandName": {
+                  "description": "Name by which an organisation is known that is printed on top of the ATM",
+                  "type": "string"
+                },
+                "BrandID": {
+                  "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
+                  "type": "string",
+                  "format": "uri"
+                }
+              },
+              "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
+              "additionalProperties": false
             },
             "BranchName": {
               "description": "Name by which a party is known and which is usually used to identify that party",
@@ -350,7 +358,7 @@ documentation:
                   "minLength": 1,
                   "maxLength": 70
                 },
-                "BuildingNameOrNumber": {
+                "BldgNb": {
                   "description": "Number or Name that identifies the position of a building on a street",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
                   "type": "string",
@@ -641,7 +649,7 @@ documentation:
               "type": "boolean"
             }
           },
-          "required": ["ParentGroupName", "ParentGroupID", "Brand", "BranchIdentification", "BranchType", "Address", "TelephoneNumber", "GeographicLocation", "OpeningTimes", "ATMAtBranch"],
+          "required": ["Organisation", "BranchIdentification", "BranchType", "Address", "TelephoneNumber", "GeographicLocation", "OpeningTimes", "ATMAtBranch"],
           "additionalProperties": false
         }
 /atms:
@@ -655,38 +663,32 @@ documentation:
           "title": "ATM",
           "type": "object",
           "properties": {
-            "ParentGroupName": {
-              "description": "Parent company that owns or partially owns subsidiary organisations. ATM Operator Organisation.",
-              "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
-              "type": "string",
-              "minLength": 1,
-              "maxLength": 350
-            },
-            "ParentGroupID": {
-              "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
-              "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
-              "type": "string",
-              "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
-            },
-            "Brand": {
-              "id": "http://localhost:8000/schemas/v0/definitions/common/brand_org.json#",
-              "description": "Brand Organisation",
+            "Organisation": {
+              "id": "http://localhost:8000/schemas/v0/definitions/common/organisation.json#",
+              "description": "Organisation",
               "type": "object",
               "properties": {
+                "ParentGroupName": {
+                  "description": "Parent company that owns or partially owns subsidiary organisations",
+                  "type": "string"
+                },
+                "ParentGroupID": {
+                  "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
+                  "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
+                  "type": "string",
+                  "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
+                },
                 "BrandName": {
                   "description": "Name by which an organisation is known that is printed on top of the ATM",
-                  "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
-                  "type": "string",
-                  "minLength": 1,
-                  "maxLength": 350
+                  "type": "string"
                 },
                 "BrandID": {
                   "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
-                  "id": "http://localhost:8000/schemas/v0/definitions/common/brand.json#",
-                  "type": "string"
+                  "type": "string",
+                  "format": "uri"
                 }
               },
-              "required": ["BrandName"],
+              "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
               "additionalProperties": false
             },
             "BranchIdentification": {
@@ -705,7 +707,7 @@ documentation:
             },
             "LocationCategory": {
               "description": "Indicates the environment of the ATM",
-              "id": "http://localhost:8000/schemas/v0/definitions/atm/location.json#",
+              "id": "http://localhost:8000/schemas/v0/definitions/atm/location_category.json#",
               "enum": ["Airport", "Bank Office", "Bank Specialised Outlet", "Branch", "Branch Customer Area", "Branch Lobby", "Branch Wall", "Bureau de Change", "Coach Station", "Convenience Store", "Exhibition Centre", "Factory", "Office", "Financial Institution", "Hospital", "Hotel", "House of Commons", "House of Lords", "Leisure Centre", "Ministry of Defence", "Motorway Services", "Petrol Station", "Pleasure Park", "Public House", "Railway Station", "Railway Station (Underground)", "Remote Unit", "Retailer", "Department Store", "Retailer Outlet", "Seaport", "Shopping Centre", "Supermarket", "University", "College", "Bank External", "Restricted Access", "Commercial Space"]
             },
             "SiteID": {
@@ -734,7 +736,7 @@ documentation:
                   "minLength": 1,
                   "maxLength": 70
                 },
-                "BuildingNameOrNumber": {
+                "BldgNb": {
                   "description": "Number or Name that identifies the position of a building on a street",
                   "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
                   "type": "string",
@@ -859,7 +861,7 @@ documentation:
               "enum": ["£ 5", "£ 10", "£ 20", "£ 50", "£ 100"]
             }
           },
-          "required": ["ParentGroupName", "ParentGroupID", "Brand", "ATMID", "Address", "GeographicLocation", "SupportedLanguages", "ATMServices", "Currency"],
+          "required": ["Organisation", "ATMID", "Address", "GeographicLocation", "SupportedLanguages", "ATMServices", "Currency"],
           "additionalProperties": false
         }
 /personal-current-accounts:
@@ -893,8 +895,8 @@ documentation:
                 },
                 "BrandID": {
                   "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
-                  "id": "http://localhost:8000/schemas/v0/definitions/common/brand.json#",
-                  "type": "string"
+                  "type": "string",
+                  "format": "uri"
                 }
               },
               "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
@@ -982,7 +984,7 @@ documentation:
               "description": "Indicates whether a credit check performed on an inquiry to open an account is submitted",
               "type": "boolean"
             },
-            "CreditScoringPartOfAccountOpeningIsAHardOrASoftCreditScore": {
+            "CreditScoringPartOfAccountOpeningIsAHardOrSoftCreditScore": {
               "description": "Describes the type of credit scoring",
               "type": "array",
               "items": {
@@ -999,7 +1001,7 @@ documentation:
               "description": "Indicates whether a credit check is used to check the address of a potential new account holder",
               "type": "boolean"
             },
-            "CreditScoringPartOfAccountOpeningIDVerificationIsAHardOrASoftCreditScore": {
+            "CreditScoringPartOfAccountOpeningIDVerificationIsAHardOrSoftCreditScore": {
               "type": "array",
               "items": {
                 "id": "http://localhost:8000/schemas/v0/definitions/ca/hard_soft.json#",
@@ -1043,74 +1045,104 @@ documentation:
               "type": "boolean"
             },
             "Feature": {
-              "id": "http://localhost:8000/schemas/v0/definitions/feature/feature.json#",
-              "description": "Account Features",
-              "type": "object",
-              "properties": {
-                "ExistingFeature": {
-                  "description": "Indicates whether the account has any feature",
-                  "type": "boolean"
-                },
-                "FeatureDetails": {
-                  "description": "Feature details",
-                  "type": "array",
-                  "items": {
-                    "id": "http://localhost:8000/schemas/v0/definitions/feature/feature_details.json#",
-                    "description": "Feature Details",
-                    "type": "object",
-                    "properties": {
-                      "ProductSubType": {
-                        "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
-                        "description": "Describes if the offering is promotional, regular or a description of a future state",
-                        "enum": ["Promotional", "Regular", "Future Regular Terms"]
-                      },
-                      "StartPromotionOrFutureTerms": {
-                        "description": "Describes the start date",
-                        "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-                        "type": "string",
-                        "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-                      },
-                      "StopPromotionOrFutureTerms": {
-                        "description": "Describes the end date",
-                        "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-                        "type": "string",
-                        "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-                      },
-                      "LengthPromotionalInDays": {
-                        "description": "Describes the length if only a duration is given instead of a date",
-                        "type": "integer"
-                      },
-                      "DateOfChange": {
-                        "description": "Date of the change if it refers to future terms",
-                        "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-                        "type": "string",
-                        "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-                      },
-                      "FeatureType": {
-                        "description": "Type that represents the nature of the feature",
-                        "type": "string"
-                      },
-                      "FeatureName": {
-                        "description": "The name of the feature",
-                        "type": "string"
-                      },
-                      "FeatureDescription": {
-                        "description": "A textual explanation of what the feature",
-                        "type": "string"
-                      },
-                      "FeatureValue": {
-                        "description": "The value or values permissible for a specific feature for an individual product representing a product characteristic",
-                        "type": "string"
-                      },
-                      "CriteriaType": {
-                        "description": "Criteria that is required in order to be eligible for the feature",
-                        "type": "string"
+              "type": "array",
+              "items": {
+                "id": "http://localhost:8000/schemas/v0/definitions/feature/feature.json#",
+                "description": "Account Features",
+                "type": "object",
+                "properties": {
+                  "ExistingFeature": {
+                    "description": "Indicates whether the account has any feature",
+                    "type": "boolean"
+                  },
+                  "ProductSubType": {
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
+                    "description": "Describes if the offering is promotional, regular or a description of a future state",
+                    "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                  },
+                  "StartPromotionOrFutureTerms": {
+                    "description": "Describes the start date",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                  },
+                  "StopPromotionOrFutureTerms": {
+                    "description": "Describes the end date",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                  },
+                  "LengthPromotionalInDays": {
+                    "description": "Describes the length if only a duration is given instead of a date",
+                    "type": "integer"
+                  },
+                  "DateOfChange": {
+                    "description": "Date of the change if it refers to future terms",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                  },
+                  "FeatureDetails": {
+                    "description": "Feature details",
+                    "type": "array",
+                    "items": {
+                      "id": "http://localhost:8000/schemas/v0/definitions/feature/feature_details.json#",
+                      "description": "Feature Details",
+                      "type": "object",
+                      "properties": {
+                        "FeatureSubType": {
+                          "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
+                          "description": "Describes if the offering is promotional, regular or a description of a future state",
+                          "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                        },
+                        "StartPromotionOrFutureTerms": {
+                          "description": "Describes the start date",
+                          "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                          "type": "string",
+                          "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                        },
+                        "StopPromotionOrFutureTerms": {
+                          "description": "Describes the end date",
+                          "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                          "type": "string",
+                          "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                        },
+                        "LengthPromotionalInDays": {
+                          "description": "Describes the length if only a duration is given instead of a date",
+                          "type": "integer"
+                        },
+                        "DateOfChange": {
+                          "description": "Date of the change if it refers to future terms",
+                          "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                          "type": "string",
+                          "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                        },
+                        "FeatureType": {
+                          "description": "Type that represents the nature of the feature",
+                          "type": "string"
+                        },
+                        "FeatureName": {
+                          "description": "The name of the feature",
+                          "type": "string"
+                        },
+                        "FeatureDescription": {
+                          "description": "A textual explanation of what the feature",
+                          "type": "string"
+                        },
+                        "FeatureValue": {
+                          "description": "The value or values permissible for a specific feature for an individual product representing a product characteristic",
+                          "type": "string"
+                        },
+                        "CriteriaType": {
+                          "description": "Criteria that is required in order to be eligible for the feature",
+                          "type": "string"
+                        }
                       }
                     }
                   }
-                }
-              },
-              "required": ["ExistingFeature"]
+                },
+                "required": ["ExistingFeature"]
+              }
             },
             "CAPricing": {
               "type": "array",
@@ -1235,14 +1267,14 @@ documentation:
                   "type": "string",
                   "pattern": "[A-Z]{3}"
                 },
-                "ResidencyResticted": {
+                "ResidencyRestricted": {
                   "description": "Indicates a customer's residency forms part of the eligibility criteria",
                   "type": "boolean"
                 },
-                "ResidencyRestictedRegion": {
+                "ResidencyRestrictedRegion": {
                   "description": "Indicates a customer must be current resident of a geographic area/country",
                   "id": "http://localhost:8000/schemas/v0/definitions/regions.json#",
-                  "enum": ["UK", "EEA", "EU", "EFTA", "GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS", "IRL"]
+                  "enum": ["UK", "EEA", "EU", "EFTA", "GB - ENG", "GB - NIR", "GB - SCT", "GB - WLS", "IRL"]
                 },
                 "MaxNumberOfAccounts": {
                   "description": "Maximum number of the same prodcut the customer may hold",
@@ -1307,7 +1339,7 @@ documentation:
                   "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
                   "type": "string"
                 },
-                "PreviousBancruptcy": {
+                "PreviousBankruptcy": {
                   "description": "Describes if a previous bankruptcy / insolvency disqualfies for this account Details in ELI-280",
                   "type": "boolean"
                 },
@@ -1321,7 +1353,7 @@ documentation:
                   "uniqueItems": true
                 }
               },
-              "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"],
+              "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyRestricted", "ThirdSectorOrganisations", "PreviousBankruptcy"],
               "additionalProperties": false
             },
             "CreditInterest": {
@@ -1442,7 +1474,7 @@ documentation:
                                 "description": "Rate Comparison Type",
                                 "enum": ["APR", "AER", "Gross"]
                               },
-                              "AprAERRate": {
+                              "APRAERRate": {
                                 "description": "AER or APR Rate for comparison",
                                 "type": "number"
                               }
@@ -1558,8 +1590,12 @@ documentation:
                         },
                         "minItems": 1
                       },
-                      "InterestRateGrossPA": {
+                      "InterestRateEARpa": {
                         "description": "Interest rate applied to tier",
+                        "type": "number"
+                      },
+                      "RepresentativeRate": {
+                        "description": "Interest rate at AER",
                         "type": "number"
                       },
                       "InterestNotes": {
@@ -1572,14 +1608,6 @@ documentation:
                       },
                       "MinUnarrangedOverdraftAmount": {
                         "description": "Minimum Unarranged Overdraft Amount if applicable",
-                        "type": "number"
-                      },
-                      "DailyOverdraftFeeCap": {
-                        "description": "Maximum daily overdraft charge",
-                        "type": "number"
-                      },
-                      "MonthlyOverdraftFeeCap": {
-                        "description": "Maximum monthly overdraft charge",
                         "type": "number"
                       },
                       "InterestRate": {
@@ -1595,9 +1623,6 @@ documentation:
                         "description": "When the interest is applied",
                         "id": "http://localhost:8000/schemas/v0/definitions/common/frequency.json#",
                         "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
-                      },
-                      "IndicativeOrActual": {
-                        "type": "boolean"
                       },
                       "DailyCharge": {
                         "description": "Maximum daily overdraft charge",
@@ -1635,6 +1660,14 @@ documentation:
                     },
                     "required": ["ApplicableTo", "Tiers"],
                     "additionalProperties": false
+                  },
+                  "MaximumMonthlyOverdraftCharge": {
+                    "description": "Maximum monthly overdraft charge",
+                    "type": "number"
+                  },
+                  "MaximumDailyOverdraftCharge": {
+                    "description": "Maximum daily overdraft charge",
+                    "type": "number"
                   },
                   "OverdraftType": {
                     "id": "http://localhost:8000/schemas/v0/definitions/ovd/overdraft_type.json#",
@@ -1736,7 +1769,7 @@ documentation:
                                 "FeeType": {
                                   "id": "http://localhost:8000/schemas/v0/definitions/fees/fee_type.json#",
                                   "description": "A description of the Fee type",
-                                  "enum": ["Account Fee", "Incoming CHAPS Fee", "Outgoing CHAPS Fee", "Foreign Currency", "Foreign Currency Withdrawal Fee (% of Tx - Min £2 - Max £5)", "Non Sterling Transaction Fee (Cash Withdrawal)", "SEPA Fee", "Stopped Cheque Fee", "Copy of Cheque Fee", "Cheque Transaction Fee", "Manual Debit Fee", "Counter Draft", "Unpaid Transaction Fee", "Special Cheque Presentation", "Court Order Fee", "Bankers Draft Fee", "Statement Copy Fee", "Bankers Reference Fee", "Personalised Card Fee", "Sterling Travellers Cheque (% of Tx - Min £2 - Max £5)", "International Payments Charge", "Other", "Cash payment In", "Cash payment Out", "Daily Monitoring", "Weekly Monitoring", "Monthly Monitoring", "Status Enquiry", "Audit Letter", "Credits paid in via night Safe", "Credit paid In via Depos ATM", "Telepay or Teledebit Item", "Balance Handlng Fee", "Late payment", "Loan arrangement", "Early Repayment charge", "Over credit limit fee", "Return payment fee", "Payment Scheme Exchange Rate", "Payment Scheme Exchange Fee", "Payment Scheme Exchange Fee Rate", "Non-Sterling Transaction fee", "Non-Sterling Transaction fee rate", "Non-Sterling Purchase Fee", "Non-Sterling Purchase Fee rate", "Non-Sterling Cash Fee", "Non-Sterling Cash Fee Rate", "Foreign Purchase Fee", "Foreign Purchase Fee Rate", "Foreign Cash Fee", "Foreign Cash Fee Rate", "Early Repayment Charges", "Tiered arrangement fees", "Monthly Account Maintenance Fee", "UK Sterling Direct Debits", "Standing order", "Business Debit card transaction (excluding ATM)", "ATM withdrawals (from a non-group ATM)", "ATM withdrawals (from a group ATM)", "Internet Bulk Payment - batch", "Automated credit", "Automated credit - Telephone and Internet Banking", "Automated credit –Faster Payments inbound", "Internet Bulk Payment –per item", "Faster Payments outbound", "Transfer to an account outside of the group", "Cheque paid in (or Postal Order)", "Cheques Out", "Cash paid in", "Cash paid out at own counter", "Other debit", "Other credit", "Credit paid in at another bank", "Cash exchanged", "Bacs –batch file submitted", "Bacs –debit or credit item", "Cardnet envelope paid in", "Credit paid in via Night Safe - up to £5K", "International payment Internet banking", "Express International Moneymover Branch", "Standard International Moneymover Branch", "Non-urgent Euro (SEPA)1 Branch", "International draft payable abroad Branch", "Electronic payments received from abroad Up to £100", "Electronic payments received from abroad over £100", "Foreign cheque/draft", "Cheques/drafts (including dividend warrants) payable in foreign currency or Sterling drawn abroad", "Cheques/drafts (including dividend warrants) payable in foreign currency drawn in the UK", "Unpaid charge (if the cheque/draft is not honoured by the paying bank)", "Status enquiries abroad", "Status enquiries abroad (if sent electronically) additional", "After an international payment has been sent abroad - Beneficiary claiming non-receipt of funds (BCNR) ", "After an international payment has been sent abroad - Recalling a payment", "First legal mortgage over a property, such as business premises", "Second or subsequent legal mortgage over a property, such as a house or business premises", "Unpaid Item", "SMS Text alerts", "SME unsecured loan fee", "World Currency Withdrawal Fee", "World Currency Purchase Fee", "Europe Currently Withdrawal Fee", "Europe Purchase Fee", "Minimum Foreign Cash Withdrawal Fee", "Maximum Foreign Cash Withdrawal Fee", "Security Fee", "Early Redemption Charge", "Paid Referral Fee", "Unpaid Referral Fee"]
+                                  "enum": ["Account Fee", "Incoming CHAPS Fee", "Outgoing CHAPS Fee", "Foreign Currency", "Foreign Currency Withdrawal Fee (% of Tx - Min £2 - Max £5)", "Non Sterling Transaction Fee (Cash Withdrawal)", "SEPA Fee", "Stopped Cheque Fee", "Copy of Cheque Fee", "Cheque Transaction Fee", "Manual Debit Fee", "Counter Draft", "Unpaid Transaction Fee", "Special Cheque Presentation", "Court Order Fee", "Bankers Draft Fee", "Statement Copy Fee", "Bankers Reference Fee", "Personalised Card Fee", "Sterling Travellers Cheque (% of Tx - Min £2 - Max £5)", "International Payments Charge", "Other", "Cash payment In", "Cash payment Out", "Daily Monitoring", "Weekly Monitoring", "Monthly Monitoring", "Status Enquiry", "Audit Letter", "Credits paid in via night Safe", "Credit paid In via Depos ATM", "Telepay or Teledebit Item", "Balance Handlng Fee", "Late payment", "Loan arrangement", "Early Repayment charge", "Over credit limit fee", "Return payment fee", "Payment Scheme Exchange Rate", "Payment Scheme Exchange Fee", "Payment Scheme Exchange Fee Rate", "Non-Sterling Transaction fee", "Non-Sterling Transaction fee rate", "Non-Sterling Purchase Fee", "Non-Sterling Purchase Fee rate", "Non-Sterling Cash Fee", "Non-Sterling Cash Fee Rate", "Foreign Purchase Fee", "Foreign Purchase Fee Rate", "Foreign Cash Fee", "Foreign Cash Fee Rate", "Early Repayment Charges", "Tiered arrangement fees", "Monthly Account Maintenance Fee", "UK Sterling Direct Debits", "Standing order", "Business Debit card transaction (excluding ATM)", "ATM withdrawals (from a non-group ATM)", "ATM withdrawals (from a group ATM)", "Internet Bulk Payment - batch", "Automated credit", "Automated credit - Telephone and Internet Banking", "Automated credit –Faster Payments inbound", "Internet Bulk Payment –per item", "Faster Payments outbound", "Transfer to an account outside of the group", "Cheque paid in (or Postal Order)", "Cheques Out", "Cash paid in", "Cash paid out at own counter", "Other debit", "Other credit", "Credit paid in at another bank", "Cash exchanged", "Bacs – batch file submitted", "Bacs – debit or credit item", "Cardnet envelope paid in", "Credit paid in via Night Safe - up to £5K", "International payment Internet banking", "Express International Moneymover Branch", "Standard International Moneymover Branch", "Non-urgent Euro (SEPA)1 Branch", "International draft payable abroad Branch", "Electronic payments received from abroad Up to £100", "Electronic payments received from abroad over £100", "Foreign cheque/draft", "Cheques/drafts (including dividend warrants) payable in foreign currency or Sterling drawn abroad", "Cheques/drafts (including dividend warrants) payable in foreign currency drawn in the UK", "Unpaid charge (if the cheque/draft is not honoured by the paying bank)", "Status enquiries abroad", "Status enquiries abroad (if sent electronically) additional", "After an international payment has been sent abroad - Beneficiary claiming non-receipt of funds (BCNR) ", "After an international payment has been sent abroad - Recalling a payment", "First legal mortgage over a property, such as business premises", "Second or subsequent legal mortgage over a property, such as a house or business premises", "Unpaid Item", "SMS Text alerts", "SME unsecured loan fee", "World Currency Withdrawal Fee", "World Currency Purchase Fee", "Europe Currently Withdrawal Fee", "Europe Purchase Fee", "Minimum Foreign Cash Withdrawal Fee", "Maximum Foreign Cash Withdrawal Fee", "Security Fee", "Early Redemption Charge", "Paid Referral Fee", "Unpaid Referral Fee"]
                                 },
                                 "Other": {
                                   "description": "Describe other fee type",
@@ -1951,7 +1984,7 @@ documentation:
               "additionalProperties": false
             }
           },
-          "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "Feature", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"]
+          "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"]
         }
 /business-current-accounts:
   type:
@@ -1985,8 +2018,8 @@ documentation:
                 },
                 "BrandID": {
                   "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
-                  "id": "http://localhost:8000/schemas/v0/definitions/common/brand.json#",
-                  "type": "string"
+                  "type": "string",
+                  "format": "uri"
                 }
               },
               "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
@@ -2074,7 +2107,7 @@ documentation:
               "description": "Indicates whether a credit check performed on an inquiry to open an account is submitted",
               "type": "boolean"
             },
-            "CreditScoringPartOfAccountOpeningIsAHardOrASoftCreditScore": {
+            "CreditScoringPartOfAccountOpeningIsAHardOrSoftCreditScore": {
               "description": "Describes the type of credit scoring",
               "type": "array",
               "items": {
@@ -2091,7 +2124,7 @@ documentation:
               "description": "Indicates whether a credit check is used to check the address of a potential new account holder",
               "type": "boolean"
             },
-            "CreditScoringPartOfAccountOpeningIDVerificationIsAHardOrASoftCreditScore": {
+            "CreditScoringPartOfAccountOpeningIDVerificationIsAHardOrSoftCreditScore": {
               "type": "array",
               "items": {
                 "id": "http://localhost:8000/schemas/v0/definitions/ca/hard_soft.json#",
@@ -2135,74 +2168,104 @@ documentation:
               "type": "boolean"
             },
             "Feature": {
-              "id": "http://localhost:8000/schemas/v0/definitions/feature/feature.json#",
-              "description": "Account Features",
-              "type": "object",
-              "properties": {
-                "ExistingFeature": {
-                  "description": "Indicates whether the account has any feature",
-                  "type": "boolean"
-                },
-                "FeatureDetails": {
-                  "description": "Feature details",
-                  "type": "array",
-                  "items": {
-                    "id": "http://localhost:8000/schemas/v0/definitions/feature/feature_details.json#",
-                    "description": "Feature Details",
-                    "type": "object",
-                    "properties": {
-                      "ProductSubType": {
-                        "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
-                        "description": "Describes if the offering is promotional, regular or a description of a future state",
-                        "enum": ["Promotional", "Regular", "Future Regular Terms"]
-                      },
-                      "StartPromotionOrFutureTerms": {
-                        "description": "Describes the start date",
-                        "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-                        "type": "string",
-                        "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-                      },
-                      "StopPromotionOrFutureTerms": {
-                        "description": "Describes the end date",
-                        "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-                        "type": "string",
-                        "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-                      },
-                      "LengthPromotionalInDays": {
-                        "description": "Describes the length if only a duration is given instead of a date",
-                        "type": "integer"
-                      },
-                      "DateOfChange": {
-                        "description": "Date of the change if it refers to future terms",
-                        "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-                        "type": "string",
-                        "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-                      },
-                      "FeatureType": {
-                        "description": "Type that represents the nature of the feature",
-                        "type": "string"
-                      },
-                      "FeatureName": {
-                        "description": "The name of the feature",
-                        "type": "string"
-                      },
-                      "FeatureDescription": {
-                        "description": "A textual explanation of what the feature",
-                        "type": "string"
-                      },
-                      "FeatureValue": {
-                        "description": "The value or values permissible for a specific feature for an individual product representing a product characteristic",
-                        "type": "string"
-                      },
-                      "CriteriaType": {
-                        "description": "Criteria that is required in order to be eligible for the feature",
-                        "type": "string"
+              "type": "array",
+              "items": {
+                "id": "http://localhost:8000/schemas/v0/definitions/feature/feature.json#",
+                "description": "Account Features",
+                "type": "object",
+                "properties": {
+                  "ExistingFeature": {
+                    "description": "Indicates whether the account has any feature",
+                    "type": "boolean"
+                  },
+                  "ProductSubType": {
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
+                    "description": "Describes if the offering is promotional, regular or a description of a future state",
+                    "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                  },
+                  "StartPromotionOrFutureTerms": {
+                    "description": "Describes the start date",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                  },
+                  "StopPromotionOrFutureTerms": {
+                    "description": "Describes the end date",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                  },
+                  "LengthPromotionalInDays": {
+                    "description": "Describes the length if only a duration is given instead of a date",
+                    "type": "integer"
+                  },
+                  "DateOfChange": {
+                    "description": "Date of the change if it refers to future terms",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                  },
+                  "FeatureDetails": {
+                    "description": "Feature details",
+                    "type": "array",
+                    "items": {
+                      "id": "http://localhost:8000/schemas/v0/definitions/feature/feature_details.json#",
+                      "description": "Feature Details",
+                      "type": "object",
+                      "properties": {
+                        "FeatureSubType": {
+                          "id": "http://localhost:8000/schemas/v0/definitions/common/offering_subtype.json#",
+                          "description": "Describes if the offering is promotional, regular or a description of a future state",
+                          "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                        },
+                        "StartPromotionOrFutureTerms": {
+                          "description": "Describes the start date",
+                          "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                          "type": "string",
+                          "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                        },
+                        "StopPromotionOrFutureTerms": {
+                          "description": "Describes the end date",
+                          "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                          "type": "string",
+                          "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                        },
+                        "LengthPromotionalInDays": {
+                          "description": "Describes the length if only a duration is given instead of a date",
+                          "type": "integer"
+                        },
+                        "DateOfChange": {
+                          "description": "Date of the change if it refers to future terms",
+                          "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                          "type": "string",
+                          "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                        },
+                        "FeatureType": {
+                          "description": "Type that represents the nature of the feature",
+                          "type": "string"
+                        },
+                        "FeatureName": {
+                          "description": "The name of the feature",
+                          "type": "string"
+                        },
+                        "FeatureDescription": {
+                          "description": "A textual explanation of what the feature",
+                          "type": "string"
+                        },
+                        "FeatureValue": {
+                          "description": "The value or values permissible for a specific feature for an individual product representing a product characteristic",
+                          "type": "string"
+                        },
+                        "CriteriaType": {
+                          "description": "Criteria that is required in order to be eligible for the feature",
+                          "type": "string"
+                        }
                       }
                     }
                   }
-                }
-              },
-              "required": ["ExistingFeature"]
+                },
+                "required": ["ExistingFeature"]
+              }
             },
             "CAPricing": {
               "type": "array",
@@ -2327,14 +2390,14 @@ documentation:
                   "type": "string",
                   "pattern": "[A-Z]{3}"
                 },
-                "ResidencyResticted": {
+                "ResidencyRestricted": {
                   "description": "Indicates a customer's residency forms part of the eligibility criteria",
                   "type": "boolean"
                 },
-                "ResidencyRestictedRegion": {
+                "ResidencyRestrictedRegion": {
                   "description": "Indicates a customer must be current resident of a geographic area/country",
                   "id": "http://localhost:8000/schemas/v0/definitions/regions.json#",
-                  "enum": ["UK", "EEA", "EU", "EFTA", "GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS", "IRL"]
+                  "enum": ["UK", "EEA", "EU", "EFTA", "GB - ENG", "GB - NIR", "GB - SCT", "GB - WLS", "IRL"]
                 },
                 "MaxNumberOfAccounts": {
                   "description": "Maximum number of the same prodcut the customer may hold",
@@ -2399,7 +2462,7 @@ documentation:
                   "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
                   "type": "string"
                 },
-                "PreviousBancruptcy": {
+                "PreviousBankruptcy": {
                   "description": "Describes if a previous bankruptcy / insolvency disqualfies for this account Details in ELI-280",
                   "type": "boolean"
                 },
@@ -2413,7 +2476,7 @@ documentation:
                   "uniqueItems": true
                 }
               },
-              "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"],
+              "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyRestricted", "ThirdSectorOrganisations", "PreviousBankruptcy"],
               "additionalProperties": false
             },
             "CreditInterest": {
@@ -2534,7 +2597,7 @@ documentation:
                                 "description": "Rate Comparison Type",
                                 "enum": ["APR", "AER", "Gross"]
                               },
-                              "AprAERRate": {
+                              "APRAERRate": {
                                 "description": "AER or APR Rate for comparison",
                                 "type": "number"
                               }
@@ -2650,8 +2713,12 @@ documentation:
                         },
                         "minItems": 1
                       },
-                      "InterestRateGrossPA": {
+                      "InterestRateEARpa": {
                         "description": "Interest rate applied to tier",
+                        "type": "number"
+                      },
+                      "RepresentativeRate": {
+                        "description": "Interest rate at AER",
                         "type": "number"
                       },
                       "InterestNotes": {
@@ -2664,14 +2731,6 @@ documentation:
                       },
                       "MinUnarrangedOverdraftAmount": {
                         "description": "Minimum Unarranged Overdraft Amount if applicable",
-                        "type": "number"
-                      },
-                      "DailyOverdraftFeeCap": {
-                        "description": "Maximum daily overdraft charge",
-                        "type": "number"
-                      },
-                      "MonthlyOverdraftFeeCap": {
-                        "description": "Maximum monthly overdraft charge",
                         "type": "number"
                       },
                       "InterestRate": {
@@ -2687,9 +2746,6 @@ documentation:
                         "description": "When the interest is applied",
                         "id": "http://localhost:8000/schemas/v0/definitions/common/frequency.json#",
                         "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
-                      },
-                      "IndicativeOrActual": {
-                        "type": "boolean"
                       },
                       "DailyCharge": {
                         "description": "Maximum daily overdraft charge",
@@ -2727,6 +2783,14 @@ documentation:
                     },
                     "required": ["ApplicableTo", "Tiers"],
                     "additionalProperties": false
+                  },
+                  "MaximumMonthlyOverdraftCharge": {
+                    "description": "Maximum monthly overdraft charge",
+                    "type": "number"
+                  },
+                  "MaximumDailyOverdraftCharge": {
+                    "description": "Maximum daily overdraft charge",
+                    "type": "number"
                   },
                   "OverdraftType": {
                     "id": "http://localhost:8000/schemas/v0/definitions/ovd/overdraft_type.json#",
@@ -2828,7 +2892,7 @@ documentation:
                                 "FeeType": {
                                   "id": "http://localhost:8000/schemas/v0/definitions/fees/fee_type.json#",
                                   "description": "A description of the Fee type",
-                                  "enum": ["Account Fee", "Incoming CHAPS Fee", "Outgoing CHAPS Fee", "Foreign Currency", "Foreign Currency Withdrawal Fee (% of Tx - Min £2 - Max £5)", "Non Sterling Transaction Fee (Cash Withdrawal)", "SEPA Fee", "Stopped Cheque Fee", "Copy of Cheque Fee", "Cheque Transaction Fee", "Manual Debit Fee", "Counter Draft", "Unpaid Transaction Fee", "Special Cheque Presentation", "Court Order Fee", "Bankers Draft Fee", "Statement Copy Fee", "Bankers Reference Fee", "Personalised Card Fee", "Sterling Travellers Cheque (% of Tx - Min £2 - Max £5)", "International Payments Charge", "Other", "Cash payment In", "Cash payment Out", "Daily Monitoring", "Weekly Monitoring", "Monthly Monitoring", "Status Enquiry", "Audit Letter", "Credits paid in via night Safe", "Credit paid In via Depos ATM", "Telepay or Teledebit Item", "Balance Handlng Fee", "Late payment", "Loan arrangement", "Early Repayment charge", "Over credit limit fee", "Return payment fee", "Payment Scheme Exchange Rate", "Payment Scheme Exchange Fee", "Payment Scheme Exchange Fee Rate", "Non-Sterling Transaction fee", "Non-Sterling Transaction fee rate", "Non-Sterling Purchase Fee", "Non-Sterling Purchase Fee rate", "Non-Sterling Cash Fee", "Non-Sterling Cash Fee Rate", "Foreign Purchase Fee", "Foreign Purchase Fee Rate", "Foreign Cash Fee", "Foreign Cash Fee Rate", "Early Repayment Charges", "Tiered arrangement fees", "Monthly Account Maintenance Fee", "UK Sterling Direct Debits", "Standing order", "Business Debit card transaction (excluding ATM)", "ATM withdrawals (from a non-group ATM)", "ATM withdrawals (from a group ATM)", "Internet Bulk Payment - batch", "Automated credit", "Automated credit - Telephone and Internet Banking", "Automated credit –Faster Payments inbound", "Internet Bulk Payment –per item", "Faster Payments outbound", "Transfer to an account outside of the group", "Cheque paid in (or Postal Order)", "Cheques Out", "Cash paid in", "Cash paid out at own counter", "Other debit", "Other credit", "Credit paid in at another bank", "Cash exchanged", "Bacs –batch file submitted", "Bacs –debit or credit item", "Cardnet envelope paid in", "Credit paid in via Night Safe - up to £5K", "International payment Internet banking", "Express International Moneymover Branch", "Standard International Moneymover Branch", "Non-urgent Euro (SEPA)1 Branch", "International draft payable abroad Branch", "Electronic payments received from abroad Up to £100", "Electronic payments received from abroad over £100", "Foreign cheque/draft", "Cheques/drafts (including dividend warrants) payable in foreign currency or Sterling drawn abroad", "Cheques/drafts (including dividend warrants) payable in foreign currency drawn in the UK", "Unpaid charge (if the cheque/draft is not honoured by the paying bank)", "Status enquiries abroad", "Status enquiries abroad (if sent electronically) additional", "After an international payment has been sent abroad - Beneficiary claiming non-receipt of funds (BCNR) ", "After an international payment has been sent abroad - Recalling a payment", "First legal mortgage over a property, such as business premises", "Second or subsequent legal mortgage over a property, such as a house or business premises", "Unpaid Item", "SMS Text alerts", "SME unsecured loan fee", "World Currency Withdrawal Fee", "World Currency Purchase Fee", "Europe Currently Withdrawal Fee", "Europe Purchase Fee", "Minimum Foreign Cash Withdrawal Fee", "Maximum Foreign Cash Withdrawal Fee", "Security Fee", "Early Redemption Charge", "Paid Referral Fee", "Unpaid Referral Fee"]
+                                  "enum": ["Account Fee", "Incoming CHAPS Fee", "Outgoing CHAPS Fee", "Foreign Currency", "Foreign Currency Withdrawal Fee (% of Tx - Min £2 - Max £5)", "Non Sterling Transaction Fee (Cash Withdrawal)", "SEPA Fee", "Stopped Cheque Fee", "Copy of Cheque Fee", "Cheque Transaction Fee", "Manual Debit Fee", "Counter Draft", "Unpaid Transaction Fee", "Special Cheque Presentation", "Court Order Fee", "Bankers Draft Fee", "Statement Copy Fee", "Bankers Reference Fee", "Personalised Card Fee", "Sterling Travellers Cheque (% of Tx - Min £2 - Max £5)", "International Payments Charge", "Other", "Cash payment In", "Cash payment Out", "Daily Monitoring", "Weekly Monitoring", "Monthly Monitoring", "Status Enquiry", "Audit Letter", "Credits paid in via night Safe", "Credit paid In via Depos ATM", "Telepay or Teledebit Item", "Balance Handlng Fee", "Late payment", "Loan arrangement", "Early Repayment charge", "Over credit limit fee", "Return payment fee", "Payment Scheme Exchange Rate", "Payment Scheme Exchange Fee", "Payment Scheme Exchange Fee Rate", "Non-Sterling Transaction fee", "Non-Sterling Transaction fee rate", "Non-Sterling Purchase Fee", "Non-Sterling Purchase Fee rate", "Non-Sterling Cash Fee", "Non-Sterling Cash Fee Rate", "Foreign Purchase Fee", "Foreign Purchase Fee Rate", "Foreign Cash Fee", "Foreign Cash Fee Rate", "Early Repayment Charges", "Tiered arrangement fees", "Monthly Account Maintenance Fee", "UK Sterling Direct Debits", "Standing order", "Business Debit card transaction (excluding ATM)", "ATM withdrawals (from a non-group ATM)", "ATM withdrawals (from a group ATM)", "Internet Bulk Payment - batch", "Automated credit", "Automated credit - Telephone and Internet Banking", "Automated credit –Faster Payments inbound", "Internet Bulk Payment –per item", "Faster Payments outbound", "Transfer to an account outside of the group", "Cheque paid in (or Postal Order)", "Cheques Out", "Cash paid in", "Cash paid out at own counter", "Other debit", "Other credit", "Credit paid in at another bank", "Cash exchanged", "Bacs – batch file submitted", "Bacs – debit or credit item", "Cardnet envelope paid in", "Credit paid in via Night Safe - up to £5K", "International payment Internet banking", "Express International Moneymover Branch", "Standard International Moneymover Branch", "Non-urgent Euro (SEPA)1 Branch", "International draft payable abroad Branch", "Electronic payments received from abroad Up to £100", "Electronic payments received from abroad over £100", "Foreign cheque/draft", "Cheques/drafts (including dividend warrants) payable in foreign currency or Sterling drawn abroad", "Cheques/drafts (including dividend warrants) payable in foreign currency drawn in the UK", "Unpaid charge (if the cheque/draft is not honoured by the paying bank)", "Status enquiries abroad", "Status enquiries abroad (if sent electronically) additional", "After an international payment has been sent abroad - Beneficiary claiming non-receipt of funds (BCNR) ", "After an international payment has been sent abroad - Recalling a payment", "First legal mortgage over a property, such as business premises", "Second or subsequent legal mortgage over a property, such as a house or business premises", "Unpaid Item", "SMS Text alerts", "SME unsecured loan fee", "World Currency Withdrawal Fee", "World Currency Purchase Fee", "Europe Currently Withdrawal Fee", "Europe Purchase Fee", "Minimum Foreign Cash Withdrawal Fee", "Maximum Foreign Cash Withdrawal Fee", "Security Fee", "Early Redemption Charge", "Paid Referral Fee", "Unpaid Referral Fee"]
                                 },
                                 "Other": {
                                   "description": "Describe other fee type",
@@ -3043,7 +3107,7 @@ documentation:
               "additionalProperties": false
             }
           },
-          "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "Feature", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"]
+          "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Ccy", "OverdraftOffered", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"]
         }
 /unsecured-sme-loans:
   type:
@@ -3076,8 +3140,8 @@ documentation:
                 },
                 "BrandID": {
                   "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
-                  "id": "http://localhost:8000/schemas/v0/definitions/common/brand.json#",
-                  "type": "string"
+                  "type": "string",
+                  "format": "uri"
                 }
               },
               "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
@@ -3303,14 +3367,14 @@ documentation:
                   "type": "string",
                   "pattern": "[A-Z]{3}"
                 },
-                "ResidencyResticted": {
+                "ResidencyRestricted": {
                   "description": "Indicates a customer's residency forms part of the eligibility criteria",
                   "type": "boolean"
                 },
-                "ResidencyRestictedRegion": {
+                "ResidencyRestrictedRegion": {
                   "description": "Indicates a customer must be current resident of a geographic area/country",
                   "id": "http://localhost:8000/schemas/v0/definitions/regions.json#",
-                  "enum": ["UK", "EEA", "EU", "EFTA", "GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS", "IRL"]
+                  "enum": ["UK", "EEA", "EU", "EFTA", "GB - ENG", "GB - NIR", "GB - SCT", "GB - WLS", "IRL"]
                 },
                 "MaxNumberOfAccounts": {
                   "description": "Maximum number of the same prodcut the customer may hold",
@@ -3375,7 +3439,7 @@ documentation:
                   "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
                   "type": "string"
                 },
-                "PreviousBancruptcy": {
+                "PreviousBankruptcy": {
                   "description": "Describes if a previous bankruptcy / insolvency disqualfies for this account Details in ELI-280",
                   "type": "boolean"
                 },
@@ -3389,7 +3453,7 @@ documentation:
                   "uniqueItems": true
                 }
               },
-              "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"],
+              "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyRestricted", "ThirdSectorOrganisations", "PreviousBankruptcy"],
               "additionalProperties": false
             },
             "FeesAndCharges": {
@@ -3459,7 +3523,7 @@ documentation:
                                 "FeeType": {
                                   "id": "http://localhost:8000/schemas/v0/definitions/fees/fee_type.json#",
                                   "description": "A description of the Fee type",
-                                  "enum": ["Account Fee", "Incoming CHAPS Fee", "Outgoing CHAPS Fee", "Foreign Currency", "Foreign Currency Withdrawal Fee (% of Tx - Min £2 - Max £5)", "Non Sterling Transaction Fee (Cash Withdrawal)", "SEPA Fee", "Stopped Cheque Fee", "Copy of Cheque Fee", "Cheque Transaction Fee", "Manual Debit Fee", "Counter Draft", "Unpaid Transaction Fee", "Special Cheque Presentation", "Court Order Fee", "Bankers Draft Fee", "Statement Copy Fee", "Bankers Reference Fee", "Personalised Card Fee", "Sterling Travellers Cheque (% of Tx - Min £2 - Max £5)", "International Payments Charge", "Other", "Cash payment In", "Cash payment Out", "Daily Monitoring", "Weekly Monitoring", "Monthly Monitoring", "Status Enquiry", "Audit Letter", "Credits paid in via night Safe", "Credit paid In via Depos ATM", "Telepay or Teledebit Item", "Balance Handlng Fee", "Late payment", "Loan arrangement", "Early Repayment charge", "Over credit limit fee", "Return payment fee", "Payment Scheme Exchange Rate", "Payment Scheme Exchange Fee", "Payment Scheme Exchange Fee Rate", "Non-Sterling Transaction fee", "Non-Sterling Transaction fee rate", "Non-Sterling Purchase Fee", "Non-Sterling Purchase Fee rate", "Non-Sterling Cash Fee", "Non-Sterling Cash Fee Rate", "Foreign Purchase Fee", "Foreign Purchase Fee Rate", "Foreign Cash Fee", "Foreign Cash Fee Rate", "Early Repayment Charges", "Tiered arrangement fees", "Monthly Account Maintenance Fee", "UK Sterling Direct Debits", "Standing order", "Business Debit card transaction (excluding ATM)", "ATM withdrawals (from a non-group ATM)", "ATM withdrawals (from a group ATM)", "Internet Bulk Payment - batch", "Automated credit", "Automated credit - Telephone and Internet Banking", "Automated credit –Faster Payments inbound", "Internet Bulk Payment –per item", "Faster Payments outbound", "Transfer to an account outside of the group", "Cheque paid in (or Postal Order)", "Cheques Out", "Cash paid in", "Cash paid out at own counter", "Other debit", "Other credit", "Credit paid in at another bank", "Cash exchanged", "Bacs –batch file submitted", "Bacs –debit or credit item", "Cardnet envelope paid in", "Credit paid in via Night Safe - up to £5K", "International payment Internet banking", "Express International Moneymover Branch", "Standard International Moneymover Branch", "Non-urgent Euro (SEPA)1 Branch", "International draft payable abroad Branch", "Electronic payments received from abroad Up to £100", "Electronic payments received from abroad over £100", "Foreign cheque/draft", "Cheques/drafts (including dividend warrants) payable in foreign currency or Sterling drawn abroad", "Cheques/drafts (including dividend warrants) payable in foreign currency drawn in the UK", "Unpaid charge (if the cheque/draft is not honoured by the paying bank)", "Status enquiries abroad", "Status enquiries abroad (if sent electronically) additional", "After an international payment has been sent abroad - Beneficiary claiming non-receipt of funds (BCNR) ", "After an international payment has been sent abroad - Recalling a payment", "First legal mortgage over a property, such as business premises", "Second or subsequent legal mortgage over a property, such as a house or business premises", "Unpaid Item", "SMS Text alerts", "SME unsecured loan fee", "World Currency Withdrawal Fee", "World Currency Purchase Fee", "Europe Currently Withdrawal Fee", "Europe Purchase Fee", "Minimum Foreign Cash Withdrawal Fee", "Maximum Foreign Cash Withdrawal Fee", "Security Fee", "Early Redemption Charge", "Paid Referral Fee", "Unpaid Referral Fee"]
+                                  "enum": ["Account Fee", "Incoming CHAPS Fee", "Outgoing CHAPS Fee", "Foreign Currency", "Foreign Currency Withdrawal Fee (% of Tx - Min £2 - Max £5)", "Non Sterling Transaction Fee (Cash Withdrawal)", "SEPA Fee", "Stopped Cheque Fee", "Copy of Cheque Fee", "Cheque Transaction Fee", "Manual Debit Fee", "Counter Draft", "Unpaid Transaction Fee", "Special Cheque Presentation", "Court Order Fee", "Bankers Draft Fee", "Statement Copy Fee", "Bankers Reference Fee", "Personalised Card Fee", "Sterling Travellers Cheque (% of Tx - Min £2 - Max £5)", "International Payments Charge", "Other", "Cash payment In", "Cash payment Out", "Daily Monitoring", "Weekly Monitoring", "Monthly Monitoring", "Status Enquiry", "Audit Letter", "Credits paid in via night Safe", "Credit paid In via Depos ATM", "Telepay or Teledebit Item", "Balance Handlng Fee", "Late payment", "Loan arrangement", "Early Repayment charge", "Over credit limit fee", "Return payment fee", "Payment Scheme Exchange Rate", "Payment Scheme Exchange Fee", "Payment Scheme Exchange Fee Rate", "Non-Sterling Transaction fee", "Non-Sterling Transaction fee rate", "Non-Sterling Purchase Fee", "Non-Sterling Purchase Fee rate", "Non-Sterling Cash Fee", "Non-Sterling Cash Fee Rate", "Foreign Purchase Fee", "Foreign Purchase Fee Rate", "Foreign Cash Fee", "Foreign Cash Fee Rate", "Early Repayment Charges", "Tiered arrangement fees", "Monthly Account Maintenance Fee", "UK Sterling Direct Debits", "Standing order", "Business Debit card transaction (excluding ATM)", "ATM withdrawals (from a non-group ATM)", "ATM withdrawals (from a group ATM)", "Internet Bulk Payment - batch", "Automated credit", "Automated credit - Telephone and Internet Banking", "Automated credit –Faster Payments inbound", "Internet Bulk Payment –per item", "Faster Payments outbound", "Transfer to an account outside of the group", "Cheque paid in (or Postal Order)", "Cheques Out", "Cash paid in", "Cash paid out at own counter", "Other debit", "Other credit", "Credit paid in at another bank", "Cash exchanged", "Bacs – batch file submitted", "Bacs – debit or credit item", "Cardnet envelope paid in", "Credit paid in via Night Safe - up to £5K", "International payment Internet banking", "Express International Moneymover Branch", "Standard International Moneymover Branch", "Non-urgent Euro (SEPA)1 Branch", "International draft payable abroad Branch", "Electronic payments received from abroad Up to £100", "Electronic payments received from abroad over £100", "Foreign cheque/draft", "Cheques/drafts (including dividend warrants) payable in foreign currency or Sterling drawn abroad", "Cheques/drafts (including dividend warrants) payable in foreign currency drawn in the UK", "Unpaid charge (if the cheque/draft is not honoured by the paying bank)", "Status enquiries abroad", "Status enquiries abroad (if sent electronically) additional", "After an international payment has been sent abroad - Beneficiary claiming non-receipt of funds (BCNR) ", "After an international payment has been sent abroad - Recalling a payment", "First legal mortgage over a property, such as business premises", "Second or subsequent legal mortgage over a property, such as a house or business premises", "Unpaid Item", "SMS Text alerts", "SME unsecured loan fee", "World Currency Withdrawal Fee", "World Currency Purchase Fee", "Europe Currently Withdrawal Fee", "Europe Purchase Fee", "Minimum Foreign Cash Withdrawal Fee", "Maximum Foreign Cash Withdrawal Fee", "Security Fee", "Early Redemption Charge", "Paid Referral Fee", "Unpaid Referral Fee"]
                                 },
                                 "Other": {
                                   "description": "Describe other fee type",
@@ -3708,8 +3772,8 @@ documentation:
                 },
                 "BrandID": {
                   "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
-                  "id": "http://localhost:8000/schemas/v0/definitions/common/brand.json#",
-                  "type": "string"
+                  "type": "string",
+                  "format": "uri"
                 }
               },
               "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
@@ -3880,6 +3944,10 @@ documentation:
                       "description": "Details on annual account fee, such as non payable when there is a turnover above a certain sum",
                       "type": "number"
                     },
+                    "ChequeFeePercent": {
+                      "description": "Percentage fee on convenience cheques",
+                      "type": "number"
+                    },
                     "CashbackPercent": {
                       "description": "Percent of cashback on amount spend",
                       "type": "number"
@@ -3899,6 +3967,10 @@ documentation:
                     "PaymentDaysAfterStatement": {
                       "description": "How many days after statement is the payment expected",
                       "type": "integer"
+                    },
+                    "AllocationofRepayment": {
+                      "description": "Allocation rules for repayment",
+                      "type": "string"
                     },
                     "RepaymentNotes": {
                       "description": "Additional notes",
@@ -4050,14 +4122,14 @@ documentation:
                   "type": "string",
                   "pattern": "[A-Z]{3}"
                 },
-                "ResidencyResticted": {
+                "ResidencyRestricted": {
                   "description": "Indicates a customer's residency forms part of the eligibility criteria",
                   "type": "boolean"
                 },
-                "ResidencyRestictedRegion": {
+                "ResidencyRestrictedRegion": {
                   "description": "Indicates a customer must be current resident of a geographic area/country",
                   "id": "http://localhost:8000/schemas/v0/definitions/regions.json#",
-                  "enum": ["UK", "EEA", "EU", "EFTA", "GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS", "IRL"]
+                  "enum": ["UK", "EEA", "EU", "EFTA", "GB - ENG", "GB - NIR", "GB - SCT", "GB - WLS", "IRL"]
                 },
                 "MaxNumberOfAccounts": {
                   "description": "Maximum number of the same prodcut the customer may hold",
@@ -4122,7 +4194,7 @@ documentation:
                   "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
                   "type": "string"
                 },
-                "PreviousBancruptcy": {
+                "PreviousBankruptcy": {
                   "description": "Describes if a previous bankruptcy / insolvency disqualfies for this account Details in ELI-280",
                   "type": "boolean"
                 },
@@ -4136,7 +4208,7 @@ documentation:
                   "uniqueItems": true
                 }
               },
-              "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"],
+              "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyRestricted", "ThirdSectorOrganisations", "PreviousBankruptcy"],
               "additionalProperties": false
             },
             "Benefits": {

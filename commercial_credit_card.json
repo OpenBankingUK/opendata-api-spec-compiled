@@ -24,8 +24,8 @@
         },
         "BrandID": {
           "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/brand.json#",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       },
       "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
@@ -196,6 +196,10 @@
               "description": "Details on annual account fee, such as non payable when there is a turnover above a certain sum",
               "type": "number"
             },
+            "ChequeFeePercent": {
+              "description": "Percentage fee on convenience cheques",
+              "type": "number"
+            },
             "CashbackPercent": {
               "description": "Percent of cashback on amount spend",
               "type": "number"
@@ -215,6 +219,10 @@
             "PaymentDaysAfterStatement": {
               "description": "How many days after statement is the payment expected",
               "type": "integer"
+            },
+            "AllocationofRepayment": {
+              "description": "Allocation rules for repayment",
+              "type": "string"
             },
             "RepaymentNotes": {
               "description": "Additional notes",
@@ -366,14 +374,14 @@
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
-        "ResidencyResticted": {
+        "ResidencyRestricted": {
           "description": "Indicates a customer's residency forms part of the eligibility criteria",
           "type": "boolean"
         },
-        "ResidencyRestictedRegion": {
+        "ResidencyRestrictedRegion": {
           "description": "Indicates a customer must be current resident of a geographic area/country",
           "id": "http://localhost:8000/schemas/v0/definitions/regions.json#",
-          "enum": ["UK", "EEA", "EU", "EFTA", "GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS", "IRL"]
+          "enum": ["UK", "EEA", "EU", "EFTA", "GB - ENG", "GB - NIR", "GB - SCT", "GB - WLS", "IRL"]
         },
         "MaxNumberOfAccounts": {
           "description": "Maximum number of the same prodcut the customer may hold",
@@ -438,7 +446,7 @@
           "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
           "type": "string"
         },
-        "PreviousBancruptcy": {
+        "PreviousBankruptcy": {
           "description": "Describes if a previous bankruptcy / insolvency disqualfies for this account Details in ELI-280",
           "type": "boolean"
         },
@@ -452,7 +460,7 @@
           "uniqueItems": true
         }
       },
-      "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyResticted", "ThirdSectorOrganisations", "PreviousBancruptcy"],
+      "required": ["AgeRestricted", "OtherFinancialHoldingRequired", "Description", "IncomeTurnoverRelated", "ResidencyRestricted", "ThirdSectorOrganisations", "PreviousBankruptcy"],
       "additionalProperties": false
     },
     "Benefits": {

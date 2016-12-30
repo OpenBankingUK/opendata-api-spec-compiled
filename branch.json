@@ -4,25 +4,33 @@
   "title": "Branch",
   "type": "object",
   "properties": {
-    "ParentGroupName": {
-      "description": "Parent company that owns or partially owns subsidiary organisations.",
-      "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 350
-    },
-    "ParentGroupID": {
-      "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
-      "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
-      "type": "string",
-      "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
-    },
-    "Brand": {
-      "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
-      "description": "maxLength 350 text",
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 350
+    "Organisation": {
+      "id": "http://localhost:8000/schemas/v0/definitions/common/organisation.json#",
+      "description": "Organisation",
+      "type": "object",
+      "properties": {
+        "ParentGroupName": {
+          "description": "Parent company that owns or partially owns subsidiary organisations",
+          "type": "string"
+        },
+        "ParentGroupID": {
+          "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
+          "type": "string",
+          "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
+        },
+        "BrandName": {
+          "description": "Name by which an organisation is known that is printed on top of the ATM",
+          "type": "string"
+        },
+        "BrandID": {
+          "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
+      "additionalProperties": false
     },
     "BranchName": {
       "description": "Name by which a party is known and which is usually used to identify that party",
@@ -55,7 +63,7 @@
           "minLength": 1,
           "maxLength": 70
         },
-        "BuildingNameOrNumber": {
+        "BldgNb": {
           "description": "Number or Name that identifies the position of a building on a street",
           "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
           "type": "string",
@@ -346,6 +354,6 @@
       "type": "boolean"
     }
   },
-  "required": ["ParentGroupName", "ParentGroupID", "Brand", "BranchIdentification", "BranchType", "Address", "TelephoneNumber", "GeographicLocation", "OpeningTimes", "ATMAtBranch"],
+  "required": ["Organisation", "BranchIdentification", "BranchType", "Address", "TelephoneNumber", "GeographicLocation", "OpeningTimes", "ATMAtBranch"],
   "additionalProperties": false
 }
