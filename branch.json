@@ -1,11 +1,11 @@
 {
-  "id": "http://localhost:8000/schemas/v0/branch.json#",
+  "id": "http://localhost:8000/schemas/v1.2/branch.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Branch",
   "type": "object",
   "properties": {
     "Organisation": {
-      "id": "http://localhost:8000/schemas/v0/definitions/common/organisation.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/organisation.json#",
       "description": "Organisation",
       "type": "object",
       "properties": {
@@ -15,16 +15,16 @@
         },
         "ParentGroupID": {
           "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/bic.json#",
           "type": "string",
           "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
         },
         "BrandName": {
-          "description": "Name by which an organisation is known that is printed on top of the ATM",
+          "description": "Name or image that links products provided by a single provider together for the purpose of providing a common identity for marketing and other purposes.",
           "type": "string"
         },
         "BrandID": {
-          "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
+          "description": "Unique and unambiguous way to identify the brand",
           "type": "string",
           "format": "uri"
         }
@@ -34,45 +34,46 @@
     },
     "BranchName": {
       "description": "Name by which a party is known and which is usually used to identify that party",
-      "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
       "type": "string",
       "minLength": 1,
       "maxLength": 35
     },
     "BranchIdentification": {
       "description": "Unique and unambiguous identification of a retail branch of a financial institution",
-      "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
       "type": "string",
       "minLength": 1,
       "maxLength": 35
     },
     "BranchType": {
-      "id": "http://localhost:8000/schemas/v0/definitions/branch/branch_type.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/branch/branch_type.json#",
       "description": "Information on the type of branch",
+      "type": "string",
       "enum": ["Physical", "Mobile"]
     },
     "Address": {
-      "id": "http://localhost:8000/schemas/v0/definitions/common/postal_address.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/postal_address.json#",
       "description": "Postal Address",
       "type": "object",
       "properties": {
-        "StrtNm": {
+        "StreetName": {
           "description": "Name of a street or thoroughfare",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/max_70_text.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_70_text.json#",
           "type": "string",
           "minLength": 1,
           "maxLength": 70
         },
-        "BldgNb": {
+        "BuildingNumberOrName": {
           "description": "Number or Name that identifies the position of a building on a street",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_140_text.json#",
           "type": "string",
           "minLength": 1,
           "maxLength": 350
         },
-        "PstCd": {
+        "PostCode": {
           "description": "Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/max_16_text.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_16_text.json#",
           "type": "string",
           "maxLength": 16
         },
@@ -80,33 +81,33 @@
           "description": "Additional field; often directions",
           "type": "string"
         },
-        "TwnNm": {
+        "TownName": {
           "description": "Name of a built-up area, with defined boundaries, and a local government",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
           "type": "string",
           "minLength": 1,
           "maxLength": 35
         },
-        "CtrySubDvsn": {
+        "CountrySubDivision": {
           "description": "Identifies a subdivision of a country such as state, region, county",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
           "type": "string",
           "minLength": 1,
           "maxLength": 35
         },
-        "Ctry": {
+        "Country": {
           "description": "Nation with its own government",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/country_code.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/country_code.json#",
           "type": "string",
           "pattern": "[A-Z]{2}"
         }
       },
-      "required": ["StrtNm", "PstCd", "Ctry"],
+      "required": ["StreetName", "PostCode", "Country"],
       "additionalProperties": false
     },
     "BranchDescription": {
       "description": "Description of the branch",
-      "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_140_text.json#",
       "type": "string",
       "minLength": 1,
       "maxLength": 140
@@ -118,20 +119,20 @@
     },
     "TelephoneNumber": {
       "description": "Collection of information that identifies a phone number, as defined by telecom services.",
-      "id": "http://localhost:8000/schemas/v0/definitions/common/phone_number.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/phone_number.json#",
       "type": "string",
       "pattern": "\\+[0-9]{1,3}-[0-9()+\\-]{1,30}"
     },
     "AlternatePhone": {
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v0/definitions/common/alternative_phone_number.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/common/alternative_phone_number.json#",
         "description": "Alternative Phone Number",
         "type": "object",
         "properties": {
           "AlternativeTelephoneNumber": {
             "description": "Collection of information that identifies a phone number, as defined by telecom services.",
-            "id": "http://localhost:8000/schemas/v0/definitions/common/phone_number.json#",
+            "id": "http://localhost:8000/schemas/v1.2/definitions/common/phone_number.json#",
             "type": "string",
             "pattern": "\\+[0-9]{1,3}-[0-9()+\\-]{1,30}"
           },
@@ -147,31 +148,31 @@
       "description": "Collection of information that identifies a FAX number, as defined by telecom services.",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v0/definitions/common/phone_number.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/common/phone_number.json#",
         "description": "Collection of information that identifies a phone number, as defined by telecom services.",
         "type": "string",
         "pattern": "\\+[0-9]{1,3}-[0-9()+\\-]{1,30}"
       }
     },
     "GeographicLocation": {
-      "id": "http://localhost:8000/schemas/v0/definitions/common/geographic_coordinates.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/geographic_coordinates.json#",
       "description": "Geographic Coordinates",
       "type": "object",
       "properties": {
-        "Lat": {
+        "Latitude": {
           "description": "Latitude measured in degrees, minutes and seconds, following by 'N' for North and 'S' for South of the Equator (for example 48°51'29'' N for the Eiffel Tower latitude)",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/max_16_text.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_16_text.json#",
           "type": "string",
           "maxLength": 16
         },
-        "Long": {
+        "Longitude": {
           "description": "Angular measurement of the distance of a location on the Earth East or West of the Greenwich Observatory. The longitude is measured in degrees, minutes and seconds, following by 'E' for East and 'W' for West (for example 2°17'4'' E for the Eiffel Tower longitude)",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/max_16_text.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_16_text.json#",
           "type": "string",
           "maxLength": 16
         }
       },
-      "required": ["Lat", "Long"],
+      "required": ["Latitude", "Longitude"],
       "additionalProperties": false
     },
     "DaysOfTheWeek": {
@@ -184,55 +185,56 @@
     },
     "ArrivalTime": {
       "description": "Arrival time of the mobile branch",
-      "id": "http://localhost:8000/schemas/v0/definitions/common/time.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/time.json#",
       "type": "string",
-      "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+      "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3}(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
     },
     "DepartureTime": {
       "description": "Departure time of the mobile branch",
-      "id": "http://localhost:8000/schemas/v0/definitions/common/time.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/time.json#",
       "type": "string",
-      "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+      "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3}(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
     },
     "ParkingLocation": {
       "description": "Parking place of the mobile branch",
       "type": "string"
     },
     "OpeningTimes": {
-      "id": "http://localhost:8000/schemas/v0/definitions/branch/opening_details.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/branch/opening_details.json#",
       "description": "Branch Opening Times",
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
           "OpeningDay": {
-            "id": "http://localhost:8000/schemas/v0/definitions/common/day.json#",
+            "id": "http://localhost:8000/schemas/v1.2/definitions/common/day.json#",
             "description": "Day of the week",
+            "type": "string",
             "enum": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Public and Bank Holiday"]
           },
           "OpeningTime": {
-            "id": "http://localhost:8000/schemas/v0/definitions/common/time.json#",
-            "description": "Time Definition HH:MM:SS",
+            "id": "http://localhost:8000/schemas/v1.2/definitions/common/time.json#",
+            "description": "ISOTime, local time hh:mm:ss.sss or time in utc hh:mm:ss.sssZ or time with timezone hh:mm:ss.sss+hh:mm hh:mm:ss.sss-hh:mm",
             "type": "string",
-            "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+            "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3}(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
           },
           "ClosingTime": {
-            "id": "http://localhost:8000/schemas/v0/definitions/common/time.json#",
-            "description": "Time Definition HH:MM:SS",
+            "id": "http://localhost:8000/schemas/v1.2/definitions/common/time.json#",
+            "description": "ISOTime, local time hh:mm:ss.sss or time in utc hh:mm:ss.sssZ or time with timezone hh:mm:ss.sss+hh:mm hh:mm:ss.sss-hh:mm",
             "type": "string",
-            "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+            "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3}(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
           },
           "UnavailableStartTime": {
-            "id": "http://localhost:8000/schemas/v0/definitions/common/time.json#",
-            "description": "Time Definition HH:MM:SS",
+            "id": "http://localhost:8000/schemas/v1.2/definitions/common/time.json#",
+            "description": "ISOTime, local time hh:mm:ss.sss or time in utc hh:mm:ss.sssZ or time with timezone hh:mm:ss.sss+hh:mm hh:mm:ss.sss-hh:mm",
             "type": "string",
-            "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+            "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3}(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
           },
           "UnavailableFinishTime": {
-            "id": "http://localhost:8000/schemas/v0/definitions/common/time.json#",
-            "description": "Time Definition HH:MM:SS",
+            "id": "http://localhost:8000/schemas/v1.2/definitions/common/time.json#",
+            "description": "ISOTime, local time hh:mm:ss.sss or time in utc hh:mm:ss.sssZ or time with timezone hh:mm:ss.sss+hh:mm hh:mm:ss.sss-hh:mm",
             "type": "string",
-            "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+            "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3}(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
           }
         },
         "required": ["OpeningDay", "OpeningTime", "ClosingTime"]
@@ -243,32 +245,28 @@
     "PlannedBranchClosure": {
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v0/definitions/branch/closure.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/branch/closure.json#",
         "description": "Planned branch closure",
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "StartDate": {
-              "description": "Date when a branch is due to close temporarily or permanently",
-              "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-              "type": "string",
-              "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-            },
-            "EndDate": {
-              "description": "Date when a branch is due to re-open following temporary closure",
-              "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-              "type": "string",
-              "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-            }
+        "type": "object",
+        "properties": {
+          "StartDate": {
+            "description": "Date when a branch is due to close temporarily or permanently",
+            "id": "http://localhost:8000/schemas/v1.2/definitions/common/date.json#",
+            "type": "string",
+            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
           },
-          "required": ["StartDate", "EndDate"]
+          "EndDate": {
+            "description": "Date when a branch is due to re-open following temporary closure",
+            "id": "http://localhost:8000/schemas/v1.2/definitions/common/date.json#",
+            "type": "string",
+            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+          }
         },
         "additionalProperties": false
       }
     },
     "AccessibilityTypes": {
-      "id": "http://localhost:8000/schemas/v0/definitions/common/accessibility_types.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/accessibility_types.json#",
       "description": "Information about the accessibility",
       "type": "array",
       "uniqueItems": true,
@@ -280,8 +278,9 @@
     "BranchSelfServeServiceName": {
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v0/definitions/branch/self_serve.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/branch/self_serve.json#",
         "description": "Information about self service branch services",
+        "type": "string",
         "enum": ["Internal ATM with Audio", "External ATM with Audio", "Internal ATM without Audio", "External ATM without Audio", "Online Banking Point", "Assisted Service Counter", "Quick Deposit", "External Quick Service Point", "Internal Quick Service Point", "Digital Self Service Account Opening", "Business Deposit Terminal", "Account Verification Service", "Statement Printer", "Lodgement Device", "Saturday Counter Service", "Cash and Cheque Deposit Machine (Coin)", "Cash and Cheque Deposit Machine (No Coin)"]
       },
       "uniqueItems": true
@@ -290,7 +289,7 @@
       "description": "Additional information about self service branch services",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_140_text.json#",
         "description": "maxLength 350 text",
         "type": "string",
         "minLength": 1,
@@ -301,8 +300,9 @@
       "description": "Information about mediated branch facilities",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v0/definitions/mediated.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/mediated.json#",
         "description": "Information about mediated branch facilities",
+        "type": "string",
         "enum": ["Counter Service", "Mortgage Advisor", "Night Safe", "Video Banking", "Premier Counter", "Card Insurance Facilities", "Bureau de Change", "Business Counter", "On Demand Currency"]
       },
       "uniqueItems": true
@@ -311,7 +311,7 @@
       "description": "Additional information about mediated branch facilities, such as waiting areas with seats available for business banking (if waiting)",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_140_text.json#",
         "description": "maxLength 350 text",
         "type": "string",
         "minLength": 1,
@@ -322,8 +322,9 @@
       "description": "Information about branch facilities",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v0/definitions/branch/facility.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/branch/facility.json#",
         "description": "Information about branch facilities",
+        "type": "string",
         "enum": ["Wifi", "Parking", "Meeting Room(s)", "Eagle Lab", "Amazon Click and Collect Lockers"]
       },
       "uniqueItems": true
@@ -332,8 +333,9 @@
       "description": "Customer segment which the branch is able to service",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v0/definitions/branch/segment.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/branch/segment.json#",
         "description": "Customer segment which the branch is able to service",
+        "type": "string",
         "enum": ["Personal", "Business", "SME", "Wealth", "Corporate", "Premier Branch"]
       },
       "uniqueItems": true
@@ -342,7 +344,7 @@
       "description": "Additional information about branch facilities, such as specific lights",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_140_text.json#",
         "description": "maxLength 350 text",
         "type": "string",
         "minLength": 1,

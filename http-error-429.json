@@ -3,12 +3,15 @@
   "type": "object",
   "properties": {
     "status": {
+      "type": "string",
       "enum": [ "429" ]
     },
     "title": {
+      "type": "string",
       "enum": [ "Too many requests" ]
     },
     "description": {
+      "type": "string",
       "enum": [ "You have requested this resource too often. Slow down." ]
     }
   },

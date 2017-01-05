@@ -1,11 +1,11 @@
 {
-  "id": "http://localhost:8000/schemas/v0/atm.json#",
+  "id": "http://localhost:8000/schemas/v1.2/atm.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "ATM",
   "type": "object",
   "properties": {
     "Organisation": {
-      "id": "http://localhost:8000/schemas/v0/definitions/common/organisation.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/organisation.json#",
       "description": "Organisation",
       "type": "object",
       "properties": {
@@ -15,16 +15,16 @@
         },
         "ParentGroupID": {
           "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/bic.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/bic.json#",
           "type": "string",
           "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
         },
         "BrandName": {
-          "description": "Name by which an organisation is known that is printed on top of the ATM",
+          "description": "Name or image that links products provided by a single provider together for the purpose of providing a common identity for marketing and other purposes.",
           "type": "string"
         },
         "BrandID": {
-          "description": "Unique and unambiguous way to identify the organisation that is shown on top of the ATM",
+          "description": "Unique and unambiguous way to identify the brand",
           "type": "string",
           "format": "uri"
         }
@@ -34,59 +34,60 @@
     },
     "BranchIdentification": {
       "description": "Unique and unambiguous identification of a retail branch of a financial institution",
-      "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
       "type": "string",
       "minLength": 1,
       "maxLength": 35
     },
     "ATMID": {
       "description": "ATM terminal device identification for the acquirer and the issuer",
-      "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
       "type": "string",
       "minLength": 1,
       "maxLength": 35
     },
     "LocationCategory": {
       "description": "Indicates the environment of the ATM",
-      "id": "http://localhost:8000/schemas/v0/definitions/atm/location_category.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/atm/location_category.json#",
+      "type": "string",
       "enum": ["Airport", "Bank Office", "Bank Specialised Outlet", "Branch", "Branch Customer Area", "Branch Lobby", "Branch Wall", "Bureau de Change", "Coach Station", "Convenience Store", "Exhibition Centre", "Factory", "Office", "Financial Institution", "Hospital", "Hotel", "House of Commons", "House of Lords", "Leisure Centre", "Ministry of Defence", "Motorway Services", "Petrol Station", "Pleasure Park", "Public House", "Railway Station", "Railway Station (Underground)", "Remote Unit", "Retailer", "Department Store", "Retailer Outlet", "Seaport", "Shopping Centre", "Supermarket", "University", "College", "Bank External", "Restricted Access", "Commercial Space"]
     },
     "SiteID": {
       "description": "Site identifying code, where ATM is located",
-      "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
       "type": "string",
       "minLength": 1,
       "maxLength": 35
     },
     "SiteName": {
       "description": "Site identifying name, where ATM is located",
-      "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
       "type": "string",
       "minLength": 1,
       "maxLength": 35
     },
     "Address": {
-      "id": "http://localhost:8000/schemas/v0/definitions/common/postal_address.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/postal_address.json#",
       "description": "Postal Address",
       "type": "object",
       "properties": {
-        "StrtNm": {
+        "StreetName": {
           "description": "Name of a street or thoroughfare",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/max_70_text.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_70_text.json#",
           "type": "string",
           "minLength": 1,
           "maxLength": 70
         },
-        "BldgNb": {
+        "BuildingNumberOrName": {
           "description": "Number or Name that identifies the position of a building on a street",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_140_text.json#",
           "type": "string",
           "minLength": 1,
           "maxLength": 350
         },
-        "PstCd": {
+        "PostCode": {
           "description": "Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/max_16_text.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_16_text.json#",
           "type": "string",
           "maxLength": 16
         },
@@ -94,54 +95,54 @@
           "description": "Additional field; often directions",
           "type": "string"
         },
-        "TwnNm": {
+        "TownName": {
           "description": "Name of a built-up area, with defined boundaries, and a local government",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
           "type": "string",
           "minLength": 1,
           "maxLength": 35
         },
-        "CtrySubDvsn": {
+        "CountrySubDivision": {
           "description": "Identifies a subdivision of a country such as state, region, county",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/max_35_text.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
           "type": "string",
           "minLength": 1,
           "maxLength": 35
         },
-        "Ctry": {
+        "Country": {
           "description": "Nation with its own government",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/country_code.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/country_code.json#",
           "type": "string",
           "pattern": "[A-Z]{2}"
         }
       },
-      "required": ["StrtNm", "PstCd", "Ctry"],
+      "required": ["StreetName", "PostCode", "Country"],
       "additionalProperties": false
     },
     "GeographicLocation": {
-      "id": "http://localhost:8000/schemas/v0/definitions/common/geographic_coordinates.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/geographic_coordinates.json#",
       "description": "Geographic Coordinates",
       "type": "object",
       "properties": {
-        "Lat": {
+        "Latitude": {
           "description": "Latitude measured in degrees, minutes and seconds, following by 'N' for North and 'S' for South of the Equator (for example 48°51'29'' N for the Eiffel Tower latitude)",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/max_16_text.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_16_text.json#",
           "type": "string",
           "maxLength": 16
         },
-        "Long": {
+        "Longitude": {
           "description": "Angular measurement of the distance of a location on the Earth East or West of the Greenwich Observatory. The longitude is measured in degrees, minutes and seconds, following by 'E' for East and 'W' for West (for example 2°17'4'' E for the Eiffel Tower longitude)",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/max_16_text.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_16_text.json#",
           "type": "string",
           "maxLength": 16
         }
       },
-      "required": ["Lat", "Long"],
+      "required": ["Latitude", "Longitude"],
       "additionalProperties": false
     },
     "AccessibilityTypes": {
       "description": "Information about the accessibility",
-      "id": "http://localhost:8000/schemas/v0/definitions/common/accessibility_types.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/accessibility_types.json#",
       "type": "array",
       "uniqueItems": true,
       "items": {
@@ -164,20 +165,20 @@
       "uniqueItems": true,
       "minItems": 1,
       "items": {
-        "id": "http://localhost:8000/schemas/v0/definitions/atm/services.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/atm/services.json#",
         "description": "Information about ATM services",
         "type": "array",
         "uniqueItems": true,
         "items": {
           "type": "string",
-          "enum": ["Cash Withdrawal", "Cash Deposits", "Mobile Banking Registration", "Pin Change", "Mobile Phone Top Up", "PingIT Registration", "Bill Payments", "Mini Statements", "Balance", "Fast Cash", "PIN Activation", "Charity Donation", "Cheque Book Request"]
+          "enum": ["Cash Withdrawal", "Cash Deposits", "Mobile Banking Registration", "PIN Change", "Mobile Phone Top Up", "PingIT Registration", "Bill Payments", "Mini Statements", "Balance", "Fast Cash", "PIN Activation", "Charity Donation", "Cheque Book Request"]
         }
       }
     },
     "AdditionalATMServices": {
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v0/definitions/common/max_140_text.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_140_text.json#",
         "description": "maxLength 350 text",
         "type": "string",
         "minLength": 1,
@@ -190,7 +191,7 @@
       "uniqueItems": true,
       "minItems": 1,
       "items": {
-        "id": "http://localhost:8000/schemas/v0/definitions/common/active_or_historic_currency_code.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/common/active_or_historic_currency_code.json#",
         "description": "Active or Historic Currency Code",
         "type": "string",
         "pattern": "[A-Z]{3}"
@@ -198,7 +199,8 @@
     },
     "MinimumValueDispensed": {
       "description": "Minimum currency denominations usually available",
-      "id": "http://localhost:8000/schemas/v0/definitions/atm/notes.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/atm/notes.json#",
+      "type": "string",
       "enum": ["£ 5", "£ 10", "£ 20", "£ 50", "£ 100"]
     }
   },

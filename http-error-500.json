@@ -3,12 +3,15 @@
   "type": "object",
   "properties": {
     "status": {
+      "type": "string",
       "enum": [ "500" ]
     },
     "title": {
+      "type": "string",
       "enum": [ "Internal server error" ]
     },
     "description": {
+      "type": "string",
       "enum": [ "An error occurred on the server. No further information is available." ]
     }
   },

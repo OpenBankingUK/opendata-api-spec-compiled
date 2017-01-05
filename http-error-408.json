@@ -3,12 +3,15 @@
   "type": "object",
   "properties": {
     "status": {
+      "type": "string",
       "enum": [ "408" ]
     },
     "title": {
+      "type": "string",
       "enum": [ "Client timeout" ]
     },
     "description": {
+      "type": "string",
       "enum": [ "Your client has failed to submit a request, and a timeout has occurred." ]
     }
   },
