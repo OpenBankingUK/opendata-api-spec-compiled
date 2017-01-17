@@ -10,7 +10,10 @@
       "properties": {
         "ParentGroupName": {
           "description": "Parent company that owns or partially owns subsidiary organisations",
-          "type": "string"
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_140_text.json#",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 350
         },
         "ParentGroupID": {
           "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
@@ -20,12 +23,17 @@
         },
         "BrandName": {
           "description": "Name or image that links products provided by a single provider together for the purpose of providing a common identity for marketing and other purposes.",
-          "type": "string"
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 35
         },
         "BrandID": {
           "description": "Unique and unambiguous way to identify the brand",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
           "type": "string",
-          "format": "uri"
+          "minLength": 1,
+          "maxLength": 35
         }
       },
       "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
@@ -54,13 +62,6 @@
     "ProductIdentifier": {
       "description": "Identifier within the parent organisation for the product. Must be unique in the organisation",
       "type": "string"
-    },
-    "ProductURL": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "minItems": 1
     },
     "Description": {
       "description": "Product description",
@@ -95,7 +96,7 @@
       "description": "Commercial Credit Card Group ",
       "type": "object",
       "properties": {
-        "ProductSubType": {
+        "CCSubType": {
           "id": "http://localhost:8000/schemas/v1.2/definitions/common/offering_subtype.json#",
           "description": "Describes if the offering is promotional, regular or a description of a future state",
           "type": "string",
@@ -172,7 +173,7 @@
               "id": "http://localhost:8000/schemas/v1.2/definitions/common/card_type.json#",
               "description": "Indicates the card scheme",
               "type": "string",
-              "enum": ["Visa", "Mastercard", "Cashcard"]
+              "enum": ["Debit Visa", "Debit Mastercard", "Cashcard"]
             },
             "AbilityToSetIndividualLimits": {
               "description": "The ability to set separate limts on different cards in one account",
@@ -193,6 +194,9 @@
             "DaysInterestFreeCreditIfPaymentFull": {
               "description": "Describes how many interest free days are given if the card is fully paid at each term",
               "type": "integer"
+            },
+            "AnnualAccountFeeType": {
+              "type": "string"
             },
             "IssuingEmergencyCardsFees": {
               "description": "Amount payable for issuing an emergency card",
@@ -216,11 +220,17 @@
             },
             "MinimumRepaymentPercent": {
               "description": "Minimum repayment as percentage",
-              "type": "integer"
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
             },
             "MinimumRepaymentAmount": {
               "description": "Minimum repayment amount",
-              "type": "number"
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
             },
             "PaymentDaysAfterStatement": {
               "description": "How many days after statement is the payment expected",
@@ -303,7 +313,7 @@
               "type": "number"
             }
           },
-          "required": ["MinimumCreditLimit", "RepaymentFrequency", "APRRate", "PurchaseRate", "BalanceTransferRate", "CashAdvanceRate", "CardScheme", "AbilityToSetIndividualLimits", "AccessToOnlineDataReportingTool", "CashWithdrawalsAllowed", "ConvenienceCheque", "DaysInterestFreeCreditIfPaymentFull", "IssuingEmergencyCardsFees", "AnnualFeeAmount", "PaymentDaysAfterStatement", "MinimumLendingAmmount", "StatementAtAccountLevel", "StatementAtPersonalLevel", "PaymentSchemeExchangeRate", "ExchangeRateAdjustment"],
+          "required": ["MinimumCreditLimit", "RepaymentFrequency", "APRRate", "PurchaseRate", "CashAdvanceRate", "CardScheme", "AccessToOnlineDataReportingTool", "CashWithdrawalsAllowed", "ConvenienceCheque", "DaysInterestFreeCreditIfPaymentFull", "IssuingEmergencyCardsFees", "AnnualFeeAmount", "PaymentDaysAfterStatement", "StatementAtAccountLevel", "StatementAtPersonalLevel", "ExchangeRateAdjustment"],
           "additionalProperties": false
         }
       },
@@ -592,7 +602,7 @@
                 "additionalProperties": false
               }
             },
-            "required": ["BenefitSubType", "BenefitItem"],
+            "required": ["BenefitItem"],
             "additionalProperties": false
           }
         }
@@ -601,6 +611,6 @@
       "additionalProperties": false
     }
   },
-  "required": ["Organisation", "ProductName", "ProductType", "ProductIdentifier", "ProductURL", "Description", "KeyFeatures", "PaymentHoliday", "PaymentHolidayDescription", "OtherKeyFeatures", "TsandCs", "Details", "Eligibility", "Benefits"],
+  "required": ["Organisation", "ProductName", "ProductType", "ProductIdentifier", "Description", "KeyFeatures", "PaymentHoliday", "PaymentHolidayDescription", "TsandCs", "Details", "Eligibility", "Benefits"],
   "additionalProperties": false
 }

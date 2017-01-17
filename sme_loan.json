@@ -10,7 +10,10 @@
       "properties": {
         "ParentGroupName": {
           "description": "Parent company that owns or partially owns subsidiary organisations",
-          "type": "string"
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_140_text.json#",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 350
         },
         "ParentGroupID": {
           "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
@@ -20,12 +23,17 @@
         },
         "BrandName": {
           "description": "Name or image that links products provided by a single provider together for the purpose of providing a common identity for marketing and other purposes.",
-          "type": "string"
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 35
         },
         "BrandID": {
           "description": "Unique and unambiguous way to identify the brand",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
           "type": "string",
-          "format": "uri"
+          "minLength": 1,
+          "maxLength": 35
         }
       },
       "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
@@ -33,6 +41,14 @@
     },
     "ProductName": {
       "description": "The short product or marketing name assigned by the parent organisation",
+      "type": "string"
+    },
+    "ProductIdentifier": {
+      "description": "Identifier within the parent organisation for the product. Must be unique in the organisation",
+      "type": "string"
+    },
+    "ArrearsTreatment": {
+      "description": "Arrears treatment",
       "type": "string"
     },
     "ProductTypeName": {
@@ -66,7 +82,7 @@
         "id": "http://localhost:8000/schemas/v1.2/definitions/channels.json#",
         "description": "Channel",
         "type": "string",
-        "enum": ["Branch", "Post", "Internet", "Phone", "Smartphone", "Text"]
+        "enum": ["Branch", "Post", "Internet", "Phone", "Smartphone", "Text", "Call centre"]
       },
       "minItems": 1
     },
@@ -111,6 +127,28 @@
           "description": "Describes if the offering is promotional, regular or a description of a future state",
           "type": "string",
           "enum": ["Promotional", "Regular", "Future Regular Terms"]
+        },
+        "StartPromotionOrFutureTerms": {
+          "description": "Describes the start date",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+          "type": "string",
+          "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+        },
+        "StopPromotionOrFutureTerms": {
+          "description": "Describes the end date",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+          "type": "string",
+          "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+        },
+        "LengthPromotionalInDays": {
+          "description": "Describes the length if only a duration is given instead of a date in days",
+          "type": "integer"
+        },
+        "DateOfChange": {
+          "description": "Date of the change if it refers to future terms",
+          "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+          "type": "string",
+          "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
         },
         "LoanPricing": {
           "type": "array",
@@ -632,7 +670,7 @@
                 "additionalProperties": false
               }
             },
-            "required": ["BenefitSubType", "BenefitItem"],
+            "required": ["BenefitItem"],
             "additionalProperties": false
           }
         }
@@ -641,6 +679,6 @@
       "additionalProperties": false
     }
   },
-  "required": ["Organisation", "ProductName", "ProductTypeName", "ProductSegment", "ProductDescription", "TsandCs", "CustomerAccessChannels", "Currency", "MinimumLoanTerm", "MinimumLoanAmount", "MaximumLoanAmount", "PaymentHoliday", "LoanItem", "Eligibility", "FeesAndCharges", "Benefits"],
+  "required": ["Organisation", "ProductName", "ProductIdentifier", "ProductTypeName", "ProductSegment", "ProductDescription", "TsandCs", "CustomerAccessChannels", "Currency", "MinimumLoanTerm", "MinimumLoanAmount", "MaximumLoanAmount", "PaymentHoliday", "LoanItem", "Eligibility", "FeesAndCharges", "Benefits"],
   "additionalProperties": false
 }

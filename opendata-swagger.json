@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "v1.2",
+    "version": "v1.2.1",
     "title": "Open Data API",
     "description": "Draft Swagger specification for OpenData"
   },
@@ -23,10 +23,10 @@
     "description": "Endpoint for getting Business Current Account data"
   }, {
     "name": "SME",
-    "description": "Endpoint for getting Unsecucred SME Loan data"
+    "description": "Endpoint for getting Unsecured SME Loan data"
   }, {
     "name": "CCC",
-    "description": "Endpoint for getting Commerical Credit Card data"
+    "description": "Endpoint for getting Commercial Credit Card data"
   }],
   "paths": {
     "/branches": {
@@ -121,7 +121,9 @@
                         "properties": {
                           "ParentGroupName": {
                             "description": "Parent company that owns or partially owns subsidiary organisations",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 350
                           },
                           "ParentGroupID": {
                             "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
@@ -130,12 +132,15 @@
                           },
                           "BrandName": {
                             "description": "Name or image that links products provided by a single provider together for the purpose of providing a common identity for marketing and other purposes.",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 35
                           },
                           "BrandID": {
                             "description": "Unique and unambiguous way to identify the brand",
                             "type": "string",
-                            "format": "uri"
+                            "minLength": 1,
+                            "maxLength": 35
                           }
                         },
                         "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
@@ -218,7 +223,7 @@
                       "TelephoneNumber": {
                         "description": "Collection of information that identifies a phone number, as defined by telecom services.",
                         "type": "string",
-                        "pattern": "\\+[0-9]{1,3}-[0-9()+\\-]{1,30}"
+                        "pattern": "^[+][0-9]{1,3}-[0-9()+-]{1,30}$"
                       },
                       "AlternatePhone": {
                         "type": "array",
@@ -229,7 +234,7 @@
                             "AlternativeTelephoneNumber": {
                               "description": "Collection of information that identifies a phone number, as defined by telecom services.",
                               "type": "string",
-                              "pattern": "\\+[0-9]{1,3}-[0-9()+\\-]{1,30}"
+                              "pattern": "^[+][0-9]{1,3}-[0-9()+-]{1,30}$"
                             },
                             "AlternativeTelephoneNumberDescription": {
                               "description": "Description of the telephone number",
@@ -245,7 +250,7 @@
                         "items": {
                           "description": "Collection of information that identifies a phone number, as defined by telecom services.",
                           "type": "string",
-                          "pattern": "\\+[0-9]{1,3}-[0-9()+\\-]{1,30}"
+                          "pattern": "^[+][0-9]{1,3}-[0-9()+-]{1,30}$"
                         }
                       },
                       "GeographicLocation": {
@@ -268,7 +273,9 @@
                       },
                       "DaysOfTheWeek": {
                         "description": "Number of days that the mobile branch is available",
-                        "type": "integer"
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 35
                       },
                       "StopName": {
                         "description": "Name of the stop of the mobile branch",
@@ -296,8 +303,10 @@
                           "properties": {
                             "OpeningDay": {
                               "description": "Day of the week",
+                              "enum": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Public and Bank Holiday"],
                               "type": "string",
-                              "enum": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Public and Bank Holiday"]
+                              "minLength": 1,
+                              "maxLength": 35
                             },
                             "OpeningTime": {
                               "description": "ISOTime, local time hh:mm:ss.sss or time in utc hh:mm:ss.sssZ or time with timezone hh:mm:ss.sss+hh:mm hh:mm:ss.sss-hh:mm",
@@ -428,7 +437,7 @@
                         "type": "boolean"
                       }
                     },
-                    "required": ["Organisation", "BranchIdentification", "BranchType", "Address", "TelephoneNumber", "GeographicLocation", "OpeningTimes", "ATMAtBranch"],
+                    "required": ["Organisation", "BranchIdentification", "BranchType", "CustomerSegment", "Address", "TelephoneNumber", "GeographicLocation", "OpeningTimes", "ATMAtBranch"],
                     "additionalProperties": false
                   }
                 }
@@ -823,7 +832,9 @@
                         "properties": {
                           "ParentGroupName": {
                             "description": "Parent company that owns or partially owns subsidiary organisations",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 350
                           },
                           "ParentGroupID": {
                             "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
@@ -832,12 +843,15 @@
                           },
                           "BrandName": {
                             "description": "Name or image that links products provided by a single provider together for the purpose of providing a common identity for marketing and other purposes.",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 35
                           },
                           "BrandID": {
                             "description": "Unique and unambiguous way to identify the brand",
                             "type": "string",
-                            "format": "uri"
+                            "minLength": 1,
+                            "maxLength": 35
                           }
                         },
                         "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
@@ -1390,7 +1404,9 @@
                         "properties": {
                           "ParentGroupName": {
                             "description": "Parent company that owns or partially owns subsidiary organisations",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 350
                           },
                           "ParentGroupID": {
                             "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
@@ -1399,12 +1415,15 @@
                           },
                           "BrandName": {
                             "description": "Name or image that links products provided by a single provider together for the purpose of providing a common identity for marketing and other purposes.",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 35
                           },
                           "BrandID": {
                             "description": "Unique and unambiguous way to identify the brand",
                             "type": "string",
-                            "format": "uri"
+                            "minLength": 1,
+                            "maxLength": 35
                           }
                         },
                         "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
@@ -1458,7 +1477,7 @@
                         "items": {
                           "description": "Channel",
                           "type": "string",
-                          "enum": ["Branch", "Post", "Internet", "Phone", "Smartphone", "Text"]
+                          "enum": ["Branch", "Post", "Internet", "Phone", "Smartphone", "Text", "Call centre"]
                         },
                         "minItems": 1
                       },
@@ -1468,7 +1487,7 @@
                         "items": {
                           "description": "Indicates the card scheme",
                           "type": "string",
-                          "enum": ["Visa", "Mastercard", "Cashcard"]
+                          "enum": ["Debit Visa", "Debit Mastercard", "Cashcard"]
                         },
                         "minItems": 1
                       },
@@ -1478,8 +1497,12 @@
                       },
                       "MobileWallet": {
                         "description": "Mobile wallet supported by this product. A mobile wallet being any electronic device that allows an individual to make electronic commerce transactions",
-                        "type": "string",
-                        "enum": ["Apple Pay", "Android Pay", "Samsung Pay", "Vodafone Wallet", "Issuer Mobile App"]
+                        "type": "array",
+                        "items": {
+                          "description": "Mobile wallet supported by this product. A mobile wallet being any electronic device that allows an individual to make electronic commerce transactions",
+                          "type": "string",
+                          "enum": ["Apple Pay", "Android Pay", "Samsung Pay", "Vodafone Wallet", "Issuer Mobile App"]
+                        }
                       },
                       "CardNotes": {
                         "description": "Optional additional notes to supplement the card details",
@@ -1935,7 +1958,8 @@
                                         },
                                         "DailyChargeForMinimum": {
                                           "description": "Special charge on tiered overdraft",
-                                          "type": "number"
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                         },
                                         "TierValueMaximum": {
                                           "description": "Max Value of interst tier",
@@ -1943,11 +1967,13 @@
                                         },
                                         "DailyChargeForMaximum": {
                                           "description": "Special charge on tiered overdraft",
-                                          "type": "number"
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                         },
                                         "Rate": {
                                           "description": "Rate being paid by the bank (gross)",
-                                          "type": "number"
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                         },
                                         "RateComparisonType": {
                                           "description": "Rate Comparison Type",
@@ -1956,7 +1982,8 @@
                                         },
                                         "APRAERRate": {
                                           "description": "AER or APR Rate for comparison",
-                                          "type": "number"
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                         }
                                       },
                                       "additionalProperties": false
@@ -2428,7 +2455,7 @@
                                   "additionalProperties": false
                                 }
                               },
-                              "required": ["BenefitSubType", "BenefitItem"],
+                              "required": ["BenefitItem"],
                               "additionalProperties": false
                             }
                           }
@@ -2832,7 +2859,9 @@
                         "properties": {
                           "ParentGroupName": {
                             "description": "Parent company that owns or partially owns subsidiary organisations",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 350
                           },
                           "ParentGroupID": {
                             "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
@@ -2841,12 +2870,15 @@
                           },
                           "BrandName": {
                             "description": "Name or image that links products provided by a single provider together for the purpose of providing a common identity for marketing and other purposes.",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 35
                           },
                           "BrandID": {
                             "description": "Unique and unambiguous way to identify the brand",
                             "type": "string",
-                            "format": "uri"
+                            "minLength": 1,
+                            "maxLength": 35
                           }
                         },
                         "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
@@ -2900,7 +2932,7 @@
                         "items": {
                           "description": "Channel",
                           "type": "string",
-                          "enum": ["Branch", "Post", "Internet", "Phone", "Smartphone", "Text"]
+                          "enum": ["Branch", "Post", "Internet", "Phone", "Smartphone", "Text", "Call centre"]
                         },
                         "minItems": 1
                       },
@@ -2910,7 +2942,7 @@
                         "items": {
                           "description": "Indicates the card scheme",
                           "type": "string",
-                          "enum": ["Visa", "Mastercard", "Cashcard"]
+                          "enum": ["Debit Visa", "Debit Mastercard", "Cashcard"]
                         },
                         "minItems": 1
                       },
@@ -2920,8 +2952,12 @@
                       },
                       "MobileWallet": {
                         "description": "Mobile wallet supported by this product. A mobile wallet being any electronic device that allows an individual to make electronic commerce transactions",
-                        "type": "string",
-                        "enum": ["Apple Pay", "Android Pay", "Samsung Pay", "Vodafone Wallet", "Issuer Mobile App"]
+                        "type": "array",
+                        "items": {
+                          "description": "Mobile wallet supported by this product. A mobile wallet being any electronic device that allows an individual to make electronic commerce transactions",
+                          "type": "string",
+                          "enum": ["Apple Pay", "Android Pay", "Samsung Pay", "Vodafone Wallet", "Issuer Mobile App"]
+                        }
                       },
                       "CardNotes": {
                         "description": "Optional additional notes to supplement the card details",
@@ -3377,7 +3413,8 @@
                                         },
                                         "DailyChargeForMinimum": {
                                           "description": "Special charge on tiered overdraft",
-                                          "type": "number"
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                         },
                                         "TierValueMaximum": {
                                           "description": "Max Value of interst tier",
@@ -3385,11 +3422,13 @@
                                         },
                                         "DailyChargeForMaximum": {
                                           "description": "Special charge on tiered overdraft",
-                                          "type": "number"
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                         },
                                         "Rate": {
                                           "description": "Rate being paid by the bank (gross)",
-                                          "type": "number"
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                         },
                                         "RateComparisonType": {
                                           "description": "Rate Comparison Type",
@@ -3398,7 +3437,8 @@
                                         },
                                         "APRAERRate": {
                                           "description": "AER or APR Rate for comparison",
-                                          "type": "number"
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                         }
                                       },
                                       "additionalProperties": false
@@ -3870,7 +3910,7 @@
                                   "additionalProperties": false
                                 }
                               },
-                              "required": ["BenefitSubType", "BenefitItem"],
+                              "required": ["BenefitItem"],
                               "additionalProperties": false
                             }
                           }
@@ -4273,7 +4313,9 @@
                         "properties": {
                           "ParentGroupName": {
                             "description": "Parent company that owns or partially owns subsidiary organisations",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 350
                           },
                           "ParentGroupID": {
                             "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
@@ -4282,12 +4324,15 @@
                           },
                           "BrandName": {
                             "description": "Name or image that links products provided by a single provider together for the purpose of providing a common identity for marketing and other purposes.",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 35
                           },
                           "BrandID": {
                             "description": "Unique and unambiguous way to identify the brand",
                             "type": "string",
-                            "format": "uri"
+                            "minLength": 1,
+                            "maxLength": 35
                           }
                         },
                         "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
@@ -4295,6 +4340,14 @@
                       },
                       "ProductName": {
                         "description": "The short product or marketing name assigned by the parent organisation",
+                        "type": "string"
+                      },
+                      "ProductIdentifier": {
+                        "description": "Identifier within the parent organisation for the product. Must be unique in the organisation",
+                        "type": "string"
+                      },
+                      "ArrearsTreatment": {
+                        "description": "Arrears treatment",
                         "type": "string"
                       },
                       "ProductTypeName": {
@@ -4325,7 +4378,7 @@
                         "items": {
                           "description": "Channel",
                           "type": "string",
-                          "enum": ["Branch", "Post", "Internet", "Phone", "Smartphone", "Text"]
+                          "enum": ["Branch", "Post", "Internet", "Phone", "Smartphone", "Text", "Call centre"]
                         },
                         "minItems": 1
                       },
@@ -4367,6 +4420,25 @@
                             "description": "Describes if the offering is promotional, regular or a description of a future state",
                             "type": "string",
                             "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                          },
+                          "StartPromotionOrFutureTerms": {
+                            "description": "Describes the start date",
+                            "type": "string",
+                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                          },
+                          "StopPromotionOrFutureTerms": {
+                            "description": "Describes the end date",
+                            "type": "string",
+                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                          },
+                          "LengthPromotionalInDays": {
+                            "description": "Describes the length if only a duration is given instead of a date in days",
+                            "type": "integer"
+                          },
+                          "DateOfChange": {
+                            "description": "Date of the change if it refers to future terms",
+                            "type": "string",
+                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                           },
                           "LoanPricing": {
                             "type": "array",
@@ -4846,7 +4918,7 @@
                                   "additionalProperties": false
                                 }
                               },
-                              "required": ["BenefitSubType", "BenefitItem"],
+                              "required": ["BenefitItem"],
                               "additionalProperties": false
                             }
                           }
@@ -4855,7 +4927,7 @@
                         "additionalProperties": false
                       }
                     },
-                    "required": ["Organisation", "ProductName", "ProductTypeName", "ProductSegment", "ProductDescription", "TsandCs", "CustomerAccessChannels", "Currency", "MinimumLoanTerm", "MinimumLoanAmount", "MaximumLoanAmount", "PaymentHoliday", "LoanItem", "Eligibility", "FeesAndCharges", "Benefits"],
+                    "required": ["Organisation", "ProductName", "ProductIdentifier", "ProductTypeName", "ProductSegment", "ProductDescription", "TsandCs", "CustomerAccessChannels", "Currency", "MinimumLoanTerm", "MinimumLoanAmount", "MaximumLoanAmount", "PaymentHoliday", "LoanItem", "Eligibility", "FeesAndCharges", "Benefits"],
                     "additionalProperties": false
                   }
                 }
@@ -5250,7 +5322,9 @@
                         "properties": {
                           "ParentGroupName": {
                             "description": "Parent company that owns or partially owns subsidiary organisations",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 350
                           },
                           "ParentGroupID": {
                             "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme",
@@ -5259,12 +5333,15 @@
                           },
                           "BrandName": {
                             "description": "Name or image that links products provided by a single provider together for the purpose of providing a common identity for marketing and other purposes.",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 35
                           },
                           "BrandID": {
                             "description": "Unique and unambiguous way to identify the brand",
                             "type": "string",
-                            "format": "uri"
+                            "minLength": 1,
+                            "maxLength": 35
                           }
                         },
                         "required": ["ParentGroupName", "ParentGroupID", "BrandName", "BrandID"],
@@ -5291,13 +5368,6 @@
                       "ProductIdentifier": {
                         "description": "Identifier within the parent organisation for the product. Must be unique in the organisation",
                         "type": "string"
-                      },
-                      "ProductURL": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        },
-                        "minItems": 1
                       },
                       "Description": {
                         "description": "Product description",
@@ -5331,7 +5401,7 @@
                         "description": "Commercial Credit Card Group ",
                         "type": "object",
                         "properties": {
-                          "ProductSubType": {
+                          "CCSubType": {
                             "description": "Describes if the offering is promotional, regular or a description of a future state",
                             "type": "string",
                             "enum": ["Promotional", "Regular", "Future Regular Terms"]
@@ -5400,7 +5470,7 @@
                               "CardScheme": {
                                 "description": "Indicates the card scheme",
                                 "type": "string",
-                                "enum": ["Visa", "Mastercard", "Cashcard"]
+                                "enum": ["Debit Visa", "Debit Mastercard", "Cashcard"]
                               },
                               "AbilityToSetIndividualLimits": {
                                 "description": "The ability to set separate limts on different cards in one account",
@@ -5421,6 +5491,9 @@
                               "DaysInterestFreeCreditIfPaymentFull": {
                                 "description": "Describes how many interest free days are given if the card is fully paid at each term",
                                 "type": "integer"
+                              },
+                              "AnnualAccountFeeType": {
+                                "type": "string"
                               },
                               "IssuingEmergencyCardsFees": {
                                 "description": "Amount payable for issuing an emergency card",
@@ -5444,11 +5517,17 @@
                               },
                               "MinimumRepaymentPercent": {
                                 "description": "Minimum repayment as percentage",
-                                "type": "integer"
+                                "type": "array",
+                                "items": {
+                                  "type": "integer"
+                                }
                               },
                               "MinimumRepaymentAmount": {
                                 "description": "Minimum repayment amount",
-                                "type": "number"
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
                               },
                               "PaymentDaysAfterStatement": {
                                 "description": "How many days after statement is the payment expected",
@@ -5531,7 +5610,7 @@
                                 "type": "number"
                               }
                             },
-                            "required": ["MinimumCreditLimit", "RepaymentFrequency", "APRRate", "PurchaseRate", "BalanceTransferRate", "CashAdvanceRate", "CardScheme", "AbilityToSetIndividualLimits", "AccessToOnlineDataReportingTool", "CashWithdrawalsAllowed", "ConvenienceCheque", "DaysInterestFreeCreditIfPaymentFull", "IssuingEmergencyCardsFees", "AnnualFeeAmount", "PaymentDaysAfterStatement", "MinimumLendingAmmount", "StatementAtAccountLevel", "StatementAtPersonalLevel", "PaymentSchemeExchangeRate", "ExchangeRateAdjustment"],
+                            "required": ["MinimumCreditLimit", "RepaymentFrequency", "APRRate", "PurchaseRate", "CashAdvanceRate", "CardScheme", "AccessToOnlineDataReportingTool", "CashWithdrawalsAllowed", "ConvenienceCheque", "DaysInterestFreeCreditIfPaymentFull", "IssuingEmergencyCardsFees", "AnnualFeeAmount", "PaymentDaysAfterStatement", "StatementAtAccountLevel", "StatementAtPersonalLevel", "ExchangeRateAdjustment"],
                             "additionalProperties": false
                           }
                         },
@@ -5798,7 +5877,7 @@
                                   "additionalProperties": false
                                 }
                               },
-                              "required": ["BenefitSubType", "BenefitItem"],
+                              "required": ["BenefitItem"],
                               "additionalProperties": false
                             }
                           }
@@ -5807,7 +5886,7 @@
                         "additionalProperties": false
                       }
                     },
-                    "required": ["Organisation", "ProductName", "ProductType", "ProductIdentifier", "ProductURL", "Description", "KeyFeatures", "PaymentHoliday", "PaymentHolidayDescription", "OtherKeyFeatures", "TsandCs", "Details", "Eligibility", "Benefits"],
+                    "required": ["Organisation", "ProductName", "ProductType", "ProductIdentifier", "Description", "KeyFeatures", "PaymentHoliday", "PaymentHolidayDescription", "TsandCs", "Details", "Eligibility", "Benefits"],
                     "additionalProperties": false
                   }
                 }
