@@ -57,11 +57,22 @@
       "type": "string",
       "enum": ["SME Unsecured Loan", "Small Business Loan", "Flexible Business Loan"]
     },
+    "ProductURL": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
     "ProductSegment": {
-      "id": "http://localhost:8000/schemas/v1.2/definitions/smel/smel_product_segment.json#",
-      "description": "Marketing or industry segment that the product is applicable for. Gives the sector or segment that the Loan is designed for",
-      "type": "string",
-      "enum": ["Corporate", "Business", "Fixed", "Specialised Sector", "Government Scheme", "Agriculture Sector", "Small Loan", "Flexible Business Loan", "All Segments"]
+      "type": "array",
+      "items": {
+        "id": "http://localhost:8000/schemas/v1.2/definitions/smel/smel_product_segment.json#",
+        "description": "Marketing or industry segment that the product is applicable for. Gives the sector or segment that the Loan is designed for",
+        "type": "string",
+        "enum": ["Corporate", "Business", "Fixed", "Specialised Sector", "Government Scheme", "Agriculture Sector", "Small Loan", "Flexible Business Loan", "All Segments"]
+      },
+      "minItems": 1
     },
     "ProductDescription": {
       "description": "Description of the product provided by the parent Organisation",
@@ -107,11 +118,15 @@
     },
     "MinimumLoanAmount": {
       "description": "Minimum loan amount",
-      "type": "number"
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+      "type": "string",
+      "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
     },
     "MaximumLoanAmount": {
       "description": "Maximum loan amount",
-      "type": "number"
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+      "type": "string",
+      "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
     },
     "PaymentHoliday": {
       "description": "Indicates whether a repayment holiday is allowed",
@@ -175,16 +190,22 @@
                   "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_repayment_type.json#",
                   "description": "Loan Repayment type",
                   "type": "string",
-                  "enum": ["Interest only", "Repayment with a bullet", "Custom schedule", "Fixed capital fully amortising", "Fixed capital with a bullet"]
+                  "enum": ["Interest only", "Repayment with a bullet", "Custom schedule", "Fixed capital fully amortising", "Fixed capital with a bullet", "Capital Interest", "Bullet or Ballon", "Bullet", "Stragith Line Interest Only"]
                 },
                 "minItems": 1,
                 "uniqueItems": true
               },
               "LoanSizeBandLower": {
-                "type": "number"
+                "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                "description": "Monetary amount without currency",
+                "type": "string",
+                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
               },
               "LoanSizeBandUpper": {
-                "type": "number"
+                "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                "description": "Monetary amount without currency",
+                "type": "string",
+                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
               },
               "LoanLengthIncrementLower": {
                 "type": "integer"
@@ -267,7 +288,9 @@
         },
         "MinimumIncomeTurnoverAmount": {
           "description": "Minimum income / Turnover required to hold the product",
-          "type": "number"
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+          "type": "string",
+          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "MinimumIncomeTurnoverCurrency": {
           "description": "Minimum income / Turnover Currency",
@@ -323,7 +346,9 @@
         },
         "OpeningDepositMinimum": {
           "description": "Minimum Amount to be held on account",
-          "type": "number"
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+          "type": "string",
+          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "OpeningDepositMinimumCurrency": {
           "description": "The currency of the Minimum Amount to be depositing at opening",
@@ -337,7 +362,9 @@
         },
         "MinimumOperatingBalance": {
           "description": "Minimum Operating Balance",
-          "type": "number"
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+          "type": "string",
+          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "MinimumOperatingBalanceCurrency": {
           "description": "Minimum Operating Balance currency",
@@ -351,7 +378,9 @@
         },
         "OpeningDepositMaximumAmount": {
           "description": "Maximum Amount to be depositing at opening",
-          "type": "number"
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+          "type": "string",
+          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "OpeningDepositMaximumCurrency": {
           "description": "The currency of the Minimum Amount to be depositing at opening",
@@ -433,11 +462,11 @@
               },
               "FeeLowerTier": {
                 "description": "Lower occurrence / range boundary e.g.. For returned cheques this could be 0, which means the first returned cheque fits into this range",
-                "type": "number"
+                "type": "integer"
               },
               "FeeHigherTier": {
                 "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
-                "type": "number"
+                "type": "integer"
               },
               "FeeDetails": {
                 "type": "array",
@@ -502,11 +531,15 @@
                             },
                             "FeeAmount": {
                               "description": "Fee in GBP",
-                              "type": "number"
+                              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "FeeRate": {
                               "description": "% Rate",
-                              "type": "number"
+                              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                              "type": "string",
+                              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                             },
                             "Negotiable": {
                               "description": "Indicates that this Fee Rate or Fee Amount is negotiable based on risk or other factor",
@@ -514,15 +547,17 @@
                             },
                             "RepresentativeRate": {
                               "description": "Representative Rate",
-                              "type": "number"
+                              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                              "type": "string",
+                              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                             },
                             "FeeLowerTier": {
                               "description": "Lower occurrence / range boundary e.g. For returned cheques this could be 0, which means the first returned cheque fits into this range",
-                              "type": "number"
+                              "type": "integer"
                             },
                             "FeeHigherTier": {
                               "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
-                              "type": "number"
+                              "type": "integer"
                             },
                             "FeesAndChargesNotes": {
                               "description": "Supplementary information for fees and charges",
@@ -629,18 +664,25 @@
                           "type": "string"
                         },
                         "CriteriaType": {
-                          "id": "http://localhost:8000/schemas/v1.2/definitions/benefits/benefit_criteria_type.json#",
-                          "description": "Criteria that is required in order to be eligible for the Benefit",
-                          "type": "string",
-                          "enum": ["Deposit", "Direct Debit", "Other"]
+                          "type": "array",
+                          "items": {
+                            "id": "http://localhost:8000/schemas/v1.2/definitions/benefits/benefit_criteria_type.json#",
+                            "description": "Criteria that is required in order to be eligible for the Benefit",
+                            "type": "string",
+                            "enum": ["Deposit", "Direct Debit", "Other"]
+                          }
                         },
                         "MinimumCriteria": {
                           "description": "Minimum amount for the criteria",
-                          "type": "number"
+                          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                          "type": "string",
+                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                         },
                         "MaximumCriteria": {
                           "description": "Maximum amount for the criteria",
-                          "type": "number"
+                          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                          "type": "string",
+                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                         },
                         "Counter": {
                           "description": "Counter for the criteria (e.g. number of DD)",
@@ -679,6 +721,6 @@
       "additionalProperties": false
     }
   },
-  "required": ["Organisation", "ProductName", "ProductIdentifier", "ProductTypeName", "ProductSegment", "ProductDescription", "TsandCs", "CustomerAccessChannels", "Currency", "MinimumLoanTerm", "MinimumLoanAmount", "MaximumLoanAmount", "PaymentHoliday", "LoanItem", "Eligibility", "FeesAndCharges", "Benefits"],
+  "required": ["Organisation", "ProductName", "ProductIdentifier", "ProductTypeName", "ProductURL", "ProductSegment", "ProductDescription", "TsandCs", "CustomerAccessChannels", "Currency", "MinimumLoanTerm", "MaximumLoanTerm", "MinimumLoanAmount", "MaximumLoanAmount", "PaymentHoliday", "LoanItem", "Eligibility", "FeesAndCharges", "Benefits"],
   "additionalProperties": false
 }

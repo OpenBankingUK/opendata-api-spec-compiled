@@ -182,11 +182,14 @@
                           "PostCode": {
                             "description": "Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail",
                             "type": "string",
+                            "minLength": 1,
                             "maxLength": 16
                           },
                           "OptionalAddressField": {
                             "description": "Additional field; often directions",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 350
                           },
                           "TownName": {
                             "description": "Name of a built-up area, with defined boundaries, and a local government",
@@ -260,11 +263,13 @@
                           "Latitude": {
                             "description": "Latitude measured in degrees, minutes and seconds, following by 'N' for North and 'S' for South of the Equator (for example 48°51'29'' N for the Eiffel Tower latitude)",
                             "type": "string",
+                            "minLength": 1,
                             "maxLength": 16
                           },
                           "Longitude": {
                             "description": "Angular measurement of the distance of a location on the Earth East or West of the Greenwich Observatory. The longitude is measured in degrees, minutes and seconds, following by 'E' for East and 'W' for West (for example 2°17'4'' E for the Eiffel Tower longitude)",
                             "type": "string",
+                            "minLength": 1,
                             "maxLength": 16
                           }
                         },
@@ -905,11 +910,14 @@
                           "PostCode": {
                             "description": "Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail",
                             "type": "string",
+                            "minLength": 1,
                             "maxLength": 16
                           },
                           "OptionalAddressField": {
                             "description": "Additional field; often directions",
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 350
                           },
                           "TownName": {
                             "description": "Name of a built-up area, with defined boundaries, and a local government",
@@ -939,11 +947,13 @@
                           "Latitude": {
                             "description": "Latitude measured in degrees, minutes and seconds, following by 'N' for North and 'S' for South of the Equator (for example 48°51'29'' N for the Eiffel Tower latitude)",
                             "type": "string",
+                            "minLength": 1,
                             "maxLength": 16
                           },
                           "Longitude": {
                             "description": "Angular measurement of the distance of a location on the Earth East or West of the Greenwich Observatory. The longitude is measured in degrees, minutes and seconds, following by 'E' for East and 'W' for West (for example 2°17'4'' E for the Eiffel Tower longitude)",
                             "type": "string",
+                            "minLength": 1,
                             "maxLength": 16
                           }
                         },
@@ -1457,7 +1467,8 @@
                       },
                       "CardWithdrawalLimit": {
                         "description": "The daily Limit that a customer can get via the ATM. This describes the default limit rather than the maximum",
-                        "type": "number"
+                        "type": "string",
+                        "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                       },
                       "ProductDescription": {
                         "description": "Description of the product provided by the parent organisation",
@@ -1550,7 +1561,8 @@
                       },
                       "MonthlyMaximumCharge": {
                         "description": "The maximum Relevant Charges that could accrue in relation to that PCA in any month as a result of exceeding or attempting to exceed a Pre-agreed credit limit on the PCA. i.e. it does not include any charges that are applied through the normal operation of the account such as overdraft interest charges whilst within an agreed limit",
-                        "type": "number"
+                        "type": "string",
+                        "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                       },
                       "ProductURL": {
                         "description": "URL provided by the organisation which redirects to the product (on live products only). There might be more than one product at a given URL",
@@ -1703,7 +1715,8 @@
                                 },
                                 "ExchangeRateAdjustment": {
                                   "description": "The margin added, by certain card issuers, to the scheme rate in order to arrive at the exchange rate qouted as the reference exchange rate to the cardholder",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                 }
                               },
                               "additionalProperties": false
@@ -1753,7 +1766,8 @@
                           },
                           "MinimumIncomeTurnoverAmount": {
                             "description": "Minimum income / Turnover required to hold the product",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "MinimumIncomeTurnoverCurrency": {
                             "description": "Minimum income / Turnover Currency",
@@ -1805,7 +1819,8 @@
                           },
                           "OpeningDepositMinimum": {
                             "description": "Minimum Amount to be held on account",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "OpeningDepositMinimumCurrency": {
                             "description": "The currency of the Minimum Amount to be depositing at opening",
@@ -1818,7 +1833,8 @@
                           },
                           "MinimumOperatingBalance": {
                             "description": "Minimum Operating Balance",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "MinimumOperatingBalanceCurrency": {
                             "description": "Minimum Operating Balance currency",
@@ -1831,7 +1847,8 @@
                           },
                           "OpeningDepositMaximumAmount": {
                             "description": "Maximum Amount to be depositing at opening",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "OpeningDepositMaximumCurrency": {
                             "description": "The currency of the Minimum Amount to be depositing at opening",
@@ -1954,7 +1971,8 @@
                                         },
                                         "TierValueMinimum": {
                                           "description": "Lower value of interest tier",
-                                          "type": "number"
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                         },
                                         "DailyChargeForMinimum": {
                                           "description": "Special charge on tiered overdraft",
@@ -1963,7 +1981,7 @@
                                         },
                                         "TierValueMaximum": {
                                           "description": "Max Value of interst tier",
-                                          "type": "number"
+                                          "type": "string"
                                         },
                                         "DailyChargeForMaximum": {
                                           "description": "Special charge on tiered overdraft",
@@ -2079,11 +2097,11 @@
                                       },
                                       "TierValueMinimum": {
                                         "description": "Lower value of interest tier",
-                                        "type": "number"
+                                        "type": "integer"
                                       },
                                       "TierValueMaximum": {
                                         "description": "Max Value of interest tier",
-                                        "type": "number"
+                                        "type": "integer"
                                       }
                                     },
                                     "additionalProperties": false
@@ -2092,11 +2110,13 @@
                                 },
                                 "InterestRateEARpa": {
                                   "description": "Interest rate applied to tier",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                 },
                                 "RepresentativeRate": {
                                   "description": "Interest rate at AER",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                 },
                                 "InterestNotes": {
                                   "description": "Optional additional notes to supplement the interest details",
@@ -2104,15 +2124,18 @@
                                 },
                                 "TotalOverdraftChargeAmount": {
                                   "description": "All charges that a customer could incur as a result of exceeding or attempting to exceed a Pre-agreed credit limit",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 },
                                 "MinUnarrangedOverdraftAmount": {
                                   "description": "Minimum Unarranged Overdraft Amount if applicable",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 },
                                 "InterestRate": {
                                   "description": "interest rate applied to tier",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                 },
                                 "InterestRateCalculationFrequency": {
                                   "description": "Frequency at which interest is calculated and accrued",
@@ -2126,19 +2149,23 @@
                                 },
                                 "DailyCharge": {
                                   "description": "Maximum daily overdraft charge",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 },
                                 "MonthlyCharge": {
                                   "description": "Maximum monthly overdraft charge",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 },
                                 "ItemCharge": {
                                   "description": "Arranged overdraft item charge",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 },
                                 "OtherCharge": {
                                   "description": "Other flat charge levied when overdrawn (Arranged)",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 },
                                 "OverdraftNotes": {
                                   "description": "Supplementary notes for overdrafts",
@@ -2151,11 +2178,13 @@
                                 },
                                 "IndicativeRate": {
                                   "description": "Indicative Rate that the client will get",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                 },
                                 "BufferAmount": {
                                   "description": "Amount on overdraft that is prearranged",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 }
                               },
                               "required": ["ApplicableTo", "Tiers"],
@@ -2163,11 +2192,13 @@
                             },
                             "MaximumMonthlyOverdraftCharge": {
                               "description": "Maximum monthly overdraft charge",
-                              "type": "number"
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "MaximumDailyOverdraftCharge": {
                               "description": "Maximum daily overdraft charge",
-                              "type": "number"
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "OverdraftType": {
                               "description": "Opposite of repayable on demand",
@@ -2180,23 +2211,43 @@
                             },
                             "SetUpFeesAmount": {
                               "description": "Fees to set up the overdraft",
-                              "type": "number"
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "SetUpFeesRate": {
                               "description": "Rate to set up the overdraft",
-                              "type": "number"
+                              "type": "string",
+                              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                             },
                             "ReviewFee": {
                               "description": "Fee to review overdraft limit",
-                              "type": "number"
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "MinimumFee": {
                               "description": "Minimum overdraft fee",
-                              "type": "number"
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "AnnualRenewalFee": {
                               "description": "Fee payable per term for overdraft",
-                              "type": "string"
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                            },
+                            "MinimumSetupFee": {
+                              "description": "The minimum amount charged for an overdraft set up",
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                            },
+                            "RenewalRate": {
+                              "description": "Rate to renew overdraft",
+                              "type": "string",
+                              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                            },
+                            "MinimumRenewalFee": {
+                              "description": "The minimum amount charged for the annual renewal",
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             }
                           },
                           "additionalProperties": false
@@ -2238,11 +2289,11 @@
                                 },
                                 "FeeLowerTier": {
                                   "description": "Lower occurrence / range boundary e.g.. For returned cheques this could be 0, which means the first returned cheque fits into this range",
-                                  "type": "number"
+                                  "type": "integer"
                                 },
                                 "FeeHigherTier": {
                                   "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
-                                  "type": "number"
+                                  "type": "integer"
                                 },
                                 "FeeDetails": {
                                   "type": "array",
@@ -2298,11 +2349,13 @@
                                               },
                                               "FeeAmount": {
                                                 "description": "Fee in GBP",
-                                                "type": "number"
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                               },
                                               "FeeRate": {
                                                 "description": "% Rate",
-                                                "type": "number"
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                               },
                                               "Negotiable": {
                                                 "description": "Indicates that this Fee Rate or Fee Amount is negotiable based on risk or other factor",
@@ -2310,15 +2363,16 @@
                                               },
                                               "RepresentativeRate": {
                                                 "description": "Representative Rate",
-                                                "type": "number"
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                               },
                                               "FeeLowerTier": {
                                                 "description": "Lower occurrence / range boundary e.g. For returned cheques this could be 0, which means the first returned cheque fits into this range",
-                                                "type": "number"
+                                                "type": "integer"
                                               },
                                               "FeeHigherTier": {
                                                 "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
-                                                "type": "number"
+                                                "type": "integer"
                                               },
                                               "FeesAndChargesNotes": {
                                                 "description": "Supplementary information for fees and charges",
@@ -2417,17 +2471,22 @@
                                             "type": "string"
                                           },
                                           "CriteriaType": {
-                                            "description": "Criteria that is required in order to be eligible for the Benefit",
-                                            "type": "string",
-                                            "enum": ["Deposit", "Direct Debit", "Other"]
+                                            "type": "array",
+                                            "items": {
+                                              "description": "Criteria that is required in order to be eligible for the Benefit",
+                                              "type": "string",
+                                              "enum": ["Deposit", "Direct Debit", "Other"]
+                                            }
                                           },
                                           "MinimumCriteria": {
                                             "description": "Minimum amount for the criteria",
-                                            "type": "number"
+                                            "type": "string",
+                                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                           },
                                           "MaximumCriteria": {
                                             "description": "Maximum amount for the criteria",
-                                            "type": "number"
+                                            "type": "string",
+                                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                           },
                                           "Counter": {
                                             "description": "Counter for the criteria (e.g. number of DD)",
@@ -2912,7 +2971,8 @@
                       },
                       "CardWithdrawalLimit": {
                         "description": "The daily Limit that a customer can get via the ATM. This describes the default limit rather than the maximum",
-                        "type": "number"
+                        "type": "string",
+                        "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                       },
                       "ProductDescription": {
                         "description": "Description of the product provided by the parent organisation",
@@ -3005,7 +3065,8 @@
                       },
                       "MonthlyMaximumCharge": {
                         "description": "The maximum Relevant Charges that could accrue in relation to that PCA in any month as a result of exceeding or attempting to exceed a Pre-agreed credit limit on the PCA. i.e. it does not include any charges that are applied through the normal operation of the account such as overdraft interest charges whilst within an agreed limit",
-                        "type": "number"
+                        "type": "string",
+                        "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                       },
                       "ProductURL": {
                         "description": "URL provided by the organisation which redirects to the product (on live products only). There might be more than one product at a given URL",
@@ -3158,7 +3219,8 @@
                                 },
                                 "ExchangeRateAdjustment": {
                                   "description": "The margin added, by certain card issuers, to the scheme rate in order to arrive at the exchange rate qouted as the reference exchange rate to the cardholder",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                 }
                               },
                               "additionalProperties": false
@@ -3208,7 +3270,8 @@
                           },
                           "MinimumIncomeTurnoverAmount": {
                             "description": "Minimum income / Turnover required to hold the product",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "MinimumIncomeTurnoverCurrency": {
                             "description": "Minimum income / Turnover Currency",
@@ -3260,7 +3323,8 @@
                           },
                           "OpeningDepositMinimum": {
                             "description": "Minimum Amount to be held on account",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "OpeningDepositMinimumCurrency": {
                             "description": "The currency of the Minimum Amount to be depositing at opening",
@@ -3273,7 +3337,8 @@
                           },
                           "MinimumOperatingBalance": {
                             "description": "Minimum Operating Balance",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "MinimumOperatingBalanceCurrency": {
                             "description": "Minimum Operating Balance currency",
@@ -3286,7 +3351,8 @@
                           },
                           "OpeningDepositMaximumAmount": {
                             "description": "Maximum Amount to be depositing at opening",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "OpeningDepositMaximumCurrency": {
                             "description": "The currency of the Minimum Amount to be depositing at opening",
@@ -3409,7 +3475,8 @@
                                         },
                                         "TierValueMinimum": {
                                           "description": "Lower value of interest tier",
-                                          "type": "number"
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                         },
                                         "DailyChargeForMinimum": {
                                           "description": "Special charge on tiered overdraft",
@@ -3418,7 +3485,7 @@
                                         },
                                         "TierValueMaximum": {
                                           "description": "Max Value of interst tier",
-                                          "type": "number"
+                                          "type": "string"
                                         },
                                         "DailyChargeForMaximum": {
                                           "description": "Special charge on tiered overdraft",
@@ -3534,11 +3601,11 @@
                                       },
                                       "TierValueMinimum": {
                                         "description": "Lower value of interest tier",
-                                        "type": "number"
+                                        "type": "integer"
                                       },
                                       "TierValueMaximum": {
                                         "description": "Max Value of interest tier",
-                                        "type": "number"
+                                        "type": "integer"
                                       }
                                     },
                                     "additionalProperties": false
@@ -3547,11 +3614,13 @@
                                 },
                                 "InterestRateEARpa": {
                                   "description": "Interest rate applied to tier",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                 },
                                 "RepresentativeRate": {
                                   "description": "Interest rate at AER",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                 },
                                 "InterestNotes": {
                                   "description": "Optional additional notes to supplement the interest details",
@@ -3559,15 +3628,18 @@
                                 },
                                 "TotalOverdraftChargeAmount": {
                                   "description": "All charges that a customer could incur as a result of exceeding or attempting to exceed a Pre-agreed credit limit",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 },
                                 "MinUnarrangedOverdraftAmount": {
                                   "description": "Minimum Unarranged Overdraft Amount if applicable",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 },
                                 "InterestRate": {
                                   "description": "interest rate applied to tier",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                 },
                                 "InterestRateCalculationFrequency": {
                                   "description": "Frequency at which interest is calculated and accrued",
@@ -3581,19 +3653,23 @@
                                 },
                                 "DailyCharge": {
                                   "description": "Maximum daily overdraft charge",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 },
                                 "MonthlyCharge": {
                                   "description": "Maximum monthly overdraft charge",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 },
                                 "ItemCharge": {
                                   "description": "Arranged overdraft item charge",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 },
                                 "OtherCharge": {
                                   "description": "Other flat charge levied when overdrawn (Arranged)",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 },
                                 "OverdraftNotes": {
                                   "description": "Supplementary notes for overdrafts",
@@ -3606,11 +3682,13 @@
                                 },
                                 "IndicativeRate": {
                                   "description": "Indicative Rate that the client will get",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                 },
                                 "BufferAmount": {
                                   "description": "Amount on overdraft that is prearranged",
-                                  "type": "number"
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 }
                               },
                               "required": ["ApplicableTo", "Tiers"],
@@ -3618,11 +3696,13 @@
                             },
                             "MaximumMonthlyOverdraftCharge": {
                               "description": "Maximum monthly overdraft charge",
-                              "type": "number"
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "MaximumDailyOverdraftCharge": {
                               "description": "Maximum daily overdraft charge",
-                              "type": "number"
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "OverdraftType": {
                               "description": "Opposite of repayable on demand",
@@ -3635,23 +3715,43 @@
                             },
                             "SetUpFeesAmount": {
                               "description": "Fees to set up the overdraft",
-                              "type": "number"
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "SetUpFeesRate": {
                               "description": "Rate to set up the overdraft",
-                              "type": "number"
+                              "type": "string",
+                              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                             },
                             "ReviewFee": {
                               "description": "Fee to review overdraft limit",
-                              "type": "number"
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "MinimumFee": {
                               "description": "Minimum overdraft fee",
-                              "type": "number"
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "AnnualRenewalFee": {
                               "description": "Fee payable per term for overdraft",
-                              "type": "string"
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                            },
+                            "MinimumSetupFee": {
+                              "description": "The minimum amount charged for an overdraft set up",
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                            },
+                            "RenewalRate": {
+                              "description": "Rate to renew overdraft",
+                              "type": "string",
+                              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                            },
+                            "MinimumRenewalFee": {
+                              "description": "The minimum amount charged for the annual renewal",
+                              "type": "string",
+                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             }
                           },
                           "additionalProperties": false
@@ -3693,11 +3793,11 @@
                                 },
                                 "FeeLowerTier": {
                                   "description": "Lower occurrence / range boundary e.g.. For returned cheques this could be 0, which means the first returned cheque fits into this range",
-                                  "type": "number"
+                                  "type": "integer"
                                 },
                                 "FeeHigherTier": {
                                   "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
-                                  "type": "number"
+                                  "type": "integer"
                                 },
                                 "FeeDetails": {
                                   "type": "array",
@@ -3753,11 +3853,13 @@
                                               },
                                               "FeeAmount": {
                                                 "description": "Fee in GBP",
-                                                "type": "number"
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                               },
                                               "FeeRate": {
                                                 "description": "% Rate",
-                                                "type": "number"
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                               },
                                               "Negotiable": {
                                                 "description": "Indicates that this Fee Rate or Fee Amount is negotiable based on risk or other factor",
@@ -3765,15 +3867,16 @@
                                               },
                                               "RepresentativeRate": {
                                                 "description": "Representative Rate",
-                                                "type": "number"
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                               },
                                               "FeeLowerTier": {
                                                 "description": "Lower occurrence / range boundary e.g. For returned cheques this could be 0, which means the first returned cheque fits into this range",
-                                                "type": "number"
+                                                "type": "integer"
                                               },
                                               "FeeHigherTier": {
                                                 "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
-                                                "type": "number"
+                                                "type": "integer"
                                               },
                                               "FeesAndChargesNotes": {
                                                 "description": "Supplementary information for fees and charges",
@@ -3872,17 +3975,22 @@
                                             "type": "string"
                                           },
                                           "CriteriaType": {
-                                            "description": "Criteria that is required in order to be eligible for the Benefit",
-                                            "type": "string",
-                                            "enum": ["Deposit", "Direct Debit", "Other"]
+                                            "type": "array",
+                                            "items": {
+                                              "description": "Criteria that is required in order to be eligible for the Benefit",
+                                              "type": "string",
+                                              "enum": ["Deposit", "Direct Debit", "Other"]
+                                            }
                                           },
                                           "MinimumCriteria": {
                                             "description": "Minimum amount for the criteria",
-                                            "type": "number"
+                                            "type": "string",
+                                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                           },
                                           "MaximumCriteria": {
                                             "description": "Maximum amount for the criteria",
-                                            "type": "number"
+                                            "type": "string",
+                                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                           },
                                           "Counter": {
                                             "description": "Counter for the criteria (e.g. number of DD)",
@@ -4355,10 +4463,21 @@
                         "type": "string",
                         "enum": ["SME Unsecured Loan", "Small Business Loan", "Flexible Business Loan"]
                       },
+                      "ProductURL": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "minItems": 1
+                      },
                       "ProductSegment": {
-                        "description": "Marketing or industry segment that the product is applicable for. Gives the sector or segment that the Loan is designed for",
-                        "type": "string",
-                        "enum": ["Corporate", "Business", "Fixed", "Specialised Sector", "Government Scheme", "Agriculture Sector", "Small Loan", "Flexible Business Loan", "All Segments"]
+                        "type": "array",
+                        "items": {
+                          "description": "Marketing or industry segment that the product is applicable for. Gives the sector or segment that the Loan is designed for",
+                          "type": "string",
+                          "enum": ["Corporate", "Business", "Fixed", "Specialised Sector", "Government Scheme", "Agriculture Sector", "Small Loan", "Flexible Business Loan", "All Segments"]
+                        },
+                        "minItems": 1
                       },
                       "ProductDescription": {
                         "description": "Description of the product provided by the parent Organisation",
@@ -4402,11 +4521,13 @@
                       },
                       "MinimumLoanAmount": {
                         "description": "Minimum loan amount",
-                        "type": "number"
+                        "type": "string",
+                        "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                       },
                       "MaximumLoanAmount": {
                         "description": "Maximum loan amount",
-                        "type": "number"
+                        "type": "string",
+                        "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                       },
                       "PaymentHoliday": {
                         "description": "Indicates whether a repayment holiday is allowed",
@@ -4461,16 +4582,20 @@
                                   "items": {
                                     "description": "Loan Repayment type",
                                     "type": "string",
-                                    "enum": ["Interest only", "Repayment with a bullet", "Custom schedule", "Fixed capital fully amortising", "Fixed capital with a bullet"]
+                                    "enum": ["Interest only", "Repayment with a bullet", "Custom schedule", "Fixed capital fully amortising", "Fixed capital with a bullet", "Capital Interest", "Bullet or Ballon", "Bullet", "Stragith Line Interest Only"]
                                   },
                                   "minItems": 1,
                                   "uniqueItems": true
                                 },
                                 "LoanSizeBandLower": {
-                                  "type": "number"
+                                  "description": "Monetary amount without currency",
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 },
                                 "LoanSizeBandUpper": {
-                                  "type": "number"
+                                  "description": "Monetary amount without currency",
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 },
                                 "LoanLengthIncrementLower": {
                                   "type": "integer"
@@ -4550,7 +4675,8 @@
                           },
                           "MinimumIncomeTurnoverAmount": {
                             "description": "Minimum income / Turnover required to hold the product",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "MinimumIncomeTurnoverCurrency": {
                             "description": "Minimum income / Turnover Currency",
@@ -4602,7 +4728,8 @@
                           },
                           "OpeningDepositMinimum": {
                             "description": "Minimum Amount to be held on account",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "OpeningDepositMinimumCurrency": {
                             "description": "The currency of the Minimum Amount to be depositing at opening",
@@ -4615,7 +4742,8 @@
                           },
                           "MinimumOperatingBalance": {
                             "description": "Minimum Operating Balance",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "MinimumOperatingBalanceCurrency": {
                             "description": "Minimum Operating Balance currency",
@@ -4628,7 +4756,8 @@
                           },
                           "OpeningDepositMaximumAmount": {
                             "description": "Maximum Amount to be depositing at opening",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "OpeningDepositMaximumCurrency": {
                             "description": "The currency of the Minimum Amount to be depositing at opening",
@@ -4701,11 +4830,11 @@
                                 },
                                 "FeeLowerTier": {
                                   "description": "Lower occurrence / range boundary e.g.. For returned cheques this could be 0, which means the first returned cheque fits into this range",
-                                  "type": "number"
+                                  "type": "integer"
                                 },
                                 "FeeHigherTier": {
                                   "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
-                                  "type": "number"
+                                  "type": "integer"
                                 },
                                 "FeeDetails": {
                                   "type": "array",
@@ -4761,11 +4890,13 @@
                                               },
                                               "FeeAmount": {
                                                 "description": "Fee in GBP",
-                                                "type": "number"
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                               },
                                               "FeeRate": {
                                                 "description": "% Rate",
-                                                "type": "number"
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                               },
                                               "Negotiable": {
                                                 "description": "Indicates that this Fee Rate or Fee Amount is negotiable based on risk or other factor",
@@ -4773,15 +4904,16 @@
                                               },
                                               "RepresentativeRate": {
                                                 "description": "Representative Rate",
-                                                "type": "number"
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                                               },
                                               "FeeLowerTier": {
                                                 "description": "Lower occurrence / range boundary e.g. For returned cheques this could be 0, which means the first returned cheque fits into this range",
-                                                "type": "number"
+                                                "type": "integer"
                                               },
                                               "FeeHigherTier": {
                                                 "description": "Higher occurrence / range boundary e.g. For returned cheques this could be 10, which means the first 10 returned cheque fits into this range",
-                                                "type": "number"
+                                                "type": "integer"
                                               },
                                               "FeesAndChargesNotes": {
                                                 "description": "Supplementary information for fees and charges",
@@ -4880,17 +5012,22 @@
                                             "type": "string"
                                           },
                                           "CriteriaType": {
-                                            "description": "Criteria that is required in order to be eligible for the Benefit",
-                                            "type": "string",
-                                            "enum": ["Deposit", "Direct Debit", "Other"]
+                                            "type": "array",
+                                            "items": {
+                                              "description": "Criteria that is required in order to be eligible for the Benefit",
+                                              "type": "string",
+                                              "enum": ["Deposit", "Direct Debit", "Other"]
+                                            }
                                           },
                                           "MinimumCriteria": {
                                             "description": "Minimum amount for the criteria",
-                                            "type": "number"
+                                            "type": "string",
+                                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                           },
                                           "MaximumCriteria": {
                                             "description": "Maximum amount for the criteria",
-                                            "type": "number"
+                                            "type": "string",
+                                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                           },
                                           "Counter": {
                                             "description": "Counter for the criteria (e.g. number of DD)",
@@ -4927,7 +5064,7 @@
                         "additionalProperties": false
                       }
                     },
-                    "required": ["Organisation", "ProductName", "ProductIdentifier", "ProductTypeName", "ProductSegment", "ProductDescription", "TsandCs", "CustomerAccessChannels", "Currency", "MinimumLoanTerm", "MinimumLoanAmount", "MaximumLoanAmount", "PaymentHoliday", "LoanItem", "Eligibility", "FeesAndCharges", "Benefits"],
+                    "required": ["Organisation", "ProductName", "ProductIdentifier", "ProductTypeName", "ProductURL", "ProductSegment", "ProductDescription", "TsandCs", "CustomerAccessChannels", "Currency", "MinimumLoanTerm", "MaximumLoanTerm", "MinimumLoanAmount", "MaximumLoanAmount", "PaymentHoliday", "LoanItem", "Eligibility", "FeesAndCharges", "Benefits"],
                     "additionalProperties": false
                   }
                 }
@@ -5431,7 +5568,8 @@
                               },
                               "MinimumCreditLimit": {
                                 "description": "Minimum £500, maximum subject to status",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
                               "RepaymentFrequency": {
                                 "description": "Repayment frequency",
@@ -5440,7 +5578,8 @@
                               },
                               "APRRate": {
                                 "description": "Annual Percentage Rate",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               },
                               "BalanceTransferInterestRatePeriod": {
                                 "description": "The period used to define the specific interest rate for balance transfers",
@@ -5449,19 +5588,23 @@
                               },
                               "PurchaseRate": {
                                 "description": "Purchase rate",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               },
                               "BalanceTransferRate": {
                                 "description": "Balance transfer rate",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               },
                               "CashAdvanceRate": {
                                 "description": "Cash advance rate",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               },
                               "OverLimitFee": {
                                 "description": "Fee applicable if the card was credited over its limit",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
                               "MaximumNumberOfCardsPermitted": {
                                 "description": "The maximum numbers of cards per account",
@@ -5497,23 +5640,28 @@
                               },
                               "IssuingEmergencyCardsFees": {
                                 "description": "Amount payable for issuing an emergency card",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
                               "AnnualFeeAmount": {
                                 "description": "Details on annual account fee, such as non payable when there is a turnover above a certain sum",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
                               "ChequeFeePercent": {
                                 "description": "Percentage fee on convenience cheques",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               },
                               "CashbackPercent": {
                                 "description": "Percent of cashback on amount spend",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               },
                               "FeesOnCheque": {
                                 "description": "Percentage fee on a convenince cheques",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
                               "MinimumRepaymentPercent": {
                                 "description": "Minimum repayment as percentage",
@@ -5526,7 +5674,9 @@
                                 "description": "Minimum repayment amount",
                                 "type": "array",
                                 "items": {
-                                  "type": "number"
+                                  "description": "Monetary amount without currency",
+                                  "type": "string",
+                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                 }
                               },
                               "PaymentDaysAfterStatement": {
@@ -5541,9 +5691,10 @@
                                 "description": "Additional notes",
                                 "type": "string"
                               },
-                              "MinimumLendingAmmount": {
+                              "MinimumLendingAmount": {
                                 "description": "The minimum lending available",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
                               "StatementAtAccountLevel": {
                                 "description": "Describes whether there is a statement at account level",
@@ -5555,59 +5706,73 @@
                               },
                               "PaymentSchemeExchangeRate": {
                                 "description": "The base exchange rate used in settlement of the transaction between issuer and scheme",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               },
                               "ExchangeRateAdjustment": {
                                 "description": "The margin added, by certain card issuers, to the scheme rate in order to arrive at the exchange rate qouted as the reference exchange rate to the cardholder",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               },
                               "PaymentSchemeExchangeFee": {
                                 "description": "Any payment network fee applied to some or all non-sterling transactions that the card issuer recover directly from the cardholder",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
                               "PaymentSchemeExchangeFeeRate": {
                                 "description": "Any payment network fee rate applied to some or all non-sterling transactions that the card issuer recover directly from the cardholder",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               },
                               "NonSterlingTransactionFee": {
                                 "description": "A fee applied to all non-Sterling card transactions",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
                               "NonSterlingTransactionFeeRate": {
                                 "description": "A fee rate applied to all non-Sterling card transactions",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               },
                               "NonSterlingPurchaseFee": {
                                 "description": "An additional fee applied to certain card retail transactions",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
                               "NonSterlingPurchaseFeeRate": {
                                 "description": "An additional fee rate applied to certain card retail transactions",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               },
                               "NonSterlingCashFee": {
                                 "description": "An additional fee applied to certain card cash withdrawals. This fee also applies to cash near fees such as gambling",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
                               "NonSterlingCashFeeRate": {
                                 "description": "An additional fee rate applied to certain card cash withdrawals. This fee also applies to cash near fees such as gambling",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               },
                               "ForeignPurchaseFee": {
                                 "description": "Additional card fee applied to sterling retail transactions made abroad",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
                               "ForeignPurchaseFeeRate": {
                                 "description": "Additional card fee rate applied to sterling retail transactions made abroad",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               },
                               "ForeignCashFee": {
                                 "description": "Additional card fee applied to sterling cash withdrawal made abroad",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
                               "ForeignCashFeeRate": {
                                 "description": "Additional card fee rate applied to sterling cash withdrawal made abroad",
-                                "type": "number"
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               }
                             },
                             "required": ["MinimumCreditLimit", "RepaymentFrequency", "APRRate", "PurchaseRate", "CashAdvanceRate", "CardScheme", "AccessToOnlineDataReportingTool", "CashWithdrawalsAllowed", "ConvenienceCheque", "DaysInterestFreeCreditIfPaymentFull", "IssuingEmergencyCardsFees", "AnnualFeeAmount", "PaymentDaysAfterStatement", "StatementAtAccountLevel", "StatementAtPersonalLevel", "ExchangeRateAdjustment"],
@@ -5655,7 +5820,8 @@
                           },
                           "MinimumIncomeTurnoverAmount": {
                             "description": "Minimum income / Turnover required to hold the product",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "MinimumIncomeTurnoverCurrency": {
                             "description": "Minimum income / Turnover Currency",
@@ -5707,7 +5873,8 @@
                           },
                           "OpeningDepositMinimum": {
                             "description": "Minimum Amount to be held on account",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "OpeningDepositMinimumCurrency": {
                             "description": "The currency of the Minimum Amount to be depositing at opening",
@@ -5720,7 +5887,8 @@
                           },
                           "MinimumOperatingBalance": {
                             "description": "Minimum Operating Balance",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "MinimumOperatingBalanceCurrency": {
                             "description": "Minimum Operating Balance currency",
@@ -5733,7 +5901,8 @@
                           },
                           "OpeningDepositMaximumAmount": {
                             "description": "Maximum Amount to be depositing at opening",
-                            "type": "number"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "OpeningDepositMaximumCurrency": {
                             "description": "The currency of the Minimum Amount to be depositing at opening",
@@ -5839,17 +6008,22 @@
                                             "type": "string"
                                           },
                                           "CriteriaType": {
-                                            "description": "Criteria that is required in order to be eligible for the Benefit",
-                                            "type": "string",
-                                            "enum": ["Deposit", "Direct Debit", "Other"]
+                                            "type": "array",
+                                            "items": {
+                                              "description": "Criteria that is required in order to be eligible for the Benefit",
+                                              "type": "string",
+                                              "enum": ["Deposit", "Direct Debit", "Other"]
+                                            }
                                           },
                                           "MinimumCriteria": {
                                             "description": "Minimum amount for the criteria",
-                                            "type": "number"
+                                            "type": "string",
+                                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                           },
                                           "MaximumCriteria": {
                                             "description": "Maximum amount for the criteria",
-                                            "type": "number"
+                                            "type": "string",
+                                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                           },
                                           "Counter": {
                                             "description": "Counter for the criteria (e.g. number of DD)",

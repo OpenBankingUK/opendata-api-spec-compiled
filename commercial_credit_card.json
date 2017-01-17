@@ -131,7 +131,9 @@
             },
             "MinimumCreditLimit": {
               "description": "Minimum £500, maximum subject to status",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "RepaymentFrequency": {
               "description": "Repayment frequency",
@@ -141,7 +143,9 @@
             },
             "APRRate": {
               "description": "Annual Percentage Rate",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "BalanceTransferInterestRatePeriod": {
               "id": "http://localhost:8000/schemas/v1.2/definitions/ccc/ccc_interest_period.json#",
@@ -151,19 +155,27 @@
             },
             "PurchaseRate": {
               "description": "Purchase rate",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "BalanceTransferRate": {
               "description": "Balance transfer rate",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "CashAdvanceRate": {
               "description": "Cash advance rate",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "OverLimitFee": {
               "description": "Fee applicable if the card was credited over its limit",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "MaximumNumberOfCardsPermitted": {
               "description": "The maximum numbers of cards per account",
@@ -200,23 +212,33 @@
             },
             "IssuingEmergencyCardsFees": {
               "description": "Amount payable for issuing an emergency card",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "AnnualFeeAmount": {
               "description": "Details on annual account fee, such as non payable when there is a turnover above a certain sum",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "ChequeFeePercent": {
               "description": "Percentage fee on convenience cheques",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "CashbackPercent": {
               "description": "Percent of cashback on amount spend",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "FeesOnCheque": {
               "description": "Percentage fee on a convenince cheques",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "MinimumRepaymentPercent": {
               "description": "Minimum repayment as percentage",
@@ -229,7 +251,10 @@
               "description": "Minimum repayment amount",
               "type": "array",
               "items": {
-                "type": "number"
+                "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                "description": "Monetary amount without currency",
+                "type": "string",
+                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
               }
             },
             "PaymentDaysAfterStatement": {
@@ -244,9 +269,11 @@
               "description": "Additional notes",
               "type": "string"
             },
-            "MinimumLendingAmmount": {
+            "MinimumLendingAmount": {
               "description": "The minimum lending available",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "StatementAtAccountLevel": {
               "description": "Describes whether there is a statement at account level",
@@ -258,59 +285,87 @@
             },
             "PaymentSchemeExchangeRate": {
               "description": "The base exchange rate used in settlement of the transaction between issuer and scheme",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "ExchangeRateAdjustment": {
               "description": "The margin added, by certain card issuers, to the scheme rate in order to arrive at the exchange rate qouted as the reference exchange rate to the cardholder",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "PaymentSchemeExchangeFee": {
               "description": "Any payment network fee applied to some or all non-sterling transactions that the card issuer recover directly from the cardholder",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "PaymentSchemeExchangeFeeRate": {
               "description": "Any payment network fee rate applied to some or all non-sterling transactions that the card issuer recover directly from the cardholder",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "NonSterlingTransactionFee": {
               "description": "A fee applied to all non-Sterling card transactions",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "NonSterlingTransactionFeeRate": {
               "description": "A fee rate applied to all non-Sterling card transactions",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "NonSterlingPurchaseFee": {
               "description": "An additional fee applied to certain card retail transactions",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "NonSterlingPurchaseFeeRate": {
               "description": "An additional fee rate applied to certain card retail transactions",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "NonSterlingCashFee": {
               "description": "An additional fee applied to certain card cash withdrawals. This fee also applies to cash near fees such as gambling",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "NonSterlingCashFeeRate": {
               "description": "An additional fee rate applied to certain card cash withdrawals. This fee also applies to cash near fees such as gambling",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "ForeignPurchaseFee": {
               "description": "Additional card fee applied to sterling retail transactions made abroad",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "ForeignPurchaseFeeRate": {
               "description": "Additional card fee rate applied to sterling retail transactions made abroad",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "ForeignCashFee": {
               "description": "Additional card fee applied to sterling cash withdrawal made abroad",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "ForeignCashFeeRate": {
               "description": "Additional card fee rate applied to sterling cash withdrawal made abroad",
-              "type": "number"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             }
           },
           "required": ["MinimumCreditLimit", "RepaymentFrequency", "APRRate", "PurchaseRate", "CashAdvanceRate", "CardScheme", "AccessToOnlineDataReportingTool", "CashWithdrawalsAllowed", "ConvenienceCheque", "DaysInterestFreeCreditIfPaymentFull", "IssuingEmergencyCardsFees", "AnnualFeeAmount", "PaymentDaysAfterStatement", "StatementAtAccountLevel", "StatementAtPersonalLevel", "ExchangeRateAdjustment"],
@@ -360,7 +415,9 @@
         },
         "MinimumIncomeTurnoverAmount": {
           "description": "Minimum income / Turnover required to hold the product",
-          "type": "number"
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+          "type": "string",
+          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "MinimumIncomeTurnoverCurrency": {
           "description": "Minimum income / Turnover Currency",
@@ -416,7 +473,9 @@
         },
         "OpeningDepositMinimum": {
           "description": "Minimum Amount to be held on account",
-          "type": "number"
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+          "type": "string",
+          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "OpeningDepositMinimumCurrency": {
           "description": "The currency of the Minimum Amount to be depositing at opening",
@@ -430,7 +489,9 @@
         },
         "MinimumOperatingBalance": {
           "description": "Minimum Operating Balance",
-          "type": "number"
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+          "type": "string",
+          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "MinimumOperatingBalanceCurrency": {
           "description": "Minimum Operating Balance currency",
@@ -444,7 +505,9 @@
         },
         "OpeningDepositMaximumAmount": {
           "description": "Maximum Amount to be depositing at opening",
-          "type": "number"
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+          "type": "string",
+          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "OpeningDepositMaximumCurrency": {
           "description": "The currency of the Minimum Amount to be depositing at opening",
@@ -561,18 +624,25 @@
                           "type": "string"
                         },
                         "CriteriaType": {
-                          "id": "http://localhost:8000/schemas/v1.2/definitions/benefits/benefit_criteria_type.json#",
-                          "description": "Criteria that is required in order to be eligible for the Benefit",
-                          "type": "string",
-                          "enum": ["Deposit", "Direct Debit", "Other"]
+                          "type": "array",
+                          "items": {
+                            "id": "http://localhost:8000/schemas/v1.2/definitions/benefits/benefit_criteria_type.json#",
+                            "description": "Criteria that is required in order to be eligible for the Benefit",
+                            "type": "string",
+                            "enum": ["Deposit", "Direct Debit", "Other"]
+                          }
                         },
                         "MinimumCriteria": {
                           "description": "Minimum amount for the criteria",
-                          "type": "number"
+                          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                          "type": "string",
+                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                         },
                         "MaximumCriteria": {
                           "description": "Maximum amount for the criteria",
-                          "type": "number"
+                          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                          "type": "string",
+                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                         },
                         "Counter": {
                           "description": "Counter for the criteria (e.g. number of DD)",
