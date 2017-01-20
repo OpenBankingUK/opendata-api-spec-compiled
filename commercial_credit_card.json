@@ -208,6 +208,7 @@
               "type": "integer"
             },
             "AnnualAccountFeeType": {
+              "description": "Details on annual account fee, such as non payable when there is a turnover above a certain sum",
               "type": "string"
             },
             "IssuingEmergencyCardsFees": {
@@ -217,7 +218,7 @@
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "AnnualFeeAmount": {
-              "description": "Details on annual account fee, such as non payable when there is a turnover above a certain sum",
+              "description": "Standard fee on the card",
               "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
@@ -240,22 +241,17 @@
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
-            "MinimumRepaymentPercent": {
+            "MinimumRepaymentPercentage": {
               "description": "Minimum repayment as percentage",
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "MinimumRepaymentAmount": {
               "description": "Minimum repayment amount",
-              "type": "array",
-              "items": {
-                "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
-                "description": "Monetary amount without currency",
-                "type": "string",
-                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-              }
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "type": "string",
+              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "PaymentDaysAfterStatement": {
               "description": "How many days after statement is the payment expected",

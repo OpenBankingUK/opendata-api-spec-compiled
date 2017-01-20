@@ -380,7 +380,7 @@ documentation:
               "enum": ["Physical", "Mobile"]
             },
             "Address": {
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/postal_address.json#",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/postal_address_branch.json#",
               "description": "Postal Address",
               "type": "object",
               "properties": {
@@ -433,7 +433,7 @@ documentation:
                   "pattern": "[A-Z]{2}"
                 }
               },
-              "required": ["StreetName", "PostCode", "Country"],
+              "required": ["StreetName", "PostCode", "Country", "BuildingNumberOrName"],
               "additionalProperties": false
             },
             "BranchDescription": {
@@ -461,15 +461,18 @@ documentation:
                 "description": "Alternative Phone Number",
                 "type": "object",
                 "properties": {
-                  "AlternativeTelephoneNumber": {
+                  "AlternateTelephoneNumber": {
                     "description": "Collection of information that identifies a phone number, as defined by telecom services.",
                     "id": "http://localhost:8000/schemas/v1.2/definitions/common/phone_number.json#",
                     "type": "string",
                     "pattern": "^[+][0-9]{1,3}-[0-9()+-]{1,30}$"
                   },
-                  "AlternativeTelephoneNumberDescription": {
+                  "AlternateTelephoneNumberDescription": {
                     "description": "Description of the telephone number",
-                    "type": "string"
+                    "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 35
                   }
                 },
                 "additionalProperties": false
@@ -509,7 +512,7 @@ documentation:
               "additionalProperties": false
             },
             "DaysOfTheWeek": {
-              "description": "Number of days that the mobile branch is available",
+              "description": "Day of the week that the mobile branch is available",
               "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
               "type": "string",
               "minLength": 1,
@@ -517,7 +520,10 @@ documentation:
             },
             "StopName": {
               "description": "Name of the stop of the mobile branch",
-              "type": "string"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_15_text.json#",
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 15
             },
             "ArrivalTime": {
               "description": "Arrival time of the mobile branch",
@@ -533,7 +539,10 @@ documentation:
             },
             "ParkingLocation": {
               "description": "Parking place of the mobile branch",
-              "type": "string"
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_50_text.json#",
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 50
             },
             "OpeningTimes": {
               "id": "http://localhost:8000/schemas/v1.2/definitions/branch/opening_details.json#",
@@ -641,7 +650,7 @@ documentation:
                 "id": "http://localhost:8000/schemas/v1.2/definitions/mediated.json#",
                 "description": "Information about mediated branch facilities",
                 "type": "string",
-                "enum": ["Counter Service", "Mortgage Advisor", "Night Safe", "Video Banking", "Premier Counter", "Card Insurance Facilities", "Bureau de Change", "Business Counter", "On Demand Currency"]
+                "enum": ["Counter Service", "Mortgage Advisor", "Night Safe", "Video Banking", "Premier Counter", "Card Issuance Facilities", "Bureau de Change", "Business Counter", "On Demand Currency"]
               },
               "uniqueItems": true
             },
@@ -1608,7 +1617,7 @@ documentation:
                       "additionalProperties": false
                     }
                   },
-                  "required": ["InterestSubType", "CreditInterestItem"],
+                  "required": ["CreditInterestItem"],
                   "additionalProperties": false
                 }
               },
@@ -1793,9 +1802,7 @@ documentation:
                       },
                       "IndicativeRate": {
                         "description": "Indicative Rate that the client will get",
-                        "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
-                        "type": "string",
-                        "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                        "type": "string"
                       },
                       "BufferAmount": {
                         "description": "Amount on overdraft that is prearranged",
@@ -1852,6 +1859,12 @@ documentation:
                     "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
                     "type": "string",
                     "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                  },
+                  "AnnualRenewalRate": {
+                    "description": "Rate to renew overdraft",
+                    "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                    "type": "string",
+                    "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                   },
                   "AnnualRenewalFee": {
                     "description": "Fee payable per term for overdraft",
@@ -2868,7 +2881,7 @@ documentation:
                       "additionalProperties": false
                     }
                   },
-                  "required": ["InterestSubType", "CreditInterestItem"],
+                  "required": ["CreditInterestItem"],
                   "additionalProperties": false
                 }
               },
@@ -3053,9 +3066,7 @@ documentation:
                       },
                       "IndicativeRate": {
                         "description": "Indicative Rate that the client will get",
-                        "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
-                        "type": "string",
-                        "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                        "type": "string"
                       },
                       "BufferAmount": {
                         "description": "Amount on overdraft that is prearranged",
@@ -3112,6 +3123,12 @@ documentation:
                     "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
                     "type": "string",
                     "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                  },
+                  "AnnualRenewalRate": {
+                    "description": "Rate to renew overdraft",
+                    "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                    "type": "string",
+                    "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                   },
                   "AnnualRenewalFee": {
                     "description": "Fee payable per term for overdraft",
@@ -3584,119 +3601,122 @@ documentation:
               "type": "boolean"
             },
             "LoanItem": {
-              "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_item.json#",
-              "description": "Loan Item",
-              "type": "object",
-              "properties": {
-                "ProductSubType": {
-                  "id": "http://localhost:8000/schemas/v1.2/definitions/common/offering_subtype.json#",
-                  "description": "Describes if the offering is promotional, regular or a description of a future state",
-                  "type": "string",
-                  "enum": ["Promotional", "Regular", "Future Regular Terms"]
-                },
-                "StartPromotionOrFutureTerms": {
-                  "description": "Describes the start date",
-                  "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-                  "type": "string",
-                  "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-                },
-                "StopPromotionOrFutureTerms": {
-                  "description": "Describes the end date",
-                  "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-                  "type": "string",
-                  "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-                },
-                "LengthPromotionalInDays": {
-                  "description": "Describes the length if only a duration is given instead of a date in days",
-                  "type": "integer"
-                },
-                "DateOfChange": {
-                  "description": "Date of the change if it refers to future terms",
-                  "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-                  "type": "string",
-                  "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-                },
-                "LoanPricing": {
-                  "type": "array",
-                  "items": {
-                    "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_pricing.json#",
-                    "description": "Loan Pricing",
-                    "type": "object",
-                    "properties": {
-                      "SizeIncrement": {
-                        "id": "http://localhost:8000/schemas/v1.2/definitions/intsme.json#",
-                        "description": "Identifier for tier only where it has been supplied under Part 8 (article 32 or the CMA order), value reflects upper tier value",
-                        "type": "string",
-                        "enum": ["£ 5,000", "£ 10,000", "£ 15,000", "£ 20,000", "£ 25,000"]
-                      },
-                      "LoanLengthIncrement": {
-                        "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_length_increment.json#",
-                        "description": "Loan Length Increments",
-                        "type": "string",
-                        "enum": ["1 year", "2 years", "3 years", "4 years", "5 years"]
-                      },
-                      "RepaymentFrequency": {
-                        "type": "array",
-                        "items": {
-                          "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_repayment_type.json#",
-                          "description": "Loan Repayment type",
-                          "type": "string",
-                          "enum": ["Interest only", "Repayment with a bullet", "Custom schedule", "Fixed capital fully amortising", "Fixed capital with a bullet", "Capital Interest", "Bullet or Ballon", "Bullet", "Stragith Line Interest Only"]
-                        },
-                        "minItems": 1,
-                        "uniqueItems": true
-                      },
-                      "LoanSizeBandLower": {
-                        "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
-                        "description": "Monetary amount without currency",
-                        "type": "string",
-                        "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                      },
-                      "LoanSizeBandUpper": {
-                        "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
-                        "description": "Monetary amount without currency",
-                        "type": "string",
-                        "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                      },
-                      "LoanLengthIncrementLower": {
-                        "type": "integer"
-                      },
-                      "LoanLengthIncrementUpper": {
-                        "type": "integer"
-                      },
-                      "IndicativeRate": {
-                        "type": "string"
-                      },
-                      "RateComparisonType": {
-                        "id": "http://localhost:8000/schemas/v1.2/definitions/rate_comparison_type.json#",
-                        "description": "Rate Comparison Type",
-                        "type": "string",
-                        "enum": ["APR", "AER", "Gross"]
-                      },
-                      "Negotiable": {
-                        "type": "boolean"
-                      }
-                    },
-                    "required": ["SizeIncrement", "LoanLengthIncrement", "RepaymentFrequency", "LoanSizeBandLower", "LoanSizeBandUpper", "LoanLengthIncrementLower", "LoanLengthIncrementUpper", "IndicativeRate", "Negotiable"],
-                    "additionalProperties": false
+              "type": "array",
+              "items": {
+                "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_item.json#",
+                "description": "Loan Item",
+                "type": "object",
+                "properties": {
+                  "ProductSubType": {
+                    "id": "http://localhost:8000/schemas/v1.2/definitions/common/offering_subtype.json#",
+                    "description": "Describes if the offering is promotional, regular or a description of a future state",
+                    "type": "string",
+                    "enum": ["Promotional", "Regular", "Future Regular Terms"]
                   },
-                  "minItems": 1
+                  "StartPromotionOrFutureTerms": {
+                    "description": "Describes the start date",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                  },
+                  "StopPromotionOrFutureTerms": {
+                    "description": "Describes the end date",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                  },
+                  "LengthPromotionalInDays": {
+                    "description": "Describes the length if only a duration is given instead of a date in days",
+                    "type": "integer"
+                  },
+                  "DateOfChange": {
+                    "description": "Date of the change if it refers to future terms",
+                    "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                  },
+                  "LoanPricing": {
+                    "type": "array",
+                    "items": {
+                      "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_pricing.json#",
+                      "description": "Loan Pricing",
+                      "type": "object",
+                      "properties": {
+                        "SizeIncrement": {
+                          "id": "http://localhost:8000/schemas/v1.2/definitions/intsme.json#",
+                          "description": "Identifier for tier only where it has been supplied under Part 8 (article 32 or the CMA order), value reflects upper tier value",
+                          "type": "string",
+                          "enum": ["£ 5,000", "£ 10,000", "£ 15,000", "£ 20,000", "£ 25,000"]
+                        },
+                        "LoanLengthIncrement": {
+                          "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_length_increment.json#",
+                          "description": "Loan Length Increments",
+                          "type": "string",
+                          "enum": ["1 year", "2 years", "3 years", "4 years", "5 years"]
+                        },
+                        "RepaymentFrequency": {
+                          "type": "array",
+                          "items": {
+                            "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_repayment_type.json#",
+                            "description": "Loan Repayment type",
+                            "type": "string",
+                            "enum": ["Interest only", "Repayment with a bullet", "Custom schedule", "Fixed capital fully amortising", "Fixed capital with a bullet", "Capital Interest", "Bullet or Ballon", "Bullet", "Stragith Line Interest Only"]
+                          },
+                          "minItems": 1,
+                          "uniqueItems": true
+                        },
+                        "LoanSizeBandLower": {
+                          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                          "description": "Monetary amount without currency",
+                          "type": "string",
+                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                        },
+                        "LoanSizeBandUpper": {
+                          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                          "description": "Monetary amount without currency",
+                          "type": "string",
+                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                        },
+                        "LoanLengthIncrementLower": {
+                          "type": "integer"
+                        },
+                        "LoanLengthIncrementUpper": {
+                          "type": "integer"
+                        },
+                        "IndicativeRate": {
+                          "type": "string"
+                        },
+                        "RateComparisonType": {
+                          "id": "http://localhost:8000/schemas/v1.2/definitions/rate_comparison_type.json#",
+                          "description": "Rate Comparison Type",
+                          "type": "string",
+                          "enum": ["APR", "AER", "Gross"]
+                        },
+                        "Negotiable": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": ["SizeIncrement", "LoanLengthIncrement", "RepaymentFrequency", "LoanSizeBandLower", "LoanSizeBandUpper", "LoanLengthIncrementLower", "LoanLengthIncrementUpper", "IndicativeRate", "Negotiable"],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  },
+                  "CCARegulatedEntity": {
+                    "type": "boolean"
+                  },
+                  "IsALowInterestRepaymentStartPossible": {
+                    "type": "boolean"
+                  },
+                  "IsThisAnInterestOnlyLoan": {
+                    "type": "boolean"
+                  },
+                  "WillTheLoanBePaidInTrancheDrawdowns": {
+                    "type": "boolean"
+                  }
                 },
-                "CCARegulatedEntity": {
-                  "type": "boolean"
-                },
-                "IsALowInterestRepaymentStartPossible": {
-                  "type": "boolean"
-                },
-                "IsThisAnInterestOnlyLoan": {
-                  "type": "boolean"
-                },
-                "WillTheLoanBePaidInTrancheDrawdowns": {
-                  "type": "boolean"
-                }
-              },
-              "required": ["ProductSubType", "LoanPricing", "CCARegulatedEntity", "IsALowInterestRepaymentStartPossible", "IsThisAnInterestOnlyLoan", "WillTheLoanBePaidInTrancheDrawdowns"],
-              "additionalProperties": false
+                "required": ["ProductSubType", "LoanPricing", "CCARegulatedEntity", "IsALowInterestRepaymentStartPossible", "IsThisAnInterestOnlyLoan", "WillTheLoanBePaidInTrancheDrawdowns"],
+                "additionalProperties": false
+              }
             },
             "Eligibility": {
               "id": "http://localhost:8000/schemas/v1.2/definitions/eligibility/eligibility.json#",
@@ -4390,6 +4410,7 @@ documentation:
                       "type": "integer"
                     },
                     "AnnualAccountFeeType": {
+                      "description": "Details on annual account fee, such as non payable when there is a turnover above a certain sum",
                       "type": "string"
                     },
                     "IssuingEmergencyCardsFees": {
@@ -4399,7 +4420,7 @@ documentation:
                       "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                     },
                     "AnnualFeeAmount": {
-                      "description": "Details on annual account fee, such as non payable when there is a turnover above a certain sum",
+                      "description": "Standard fee on the card",
                       "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
                       "type": "string",
                       "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
@@ -4422,22 +4443,17 @@ documentation:
                       "type": "string",
                       "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                     },
-                    "MinimumRepaymentPercent": {
+                    "MinimumRepaymentPercentage": {
                       "description": "Minimum repayment as percentage",
-                      "type": "array",
-                      "items": {
-                        "type": "integer"
-                      }
+                      "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                      "type": "string",
+                      "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                     },
                     "MinimumRepaymentAmount": {
                       "description": "Minimum repayment amount",
-                      "type": "array",
-                      "items": {
-                        "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
-                        "description": "Monetary amount without currency",
-                        "type": "string",
-                        "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                      }
+                      "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                      "type": "string",
+                      "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                     },
                     "PaymentDaysAfterStatement": {
                       "description": "How many days after statement is the payment expected",

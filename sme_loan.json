@@ -133,119 +133,122 @@
       "type": "boolean"
     },
     "LoanItem": {
-      "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_item.json#",
-      "description": "Loan Item",
-      "type": "object",
-      "properties": {
-        "ProductSubType": {
-          "id": "http://localhost:8000/schemas/v1.2/definitions/common/offering_subtype.json#",
-          "description": "Describes if the offering is promotional, regular or a description of a future state",
-          "type": "string",
-          "enum": ["Promotional", "Regular", "Future Regular Terms"]
-        },
-        "StartPromotionOrFutureTerms": {
-          "description": "Describes the start date",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-          "type": "string",
-          "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-        },
-        "StopPromotionOrFutureTerms": {
-          "description": "Describes the end date",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-          "type": "string",
-          "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-        },
-        "LengthPromotionalInDays": {
-          "description": "Describes the length if only a duration is given instead of a date in days",
-          "type": "integer"
-        },
-        "DateOfChange": {
-          "description": "Date of the change if it refers to future terms",
-          "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
-          "type": "string",
-          "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-        },
-        "LoanPricing": {
-          "type": "array",
-          "items": {
-            "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_pricing.json#",
-            "description": "Loan Pricing",
-            "type": "object",
-            "properties": {
-              "SizeIncrement": {
-                "id": "http://localhost:8000/schemas/v1.2/definitions/intsme.json#",
-                "description": "Identifier for tier only where it has been supplied under Part 8 (article 32 or the CMA order), value reflects upper tier value",
-                "type": "string",
-                "enum": ["£ 5,000", "£ 10,000", "£ 15,000", "£ 20,000", "£ 25,000"]
-              },
-              "LoanLengthIncrement": {
-                "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_length_increment.json#",
-                "description": "Loan Length Increments",
-                "type": "string",
-                "enum": ["1 year", "2 years", "3 years", "4 years", "5 years"]
-              },
-              "RepaymentFrequency": {
-                "type": "array",
-                "items": {
-                  "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_repayment_type.json#",
-                  "description": "Loan Repayment type",
-                  "type": "string",
-                  "enum": ["Interest only", "Repayment with a bullet", "Custom schedule", "Fixed capital fully amortising", "Fixed capital with a bullet", "Capital Interest", "Bullet or Ballon", "Bullet", "Stragith Line Interest Only"]
-                },
-                "minItems": 1,
-                "uniqueItems": true
-              },
-              "LoanSizeBandLower": {
-                "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
-                "description": "Monetary amount without currency",
-                "type": "string",
-                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-              },
-              "LoanSizeBandUpper": {
-                "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
-                "description": "Monetary amount without currency",
-                "type": "string",
-                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-              },
-              "LoanLengthIncrementLower": {
-                "type": "integer"
-              },
-              "LoanLengthIncrementUpper": {
-                "type": "integer"
-              },
-              "IndicativeRate": {
-                "type": "string"
-              },
-              "RateComparisonType": {
-                "id": "http://localhost:8000/schemas/v1.2/definitions/rate_comparison_type.json#",
-                "description": "Rate Comparison Type",
-                "type": "string",
-                "enum": ["APR", "AER", "Gross"]
-              },
-              "Negotiable": {
-                "type": "boolean"
-              }
-            },
-            "required": ["SizeIncrement", "LoanLengthIncrement", "RepaymentFrequency", "LoanSizeBandLower", "LoanSizeBandUpper", "LoanLengthIncrementLower", "LoanLengthIncrementUpper", "IndicativeRate", "Negotiable"],
-            "additionalProperties": false
+      "type": "array",
+      "items": {
+        "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_item.json#",
+        "description": "Loan Item",
+        "type": "object",
+        "properties": {
+          "ProductSubType": {
+            "id": "http://localhost:8000/schemas/v1.2/definitions/common/offering_subtype.json#",
+            "description": "Describes if the offering is promotional, regular or a description of a future state",
+            "type": "string",
+            "enum": ["Promotional", "Regular", "Future Regular Terms"]
           },
-          "minItems": 1
+          "StartPromotionOrFutureTerms": {
+            "description": "Describes the start date",
+            "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+            "type": "string",
+            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+          },
+          "StopPromotionOrFutureTerms": {
+            "description": "Describes the end date",
+            "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+            "type": "string",
+            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+          },
+          "LengthPromotionalInDays": {
+            "description": "Describes the length if only a duration is given instead of a date in days",
+            "type": "integer"
+          },
+          "DateOfChange": {
+            "description": "Date of the change if it refers to future terms",
+            "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
+            "type": "string",
+            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+          },
+          "LoanPricing": {
+            "type": "array",
+            "items": {
+              "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_pricing.json#",
+              "description": "Loan Pricing",
+              "type": "object",
+              "properties": {
+                "SizeIncrement": {
+                  "id": "http://localhost:8000/schemas/v1.2/definitions/intsme.json#",
+                  "description": "Identifier for tier only where it has been supplied under Part 8 (article 32 or the CMA order), value reflects upper tier value",
+                  "type": "string",
+                  "enum": ["£ 5,000", "£ 10,000", "£ 15,000", "£ 20,000", "£ 25,000"]
+                },
+                "LoanLengthIncrement": {
+                  "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_length_increment.json#",
+                  "description": "Loan Length Increments",
+                  "type": "string",
+                  "enum": ["1 year", "2 years", "3 years", "4 years", "5 years"]
+                },
+                "RepaymentFrequency": {
+                  "type": "array",
+                  "items": {
+                    "id": "http://localhost:8000/schemas/v1.2/definitions/loan/loan_repayment_type.json#",
+                    "description": "Loan Repayment type",
+                    "type": "string",
+                    "enum": ["Interest only", "Repayment with a bullet", "Custom schedule", "Fixed capital fully amortising", "Fixed capital with a bullet", "Capital Interest", "Bullet or Ballon", "Bullet", "Stragith Line Interest Only"]
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true
+                },
+                "LoanSizeBandLower": {
+                  "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                  "description": "Monetary amount without currency",
+                  "type": "string",
+                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                },
+                "LoanSizeBandUpper": {
+                  "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                  "description": "Monetary amount without currency",
+                  "type": "string",
+                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                },
+                "LoanLengthIncrementLower": {
+                  "type": "integer"
+                },
+                "LoanLengthIncrementUpper": {
+                  "type": "integer"
+                },
+                "IndicativeRate": {
+                  "type": "string"
+                },
+                "RateComparisonType": {
+                  "id": "http://localhost:8000/schemas/v1.2/definitions/rate_comparison_type.json#",
+                  "description": "Rate Comparison Type",
+                  "type": "string",
+                  "enum": ["APR", "AER", "Gross"]
+                },
+                "Negotiable": {
+                  "type": "boolean"
+                }
+              },
+              "required": ["SizeIncrement", "LoanLengthIncrement", "RepaymentFrequency", "LoanSizeBandLower", "LoanSizeBandUpper", "LoanLengthIncrementLower", "LoanLengthIncrementUpper", "IndicativeRate", "Negotiable"],
+              "additionalProperties": false
+            },
+            "minItems": 1
+          },
+          "CCARegulatedEntity": {
+            "type": "boolean"
+          },
+          "IsALowInterestRepaymentStartPossible": {
+            "type": "boolean"
+          },
+          "IsThisAnInterestOnlyLoan": {
+            "type": "boolean"
+          },
+          "WillTheLoanBePaidInTrancheDrawdowns": {
+            "type": "boolean"
+          }
         },
-        "CCARegulatedEntity": {
-          "type": "boolean"
-        },
-        "IsALowInterestRepaymentStartPossible": {
-          "type": "boolean"
-        },
-        "IsThisAnInterestOnlyLoan": {
-          "type": "boolean"
-        },
-        "WillTheLoanBePaidInTrancheDrawdowns": {
-          "type": "boolean"
-        }
-      },
-      "required": ["ProductSubType", "LoanPricing", "CCARegulatedEntity", "IsALowInterestRepaymentStartPossible", "IsThisAnInterestOnlyLoan", "WillTheLoanBePaidInTrancheDrawdowns"],
-      "additionalProperties": false
+        "required": ["ProductSubType", "LoanPricing", "CCARegulatedEntity", "IsALowInterestRepaymentStartPossible", "IsThisAnInterestOnlyLoan", "WillTheLoanBePaidInTrancheDrawdowns"],
+        "additionalProperties": false
+      }
     },
     "Eligibility": {
       "id": "http://localhost:8000/schemas/v1.2/definitions/eligibility/eligibility.json#",

@@ -209,7 +209,7 @@
                             "pattern": "[A-Z]{2}"
                           }
                         },
-                        "required": ["StreetName", "PostCode", "Country"],
+                        "required": ["StreetName", "PostCode", "Country", "BuildingNumberOrName"],
                         "additionalProperties": false
                       },
                       "BranchDescription": {
@@ -234,14 +234,16 @@
                           "description": "Alternative Phone Number",
                           "type": "object",
                           "properties": {
-                            "AlternativeTelephoneNumber": {
+                            "AlternateTelephoneNumber": {
                               "description": "Collection of information that identifies a phone number, as defined by telecom services.",
                               "type": "string",
                               "pattern": "^[+][0-9]{1,3}-[0-9()+-]{1,30}$"
                             },
-                            "AlternativeTelephoneNumberDescription": {
+                            "AlternateTelephoneNumberDescription": {
                               "description": "Description of the telephone number",
-                              "type": "string"
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 35
                             }
                           },
                           "additionalProperties": false
@@ -277,14 +279,16 @@
                         "additionalProperties": false
                       },
                       "DaysOfTheWeek": {
-                        "description": "Number of days that the mobile branch is available",
+                        "description": "Day of the week that the mobile branch is available",
                         "type": "string",
                         "minLength": 1,
                         "maxLength": 35
                       },
                       "StopName": {
                         "description": "Name of the stop of the mobile branch",
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 15
                       },
                       "ArrivalTime": {
                         "description": "Arrival time of the mobile branch",
@@ -298,7 +302,9 @@
                       },
                       "ParkingLocation": {
                         "description": "Parking place of the mobile branch",
-                        "type": "string"
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 50
                       },
                       "OpeningTimes": {
                         "description": "Branch Opening Times",
@@ -393,7 +399,7 @@
                         "items": {
                           "description": "Information about mediated branch facilities",
                           "type": "string",
-                          "enum": ["Counter Service", "Mortgage Advisor", "Night Safe", "Video Banking", "Premier Counter", "Card Insurance Facilities", "Bureau de Change", "Business Counter", "On Demand Currency"]
+                          "enum": ["Counter Service", "Mortgage Advisor", "Night Safe", "Video Banking", "Premier Counter", "Card Issuance Facilities", "Bureau de Change", "Business Counter", "On Demand Currency"]
                         },
                         "uniqueItems": true
                       },
@@ -2015,7 +2021,7 @@
                                 "additionalProperties": false
                               }
                             },
-                            "required": ["InterestSubType", "CreditInterestItem"],
+                            "required": ["CreditInterestItem"],
                             "additionalProperties": false
                           }
                         },
@@ -2178,8 +2184,7 @@
                                 },
                                 "IndicativeRate": {
                                   "description": "Indicative Rate that the client will get",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                                  "type": "string"
                                 },
                                 "BufferAmount": {
                                   "description": "Amount on overdraft that is prearranged",
@@ -2228,6 +2233,11 @@
                               "description": "Minimum overdraft fee",
                               "type": "string",
                               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                            },
+                            "AnnualRenewalRate": {
+                              "description": "Rate to renew overdraft",
+                              "type": "string",
+                              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                             },
                             "AnnualRenewalFee": {
                               "description": "Fee payable per term for overdraft",
@@ -3519,7 +3529,7 @@
                                 "additionalProperties": false
                               }
                             },
-                            "required": ["InterestSubType", "CreditInterestItem"],
+                            "required": ["CreditInterestItem"],
                             "additionalProperties": false
                           }
                         },
@@ -3682,8 +3692,7 @@
                                 },
                                 "IndicativeRate": {
                                   "description": "Indicative Rate that the client will get",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                                  "type": "string"
                                 },
                                 "BufferAmount": {
                                   "description": "Amount on overdraft that is prearranged",
@@ -3732,6 +3741,11 @@
                               "description": "Minimum overdraft fee",
                               "type": "string",
                               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                            },
+                            "AnnualRenewalRate": {
+                              "description": "Rate to renew overdraft",
+                              "type": "string",
+                              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                             },
                             "AnnualRenewalFee": {
                               "description": "Fee payable per term for overdraft",
@@ -4534,107 +4548,110 @@
                         "type": "boolean"
                       },
                       "LoanItem": {
-                        "description": "Loan Item",
-                        "type": "object",
-                        "properties": {
-                          "ProductSubType": {
-                            "description": "Describes if the offering is promotional, regular or a description of a future state",
-                            "type": "string",
-                            "enum": ["Promotional", "Regular", "Future Regular Terms"]
-                          },
-                          "StartPromotionOrFutureTerms": {
-                            "description": "Describes the start date",
-                            "type": "string",
-                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-                          },
-                          "StopPromotionOrFutureTerms": {
-                            "description": "Describes the end date",
-                            "type": "string",
-                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-                          },
-                          "LengthPromotionalInDays": {
-                            "description": "Describes the length if only a duration is given instead of a date in days",
-                            "type": "integer"
-                          },
-                          "DateOfChange": {
-                            "description": "Date of the change if it refers to future terms",
-                            "type": "string",
-                            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
-                          },
-                          "LoanPricing": {
-                            "type": "array",
-                            "items": {
-                              "description": "Loan Pricing",
-                              "type": "object",
-                              "properties": {
-                                "SizeIncrement": {
-                                  "description": "Identifier for tier only where it has been supplied under Part 8 (article 32 or the CMA order), value reflects upper tier value",
-                                  "type": "string",
-                                  "enum": ["£ 5,000", "£ 10,000", "£ 15,000", "£ 20,000", "£ 25,000"]
-                                },
-                                "LoanLengthIncrement": {
-                                  "description": "Loan Length Increments",
-                                  "type": "string",
-                                  "enum": ["1 year", "2 years", "3 years", "4 years", "5 years"]
-                                },
-                                "RepaymentFrequency": {
-                                  "type": "array",
-                                  "items": {
-                                    "description": "Loan Repayment type",
-                                    "type": "string",
-                                    "enum": ["Interest only", "Repayment with a bullet", "Custom schedule", "Fixed capital fully amortising", "Fixed capital with a bullet", "Capital Interest", "Bullet or Ballon", "Bullet", "Stragith Line Interest Only"]
-                                  },
-                                  "minItems": 1,
-                                  "uniqueItems": true
-                                },
-                                "LoanSizeBandLower": {
-                                  "description": "Monetary amount without currency",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                },
-                                "LoanSizeBandUpper": {
-                                  "description": "Monetary amount without currency",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                },
-                                "LoanLengthIncrementLower": {
-                                  "type": "integer"
-                                },
-                                "LoanLengthIncrementUpper": {
-                                  "type": "integer"
-                                },
-                                "IndicativeRate": {
-                                  "type": "string"
-                                },
-                                "RateComparisonType": {
-                                  "description": "Rate Comparison Type",
-                                  "type": "string",
-                                  "enum": ["APR", "AER", "Gross"]
-                                },
-                                "Negotiable": {
-                                  "type": "boolean"
-                                }
-                              },
-                              "required": ["SizeIncrement", "LoanLengthIncrement", "RepaymentFrequency", "LoanSizeBandLower", "LoanSizeBandUpper", "LoanLengthIncrementLower", "LoanLengthIncrementUpper", "IndicativeRate", "Negotiable"],
-                              "additionalProperties": false
+                        "type": "array",
+                        "items": {
+                          "description": "Loan Item",
+                          "type": "object",
+                          "properties": {
+                            "ProductSubType": {
+                              "description": "Describes if the offering is promotional, regular or a description of a future state",
+                              "type": "string",
+                              "enum": ["Promotional", "Regular", "Future Regular Terms"]
                             },
-                            "minItems": 1
+                            "StartPromotionOrFutureTerms": {
+                              "description": "Describes the start date",
+                              "type": "string",
+                              "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                            },
+                            "StopPromotionOrFutureTerms": {
+                              "description": "Describes the end date",
+                              "type": "string",
+                              "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                            },
+                            "LengthPromotionalInDays": {
+                              "description": "Describes the length if only a duration is given instead of a date in days",
+                              "type": "integer"
+                            },
+                            "DateOfChange": {
+                              "description": "Date of the change if it refers to future terms",
+                              "type": "string",
+                              "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+                            },
+                            "LoanPricing": {
+                              "type": "array",
+                              "items": {
+                                "description": "Loan Pricing",
+                                "type": "object",
+                                "properties": {
+                                  "SizeIncrement": {
+                                    "description": "Identifier for tier only where it has been supplied under Part 8 (article 32 or the CMA order), value reflects upper tier value",
+                                    "type": "string",
+                                    "enum": ["£ 5,000", "£ 10,000", "£ 15,000", "£ 20,000", "£ 25,000"]
+                                  },
+                                  "LoanLengthIncrement": {
+                                    "description": "Loan Length Increments",
+                                    "type": "string",
+                                    "enum": ["1 year", "2 years", "3 years", "4 years", "5 years"]
+                                  },
+                                  "RepaymentFrequency": {
+                                    "type": "array",
+                                    "items": {
+                                      "description": "Loan Repayment type",
+                                      "type": "string",
+                                      "enum": ["Interest only", "Repayment with a bullet", "Custom schedule", "Fixed capital fully amortising", "Fixed capital with a bullet", "Capital Interest", "Bullet or Ballon", "Bullet", "Stragith Line Interest Only"]
+                                    },
+                                    "minItems": 1,
+                                    "uniqueItems": true
+                                  },
+                                  "LoanSizeBandLower": {
+                                    "description": "Monetary amount without currency",
+                                    "type": "string",
+                                    "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                  },
+                                  "LoanSizeBandUpper": {
+                                    "description": "Monetary amount without currency",
+                                    "type": "string",
+                                    "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                  },
+                                  "LoanLengthIncrementLower": {
+                                    "type": "integer"
+                                  },
+                                  "LoanLengthIncrementUpper": {
+                                    "type": "integer"
+                                  },
+                                  "IndicativeRate": {
+                                    "type": "string"
+                                  },
+                                  "RateComparisonType": {
+                                    "description": "Rate Comparison Type",
+                                    "type": "string",
+                                    "enum": ["APR", "AER", "Gross"]
+                                  },
+                                  "Negotiable": {
+                                    "type": "boolean"
+                                  }
+                                },
+                                "required": ["SizeIncrement", "LoanLengthIncrement", "RepaymentFrequency", "LoanSizeBandLower", "LoanSizeBandUpper", "LoanLengthIncrementLower", "LoanLengthIncrementUpper", "IndicativeRate", "Negotiable"],
+                                "additionalProperties": false
+                              },
+                              "minItems": 1
+                            },
+                            "CCARegulatedEntity": {
+                              "type": "boolean"
+                            },
+                            "IsALowInterestRepaymentStartPossible": {
+                              "type": "boolean"
+                            },
+                            "IsThisAnInterestOnlyLoan": {
+                              "type": "boolean"
+                            },
+                            "WillTheLoanBePaidInTrancheDrawdowns": {
+                              "type": "boolean"
+                            }
                           },
-                          "CCARegulatedEntity": {
-                            "type": "boolean"
-                          },
-                          "IsALowInterestRepaymentStartPossible": {
-                            "type": "boolean"
-                          },
-                          "IsThisAnInterestOnlyLoan": {
-                            "type": "boolean"
-                          },
-                          "WillTheLoanBePaidInTrancheDrawdowns": {
-                            "type": "boolean"
-                          }
-                        },
-                        "required": ["ProductSubType", "LoanPricing", "CCARegulatedEntity", "IsALowInterestRepaymentStartPossible", "IsThisAnInterestOnlyLoan", "WillTheLoanBePaidInTrancheDrawdowns"],
-                        "additionalProperties": false
+                          "required": ["ProductSubType", "LoanPricing", "CCARegulatedEntity", "IsALowInterestRepaymentStartPossible", "IsThisAnInterestOnlyLoan", "WillTheLoanBePaidInTrancheDrawdowns"],
+                          "additionalProperties": false
+                        }
                       },
                       "Eligibility": {
                         "description": "Eligibility",
@@ -5636,6 +5653,7 @@
                                 "type": "integer"
                               },
                               "AnnualAccountFeeType": {
+                                "description": "Details on annual account fee, such as non payable when there is a turnover above a certain sum",
                                 "type": "string"
                               },
                               "IssuingEmergencyCardsFees": {
@@ -5644,7 +5662,7 @@
                                 "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
                               "AnnualFeeAmount": {
-                                "description": "Details on annual account fee, such as non payable when there is a turnover above a certain sum",
+                                "description": "Standard fee on the card",
                                 "type": "string",
                                 "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
@@ -5663,21 +5681,15 @@
                                 "type": "string",
                                 "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
-                              "MinimumRepaymentPercent": {
+                              "MinimumRepaymentPercentage": {
                                 "description": "Minimum repayment as percentage",
-                                "type": "array",
-                                "items": {
-                                  "type": "integer"
-                                }
+                                "type": "string",
+                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                               },
                               "MinimumRepaymentAmount": {
                                 "description": "Minimum repayment amount",
-                                "type": "array",
-                                "items": {
-                                  "description": "Monetary amount without currency",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                }
+                                "type": "string",
+                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                               },
                               "PaymentDaysAfterStatement": {
                                 "description": "How many days after statement is the payment expected",

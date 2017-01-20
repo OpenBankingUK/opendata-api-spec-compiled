@@ -61,7 +61,7 @@
       "enum": ["Physical", "Mobile"]
     },
     "Address": {
-      "id": "http://localhost:8000/schemas/v1.2/definitions/common/postal_address.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/postal_address_branch.json#",
       "description": "Postal Address",
       "type": "object",
       "properties": {
@@ -114,7 +114,7 @@
           "pattern": "[A-Z]{2}"
         }
       },
-      "required": ["StreetName", "PostCode", "Country"],
+      "required": ["StreetName", "PostCode", "Country", "BuildingNumberOrName"],
       "additionalProperties": false
     },
     "BranchDescription": {
@@ -142,15 +142,18 @@
         "description": "Alternative Phone Number",
         "type": "object",
         "properties": {
-          "AlternativeTelephoneNumber": {
+          "AlternateTelephoneNumber": {
             "description": "Collection of information that identifies a phone number, as defined by telecom services.",
             "id": "http://localhost:8000/schemas/v1.2/definitions/common/phone_number.json#",
             "type": "string",
             "pattern": "^[+][0-9]{1,3}-[0-9()+-]{1,30}$"
           },
-          "AlternativeTelephoneNumberDescription": {
+          "AlternateTelephoneNumberDescription": {
             "description": "Description of the telephone number",
-            "type": "string"
+            "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 35
           }
         },
         "additionalProperties": false
@@ -190,7 +193,7 @@
       "additionalProperties": false
     },
     "DaysOfTheWeek": {
-      "description": "Number of days that the mobile branch is available",
+      "description": "Day of the week that the mobile branch is available",
       "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_35_text.json#",
       "type": "string",
       "minLength": 1,
@@ -198,7 +201,10 @@
     },
     "StopName": {
       "description": "Name of the stop of the mobile branch",
-      "type": "string"
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_15_text.json#",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 15
     },
     "ArrivalTime": {
       "description": "Arrival time of the mobile branch",
@@ -214,7 +220,10 @@
     },
     "ParkingLocation": {
       "description": "Parking place of the mobile branch",
-      "type": "string"
+      "id": "http://localhost:8000/schemas/v1.2/definitions/common/max_50_text.json#",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50
     },
     "OpeningTimes": {
       "id": "http://localhost:8000/schemas/v1.2/definitions/branch/opening_details.json#",
@@ -322,7 +331,7 @@
         "id": "http://localhost:8000/schemas/v1.2/definitions/mediated.json#",
         "description": "Information about mediated branch facilities",
         "type": "string",
-        "enum": ["Counter Service", "Mortgage Advisor", "Night Safe", "Video Banking", "Premier Counter", "Card Insurance Facilities", "Bureau de Change", "Business Counter", "On Demand Currency"]
+        "enum": ["Counter Service", "Mortgage Advisor", "Night Safe", "Video Banking", "Premier Counter", "Card Issuance Facilities", "Bureau de Change", "Business Counter", "On Demand Currency"]
       },
       "uniqueItems": true
     },
