@@ -5795,6 +5795,7 @@
                             "additionalProperties": false
                           }
                         },
+                        "required": ["CCSubType", "CommercialCreditCardItem"],
                         "additionalProperties": false
                       },
                       "Eligibility": {

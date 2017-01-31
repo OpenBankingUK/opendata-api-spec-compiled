@@ -5,7 +5,7 @@ version: v1.2.2
 protocols:
   - HTTPS
 baseUri: 'https://api.openbanking.xyz/open-banking/v1.2'
-mediaType: application/json
+mediaType: application/prs.openbanking.opendata.v1.2+json
 traits:
   - retrievable:
       responses:
@@ -5390,6 +5390,10 @@ documentation:
                   "additionalProperties": false
                 }
               },
+              "required": [
+                "CCSubType",
+                "CommercialCreditCardItem"
+              ],
               "additionalProperties": false
             },
             "Eligibility": {

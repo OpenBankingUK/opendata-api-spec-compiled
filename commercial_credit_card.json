@@ -143,7 +143,7 @@
             },
             "APRRate": {
               "description": "Annual Percentage Rate",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
@@ -155,19 +155,19 @@
             },
             "PurchaseRate": {
               "description": "Purchase rate",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "BalanceTransferRate": {
               "description": "Balance transfer rate",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "CashAdvanceRate": {
               "description": "Cash advance rate",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
@@ -225,13 +225,13 @@
             },
             "ChequeFeePercent": {
               "description": "Percentage fee on convenience cheques",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "CashbackPercent": {
               "description": "Percent of cashback on amount spend",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
@@ -243,7 +243,7 @@
             },
             "MinimumRepaymentPercentage": {
               "description": "Minimum repayment as percentage",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
@@ -281,13 +281,13 @@
             },
             "PaymentSchemeExchangeRate": {
               "description": "The base exchange rate used in settlement of the transaction between issuer and scheme",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "ExchangeRateAdjustment": {
               "description": "The margin added, by certain card issuers, to the scheme rate in order to arrive at the exchange rate qouted as the reference exchange rate to the cardholder",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
@@ -299,7 +299,7 @@
             },
             "PaymentSchemeExchangeFeeRate": {
               "description": "Any payment network fee rate applied to some or all non-sterling transactions that the card issuer recover directly from the cardholder",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
@@ -311,7 +311,7 @@
             },
             "NonSterlingTransactionFeeRate": {
               "description": "A fee rate applied to all non-Sterling card transactions",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
@@ -323,7 +323,7 @@
             },
             "NonSterlingPurchaseFeeRate": {
               "description": "An additional fee rate applied to certain card retail transactions",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
@@ -335,7 +335,7 @@
             },
             "NonSterlingCashFeeRate": {
               "description": "An additional fee rate applied to certain card cash withdrawals. This fee also applies to cash near fees such as gambling",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
@@ -347,7 +347,7 @@
             },
             "ForeignPurchaseFeeRate": {
               "description": "Additional card fee rate applied to sterling retail transactions made abroad",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
@@ -359,7 +359,7 @@
             },
             "ForeignCashFeeRate": {
               "description": "Additional card fee rate applied to sterling cash withdrawal made abroad",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             }
@@ -368,6 +368,7 @@
           "additionalProperties": false
         }
       },
+      "required": ["CCSubType", "CommercialCreditCardItem"],
       "additionalProperties": false
     },
     "Eligibility": {

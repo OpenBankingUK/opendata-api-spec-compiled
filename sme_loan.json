@@ -540,7 +540,7 @@
                             },
                             "FeeRate": {
                               "description": "% Rate",
-                              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
                               "type": "string",
                               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                             },
@@ -550,7 +550,7 @@
                             },
                             "RepresentativeRate": {
                               "description": "Representative Rate",
-                              "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+                              "id": "http://localhost:8000/schemas/v1.2/definitions/common/percentage.json",
                               "type": "string",
                               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                             },
