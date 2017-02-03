@@ -120,7 +120,7 @@
                         "type": "object",
                         "properties": {
                           "ParentOrganisation": {
-                            "description": "Organisation Identification",
+                            "description": "Parent organisation",
                             "type": "object",
                             "properties": {
                               "LEI": {
@@ -864,7 +864,7 @@
                         "type": "object",
                         "properties": {
                           "ParentOrganisation": {
-                            "description": "Organisation Identification",
+                            "description": "Parent organisation",
                             "type": "object",
                             "properties": {
                               "LEI": {
@@ -1465,7 +1465,7 @@
                         "type": "object",
                         "properties": {
                           "ParentOrganisation": {
-                            "description": "Organisation Identification",
+                            "description": "Parent organisation",
                             "type": "object",
                             "properties": {
                               "LEI": {
@@ -1533,7 +1533,7 @@
                         "items": {
                           "description": "Marketing or industry segment that the product is designed for",
                           "type": "string",
-                          "enum": ["Student", "Graduate", "Child", "Package", "Basic", "General", "Business", "Youth"]
+                          "enum": ["Basic", "Business", "General", "Graduate", "International", "Packaged", "Personal", "Premium", "Reward", "SME", "Student", "YoungAdult", "Youth"]
                         },
                         "minItems": 1
                       },
@@ -1568,7 +1568,7 @@
                         "items": {
                           "description": "Channel",
                           "type": "string",
-                          "enum": ["Branch", "Post", "Internet", "Phone", "Smartphone", "Text", "Call centre"]
+                          "enum": ["ATM", "Branch", "BusinessCommercialCentre", "CallCentre", "MobileApps", "MobileBanking", "Online", "Phone", "Post", "PostOffice", "RelationshipManager", "Text"]
                         },
                         "minItems": 1
                       },
@@ -1578,7 +1578,7 @@
                         "items": {
                           "description": "Indicates the card scheme",
                           "type": "string",
-                          "enum": ["Debit Visa", "Debit Mastercard", "Cashcard"]
+                          "enum": ["BasicCard", "BusinessQuickLodgeCard", "Cashcard", "ContactlessCashcard", "ContactlessDebitMastercard", "ContactlessDebitVisa", "DebitMastercard", "VisaDebit", "DepositCard", "OperatorCard", "POCACard"]
                         },
                         "minItems": 1
                       },
@@ -1592,7 +1592,7 @@
                         "items": {
                           "description": "Mobile wallet supported by this product. A mobile wallet being any electronic device that allows an individual to make electronic commerce transactions",
                           "type": "string",
-                          "enum": ["Apple Pay", "Android Pay", "Samsung Pay", "Vodafone Wallet", "Issuer Mobile App"]
+                          "enum": ["AndroidPay", "ApplePay", "IssuerMobileApp", "MobileBankingApp", "Other", "PayM", "SamsungPay", "VodafoneWallet"]
                         }
                       },
                       "CardNotes": {
@@ -1640,7 +1640,7 @@
                         }
                       },
                       "MonthlyMaximumCharge": {
-                        "description": "The maximum Relevant Charges that could accrue in relation to that PCA in any month as a result of exceeding or attempting to exceed a Pre-agreed credit limit on the PCA. i.e. it does not include any charges that are applied through the normal operation of the account such as overdraft interest charges whilst within an agreed limit",
+                        "description": "The maximum Relevant Charges that could accrue",
                         "type": "string",
                         "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                       },
@@ -1680,7 +1680,7 @@
                             "ProductSubType": {
                               "description": "Describes if the offering is promotional, regular or a description of a future state",
                               "type": "string",
-                              "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                              "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
                             "StartPromotionOrFutureTerms": {
                               "description": "Describes the start date",
@@ -1709,9 +1709,9 @@
                                 "type": "object",
                                 "properties": {
                                   "FeatureSubType": {
-                                    "description": "Describes if the offering is promotional, regular or a description of a future state",
+                                    "description": "",
                                     "type": "string",
-                                    "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                                    "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                                   },
                                   "StartPromotionOrFutureTerms": {
                                     "description": "Describes the start date",
@@ -1768,7 +1768,7 @@
                             "ProductSubType": {
                               "description": "Describes if the offering is promotional, regular or a description of a future state",
                               "type": "string",
-                              "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                              "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
                             "CAPricingItem": {
                               "description": "Card Pricing",
@@ -1842,7 +1842,7 @@
                           "SingleJointIncome": {
                             "description": "Minimum Income Source. For certain products a minimum income is required. This can be mandated as to the single income or to a joint income. This field describes this",
                             "type": "string",
-                            "enum": ["Single Income", "Joint Income", "Single or Joint Income"]
+                            "enum": ["Joint", "SoleIncome", "SoleOrJoint", "Turnover"]
                           },
                           "MinimumIncomeTurnoverAmount": {
                             "description": "Minimum income / Turnover required to hold the product",
@@ -1865,11 +1865,12 @@
                           "MinimumIncomeFrequency": {
                             "description": "The frequency that the minimum mentioned before is deposited in the account. Yearly is very important for premium accounts",
                             "type": "string",
-                            "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+                            "enum": ["AcademicTerm", "HalfYearly", "Monthly", "Quarterly", "Weekly", "Yearly"]
                           },
                           "AnnualBusinessTurnover": {
                             "description": "Annual Business Turnover",
-                            "type": "integer"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "AnnualBusinessTurnoverCurrency": {
                             "description": "Annual Business Turnover Currency",
@@ -1942,7 +1943,7 @@
                           "EligibilityType": {
                             "description": "Eligibility type",
                             "type": "string",
-                            "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account", "Any business customer", "ID and Verification", "Arrears on Loan, Credit Card, mortgage", "Over Overdraft for more than 30 days", "Sole UK Account or Bankrupt", "UCAS Fulltime for 2 years", "Date Limited (2 months within course start date)", "Email Address", "Sole Student Account"]
+                            "enum": ["AnyBusinessCustomer", "BusinessOnly", "CreditCard", "CreditScoring", "EmailAddress", "ExistingCustomers", "IdAndV", "Mortgage", "NoArrearsOnLoan", "NoCustomerInArrears", "NoOverOverdraftThirtyDays", "NoSoleUkAccountOrBankrupt", "NTB", "NTBBusiness", "SoleStudentAccount", "SoleUkAccount", "StudentsOnly", "TwoMonthsOfCourseStart", "UCASFulltimeTwoYears"]
                           },
                           "EligibilityNotes": {
                             "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
@@ -1957,7 +1958,7 @@
                             "items": {
                               "description": "Specific eligibility for marketing",
                               "type": "string",
-                              "enum": ["Switchers Only", "New Customers Only"]
+                              "enum": ["ExistingCustomers", "NewCustomersOnly", "SwitchersOnly", "StartUp"]
                             },
                             "uniqueItems": true
                           }
@@ -1979,10 +1980,10 @@
                               "description": "Credit Interest Group",
                               "type": "object",
                               "properties": {
-                                "InterestSubType": {
+                                "InterestTierSubType": {
                                   "description": "Describes if the offering is promotional, regular or a description of a future state",
                                   "type": "string",
-                                  "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                                  "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                                 },
                                 "CreditInterestItem": {
                                   "description": "Credit Interest item",
@@ -2020,12 +2021,12 @@
                                     "CalculationFrequency": {
                                       "description": "How often is interest applied to account",
                                       "type": "string",
-                                      "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+                                      "enum": ["Month", "Week", "Year"]
                                     },
                                     "PaymentMethod": {
-                                      "description": "Credit Interest Payment Method",
+                                      "description": "Credit Interest Payment Method Code",
                                       "type": "string",
-                                      "enum": ["Pay away", "Compound"]
+                                      "enum": ["Compound", "PayAway", "SelfCredit", "SimpleInterest"]
                                     },
                                     "InterestRateType": {
                                       "description": "Credit Interest Payment Rate Type",
@@ -2039,7 +2040,7 @@
                                     "CalculationMethod": {
                                       "description": "Method for interest calculation",
                                       "type": "string",
-                                      "enum": ["Branded", "Tiered"]
+                                      "enum": ["Banded", "Tiered", "Whole"]
                                     },
                                     "InterestTiers": {
                                       "type": "array",
@@ -2063,7 +2064,9 @@
                                           },
                                           "TierValueMaximum": {
                                             "description": "Max Value of interst tier",
-                                            "type": "string"
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 15
                                           },
                                           "DailyChargeForMaximum": {
                                             "description": "Special charge on tiered overdraft",
@@ -2078,7 +2081,7 @@
                                           "RateComparisonType": {
                                             "description": "Rate Comparison Type",
                                             "type": "string",
-                                            "enum": ["APR", "AER", "Gross"]
+                                            "enum": ["APR", "AER", "Gross", "Net", "RepApr"]
                                           },
                                           "APRAERRate": {
                                             "description": "AER or APR Rate for comparison",
@@ -2114,7 +2117,7 @@
                             "InterestProductSubType": {
                               "description": "Describes if the offering is promotional, regular or a description of a future state",
                               "type": "string",
-                              "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                              "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
                             "StartPromotionOrFutureTerms": {
                               "description": "Describes the start date",
@@ -2146,7 +2149,7 @@
                                     "InterestTierSME": {
                                       "description": "Identifier for tier only where it has been supplied under Part 8 (article 32 or the CMA order), value reflects upper tier value",
                                       "type": "string",
-                                      "enum": ["£ 5,000", "£ 10,000", "£ 15,000", "£ 20,000", "£ 25,000"]
+                                      "enum": ["£5000", "£10000", "£15000", "£20000", "£25000", "Other", "TierMaximum", "TierMinimum"]
                                     },
                                     "InterestTierPersonal": {
                                       "description": "Identifier for the tier",
@@ -2182,11 +2185,14 @@
                                       },
                                       "TierValueMinimum": {
                                         "description": "Lower value of interest tier",
-                                        "type": "integer"
+                                        "type": "string",
+                                        "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                       },
                                       "TierValueMaximum": {
                                         "description": "Max Value of interest tier",
-                                        "type": "integer"
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 15
                                       }
                                     },
                                     "additionalProperties": false
@@ -2210,7 +2216,7 @@
                                 "TotalOverdraftChargeAmount": {
                                   "description": "All charges that a customer could incur as a result of exceeding or attempting to exceed a Pre-agreed credit limit",
                                   "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                  "enum": ["Banded", "Tiered", "Whole"]
                                 },
                                 "MinUnarrangedOverdraftAmount": {
                                   "description": "Minimum Unarranged Overdraft Amount if applicable",
@@ -2225,12 +2231,12 @@
                                 "InterestRateCalculationFrequency": {
                                   "description": "Frequency at which interest is calculated and accrued",
                                   "type": "string",
-                                  "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+                                  "enum": ["Annual", "Daily", "Monthly", "Quarterly"]
                                 },
                                 "InterestApplicationFrequency": {
                                   "description": "When the interest is applied",
                                   "type": "string",
-                                  "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+                                  "enum": ["Annual", "Daily", "Monthly", "Quarterly", "StatementDate"]
                                 },
                                 "DailyCharge": {
                                   "description": "Maximum daily overdraft charge",
@@ -2256,10 +2262,10 @@
                                   "description": "Supplementary notes for overdrafts",
                                   "type": "string"
                                 },
-                                "RatesAreNegotionable": {
+                                "RatesAreNegotiable": {
                                   "description": "Value that expresses if the rates are negotiable",
                                   "type": "string",
-                                  "enum": ["yes", "no", "Condition based"]
+                                  "enum": ["No", "Yes"]
                                 },
                                 "IndicativeRate": {
                                   "description": "Indicative Rate that the client will get",
@@ -2287,7 +2293,7 @@
                             "OverdraftType": {
                               "description": "Opposite of repayable on demand",
                               "type": "string",
-                              "enum": ["On Demand", "Committed"]
+                              "enum": ["Committed", "OnDemand"]
                             },
                             "Term": {
                               "description": "The duration of the overdraft, if it is non permanent",
@@ -2351,7 +2357,7 @@
                             "ProductSubType": {
                               "description": "Describes if the offering is promotional, regular or a description of a future state",
                               "type": "string",
-                              "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                              "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
                             "Fees": {
                               "description": "Fees",
@@ -2391,9 +2397,9 @@
                                     "type": "object",
                                     "properties": {
                                       "FeeSubType": {
-                                        "description": "Describes if the offering is promotional, regular or a description of a future state",
+                                        "description": "Fee Sub Type code",
                                         "type": "string",
-                                        "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                                        "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                                       },
                                       "FeeDetail": {
                                         "description": "Fee Detail",
@@ -2434,9 +2440,19 @@
                                               "FeeFrequency": {
                                                 "description": "Triggering frequency of the fee",
                                                 "type": "string",
-                                                "enum": ["Monthly", "Per Transaction - Amount", "Per Transaction - Percentage", "Per Occurrence", "Daily", "5 consecutive business days", "Weekly", "Statement Monthly", "Quarterly", "6 monthly", "Yearly", "On account anniversary", "Charging period", "Item", "Account opening", "Account Closing", "Academic Term", "One time payment at the start of the loan", "At the time of repayment", "per hour", "per sheet"]
+                                                "enum": ["AcademicTerm", "AccountClosing", "AccountOpening", "AtTimeOfLoanRepayment", "ChargingPeriod", "Daily", "EveryFiveBusinessDays", "Item", "Monthly", "OnAccountAnniversary", "PerHour", "PerOccurrence", "PerSheet", "PerTransactionAmount", "PerTransactionPercentage", "Quarterly", "SixMonthly", "StartOfLoan", "StatementMonthly", "Weekly", "Yearly"]
                                               },
                                               "FeeAmount": {
+                                                "description": "Fee in GBP",
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                              },
+                                              "FeeMin": {
+                                                "description": "Fee in GBP",
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                              },
+                                              "FeeMax": {
                                                 "description": "Fee in GBP",
                                                 "type": "string",
                                                 "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
@@ -2468,7 +2484,7 @@
                                                 "type": "string"
                                               }
                                             },
-                                            "required": ["FeeFrequency", "FeeAmount", "Negotiable"],
+                                            "required": ["FeeFrequency", "Negotiable"],
                                             "additionalProperties": false
                                           }
                                         },
@@ -2506,9 +2522,9 @@
                               "type": "object",
                               "properties": {
                                 "BenefitSubType": {
-                                  "description": "Describes if the offering is promotional, regular or a description of a future state",
+                                  "description": "Benefit Subtype Code",
                                   "type": "string",
-                                  "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                                  "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                                 },
                                 "BenefitItem": {
                                   "description": "Benefit Item",
@@ -2564,7 +2580,7 @@
                                             "items": {
                                               "description": "Criteria that is required in order to be eligible for the Benefit",
                                               "type": "string",
-                                              "enum": ["Deposit", "Direct Debit", "Other"]
+                                              "enum": ["CashDeposit", "Deposit", "DirectDebit", "InitialDeposit", "InternetLogon", "MobileLogon", "RegularDeposit"]
                                             }
                                           },
                                           "MinimumCriteria": {
@@ -3006,7 +3022,7 @@
                         "type": "object",
                         "properties": {
                           "ParentOrganisation": {
-                            "description": "Organisation Identification",
+                            "description": "Parent organisation",
                             "type": "object",
                             "properties": {
                               "LEI": {
@@ -3074,7 +3090,7 @@
                         "items": {
                           "description": "Marketing or industry segment that the product is designed for",
                           "type": "string",
-                          "enum": ["Student", "Graduate", "Child", "Package", "Basic", "General", "Business", "Youth"]
+                          "enum": ["Basic", "Business", "General", "Graduate", "International", "Packaged", "Personal", "Premium", "Reward", "SME", "Student", "YoungAdult", "Youth"]
                         },
                         "minItems": 1
                       },
@@ -3109,7 +3125,7 @@
                         "items": {
                           "description": "Channel",
                           "type": "string",
-                          "enum": ["Branch", "Post", "Internet", "Phone", "Smartphone", "Text", "Call centre"]
+                          "enum": ["ATM", "Branch", "BusinessCommercialCentre", "CallCentre", "MobileApps", "MobileBanking", "Online", "Phone", "Post", "PostOffice", "RelationshipManager", "Text"]
                         },
                         "minItems": 1
                       },
@@ -3119,7 +3135,7 @@
                         "items": {
                           "description": "Indicates the card scheme",
                           "type": "string",
-                          "enum": ["Debit Visa", "Debit Mastercard", "Cashcard"]
+                          "enum": ["BasicCard", "BusinessQuickLodgeCard", "Cashcard", "ContactlessCashcard", "ContactlessDebitMastercard", "ContactlessDebitVisa", "DebitMastercard", "VisaDebit", "DepositCard", "OperatorCard", "POCACard"]
                         },
                         "minItems": 1
                       },
@@ -3133,7 +3149,7 @@
                         "items": {
                           "description": "Mobile wallet supported by this product. A mobile wallet being any electronic device that allows an individual to make electronic commerce transactions",
                           "type": "string",
-                          "enum": ["Apple Pay", "Android Pay", "Samsung Pay", "Vodafone Wallet", "Issuer Mobile App"]
+                          "enum": ["AndroidPay", "ApplePay", "IssuerMobileApp", "MobileBankingApp", "Other", "PayM", "SamsungPay", "VodafoneWallet"]
                         }
                       },
                       "CardNotes": {
@@ -3181,7 +3197,7 @@
                         }
                       },
                       "MonthlyMaximumCharge": {
-                        "description": "The maximum Relevant Charges that could accrue in relation to that PCA in any month as a result of exceeding or attempting to exceed a Pre-agreed credit limit on the PCA. i.e. it does not include any charges that are applied through the normal operation of the account such as overdraft interest charges whilst within an agreed limit",
+                        "description": "The maximum Relevant Charges that could accrue",
                         "type": "string",
                         "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                       },
@@ -3221,7 +3237,7 @@
                             "ProductSubType": {
                               "description": "Describes if the offering is promotional, regular or a description of a future state",
                               "type": "string",
-                              "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                              "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
                             "StartPromotionOrFutureTerms": {
                               "description": "Describes the start date",
@@ -3250,9 +3266,9 @@
                                 "type": "object",
                                 "properties": {
                                   "FeatureSubType": {
-                                    "description": "Describes if the offering is promotional, regular or a description of a future state",
+                                    "description": "",
                                     "type": "string",
-                                    "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                                    "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                                   },
                                   "StartPromotionOrFutureTerms": {
                                     "description": "Describes the start date",
@@ -3309,7 +3325,7 @@
                             "ProductSubType": {
                               "description": "Describes if the offering is promotional, regular or a description of a future state",
                               "type": "string",
-                              "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                              "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
                             "CAPricingItem": {
                               "description": "Card Pricing",
@@ -3383,7 +3399,7 @@
                           "SingleJointIncome": {
                             "description": "Minimum Income Source. For certain products a minimum income is required. This can be mandated as to the single income or to a joint income. This field describes this",
                             "type": "string",
-                            "enum": ["Single Income", "Joint Income", "Single or Joint Income"]
+                            "enum": ["Joint", "SoleIncome", "SoleOrJoint", "Turnover"]
                           },
                           "MinimumIncomeTurnoverAmount": {
                             "description": "Minimum income / Turnover required to hold the product",
@@ -3406,11 +3422,12 @@
                           "MinimumIncomeFrequency": {
                             "description": "The frequency that the minimum mentioned before is deposited in the account. Yearly is very important for premium accounts",
                             "type": "string",
-                            "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+                            "enum": ["AcademicTerm", "HalfYearly", "Monthly", "Quarterly", "Weekly", "Yearly"]
                           },
                           "AnnualBusinessTurnover": {
                             "description": "Annual Business Turnover",
-                            "type": "integer"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "AnnualBusinessTurnoverCurrency": {
                             "description": "Annual Business Turnover Currency",
@@ -3483,7 +3500,7 @@
                           "EligibilityType": {
                             "description": "Eligibility type",
                             "type": "string",
-                            "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account", "Any business customer", "ID and Verification", "Arrears on Loan, Credit Card, mortgage", "Over Overdraft for more than 30 days", "Sole UK Account or Bankrupt", "UCAS Fulltime for 2 years", "Date Limited (2 months within course start date)", "Email Address", "Sole Student Account"]
+                            "enum": ["AnyBusinessCustomer", "BusinessOnly", "CreditCard", "CreditScoring", "EmailAddress", "ExistingCustomers", "IdAndV", "Mortgage", "NoArrearsOnLoan", "NoCustomerInArrears", "NoOverOverdraftThirtyDays", "NoSoleUkAccountOrBankrupt", "NTB", "NTBBusiness", "SoleStudentAccount", "SoleUkAccount", "StudentsOnly", "TwoMonthsOfCourseStart", "UCASFulltimeTwoYears"]
                           },
                           "EligibilityNotes": {
                             "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
@@ -3498,7 +3515,7 @@
                             "items": {
                               "description": "Specific eligibility for marketing",
                               "type": "string",
-                              "enum": ["Switchers Only", "New Customers Only"]
+                              "enum": ["ExistingCustomers", "NewCustomersOnly", "SwitchersOnly", "StartUp"]
                             },
                             "uniqueItems": true
                           }
@@ -3520,10 +3537,10 @@
                               "description": "Credit Interest Group",
                               "type": "object",
                               "properties": {
-                                "InterestSubType": {
+                                "InterestTierSubType": {
                                   "description": "Describes if the offering is promotional, regular or a description of a future state",
                                   "type": "string",
-                                  "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                                  "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                                 },
                                 "CreditInterestItem": {
                                   "description": "Credit Interest item",
@@ -3561,12 +3578,12 @@
                                     "CalculationFrequency": {
                                       "description": "How often is interest applied to account",
                                       "type": "string",
-                                      "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+                                      "enum": ["Month", "Week", "Year"]
                                     },
                                     "PaymentMethod": {
-                                      "description": "Credit Interest Payment Method",
+                                      "description": "Credit Interest Payment Method Code",
                                       "type": "string",
-                                      "enum": ["Pay away", "Compound"]
+                                      "enum": ["Compound", "PayAway", "SelfCredit", "SimpleInterest"]
                                     },
                                     "InterestRateType": {
                                       "description": "Credit Interest Payment Rate Type",
@@ -3580,7 +3597,7 @@
                                     "CalculationMethod": {
                                       "description": "Method for interest calculation",
                                       "type": "string",
-                                      "enum": ["Branded", "Tiered"]
+                                      "enum": ["Banded", "Tiered", "Whole"]
                                     },
                                     "InterestTiers": {
                                       "type": "array",
@@ -3604,7 +3621,9 @@
                                           },
                                           "TierValueMaximum": {
                                             "description": "Max Value of interst tier",
-                                            "type": "string"
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 15
                                           },
                                           "DailyChargeForMaximum": {
                                             "description": "Special charge on tiered overdraft",
@@ -3619,7 +3638,7 @@
                                           "RateComparisonType": {
                                             "description": "Rate Comparison Type",
                                             "type": "string",
-                                            "enum": ["APR", "AER", "Gross"]
+                                            "enum": ["APR", "AER", "Gross", "Net", "RepApr"]
                                           },
                                           "APRAERRate": {
                                             "description": "AER or APR Rate for comparison",
@@ -3655,7 +3674,7 @@
                             "InterestProductSubType": {
                               "description": "Describes if the offering is promotional, regular or a description of a future state",
                               "type": "string",
-                              "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                              "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
                             "StartPromotionOrFutureTerms": {
                               "description": "Describes the start date",
@@ -3687,7 +3706,7 @@
                                     "InterestTierSME": {
                                       "description": "Identifier for tier only where it has been supplied under Part 8 (article 32 or the CMA order), value reflects upper tier value",
                                       "type": "string",
-                                      "enum": ["£ 5,000", "£ 10,000", "£ 15,000", "£ 20,000", "£ 25,000"]
+                                      "enum": ["£5000", "£10000", "£15000", "£20000", "£25000", "Other", "TierMaximum", "TierMinimum"]
                                     },
                                     "InterestTierPersonal": {
                                       "description": "Identifier for the tier",
@@ -3723,11 +3742,14 @@
                                       },
                                       "TierValueMinimum": {
                                         "description": "Lower value of interest tier",
-                                        "type": "integer"
+                                        "type": "string",
+                                        "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                                       },
                                       "TierValueMaximum": {
                                         "description": "Max Value of interest tier",
-                                        "type": "integer"
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 15
                                       }
                                     },
                                     "additionalProperties": false
@@ -3751,7 +3773,7 @@
                                 "TotalOverdraftChargeAmount": {
                                   "description": "All charges that a customer could incur as a result of exceeding or attempting to exceed a Pre-agreed credit limit",
                                   "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                  "enum": ["Banded", "Tiered", "Whole"]
                                 },
                                 "MinUnarrangedOverdraftAmount": {
                                   "description": "Minimum Unarranged Overdraft Amount if applicable",
@@ -3766,12 +3788,12 @@
                                 "InterestRateCalculationFrequency": {
                                   "description": "Frequency at which interest is calculated and accrued",
                                   "type": "string",
-                                  "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+                                  "enum": ["Annual", "Daily", "Monthly", "Quarterly"]
                                 },
                                 "InterestApplicationFrequency": {
                                   "description": "When the interest is applied",
                                   "type": "string",
-                                  "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+                                  "enum": ["Annual", "Daily", "Monthly", "Quarterly", "StatementDate"]
                                 },
                                 "DailyCharge": {
                                   "description": "Maximum daily overdraft charge",
@@ -3797,10 +3819,10 @@
                                   "description": "Supplementary notes for overdrafts",
                                   "type": "string"
                                 },
-                                "RatesAreNegotionable": {
+                                "RatesAreNegotiable": {
                                   "description": "Value that expresses if the rates are negotiable",
                                   "type": "string",
-                                  "enum": ["yes", "no", "Condition based"]
+                                  "enum": ["No", "Yes"]
                                 },
                                 "IndicativeRate": {
                                   "description": "Indicative Rate that the client will get",
@@ -3828,7 +3850,7 @@
                             "OverdraftType": {
                               "description": "Opposite of repayable on demand",
                               "type": "string",
-                              "enum": ["On Demand", "Committed"]
+                              "enum": ["Committed", "OnDemand"]
                             },
                             "Term": {
                               "description": "The duration of the overdraft, if it is non permanent",
@@ -3892,7 +3914,7 @@
                             "ProductSubType": {
                               "description": "Describes if the offering is promotional, regular or a description of a future state",
                               "type": "string",
-                              "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                              "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
                             "Fees": {
                               "description": "Fees",
@@ -3932,9 +3954,9 @@
                                     "type": "object",
                                     "properties": {
                                       "FeeSubType": {
-                                        "description": "Describes if the offering is promotional, regular or a description of a future state",
+                                        "description": "Fee Sub Type code",
                                         "type": "string",
-                                        "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                                        "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                                       },
                                       "FeeDetail": {
                                         "description": "Fee Detail",
@@ -3975,9 +3997,19 @@
                                               "FeeFrequency": {
                                                 "description": "Triggering frequency of the fee",
                                                 "type": "string",
-                                                "enum": ["Monthly", "Per Transaction - Amount", "Per Transaction - Percentage", "Per Occurrence", "Daily", "5 consecutive business days", "Weekly", "Statement Monthly", "Quarterly", "6 monthly", "Yearly", "On account anniversary", "Charging period", "Item", "Account opening", "Account Closing", "Academic Term", "One time payment at the start of the loan", "At the time of repayment", "per hour", "per sheet"]
+                                                "enum": ["AcademicTerm", "AccountClosing", "AccountOpening", "AtTimeOfLoanRepayment", "ChargingPeriod", "Daily", "EveryFiveBusinessDays", "Item", "Monthly", "OnAccountAnniversary", "PerHour", "PerOccurrence", "PerSheet", "PerTransactionAmount", "PerTransactionPercentage", "Quarterly", "SixMonthly", "StartOfLoan", "StatementMonthly", "Weekly", "Yearly"]
                                               },
                                               "FeeAmount": {
+                                                "description": "Fee in GBP",
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                              },
+                                              "FeeMin": {
+                                                "description": "Fee in GBP",
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                              },
+                                              "FeeMax": {
                                                 "description": "Fee in GBP",
                                                 "type": "string",
                                                 "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
@@ -4009,7 +4041,7 @@
                                                 "type": "string"
                                               }
                                             },
-                                            "required": ["FeeFrequency", "FeeAmount", "Negotiable"],
+                                            "required": ["FeeFrequency", "Negotiable"],
                                             "additionalProperties": false
                                           }
                                         },
@@ -4047,9 +4079,9 @@
                               "type": "object",
                               "properties": {
                                 "BenefitSubType": {
-                                  "description": "Describes if the offering is promotional, regular or a description of a future state",
+                                  "description": "Benefit Subtype Code",
                                   "type": "string",
-                                  "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                                  "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                                 },
                                 "BenefitItem": {
                                   "description": "Benefit Item",
@@ -4105,7 +4137,7 @@
                                             "items": {
                                               "description": "Criteria that is required in order to be eligible for the Benefit",
                                               "type": "string",
-                                              "enum": ["Deposit", "Direct Debit", "Other"]
+                                              "enum": ["CashDeposit", "Deposit", "DirectDebit", "InitialDeposit", "InternetLogon", "MobileLogon", "RegularDeposit"]
                                             }
                                           },
                                           "MinimumCriteria": {
@@ -4546,7 +4578,7 @@
                         "type": "object",
                         "properties": {
                           "ParentOrganisation": {
-                            "description": "Organisation Identification",
+                            "description": "Parent organisation",
                             "type": "object",
                             "properties": {
                               "LEI": {
@@ -4615,12 +4647,13 @@
                       "ProductTypeName": {
                         "description": "Descriptive code for the product category",
                         "type": "string",
-                        "enum": ["SME Unsecured Loan", "Small Business Loan", "Flexible Business Loan"]
+                        "enum": ["FlexibleBusinessLoan", "SmallBusinessLoan", "SmeUnsecuredLoan"]
                       },
                       "ProductURL": {
                         "type": "array",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "format": "uri"
                         },
                         "minItems": 1
                       },
@@ -4629,7 +4662,7 @@
                         "items": {
                           "description": "Marketing or industry segment that the product is applicable for. Gives the sector or segment that the Loan is designed for",
                           "type": "string",
-                          "enum": ["Corporate", "Business", "Fixed", "Specialised Sector", "Government Scheme", "Agriculture Sector", "Small Loan", "Flexible Business Loan", "All Segments"]
+                          "enum": ["AgricultureSector", "AllSegmentsCorporate", "Corporate", "FixedGroup", "FlexibleBusinessLoan", "GovernmentScheme", "NewCustomersOnly", "SmallLoan", "SpecialisedSector", "SwitchersOnly"]
                         },
                         "minItems": 1
                       },
@@ -4649,9 +4682,9 @@
                         "description": "Ways to interact with the bank",
                         "type": "array",
                         "items": {
-                          "description": "Channel",
+                          "description": "",
                           "type": "string",
-                          "enum": ["Branch", "Post", "Internet", "Phone", "Smartphone", "Text", "Call centre"]
+                          "enum": ["Branch", "MobileBankingApp", "Online", "Phone", "Post", "PostOffice", "Text"]
                         },
                         "minItems": 1
                       },
@@ -4696,7 +4729,7 @@
                             "ProductSubType": {
                               "description": "Describes if the offering is promotional, regular or a description of a future state",
                               "type": "string",
-                              "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                              "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
                             "StartPromotionOrFutureTerms": {
                               "description": "Describes the start date",
@@ -4726,7 +4759,7 @@
                                   "SizeIncrement": {
                                     "description": "Identifier for tier only where it has been supplied under Part 8 (article 32 or the CMA order), value reflects upper tier value",
                                     "type": "string",
-                                    "enum": ["£ 5,000", "£ 10,000", "£ 15,000", "£ 20,000", "£ 25,000"]
+                                    "enum": ["£5000", "£10000", "£15000", "£20000", "£25000", "Other", "TierMaximum", "TierMinimum"]
                                   },
                                   "LoanLengthIncrement": {
                                     "description": "Loan Length Increments",
@@ -4736,9 +4769,9 @@
                                   "RepaymentFrequency": {
                                     "type": "array",
                                     "items": {
-                                      "description": "Loan Repayment type",
+                                      "description": "Repayment Frequency Code",
                                       "type": "string",
-                                      "enum": ["Interest only", "Repayment with a bullet", "Custom schedule", "Fixed capital fully amortising", "Fixed capital with a bullet", "Capital Interest", "Bullet or Ballon", "Bullet", "Stragith Line Interest Only"]
+                                      "enum": ["Daily", "Flexible", "Fortnightly", "HalfYearly", "Monthly", "Quarterly", "Weekly", "Yearly"]
                                     },
                                     "minItems": 1,
                                     "uniqueItems": true
@@ -4765,7 +4798,7 @@
                                   "RateComparisonType": {
                                     "description": "Rate Comparison Type",
                                     "type": "string",
-                                    "enum": ["APR", "AER", "Gross"]
+                                    "enum": ["APR", "AER", "Gross", "Net", "RepApr"]
                                   },
                                   "Negotiable": {
                                     "type": "boolean"
@@ -4773,8 +4806,7 @@
                                 },
                                 "required": ["SizeIncrement", "LoanLengthIncrement", "RepaymentFrequency", "LoanSizeBandLower", "LoanSizeBandUpper", "LoanLengthIncrementLower", "LoanLengthIncrementUpper", "IndicativeRate", "Negotiable"],
                                 "additionalProperties": false
-                              },
-                              "minItems": 1
+                              }
                             },
                             "CCARegulatedEntity": {
                               "type": "boolean"
@@ -4789,7 +4821,7 @@
                               "type": "boolean"
                             }
                           },
-                          "required": ["ProductSubType", "LoanPricing", "CCARegulatedEntity", "IsALowInterestRepaymentStartPossible", "IsThisAnInterestOnlyLoan", "WillTheLoanBePaidInTrancheDrawdowns"],
+                          "required": ["ProductSubType", "CCARegulatedEntity", "IsALowInterestRepaymentStartPossible", "IsThisAnInterestOnlyLoan", "WillTheLoanBePaidInTrancheDrawdowns"],
                           "additionalProperties": false
                         }
                       },
@@ -4828,7 +4860,7 @@
                           "SingleJointIncome": {
                             "description": "Minimum Income Source. For certain products a minimum income is required. This can be mandated as to the single income or to a joint income. This field describes this",
                             "type": "string",
-                            "enum": ["Single Income", "Joint Income", "Single or Joint Income"]
+                            "enum": ["Joint", "SoleIncome", "SoleOrJoint", "Turnover"]
                           },
                           "MinimumIncomeTurnoverAmount": {
                             "description": "Minimum income / Turnover required to hold the product",
@@ -4851,11 +4883,12 @@
                           "MinimumIncomeFrequency": {
                             "description": "The frequency that the minimum mentioned before is deposited in the account. Yearly is very important for premium accounts",
                             "type": "string",
-                            "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+                            "enum": ["AcademicTerm", "HalfYearly", "Monthly", "Quarterly", "Weekly", "Yearly"]
                           },
                           "AnnualBusinessTurnover": {
                             "description": "Annual Business Turnover",
-                            "type": "integer"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "AnnualBusinessTurnoverCurrency": {
                             "description": "Annual Business Turnover Currency",
@@ -4928,7 +4961,7 @@
                           "EligibilityType": {
                             "description": "Eligibility type",
                             "type": "string",
-                            "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account", "Any business customer", "ID and Verification", "Arrears on Loan, Credit Card, mortgage", "Over Overdraft for more than 30 days", "Sole UK Account or Bankrupt", "UCAS Fulltime for 2 years", "Date Limited (2 months within course start date)", "Email Address", "Sole Student Account"]
+                            "enum": ["AnyBusinessCustomer", "BusinessOnly", "CreditCard", "CreditScoring", "EmailAddress", "ExistingCustomers", "IdAndV", "Mortgage", "NoArrearsOnLoan", "NoCustomerInArrears", "NoOverOverdraftThirtyDays", "NoSoleUkAccountOrBankrupt", "NTB", "NTBBusiness", "SoleStudentAccount", "SoleUkAccount", "StudentsOnly", "TwoMonthsOfCourseStart", "UCASFulltimeTwoYears"]
                           },
                           "EligibilityNotes": {
                             "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
@@ -4943,7 +4976,7 @@
                             "items": {
                               "description": "Specific eligibility for marketing",
                               "type": "string",
-                              "enum": ["Switchers Only", "New Customers Only"]
+                              "enum": ["ExistingCustomers", "NewCustomersOnly", "SwitchersOnly", "StartUp"]
                             },
                             "uniqueItems": true
                           }
@@ -4960,7 +4993,7 @@
                             "ProductSubType": {
                               "description": "Describes if the offering is promotional, regular or a description of a future state",
                               "type": "string",
-                              "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                              "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
                             "Fees": {
                               "description": "Fees",
@@ -5000,9 +5033,9 @@
                                     "type": "object",
                                     "properties": {
                                       "FeeSubType": {
-                                        "description": "Describes if the offering is promotional, regular or a description of a future state",
+                                        "description": "Fee Sub Type code",
                                         "type": "string",
-                                        "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                                        "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                                       },
                                       "FeeDetail": {
                                         "description": "Fee Detail",
@@ -5043,9 +5076,19 @@
                                               "FeeFrequency": {
                                                 "description": "Triggering frequency of the fee",
                                                 "type": "string",
-                                                "enum": ["Monthly", "Per Transaction - Amount", "Per Transaction - Percentage", "Per Occurrence", "Daily", "5 consecutive business days", "Weekly", "Statement Monthly", "Quarterly", "6 monthly", "Yearly", "On account anniversary", "Charging period", "Item", "Account opening", "Account Closing", "Academic Term", "One time payment at the start of the loan", "At the time of repayment", "per hour", "per sheet"]
+                                                "enum": ["AcademicTerm", "AccountClosing", "AccountOpening", "AtTimeOfLoanRepayment", "ChargingPeriod", "Daily", "EveryFiveBusinessDays", "Item", "Monthly", "OnAccountAnniversary", "PerHour", "PerOccurrence", "PerSheet", "PerTransactionAmount", "PerTransactionPercentage", "Quarterly", "SixMonthly", "StartOfLoan", "StatementMonthly", "Weekly", "Yearly"]
                                               },
                                               "FeeAmount": {
+                                                "description": "Fee in GBP",
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                              },
+                                              "FeeMin": {
+                                                "description": "Fee in GBP",
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                              },
+                                              "FeeMax": {
                                                 "description": "Fee in GBP",
                                                 "type": "string",
                                                 "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
@@ -5077,7 +5120,7 @@
                                                 "type": "string"
                                               }
                                             },
-                                            "required": ["FeeFrequency", "FeeAmount", "Negotiable"],
+                                            "required": ["FeeFrequency", "Negotiable"],
                                             "additionalProperties": false
                                           }
                                         },
@@ -5115,9 +5158,9 @@
                               "type": "object",
                               "properties": {
                                 "BenefitSubType": {
-                                  "description": "Describes if the offering is promotional, regular or a description of a future state",
+                                  "description": "Benefit Subtype Code",
                                   "type": "string",
-                                  "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                                  "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                                 },
                                 "BenefitItem": {
                                   "description": "Benefit Item",
@@ -5173,7 +5216,7 @@
                                             "items": {
                                               "description": "Criteria that is required in order to be eligible for the Benefit",
                                               "type": "string",
-                                              "enum": ["Deposit", "Direct Debit", "Other"]
+                                              "enum": ["CashDeposit", "Deposit", "DirectDebit", "InitialDeposit", "InternetLogon", "MobileLogon", "RegularDeposit"]
                                             }
                                           },
                                           "MinimumCriteria": {
@@ -5615,7 +5658,7 @@
                         "type": "object",
                         "properties": {
                           "ParentOrganisation": {
-                            "description": "Organisation Identification",
+                            "description": "Parent organisation",
                             "type": "object",
                             "properties": {
                               "LEI": {
@@ -5676,7 +5719,7 @@
                       "ProductType": {
                         "description": "Descriptive code for the product category",
                         "type": "string",
-                        "enum": ["Commercial Credit Cards"]
+                        "enum": ["CommercialCreditCards"]
                       },
                       "ProductSegment": {
                         "description": "Marketing or industry segment that the product is designed for",
@@ -5684,7 +5727,7 @@
                         "items": {
                           "description": "Marketing or industry segment that the product is designed for",
                           "type": "string",
-                          "enum": ["CashBack", "Rewards", "Corporate", "SME", "General"]
+                          "enum": ["Cashback", "Corporate", "General", "Reward", "SME"]
                         }
                       },
                       "ProductIdentifier": {
@@ -5733,9 +5776,9 @@
                         "type": "object",
                         "properties": {
                           "CCSubType": {
-                            "description": "Describes if the offering is promotional, regular or a description of a future state",
+                            "description": "CCC Subtype Code",
                             "type": "string",
-                            "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                            "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                           },
                           "CommercialCreditCardItem": {
                             "description": "Commercial Credit Card Item ",
@@ -5768,7 +5811,7 @@
                               "RepaymentFrequency": {
                                 "description": "Repayment frequency",
                                 "type": "string",
-                                "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+                                "enum": ["Daily", "Flexible", "Fortnightly", "HalfYearly", "Monthly", "Quarterly", "Weekly", "Yearly"]
                               },
                               "APRRate": {
                                 "description": "Annual Percentage Rate",
@@ -5778,7 +5821,7 @@
                               "BalanceTransferInterestRatePeriod": {
                                 "description": "The period used to define the specific interest rate for balance transfers",
                                 "type": "string",
-                                "enum": ["Monthly", "Annual"]
+                                "enum": ["Annual", "Monthly"]
                               },
                               "PurchaseRate": {
                                 "description": "Purchase rate",
@@ -5805,9 +5848,9 @@
                                 "type": "integer"
                               },
                               "CardScheme": {
-                                "description": "Indicates the card scheme",
+                                "description": "Card Scheme Code",
                                 "type": "string",
-                                "enum": ["Debit Visa", "Debit Mastercard", "Cashcard"]
+                                "enum": ["Cashcard", "CreditMastercard", "CreditVisa"]
                               },
                               "AbilityToSetIndividualLimits": {
                                 "description": "The ability to set separate limts on different cards in one account",
@@ -6006,7 +6049,7 @@
                           "SingleJointIncome": {
                             "description": "Minimum Income Source. For certain products a minimum income is required. This can be mandated as to the single income or to a joint income. This field describes this",
                             "type": "string",
-                            "enum": ["Single Income", "Joint Income", "Single or Joint Income"]
+                            "enum": ["Joint", "SoleIncome", "SoleOrJoint", "Turnover"]
                           },
                           "MinimumIncomeTurnoverAmount": {
                             "description": "Minimum income / Turnover required to hold the product",
@@ -6029,11 +6072,12 @@
                           "MinimumIncomeFrequency": {
                             "description": "The frequency that the minimum mentioned before is deposited in the account. Yearly is very important for premium accounts",
                             "type": "string",
-                            "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+                            "enum": ["AcademicTerm", "HalfYearly", "Monthly", "Quarterly", "Weekly", "Yearly"]
                           },
                           "AnnualBusinessTurnover": {
                             "description": "Annual Business Turnover",
-                            "type": "integer"
+                            "type": "string",
+                            "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                           },
                           "AnnualBusinessTurnoverCurrency": {
                             "description": "Annual Business Turnover Currency",
@@ -6106,7 +6150,7 @@
                           "EligibilityType": {
                             "description": "Eligibility type",
                             "type": "string",
-                            "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account", "Any business customer", "ID and Verification", "Arrears on Loan, Credit Card, mortgage", "Over Overdraft for more than 30 days", "Sole UK Account or Bankrupt", "UCAS Fulltime for 2 years", "Date Limited (2 months within course start date)", "Email Address", "Sole Student Account"]
+                            "enum": ["AnyBusinessCustomer", "BusinessOnly", "CreditCard", "CreditScoring", "EmailAddress", "ExistingCustomers", "IdAndV", "Mortgage", "NoArrearsOnLoan", "NoCustomerInArrears", "NoOverOverdraftThirtyDays", "NoSoleUkAccountOrBankrupt", "NTB", "NTBBusiness", "SoleStudentAccount", "SoleUkAccount", "StudentsOnly", "TwoMonthsOfCourseStart", "UCASFulltimeTwoYears"]
                           },
                           "EligibilityNotes": {
                             "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
@@ -6121,7 +6165,7 @@
                             "items": {
                               "description": "Specific eligibility for marketing",
                               "type": "string",
-                              "enum": ["Switchers Only", "New Customers Only"]
+                              "enum": ["ExistingCustomers", "NewCustomersOnly", "SwitchersOnly", "StartUp"]
                             },
                             "uniqueItems": true
                           }
@@ -6144,9 +6188,9 @@
                               "type": "object",
                               "properties": {
                                 "BenefitSubType": {
-                                  "description": "Describes if the offering is promotional, regular or a description of a future state",
+                                  "description": "Benefit Subtype Code",
                                   "type": "string",
-                                  "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                                  "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                                 },
                                 "BenefitItem": {
                                   "description": "Benefit Item",
@@ -6202,7 +6246,7 @@
                                             "items": {
                                               "description": "Criteria that is required in order to be eligible for the Benefit",
                                               "type": "string",
-                                              "enum": ["Deposit", "Direct Debit", "Other"]
+                                              "enum": ["CashDeposit", "Deposit", "DirectDebit", "InitialDeposit", "InternetLogon", "MobileLogon", "RegularDeposit"]
                                             }
                                           },
                                           "MinimumCriteria": {
@@ -6250,7 +6294,7 @@
                         "additionalProperties": false
                       }
                     },
-                    "required": ["Organisation", "ProductName", "ProductType", "ProductIdentifier", "ProductURL", "Description", "KeyFeatures", "PaymentHoliday", "PaymentHolidayDescription", "TsandCs", "Details", "Eligibility", "Benefits"],
+                    "required": ["Organisation", "ProductName", "ProductType", "ProductIdentifier", "ProductURL", "Description", "KeyFeatures", "PaymentHoliday", "TsandCs", "Details", "Eligibility", "Benefits"],
                     "additionalProperties": false
                   }
                 }

@@ -9,8 +9,8 @@
       "type": "object",
       "properties": {
         "ParentOrganisation": {
+          "description": "Parent organisation",
           "id": "http://localhost:8000/schemas/v1.2/definitions/common/organisation_identification.json#",
-          "description": "Organisation Identification",
           "type": "object",
           "properties": {
             "LEI": {
@@ -46,8 +46,8 @@
           "additionalProperties": false
         },
         "Brand": {
-          "id": "http://localhost:8000/schemas/v1.2/definitions/common/brand.json#",
           "description": "Brand",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/brand.json#",
           "type": "object",
           "properties": {
             "TrademarkIPOCode": {
@@ -79,7 +79,7 @@
       "description": "Descriptive code for the product category",
       "id": "http://localhost:8000/schemas/v1.2/definitions/ccc_product_type.json#",
       "type": "string",
-      "enum": ["Commercial Credit Cards"]
+      "enum": ["CommercialCreditCards"]
     },
     "ProductSegment": {
       "description": "Marketing or industry segment that the product is designed for",
@@ -88,7 +88,7 @@
         "id": "http://localhost:8000/schemas/v1.2/definitions/ccc_segments.json#",
         "description": "Marketing or industry segment that the product is designed for",
         "type": "string",
-        "enum": ["CashBack", "Rewards", "Corporate", "SME", "General"]
+        "enum": ["Cashback", "Corporate", "General", "Reward", "SME"]
       }
     },
     "ProductIdentifier": {
@@ -138,10 +138,10 @@
       "type": "object",
       "properties": {
         "CCSubType": {
-          "id": "http://localhost:8000/schemas/v1.2/definitions/common/offering_subtype.json#",
-          "description": "Describes if the offering is promotional, regular or a description of a future state",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/ccc_subtype_code.json#",
+          "description": "CCC Subtype Code",
           "type": "string",
-          "enum": ["Promotional", "Regular", "Future Regular Terms"]
+          "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
         },
         "CommercialCreditCardItem": {
           "id": "http://localhost:8000/schemas/v1.2/definitions/ccc/ccc_item.json#",
@@ -178,9 +178,9 @@
             },
             "RepaymentFrequency": {
               "description": "Repayment frequency",
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/frequency.json#",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/common/repayment_frequency_code.json#",
               "type": "string",
-              "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+              "enum": ["Daily", "Flexible", "Fortnightly", "HalfYearly", "Monthly", "Quarterly", "Weekly", "Yearly"]
             },
             "APRRate": {
               "description": "Annual Percentage Rate",
@@ -189,10 +189,10 @@
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "BalanceTransferInterestRatePeriod": {
-              "id": "http://localhost:8000/schemas/v1.2/definitions/ccc/ccc_interest_period.json#",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/ccc/balance_transfer_interest_rate_period_code.json#",
               "description": "The period used to define the specific interest rate for balance transfers",
               "type": "string",
-              "enum": ["Monthly", "Annual"]
+              "enum": ["Annual", "Monthly"]
             },
             "PurchaseRate": {
               "description": "Purchase rate",
@@ -223,10 +223,10 @@
               "type": "integer"
             },
             "CardScheme": {
-              "id": "http://localhost:8000/schemas/v1.2/definitions/common/card_type.json#",
-              "description": "Indicates the card scheme",
+              "id": "http://localhost:8000/schemas/v1.2/definitions/ccc/card_scheme_code.json#",
+              "description": "Card Scheme Code",
               "type": "string",
-              "enum": ["Debit Visa", "Debit Mastercard", "Cashcard"]
+              "enum": ["Cashcard", "CreditMastercard", "CreditVisa"]
             },
             "AbilityToSetIndividualLimits": {
               "description": "The ability to set separate limts on different cards in one account",
@@ -446,10 +446,10 @@
           "type": "boolean"
         },
         "SingleJointIncome": {
-          "id": "http://localhost:8000/schemas/v1.2/definitions/eligibility/income_type.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/eligibility/single_joint_income_code.json#",
           "description": "Minimum Income Source. For certain products a minimum income is required. This can be mandated as to the single income or to a joint income. This field describes this",
           "type": "string",
-          "enum": ["Single Income", "Joint Income", "Single or Joint Income"]
+          "enum": ["Joint", "SoleIncome", "SoleOrJoint", "Turnover"]
         },
         "MinimumIncomeTurnoverAmount": {
           "description": "Minimum income / Turnover required to hold the product",
@@ -473,13 +473,15 @@
         },
         "MinimumIncomeFrequency": {
           "description": "The frequency that the minimum mentioned before is deposited in the account. Yearly is very important for premium accounts",
-          "id": "http://localhost:8000/schemas/v1.2/definitions/common/frequency.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/eligibility/minimum_income_frequency_code.json#",
           "type": "string",
-          "enum": ["Daily", "Weekly", "Monthly", "Yearly", "University Term", "Flexible"]
+          "enum": ["AcademicTerm", "HalfYearly", "Monthly", "Quarterly", "Weekly", "Yearly"]
         },
         "AnnualBusinessTurnover": {
           "description": "Annual Business Turnover",
-          "type": "integer"
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/amount.json",
+          "type": "string",
+          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "AnnualBusinessTurnoverCurrency": {
           "description": "Annual Business Turnover Currency",
@@ -559,9 +561,9 @@
         },
         "EligibilityType": {
           "description": "Eligibility type",
-          "id": "http://localhost:8000/schemas/v1.2/definitions/eligibility/eligibility_type.json#",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/eligibility/eligibility_type_code.json#",
           "type": "string",
-          "enum": ["Business Only", "Students Only", "NTB Business", "Credit Scoring", "Sole UK account", "Any business customer", "ID and Verification", "Arrears on Loan, Credit Card, mortgage", "Over Overdraft for more than 30 days", "Sole UK Account or Bankrupt", "UCAS Fulltime for 2 years", "Date Limited (2 months within course start date)", "Email Address", "Sole Student Account"]
+          "enum": ["AnyBusinessCustomer", "BusinessOnly", "CreditCard", "CreditScoring", "EmailAddress", "ExistingCustomers", "IdAndV", "Mortgage", "NoArrearsOnLoan", "NoCustomerInArrears", "NoOverOverdraftThirtyDays", "NoSoleUkAccountOrBankrupt", "NTB", "NTBBusiness", "SoleStudentAccount", "SoleUkAccount", "StudentsOnly", "TwoMonthsOfCourseStart", "UCASFulltimeTwoYears"]
         },
         "EligibilityNotes": {
           "description": "Optional additional notes to supplement the eligibility conditions. Only used for very specific conditions",
@@ -574,10 +576,10 @@
         "MarketingEligibility": {
           "type": "array",
           "items": {
-            "id": "http://localhost:8000/schemas/v1.2/definitions/eligibility/marketing_eligibility.json#",
+            "id": "http://localhost:8000/schemas/v1.2/definitions/eligibility/marketing_eligibility_code.json#",
             "description": "Specific eligibility for marketing",
             "type": "string",
-            "enum": ["Switchers Only", "New Customers Only"]
+            "enum": ["ExistingCustomers", "NewCustomersOnly", "SwitchersOnly", "StartUp"]
           },
           "uniqueItems": true
         }
@@ -602,10 +604,10 @@
             "type": "object",
             "properties": {
               "BenefitSubType": {
-                "id": "http://localhost:8000/schemas/v1.2/definitions/common/offering_subtype.json#",
-                "description": "Describes if the offering is promotional, regular or a description of a future state",
+                "id": "http://localhost:8000/schemas/v1.2/definitions/benefits/benefit_subtype_code.json#",
+                "description": "Benefit Subtype Code",
                 "type": "string",
-                "enum": ["Promotional", "Regular", "Future Regular Terms"]
+                "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
               },
               "BenefitItem": {
                 "id": "http://localhost:8000/schemas/v1.2/definitions/benefits/benefit_item.json#",
@@ -667,7 +669,7 @@
                             "id": "http://localhost:8000/schemas/v1.2/definitions/benefits/benefit_criteria_type.json#",
                             "description": "Criteria that is required in order to be eligible for the Benefit",
                             "type": "string",
-                            "enum": ["Deposit", "Direct Debit", "Other"]
+                            "enum": ["CashDeposit", "Deposit", "DirectDebit", "InitialDeposit", "InternetLogon", "MobileLogon", "RegularDeposit"]
                           }
                         },
                         "MinimumCriteria": {
@@ -719,6 +721,6 @@
       "additionalProperties": false
     }
   },
-  "required": ["Organisation", "ProductName", "ProductType", "ProductIdentifier", "ProductURL", "Description", "KeyFeatures", "PaymentHoliday", "PaymentHolidayDescription", "TsandCs", "Details", "Eligibility", "Benefits"],
+  "required": ["Organisation", "ProductName", "ProductType", "ProductIdentifier", "ProductURL", "Description", "KeyFeatures", "PaymentHoliday", "TsandCs", "Details", "Eligibility", "Benefits"],
   "additionalProperties": false
 }

@@ -10,8 +10,8 @@
       "type": "object",
       "properties": {
         "ParentOrganisation": {
+          "description": "Parent organisation",
           "id": "http://localhost:8000/schemas/v1.2/definitions/common/organisation_identification.json#",
-          "description": "Organisation Identification",
           "type": "object",
           "properties": {
             "LEI": {
@@ -47,8 +47,8 @@
           "additionalProperties": false
         },
         "Brand": {
-          "id": "http://localhost:8000/schemas/v1.2/definitions/common/brand.json#",
           "description": "Brand",
+          "id": "http://localhost:8000/schemas/v1.2/definitions/common/brand.json#",
           "type": "object",
           "properties": {
             "TrademarkIPOCode": {
