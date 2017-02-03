@@ -94,13 +94,13 @@
                       "enum": ["Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"]
                     },
                     "License": {
-                      "description": "Change Banking License",
+                      "description": "Open Banking License",
                       "type": "string",
                       "format": "uri",
                       "enum": ["https://openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
-                      "description": "Change Banking Terms of Use",
+                      "description": "Open Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
                       "enum": ["https://openbanking.org.uk/terms"]
@@ -838,13 +838,13 @@
                       "enum": ["Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"]
                     },
                     "License": {
-                      "description": "Change Banking License",
+                      "description": "Open Banking License",
                       "type": "string",
                       "format": "uri",
                       "enum": ["https://openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
-                      "description": "Change Banking Terms of Use",
+                      "description": "Open Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
                       "enum": ["https://openbanking.org.uk/terms"]
@@ -1439,13 +1439,13 @@
                       "enum": ["Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"]
                     },
                     "License": {
-                      "description": "Change Banking License",
+                      "description": "Open Banking License",
                       "type": "string",
                       "format": "uri",
                       "enum": ["https://openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
-                      "description": "Change Banking Terms of Use",
+                      "description": "Open Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
                       "enum": ["https://openbanking.org.uk/terms"]
@@ -2995,13 +2995,13 @@
                       "enum": ["Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"]
                     },
                     "License": {
-                      "description": "Change Banking License",
+                      "description": "Open Banking License",
                       "type": "string",
                       "format": "uri",
                       "enum": ["https://openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
-                      "description": "Change Banking Terms of Use",
+                      "description": "Open Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
                       "enum": ["https://openbanking.org.uk/terms"]
@@ -4552,13 +4552,13 @@
                       "enum": ["Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"]
                     },
                     "License": {
-                      "description": "Change Banking License",
+                      "description": "Open Banking License",
                       "type": "string",
                       "format": "uri",
                       "enum": ["https://openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
-                      "description": "Change Banking Terms of Use",
+                      "description": "Open Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
                       "enum": ["https://openbanking.org.uk/terms"]
@@ -5632,13 +5632,13 @@
                       "enum": ["Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"]
                     },
                     "License": {
-                      "description": "Change Banking License",
+                      "description": "Open Banking License",
                       "type": "string",
                       "format": "uri",
                       "enum": ["https://openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
-                      "description": "Change Banking Terms of Use",
+                      "description": "Open Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
                       "enum": ["https://openbanking.org.uk/terms"]
