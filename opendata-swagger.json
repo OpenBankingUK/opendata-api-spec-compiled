@@ -97,13 +97,13 @@
                       "description": "Change Banking License",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["http://www.changebanking.uk/Open-Licence"]
+                      "enum": ["https://openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
                       "description": "Change Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["http://www.changebanking.uk/API-Terms"]
+                      "enum": ["https://openbanking.org.uk/terms"]
                     }
                   },
                   "required": ["LastUpdated", "TotalResults", "Agreement", "License", "TermsOfUse"],
@@ -841,13 +841,13 @@
                       "description": "Change Banking License",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["http://www.changebanking.uk/Open-Licence"]
+                      "enum": ["https://openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
                       "description": "Change Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["http://www.changebanking.uk/API-Terms"]
+                      "enum": ["https://openbanking.org.uk/terms"]
                     }
                   },
                   "required": ["LastUpdated", "TotalResults", "Agreement", "License", "TermsOfUse"],
@@ -1442,13 +1442,13 @@
                       "description": "Change Banking License",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["http://www.changebanking.uk/Open-Licence"]
+                      "enum": ["https://openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
                       "description": "Change Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["http://www.changebanking.uk/API-Terms"]
+                      "enum": ["https://openbanking.org.uk/terms"]
                     }
                   },
                   "required": ["LastUpdated", "TotalResults", "Agreement", "License", "TermsOfUse"],
@@ -2998,13 +2998,13 @@
                       "description": "Change Banking License",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["http://www.changebanking.uk/Open-Licence"]
+                      "enum": ["https://openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
                       "description": "Change Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["http://www.changebanking.uk/API-Terms"]
+                      "enum": ["https://openbanking.org.uk/terms"]
                     }
                   },
                   "required": ["LastUpdated", "TotalResults", "Agreement", "License", "TermsOfUse"],
@@ -4555,13 +4555,13 @@
                       "description": "Change Banking License",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["http://www.changebanking.uk/Open-Licence"]
+                      "enum": ["https://openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
                       "description": "Change Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["http://www.changebanking.uk/API-Terms"]
+                      "enum": ["https://openbanking.org.uk/terms"]
                     }
                   },
                   "required": ["LastUpdated", "TotalResults", "Agreement", "License", "TermsOfUse"],
@@ -5635,13 +5635,13 @@
                       "description": "Change Banking License",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["http://www.changebanking.uk/Open-Licence"]
+                      "enum": ["https://openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
                       "description": "Change Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["http://www.changebanking.uk/API-Terms"]
+                      "enum": ["https://openbanking.org.uk/terms"]
                     }
                   },
                   "required": ["LastUpdated", "TotalResults", "Agreement", "License", "TermsOfUse"],
