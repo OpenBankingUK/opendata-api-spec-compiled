@@ -319,12 +319,12 @@
                       "ArrivalTime": {
                         "description": "Time that the mobile branch is scheduled to arrive",
                         "type": "string",
-                        "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3}(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
+                        "pattern": "^(([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3})|(^24:00:00\\.000)(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
                       },
                       "DepartureTime": {
                         "description": "Time that the mobile branch is scheduled to depart",
                         "type": "string",
-                        "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3}(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
+                        "pattern": "^(([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3})|(^24:00:00\\.000)(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
                       },
                       "ParkingLocation": {
                         "description": "Place where the mobile branch is located, such as between the news agent and the church.",
@@ -348,22 +348,22 @@
                             "OpeningTime": {
                               "description": "ISOTime, local time hh:mm:ss.sss or time in utc hh:mm:ss.sssZ or time with timezone hh:mm:ss.sss+hh:mm hh:mm:ss.sss-hh:mm",
                               "type": "string",
-                              "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3}(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
+                              "pattern": "^(([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3})|(^24:00:00\\.000)(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
                             },
                             "ClosingTime": {
                               "description": "ISOTime, local time hh:mm:ss.sss or time in utc hh:mm:ss.sssZ or time with timezone hh:mm:ss.sss+hh:mm hh:mm:ss.sss-hh:mm",
                               "type": "string",
-                              "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3}(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
+                              "pattern": "^(([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3})|(^24:00:00\\.000)(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
                             },
                             "UnavailableStartTime": {
                               "description": "ISOTime, local time hh:mm:ss.sss or time in utc hh:mm:ss.sssZ or time with timezone hh:mm:ss.sss+hh:mm hh:mm:ss.sss-hh:mm",
                               "type": "string",
-                              "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3}(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
+                              "pattern": "^(([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3})|(^24:00:00\\.000)(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
                             },
                             "UnavailableFinishTime": {
                               "description": "ISOTime, local time hh:mm:ss.sss or time in utc hh:mm:ss.sssZ or time with timezone hh:mm:ss.sss+hh:mm hh:mm:ss.sss-hh:mm",
                               "type": "string",
-                              "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3}(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
+                              "pattern": "^(([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9].\\d{3})|(^24:00:00\\.000)(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?$"
                             }
                           },
                           "required": ["OpeningDay", "OpeningTime", "ClosingTime"]
