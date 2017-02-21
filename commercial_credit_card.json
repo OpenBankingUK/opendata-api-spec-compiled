@@ -77,7 +77,7 @@
     },
     "ProductType": {
       "description": "Descriptive code for the product category",
-      "id": "http://localhost:8000/schemas/v1.2/definitions/ccc_product_type.json#",
+      "id": "http://localhost:8000/schemas/v1.2/definitions/ccc/ccc_product_type.json#",
       "type": "string",
       "enum": ["CommercialCreditCards"]
     },
@@ -85,7 +85,7 @@
       "description": "Marketing or industry segment that the product is designed for",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.2/definitions/ccc_segments.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/ccc/ccc_segments.json#",
         "description": "Marketing or industry segment that the product is designed for",
         "type": "string",
         "enum": ["Cashback", "Corporate", "General", "Reward", "SME"]

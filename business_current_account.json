@@ -121,7 +121,7 @@
       "description": "Ways to interact with the bank when managing account",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.2/definitions/access_channels_code.json#",
+        "id": "http://localhost:8000/schemas/v1.2/definitions/common/access_channels_code.json#",
         "description": "Channel",
         "type": "string",
         "enum": ["ATM", "Branch", "BusinessCommercialCentre", "CallCentre", "MobileApps", "MobileBanking", "Online", "Phone", "Post", "PostOffice", "RelationshipManager", "Text"]
