@@ -1,14 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "v1.2.4",
+    "version": "v1.3",
     "title": "Open Data API",
-    "description": "Draft Swagger specification for OpenData"
+    "description": "Latest Swagger specification for OpenData"
   },
-  "host": "api.openbanking.xyz",
-  "basePath": "/open-banking/v1.2",
+  "host": "developer.openbanking.org.uk",
+  "basePath": "/reference-implementation/open-banking/v1.3",
   "schemes": ["https"],
-  "produces": ["application/prs.openbanking.opendata.v1.2+json"],
+  "produces": ["application/prs.openbanking.opendata.v1.3+json"],
   "tags": [{
     "name": "Branch",
     "description": "Endpoint for getting Branch data"
@@ -1677,8 +1677,8 @@
                               "description": "Indicates whether the account has any feature",
                               "type": "boolean"
                             },
-                            "ProductSubType": {
-                              "description": "Describes if the offering is promotional, regular or a description of a future state",
+                            "ProductState": {
+                              "description": "Describes if the offering is promotional or a description of a future state.",
                               "type": "string",
                               "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
@@ -1765,8 +1765,8 @@
                           "description": "Card Price",
                           "type": "object",
                           "properties": {
-                            "ProductSubType": {
-                              "description": "Describes if the offering is promotional, regular or a description of a future state",
+                            "ProductState": {
+                              "description": "Describes if the offering is promotional or a description of a future state.",
                               "type": "string",
                               "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
@@ -1802,7 +1802,7 @@
                               "additionalProperties": false
                             }
                           },
-                          "required": ["ProductSubType", "CAPricingItem"],
+                          "required": ["ProductState", "CAPricingItem"],
                           "additionalProperties": false
                         },
                         "minItems": 1
@@ -2021,7 +2021,7 @@
                                     "CalculationFrequency": {
                                       "description": "How often is interest applied to account",
                                       "type": "string",
-                                      "enum": ["Month", "Week", "Year"]
+                                      "enum": ["Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight"]
                                     },
                                     "PaymentMethod": {
                                       "description": "Credit Interest Payment Method Code",
@@ -2114,8 +2114,8 @@
                           "description": "Overdraft",
                           "type": "object",
                           "properties": {
-                            "InterestProductSubType": {
-                              "description": "Describes if the offering is promotional, regular or a description of a future state",
+                            "OverdraftProductState": {
+                              "description": "Describes if the offering is promotional or a description of a future state.",
                               "type": "string",
                               "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
@@ -2138,164 +2138,516 @@
                               "type": "string",
                               "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                             },
-                            "OverdraftPricing": {
-                              "description": "Overdraft Pricing",
-                              "type": "object",
-                              "properties": {
-                                "ApplicableTo": {
-                                  "description": "Personal Interest Tiers",
-                                  "type": "object",
-                                  "properties": {
-                                    "InterestTierSME": {
-                                      "description": "Identifier for tier only where it has been supplied under Part 8 (article 32 or the CMA order), value reflects upper tier value",
-                                      "type": "string",
-                                      "enum": ["£5000", "£10000", "£15000", "£20000", "£25000", "Other", "TierMaximum", "TierMinimum"]
-                                    },
-                                    "InterestTierPersonal": {
-                                      "description": "Identifier for the tier",
-                                      "type": "string"
-                                    }
+                            "OverdraftTierBandSet": {
+                              "description": "Overdraft Tier Band Set",
+                              "type": "array",
+                              "items": {
+                                "description": "Tier Bandset",
+                                "type": "object",
+                                "properties": {
+                                  "CMADefinedIndicator": {
+                                    "description": "describes that the tiers and bands are set by the CMA order, as opposed to be set by the banks",
+                                    "type": "boolean"
                                   },
-                                  "minProperties": 1,
-                                  "maxProperties": 1,
-                                  "additionalProperties": false
-                                },
-                                "Tiers": {
-                                  "type": "array",
-                                  "items": {
-                                    "description": "Tiers",
+                                  "ArrangementType": {
+                                    "description": "Defines the arrangement of the overdraft",
+                                    "type": "string",
+                                    "enum": ["Unarranged", "Arranged", "Other"]
+                                  },
+                                  "ArrangementOtherType": {
+                                    "description": "Other Code Type",
                                     "type": "object",
                                     "properties": {
-                                      "TierType": {
-                                        "description": "Tier Type",
-                                        "type": "object",
-                                        "properties": {
-                                          "ArrangedOverdraftInterestTier": {
-                                            "description": "Arranged overdraft interest tier",
-                                            "type": "string",
-                                            "minLength": 1,
-                                            "maxLength": 10
-                                          },
-                                          "UnarrangedOverdraftInterestTier": {
-                                            "description": "Unarranged overdraft interest tier",
-                                            "type": "string",
-                                            "minLength": 1,
-                                            "maxLength": 10
-                                          }
-                                        },
-                                        "minProperties": 1,
-                                        "maxProperties": 1,
-                                        "additionalProperties": false
-                                      },
-                                      "TierValueMinimum": {
-                                        "description": "Lower value of interest tier",
+                                      "Code": {
+                                        "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
                                         "type": "string",
-                                        "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                        "minLength": 4,
+                                        "maxLength": 4
                                       },
-                                      "TierValueMaximum": {
-                                        "description": "Max Value of interest tier",
+                                      "Name": {
+                                        "description": "Name of 'Other' code set value applicable to specified attribute",
                                         "type": "string",
                                         "minLength": 1,
-                                        "maxLength": 15
+                                        "maxLength": 256
+                                      },
+                                      "Description": {
+                                        "description": "Description for 'Other' code set value applicable to specified attribute",
+                                        "type": "string"
                                       }
                                     },
                                     "additionalProperties": false
                                   },
-                                  "minItems": 1
+                                  "TierBandSetIdentification": {
+                                    "description": "Identification of the set of tiers or bands",
+                                    "type": "string"
+                                  },
+                                  "EAR": {
+                                    "description": "EAR of the Overdraft Set",
+                                    "type": "string",
+                                    "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                                  },
+                                  "FeesAndCharges": {
+                                    "description": "Type of fee or charge",
+                                    "type": "array",
+                                    "items": {
+                                      "description": "Overdraft Fees Charges",
+                                      "type": "object",
+                                      "properties": {
+                                        "FeeChargeType": {
+                                          "description": "Type of fee or charge",
+                                          "type": "string",
+                                          "enum": ["Periodic", "Minimum", "Maximum", "Setup", "Review", "Renewal", "MinimumSetup", "MaximumSetup", "Total", "Item", "EmergencyLending", "Other"]
+                                        },
+                                        "FeeChargeOtherType": {
+                                          "description": "Other Code Type",
+                                          "type": "object",
+                                          "properties": {
+                                            "Code": {
+                                              "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 4,
+                                              "maxLength": 4
+                                            },
+                                            "Name": {
+                                              "description": "Name of 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 1,
+                                              "maxLength": 256
+                                            },
+                                            "Description": {
+                                              "description": "Description for 'Other' code set value applicable to specified attribute",
+                                              "type": "string"
+                                            }
+                                          },
+                                          "additionalProperties": false
+                                        },
+                                        "FeeChargeAmount": {
+                                          "description": "Charge applied to tier",
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                        },
+                                        "FeeChargeRate": {
+                                          "description": "Fee charge rate applied to tier",
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                                        },
+                                        "FeeChargeRateType": {
+                                          "description": "Rate type other than EAR",
+                                          "type": "string",
+                                          "enum": ["Gross", "Net", "Other"]
+                                        },
+                                        "FeeChargeRateOtherType": {
+                                          "description": "Other Code Type",
+                                          "type": "object",
+                                          "properties": {
+                                            "Code": {
+                                              "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 4,
+                                              "maxLength": 4
+                                            },
+                                            "Name": {
+                                              "description": "Name of 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 1,
+                                              "maxLength": 256
+                                            },
+                                            "Description": {
+                                              "description": "Description for 'Other' code set value applicable to specified attribute",
+                                              "type": "string"
+                                            }
+                                          },
+                                          "additionalProperties": false
+                                        },
+                                        "FeeChargeApplicationFrequency": {
+                                          "description": "Frequency with which the rate, or amount is charged",
+                                          "type": "string",
+                                          "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
+                                        },
+                                        "FeeChargeOtherApplicationFrequency": {
+                                          "description": "Other Code Type",
+                                          "type": "object",
+                                          "properties": {
+                                            "Code": {
+                                              "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 4,
+                                              "maxLength": 4
+                                            },
+                                            "Name": {
+                                              "description": "Name of 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 1,
+                                              "maxLength": 256
+                                            },
+                                            "Description": {
+                                              "description": "Description for 'Other' code set value applicable to specified attribute",
+                                              "type": "string"
+                                            }
+                                          },
+                                          "additionalProperties": false
+                                        },
+                                        "FeeChargeCalculationFrequency": {
+                                          "description": "Frequency with which the rate, or amount is calculated",
+                                          "type": "string",
+                                          "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
+                                        },
+                                        "FeeChargeOtherCalculationFrequency": {
+                                          "description": "Other Code Type",
+                                          "type": "object",
+                                          "properties": {
+                                            "Code": {
+                                              "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 4,
+                                              "maxLength": 4
+                                            },
+                                            "Name": {
+                                              "description": "Name of 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 1,
+                                              "maxLength": 256
+                                            },
+                                            "Description": {
+                                              "description": "Description for 'Other' code set value applicable to specified attribute",
+                                              "type": "string"
+                                            }
+                                          },
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": ["FeeChargeType"],
+                                      "additionalProperties": false
+                                    }
+                                  },
+                                  "BufferAmount": {
+                                    "description": "Amount on overdraft that is prearranged",
+                                    "type": "string",
+                                    "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                  },
+                                  "OverdraftTierBand": {
+                                    "type": "array",
+                                    "items": {
+                                      "description": "Tiers",
+                                      "type": "object",
+                                      "properties": {
+                                        "TierBandIdentification": {
+                                          "description": "Identification of the tier or band",
+                                          "type": "string"
+                                        },
+                                        "TierValueMinimum": {
+                                          "description": "Minimum value of the tier",
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                        },
+                                        "TierValueMaximum": {
+                                          "description": "Maximum value of the tier",
+                                          "type": "string",
+                                          "minLength": 1,
+                                          "maxLength": 15
+                                        },
+                                        "EAR": {
+                                          "description": "EAR of the Tier",
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                                        },
+                                        "FeesAndCharges": {
+                                          "type": "array",
+                                          "items": {
+                                            "description": "Overdraft Fees Charges",
+                                            "type": "object",
+                                            "properties": {
+                                              "FeeChargeType": {
+                                                "description": "Type of fee or charge",
+                                                "type": "string",
+                                                "enum": ["Periodic", "Minimum", "Maximum", "Setup", "Review", "Renewal", "MinimumSetup", "MaximumSetup", "Total", "Item", "EmergencyLending", "Other"]
+                                              },
+                                              "FeeChargeOtherType": {
+                                                "description": "Other Code Type",
+                                                "type": "object",
+                                                "properties": {
+                                                  "Code": {
+                                                    "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 4,
+                                                    "maxLength": 4
+                                                  },
+                                                  "Name": {
+                                                    "description": "Name of 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 1,
+                                                    "maxLength": 256
+                                                  },
+                                                  "Description": {
+                                                    "description": "Description for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "additionalProperties": false
+                                              },
+                                              "FeeChargeAmount": {
+                                                "description": "Charge applied to tier",
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                              },
+                                              "FeeChargeRate": {
+                                                "description": "Fee charge rate applied to tier",
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                                              },
+                                              "FeeChargeRateType": {
+                                                "description": "Rate type other than EAR",
+                                                "type": "string",
+                                                "enum": ["Gross", "Net", "Other"]
+                                              },
+                                              "FeeChargeRateOtherType": {
+                                                "description": "Other Code Type",
+                                                "type": "object",
+                                                "properties": {
+                                                  "Code": {
+                                                    "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 4,
+                                                    "maxLength": 4
+                                                  },
+                                                  "Name": {
+                                                    "description": "Name of 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 1,
+                                                    "maxLength": 256
+                                                  },
+                                                  "Description": {
+                                                    "description": "Description for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "additionalProperties": false
+                                              },
+                                              "FeeChargeApplicationFrequency": {
+                                                "description": "Frequency with which the rate, or amount is charged",
+                                                "type": "string",
+                                                "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
+                                              },
+                                              "FeeChargeOtherApplicationFrequency": {
+                                                "description": "Other Code Type",
+                                                "type": "object",
+                                                "properties": {
+                                                  "Code": {
+                                                    "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 4,
+                                                    "maxLength": 4
+                                                  },
+                                                  "Name": {
+                                                    "description": "Name of 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 1,
+                                                    "maxLength": 256
+                                                  },
+                                                  "Description": {
+                                                    "description": "Description for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "additionalProperties": false
+                                              },
+                                              "FeeChargeCalculationFrequency": {
+                                                "description": "Frequency with which the rate, or amount is calculated",
+                                                "type": "string",
+                                                "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
+                                              },
+                                              "FeeChargeOtherCalculationFrequency": {
+                                                "description": "Other Code Type",
+                                                "type": "object",
+                                                "properties": {
+                                                  "Code": {
+                                                    "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 4,
+                                                    "maxLength": 4
+                                                  },
+                                                  "Name": {
+                                                    "description": "Name of 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 1,
+                                                    "maxLength": 256
+                                                  },
+                                                  "Description": {
+                                                    "description": "Description for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "additionalProperties": false
+                                              }
+                                            },
+                                            "required": ["FeeChargeType"],
+                                            "additionalProperties": false
+                                          },
+                                          "uniqueItems": true
+                                        },
+                                        "Notes": {
+                                          "description": "Notes on the Overdraft",
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": ["TierValueMinimum", "TierValueMaximum"],
+                                      "additionalProperties": false
+                                    }
+                                  },
+                                  "Notes": {
+                                    "description": "Notes on the Overdraft",
+                                    "type": "string"
+                                  }
                                 },
-                                "InterestRateEARpa": {
-                                  "description": "Interest rate applied to tier",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                                "required": ["CMADefinedIndicator", "ArrangementType"],
+                                "additionalProperties": false
+                              }
+                            },
+                            "FeeChargeNegotiableIndicator": {
+                              "description": "Fee Charge negotiable Indicator",
+                              "type": "string",
+                              "enum": ["No", "Yes"]
+                            },
+                            "FeesAndCharges": {
+                              "type": "array",
+                              "items": {
+                                "description": "Overdraft Fees Charges",
+                                "type": "object",
+                                "properties": {
+                                  "FeeChargeType": {
+                                    "description": "Type of fee or charge",
+                                    "type": "string",
+                                    "enum": ["Periodic", "Minimum", "Maximum", "Setup", "Review", "Renewal", "MinimumSetup", "MaximumSetup", "Total", "Item", "EmergencyLending", "Other"]
+                                  },
+                                  "FeeChargeOtherType": {
+                                    "description": "Other Code Type",
+                                    "type": "object",
+                                    "properties": {
+                                      "Code": {
+                                        "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 4,
+                                        "maxLength": 4
+                                      },
+                                      "Name": {
+                                        "description": "Name of 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 256
+                                      },
+                                      "Description": {
+                                        "description": "Description for 'Other' code set value applicable to specified attribute",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  },
+                                  "FeeChargeAmount": {
+                                    "description": "Charge applied to tier",
+                                    "type": "string",
+                                    "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                  },
+                                  "FeeChargeRate": {
+                                    "description": "Fee charge rate applied to tier",
+                                    "type": "string",
+                                    "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                                  },
+                                  "FeeChargeRateType": {
+                                    "description": "Rate type other than EAR",
+                                    "type": "string",
+                                    "enum": ["Gross", "Net", "Other"]
+                                  },
+                                  "FeeChargeRateOtherType": {
+                                    "description": "Other Code Type",
+                                    "type": "object",
+                                    "properties": {
+                                      "Code": {
+                                        "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 4,
+                                        "maxLength": 4
+                                      },
+                                      "Name": {
+                                        "description": "Name of 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 256
+                                      },
+                                      "Description": {
+                                        "description": "Description for 'Other' code set value applicable to specified attribute",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  },
+                                  "FeeChargeApplicationFrequency": {
+                                    "description": "Frequency with which the rate, or amount is charged",
+                                    "type": "string",
+                                    "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
+                                  },
+                                  "FeeChargeOtherApplicationFrequency": {
+                                    "description": "Other Code Type",
+                                    "type": "object",
+                                    "properties": {
+                                      "Code": {
+                                        "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 4,
+                                        "maxLength": 4
+                                      },
+                                      "Name": {
+                                        "description": "Name of 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 256
+                                      },
+                                      "Description": {
+                                        "description": "Description for 'Other' code set value applicable to specified attribute",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  },
+                                  "FeeChargeCalculationFrequency": {
+                                    "description": "Frequency with which the rate, or amount is calculated",
+                                    "type": "string",
+                                    "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
+                                  },
+                                  "FeeChargeOtherCalculationFrequency": {
+                                    "description": "Other Code Type",
+                                    "type": "object",
+                                    "properties": {
+                                      "Code": {
+                                        "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 4,
+                                        "maxLength": 4
+                                      },
+                                      "Name": {
+                                        "description": "Name of 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 256
+                                      },
+                                      "Description": {
+                                        "description": "Description for 'Other' code set value applicable to specified attribute",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  }
                                 },
-                                "RepresentativeRate": {
-                                  "description": "Interest rate at AER",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
-                                },
-                                "InterestNotes": {
-                                  "description": "Optional additional notes to supplement the interest details",
-                                  "type": "string"
-                                },
-                                "TotalOverdraftChargeAmount": {
-                                  "description": "All charges that a customer could incur as a result of exceeding or attempting to exceed a Pre-agreed credit limit",
-                                  "type": "string",
-                                  "enum": ["Banded", "Tiered", "Whole"]
-                                },
-                                "MinUnarrangedOverdraftAmount": {
-                                  "description": "Minimum Unarranged Overdraft Amount if applicable",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                },
-                                "InterestRate": {
-                                  "description": "interest rate applied to tier",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
-                                },
-                                "InterestRateCalculationFrequency": {
-                                  "description": "Frequency at which interest is calculated and accrued",
-                                  "type": "string",
-                                  "enum": ["Annual", "Daily", "Monthly", "Quarterly"]
-                                },
-                                "InterestApplicationFrequency": {
-                                  "description": "When the interest is applied",
-                                  "type": "string",
-                                  "enum": ["Annual", "Daily", "Monthly", "Quarterly", "StatementDate"]
-                                },
-                                "DailyCharge": {
-                                  "description": "Maximum daily overdraft charge",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                },
-                                "MonthlyCharge": {
-                                  "description": "Maximum monthly overdraft charge",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                },
-                                "ItemCharge": {
-                                  "description": "Arranged overdraft item charge",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                },
-                                "OtherCharge": {
-                                  "description": "Other flat charge levied when overdrawn (Arranged)",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                },
-                                "OverdraftNotes": {
-                                  "description": "Supplementary notes for overdrafts",
-                                  "type": "string"
-                                },
-                                "RatesAreNegotiable": {
-                                  "description": "Value that expresses if the rates are negotiable",
-                                  "type": "string",
-                                  "enum": ["No", "Yes"]
-                                },
-                                "IndicativeRate": {
-                                  "description": "Indicative Rate that the client will get",
-                                  "type": "string"
-                                },
-                                "BufferAmount": {
-                                  "description": "Amount on overdraft that is prearranged",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                }
-                              },
-                              "required": ["ApplicableTo", "Tiers"],
-                              "additionalProperties": false
+                                "required": ["FeeChargeType"],
+                                "additionalProperties": false
+                              }
                             },
                             "MaximumMonthlyOverdraftCharge": {
-                              "description": "Maximum monthly overdraft charge",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                            },
-                            "MaximumDailyOverdraftCharge": {
-                              "description": "Maximum daily overdraft charge",
+                              "description": "Maximum Monthly Charge (MMC) for Overdraft fee and charges.",
                               "type": "string",
                               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "OverdraftType": {
-                              "description": "Opposite of repayable on demand",
+                              "description": "Defines if the overdraft facility is committed ",
                               "type": "string",
                               "enum": ["Committed", "OnDemand"]
                             },
@@ -2303,50 +2655,9 @@
                               "description": "The duration of the overdraft, if it is non permanent",
                               "type": "string"
                             },
-                            "SetUpFeesAmount": {
-                              "description": "Fees to set up the overdraft",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                            },
-                            "SetUpFeesRate": {
-                              "description": "Rate to set up the overdraft",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
-                            },
-                            "ReviewFee": {
-                              "description": "Fee to review overdraft limit",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                            },
-                            "MinimumFee": {
-                              "description": "Minimum overdraft fee",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                            },
-                            "AnnualRenewalRate": {
-                              "description": "Rate to renew overdraft",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
-                            },
-                            "AnnualRenewalFee": {
-                              "description": "Fee payable per term for overdraft",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                            },
-                            "MinimumSetupFee": {
-                              "description": "The minimum amount charged for an overdraft set up",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                            },
-                            "RenewalRate": {
-                              "description": "Rate to renew overdraft",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
-                            },
-                            "MinimumRenewalFee": {
-                              "description": "The minimum amount charged for the annual renewal",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                            "Notes": {
+                              "description": "Notes on the overdraft",
+                              "type": "string"
                             }
                           },
                           "additionalProperties": false
@@ -2358,8 +2669,8 @@
                           "description": "Fees And Charges",
                           "type": "object",
                           "properties": {
-                            "ProductSubType": {
-                              "description": "Describes if the offering is promotional, regular or a description of a future state",
+                            "ProductState": {
+                              "description": "Describes if the offering is promotional or a description of a future state.",
                               "type": "string",
                               "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
@@ -2412,7 +2723,7 @@
                                           "FeeType": {
                                             "description": "A description of the Fee type",
                                             "type": "string",
-                                            "enum": ["ATMDonation", "ATMDeposATMPaidIn", "ReportCertBalance", "ATMAbroadConVisaCredit", "ATMAbroadConVisaDebit", "ATMCardnetEnvIn", "ATMCashGroupATMCreditCard", "ATMCashNonGroupATMCredittcard", "ATMCashGroupATMDebitCard", "ATMCashNonGroupATMDebitcard", "ATMConGroupATM", "ATMAbroad", "ATMForeignCashDebCard", "ATMAbroadGoldVisaDebit", "ATMSpainCashCard", "ATMSpainDebitCard", "ATMSpainConversionDebitCard", "ATMSpainConversionCashCard", "ATMNonSterlingWithdrawal", "ATMAbroadVisaCredit", "ATMAbroadVisaDebit", "ATMAbroadConVisaGoldDebit", "ATMWidthdrawCash", "BACSOnLineAncilliary", "BACSBatch", "BACSOnLineFile", "BACSFileItem", "BACSOnLineSetup ", "BACSItem", "BACSItemInterbranch", "BACSBulkBatch", "BACSOnLineOverlimit", "BACSOnLinePayment", "BACSRecallItem", "BACSOnLineService", "BACSBulkInternet", "BACSTELDirDebSmartCard", "BACSTELDirDebWebInit", "BACSTELirDebWebInit", "BACSTELDirDebOverlimit", "BACSTELDirDebPayment", "BACSTELDirDebService", "BACSTELDirDebAncilliary", "BACSDirectItemProfile", "BACSTELAncilliary", "BACSTELSmartCard", "BACSTELFile", "BACSTELSetup ", "BACSTELOverlimit", "BACSTELPayment", "BACSTELService", "CHAPSOutBranch", "CHAPSCancellation", "CHAPSOutOnlineDepositAcc", "CHAPSIn", "CHAPSOutInterBank", "CHAPSInterBank", "CHAPSOutPost", "CHAPSOutInterBranch", "CHAPSOut", "CHAPSOutOnline", "CHAPSandForeignPay", "CHAPSOutManual", "CardCardReplacement", "DraftsCounter", "DraftsBankers", "DraftsIntlPayableAbroad", "DraftsLostStolen", "CardPersonalisedCard", "DraftsIntlStoppedCancelled", "EuroChqXLess", "EuroChqXPlus", "FPSOutFutureDated", "FPSOutImmediate", "FPSOut", "FPSOutOwn", "FPSInBranch", "FPSUKPayUrgent", "LegalArticlesReport", "LegalSealing", "LegalBondAndGuarantee", "LegalCourtOrder", "LegalCoSearch", "LegalDepositAssignment", "LegalGuaranteePrep", "LegalLifePolicyPrepCo", "LegalLifePolicyPrepPersonal", "LegalPriorityPariPassu", "LegalSubordinationAgreement", "DirDebDirectDebitAdmin", "DirDebDirectDebitCancel", "IntlPayBIBForeignLimit", "IntlPayCreditTransCust", "IntlPayCreditTransNonCust", "IntlPayUrgentPaymentForeign", "IntlPayExpressMoneyMover", "IntlPayEEAPayUrgent", "IntlPayIrishPayUrgent", "IntlPayEEAPay", "IntlPayForeignIn1CPlus", "IntlPayForeignPaymentInUKAcc", "IntlPayForeignCharge", "IntlPayForeignCancellation", "IntlPayForeignStandardEUEuroBIC", "IntlPayFXFeeRate", "IntlPayForeignInternet", "IntlPayForeign", "IntlPayForeignInbound", "IntlPayFXPaymentOut", "IntlPayForeignInSub1C", "IntlPayFXRate", "IntlPayForeignStandardEUEuroNoBIC", "IntlPayFXPaymentOutIR", "IntlPayFXFee", "IntlPayPurchaseNonSterling", "IntlPayPostPaymentForeign", "IntlPayPurchaseRateNonSterling", "IntlPayPaymentTracing", "IntlPayStandardMoneyMover", "IntlPayMT101Transaction", "IntlPayTransNonSterling", "IntlPayTransRateNonSterling", "IntlPayForeignUrgentEUEuroBIC", "IntlPayForeignUrgentEUEuroNoBIC", "IntlPayUrgentPaymentGroup", "IntlPayUrgentPaymentUK", "IntlPayUSAPayUrgent", "IntlPayCurrencyPurchase", "IntlPayWorldpayPayment", "IntlPayCurrencyWithdraw", "InvPayBankDetailsWrong", "InvPayForeignBCNR", "InvPayForeignRecall", "InvGeneralInq", "InvOldInstruction", "InvPayPaymentRecall", "InvPayReturnDebitXVLess", "InvPayReturnDebitXVPlus", "InvPayStopPayment", "InvPayStandingOrdUnpaid", "SafeKeepAccess", "SafeKeepDeedMedium", "SafeKeepingEnvelope", "SafeKeepingInspection", "SafeKeepingLargeItem", "SafeKeepMultipleItems", "SafeKeepingParcel", "SafeKeepDeedSmall", "SafeKeepOneItem", "SafeKeepSafeCustody", "LoanArrangementFeePC", "LoanArrangement", "LoanEarlyRepayment", "LoanLatePayment", "LoanSMEUnsecuredLoan", "LoanTieredArrangement", "NightSafeNightSafeBankOpen", "NightSafeCreditSub5K", "NightSafeNightSafe", "NightSafeNightSafePaidIn", "OverdraftAnnualReview", "OverdraftTempOverdraft", "OverdraftUnauthorisedBorrowing", "POPostOfficeCounterCredit", "POPostOfficeCashCredit", "POPostOfficeCashOut", "POPostOfficeWithdrawal", "ChqBookTheftLossAllStopped", "ChqIssuedCurrencyAcc", "ChqCopy", "ChqDraft", "ChqIn", "ChqDraftSterling", "ChqOutIssued", "ChqSpecialChqPresentation", "ChqCounterCheque", "ChqChequeswithStatement", "ChqStopped", "ChqTrans", "ChqDraftFX", "ChqForeignCourier", "ChqForeignNegTenThou", "ChqForeignNegHundred", "ChequeForeignBankDivi", "ChqForeignNegFiftyThou", "ChqPensionCheque", "ChequeForeignOtherDivi", "ChqForeignNegFiveThou", "ChqForeignNegMax", "ChqForeignGBPMMDPlus", "ChqGiftCheque", "ChqCounterLodgement", "ChqCashDropLodgement", "ChqChequePhotocopy", "ChqPostOfficeCredit", "ChqPostOfficeChequeCollected", "ChqChequeRetrieval", "ChqReconcilliationPerTrans", "ChqSpecialPresentationCount", "ChqSpecialPresentationPTT", "ChqUnpaidCharge", "ChqUnpaidTransIn", "ChqUnpaidTransOut", "ChqUnpaidCheque", "ReportAuditLetter", "ReportFAXAdviceAdditional", "ReportTelAdviceAdditional", "ReportCreditHistory", "ReportCertInterestDuplicate", "ReportCertInterest", "ReportCreditHistoryAdditionalInYear", "ReportForeignStatusEnqElec", "ReportForeignStatusEnq", "ReportCashBackorInterestAnal", "ReportStatementChqDaily", "ReportStatementChqFortnightly", "ReportStatementChqMonthly", "ReportStatementChqWeekly", "ReportStatementAndDiviChq", "ReportReference", "ReportReferralItem", "ReportStatementByATM", "ReportStatementByBranch", "ReportStatementCopyRegular", "ReportStatusEnquiry", "ReportStatementFrequent", "ReportStatementMonthly", "ReportStatementCopy1", "ReportStatementToBranch", "ReportSMSTextMiniStatementorAlert", "ReportStatementFortnightly", "ReportSMSTextMiniStatementWoM", "ReportSMSTextAlertBalance", "ReportSMSTextAlert", "ReportTaxCert", "ReportWeeklyStatement", "ReportTextMessageBanking", "SEPACancellation", "SEPABranch", "SEPACredit", "SEPADirectDebit", "SEPAIn", "SEPAEuro", "SEPAOut", "SEPAUnpaid", "SEPAWinbitsAnnual Service", "SEPAWinbitsTransaction", "TransBillPaymentBranch", "TransBillCollect", "TransTelephoneBillPayment", "TransBankPayment", "TransBillPaymentTelephone", "TransCorrespondentBankFee", "TransCreditTransferUKDifferent", "TransCreditTransferUKSame", "TransCredit", "TransCreditTransfer", "TransBranchCredit", "TransDebit", "TransDebCardDeb", "TransUKDirDeb", "TransManualDeb", "TransBuyForeignWithGBP", "TransGoodValueReq", "TransSWIFTOutUKForeign", "TransInconpleteInstruction", "TransManualEntries", "TransManualTrans", "TransNonSterling", "TransPOSSaleForeign", "TransPriPaymentPost", "TransPOSSaleUK", "TransReturnPayment", "TransReconciliationPerTrans", "TransStandingOrdAdmin", "TransStandingOrd", "TransStandingOrdManPay", "TransTravellersChqOtherBank", "TransTelBusiPriPaymentForeignToUKAcc", "TransTeleItem", "TransTelBusiPriPaymentToGrpAcc", "TransTravellersChqRate", "TransTransferExGroup", "TransUnauthorisedPaidTrans", "TransUrgentPaymentPostal", "TransUnpaidTrans", "TransTelBusiPriPaymentToNonGrpAcc", "TransSWIFTOutNonEEASterling", "AutoAutoCredit", "AutoAutomatedEntries", "AutoAutoCreditPhoneInet", "AutoAutomatedTrans", "AutoDebitCardCommercial", "AutoFPSAutoCredit", "VisaConvertAbroadForeign", "VisaBureauDeChange", "VisaTravellersChqorCurrency", "OnlineInternetBillPayment", "OnlineBusinessOnlineEuroPayment", "OnlineBusinessOnlineUrgentEuroPayment", "OnlineBusinessOnlineForeignPayment", "OnlineInterbankTransfer", "OnlineInterbankPerTransfer", "OnlineInterbranchTransfer", "OnlineInterbranchPerTransfer", "OnlineSubscriptionMonthly", "OnlineBankingPayment", "OnlineBankingSubscription", "OnlinePOSSale", "OnlinePersonalCustAncillarys", "OnlinePersonalCustService", "OnlinePersonalCustOverlimits", "OnlineReplacementCardReader", "OnlinePersonalCustSetUp", "OnlinePersonalCustTransaction", "OnlinePaymentinGBPtoUK", "OnlineUrgentPayment", "OnlinePaymentinUSDtoUS", "OnlineBulkDirectDebSterling", "ForeignChqSent", "ForeignChqSelf", "ForeignChqEncashment", "ForeignFXInwardsCust", "ForeignFXTransfersROI", "ForeignFXForwardTrans", "ForeignFXTransfersBOI", "ForeignExMaintenance", "ForeignFXInwardsNonCust", "ForeignFXOutwards", "ForeignPurchase", "ForeignStatusRep", "ForeignChqDraft", "ForeignChqCLess", "ForeignChqMLess", "ForeignChqOther", "ForeignChqMPlus", "ForeignChqCCC", "ServiceCAccountFee", "ServiceCAccountFeeMonthly", "ServiceCAccountFeeQuarterly", "ServiceCBalanceHandling", "ServiceCFixedTariff", "ServiceCBusiDepAccBreakage", "ServiceCMonitorDaily", "ServiceCManagementFee", "ServiceCMinimumMonthlyFee", "ServiceCMonitorMonthly", "ServiceCMonitorWeekly", "ServiceCSecurityFee", "ServiceCMT940AccountFirst", "ServiceCMT940AccountSubsequent", "ServiceCOther", "CounterCoinHandling", "CounterCashIn", "CounterCashInNotUs", "CounterCashOut", "CounterCashX", "CounterForeignCashMax", "CounterForeignNoteHandling", "CounterForeignCashOut", "CounterCashFeeRate", "CounterForeignCashOutTx", "CounterCounterLodgement", "CounterCashDropLodgement", "CounterNotesLodged", "CounterNotesOut", "CounterCashInOwn", "CounterPaidTrans", "CounterCashFeePercent"]
+                                            "enum": ["Other", "ATMDonation", "ATMDeposATMPaidIn", "ReportCertBalance", "ATMAbroadConVisaCredit", "ATMAbroadConVisaDebit", "ATMCardnetEnvIn", "ATMCashGroupATMCreditCard", "ATMCashNonGroupATMCredittcard", "ATMCashGroupATMDebitCard", "ATMCashNonGroupATMDebitcard", "ATMConGroupATM", "ATMAbroad", "ATMForeignCashDebCard", "ATMAbroadGoldVisaDebit", "ATMSpainCashCard", "ATMSpainDebitCard", "ATMSpainConversionDebitCard", "ATMSpainConversionCashCard", "ATMNonSterlingWithdrawal", "ATMAbroadVisaCredit", "ATMAbroadVisaDebit", "ATMAbroadConVisaGoldDebit", "ATMWidthdrawCash", "BACSOnLineAncilliary", "BACSBatch", "BACSOnLineFile", "BACSFileItem", "BACSOnLineSetup ", "BACSItem", "BACSItemInterbranch", "BACSBulkBatch", "BACSOnLineOverlimit", "BACSOnLinePayment", "BACSRecallItem", "BACSOnLineService", "BACSBulkInternet", "BACSTELDirDebSmartCard", "BACSTELDirDebWebInit", "BACSTELirDebWebInit", "BACSTELDirDebOverlimit", "BACSTELDirDebPayment", "BACSTELDirDebService", "BACSTELDirDebAncilliary", "BACSDirectItemProfile", "BACSTELAncilliary", "BACSTELSmartCard", "BACSTELFile", "BACSTELSetup ", "BACSTELOverlimit", "BACSTELPayment", "BACSTELService", "CHAPSOutBranch", "CHAPSCancellation", "CHAPSOutOnlineDepositAcc", "CHAPSIn", "CHAPSOutInterBank", "CHAPSInterBank", "CHAPSOutPost", "CHAPSOutInterBranch", "CHAPSOut", "CHAPSOutOnline", "CHAPSandForeignPay", "CHAPSOutManual", "CardCardReplacement", "DraftsCounter", "DraftsBankers", "DraftsIntlPayableAbroad", "DraftsLostStolen", "CardPersonalisedCard", "DraftsIntlStoppedCancelled", "EuroChqXLess", "EuroChqXPlus", "FPSOutFutureDated", "FPSOutImmediate", "FPSOut", "FPSOutOwn", "FPSInBranch", "FPSUKPayUrgent", "LegalArticlesReport", "LegalSealing", "LegalBondAndGuarantee", "LegalCourtOrder", "LegalCoSearch", "LegalDepositAssignment", "LegalGuaranteePrep", "LegalLifePolicyPrepCo", "LegalLifePolicyPrepPersonal", "LegalPriorityPariPassu", "LegalSubordinationAgreement", "DirDebDirectDebitAdmin", "DirDebDirectDebitCancel", "IntlPayBIBForeignLimit", "IntlPayCreditTransCust", "IntlPayCreditTransNonCust", "IntlPayUrgentPaymentForeign", "IntlPayExpressMoneyMover", "IntlPayEEAPayUrgent", "IntlPayIrishPayUrgent", "IntlPayEEAPay", "IntlPayForeignIn1CPlus", "IntlPayForeignPaymentInUKAcc", "IntlPayForeignCharge", "IntlPayForeignCancellation", "IntlPayForeignStandardEUEuroBIC", "IntlPayFXFeeRate", "IntlPayForeignInternet", "IntlPayForeign", "IntlPayForeignInbound", "IntlPayFXPaymentOut", "IntlPayForeignInSub1C", "IntlPayFXRate", "IntlPayForeignStandardEUEuroNoBIC", "IntlPayFXPaymentOutIR", "IntlPayFXFee", "IntlPayPurchaseNonSterling", "IntlPayPostPaymentForeign", "IntlPayPurchaseRateNonSterling", "IntlPayPaymentTracing", "IntlPayStandardMoneyMover", "IntlPayMT101Transaction", "IntlPayTransNonSterling", "IntlPayTransRateNonSterling", "IntlPayForeignUrgentEUEuroBIC", "IntlPayForeignUrgentEUEuroNoBIC", "IntlPayUrgentPaymentGroup", "IntlPayUrgentPaymentUK", "IntlPayUSAPayUrgent", "IntlPayCurrencyPurchase", "IntlPayWorldpayPayment", "IntlPayCurrencyWithdraw", "InvPayBankDetailsWrong", "InvPayForeignBCNR", "InvPayForeignRecall", "InvGeneralInq", "InvOldInstruction", "InvPayPaymentRecall", "InvPayReturnDebitXVLess", "InvPayReturnDebitXVPlus", "InvPayStopPayment", "InvPayStandingOrdUnpaid", "SafeKeepAccess", "SafeKeepDeedMedium", "SafeKeepingEnvelope", "SafeKeepingInspection", "SafeKeepingLargeItem", "SafeKeepMultipleItems", "SafeKeepingParcel", "SafeKeepDeedSmall", "SafeKeepOneItem", "SafeKeepSafeCustody", "LoanArrangementFeePC", "LoanArrangement", "LoanEarlyRepayment", "LoanLatePayment", "LoanSMEUnsecuredLoan", "LoanTieredArrangement", "NightSafeNightSafeBankOpen", "NightSafeCreditSub5K", "NightSafeNightSafe", "NightSafeNightSafePaidIn", "OverdraftAnnualReview", "OverdraftTempOverdraft", "OverdraftUnauthorisedBorrowing", "POPostOfficeCounterCredit", "POPostOfficeCashCredit", "POPostOfficeCashOut", "POPostOfficeWithdrawal", "ChqBookTheftLossAllStopped", "ChqIssuedCurrencyAcc", "ChqCopy", "ChqDraft", "ChqIn", "ChqDraftSterling", "ChqOutIssued", "ChqSpecialChqPresentation", "ChqCounterCheque", "ChqChequeswithStatement", "ChqStopped", "ChqTrans", "ChqDraftFX", "ChqForeignCourier", "ChqForeignNegTenThou", "ChqForeignNegHundred", "ChequeForeignBankDivi", "ChqForeignNegFiftyThou", "ChqPensionCheque", "ChequeForeignOtherDivi", "ChqForeignNegFiveThou", "ChqForeignNegMax", "ChqForeignGBPMMDPlus", "ChqGiftCheque", "ChqCounterLodgement", "ChqCashDropLodgement", "ChqChequePhotocopy", "ChqPostOfficeCredit", "ChqPostOfficeChequeCollected", "ChqChequeRetrieval", "ChqReconcilliationPerTrans", "ChqSpecialPresentationCount", "ChqSpecialPresentationPTT", "ChqUnpaidCharge", "ChqUnpaidTransIn", "ChqUnpaidTransOut", "ChqUnpaidCheque", "ReportAuditLetter", "ReportFAXAdviceAdditional", "ReportTelAdviceAdditional", "ReportCreditHistory", "ReportCertInterestDuplicate", "ReportCertInterest", "ReportCreditHistoryAdditionalInYear", "ReportForeignStatusEnqElec", "ReportForeignStatusEnq", "ReportCashBackorInterestAnal", "ReportStatementChqDaily", "ReportStatementChqFortnightly", "ReportStatementChqMonthly", "ReportStatementChqWeekly", "ReportStatementAndDiviChq", "ReportReference", "ReportReferralItem", "ReportStatementByATM", "ReportStatementByBranch", "ReportStatementCopyRegular", "ReportStatusEnquiry", "ReportStatementFrequent", "ReportStatementMonthly", "ReportStatementCopy1", "ReportStatementToBranch", "ReportSMSTextMiniStatementorAlert", "ReportStatementFortnightly", "ReportSMSTextMiniStatementWoM", "ReportSMSTextAlertBalance", "ReportSMSTextAlert", "ReportTaxCert", "ReportWeeklyStatement", "ReportTextMessageBanking", "SEPACancellation", "SEPABranch", "SEPACredit", "SEPADirectDebit", "SEPAIn", "SEPAEuro", "SEPAOut", "SEPAUnpaid", "SEPAWinbitsAnnual Service", "SEPAWinbitsTransaction", "TransBillPaymentBranch", "TransBillCollect", "TransTelephoneBillPayment", "TransBankPayment", "TransBillPaymentTelephone", "TransCorrespondentBankFee", "TransCreditTransferUKDifferent", "TransCreditTransferUKSame", "TransCredit", "TransCreditTransfer", "TransBranchCredit", "TransDebit", "TransDebCardDeb", "TransUKDirDeb", "TransManualDeb", "TransBuyForeignWithGBP", "TransGoodValueReq", "TransSWIFTOutUKForeign", "TransInconpleteInstruction", "TransManualEntries", "TransManualTrans", "TransNonSterling", "TransPOSSaleForeign", "TransPriPaymentPost", "TransPOSSaleUK", "TransReturnPayment", "TransReconciliationPerTrans", "TransStandingOrdAdmin", "TransStandingOrd", "TransStandingOrdManPay", "TransTravellersChqOtherBank", "TransTelBusiPriPaymentForeignToUKAcc", "TransTeleItem", "TransTelBusiPriPaymentToGrpAcc", "TransTravellersChqRate", "TransTransferExGroup", "TransUnauthorisedPaidTrans", "TransUrgentPaymentPostal", "TransUnpaidTrans", "TransTelBusiPriPaymentToNonGrpAcc", "TransSWIFTOutNonEEASterling", "AutoAutoCredit", "AutoAutomatedEntries", "AutoAutoCreditPhoneInet", "AutoAutomatedTrans", "AutoDebitCardCommercial", "AutoFPSAutoCredit", "VisaConvertAbroadForeign", "VisaBureauDeChange", "VisaTravellersChqorCurrency", "OnlineInternetBillPayment", "OnlineBusinessOnlineEuroPayment", "OnlineBusinessOnlineUrgentEuroPayment", "OnlineBusinessOnlineForeignPayment", "OnlineInterbankTransfer", "OnlineInterbankPerTransfer", "OnlineInterbranchTransfer", "OnlineInterbranchPerTransfer", "OnlineSubscriptionMonthly", "OnlineBankingPayment", "OnlineBankingSubscription", "OnlinePOSSale", "OnlinePersonalCustAncillarys", "OnlinePersonalCustService", "OnlinePersonalCustOverlimits", "OnlineReplacementCardReader", "OnlinePersonalCustSetUp", "OnlinePersonalCustTransaction", "OnlinePaymentinGBPtoUK", "OnlineUrgentPayment", "OnlinePaymentinUSDtoUS", "OnlineBulkDirectDebSterling", "ForeignChqSent", "ForeignChqSelf", "ForeignChqEncashment", "ForeignFXInwardsCust", "ForeignFXTransfersROI", "ForeignFXForwardTrans", "ForeignFXTransfersBOI", "ForeignExMaintenance", "ForeignFXInwardsNonCust", "ForeignFXOutwards", "ForeignPurchase", "ForeignStatusRep", "ForeignChqDraft", "ForeignChqCLess", "ForeignChqMLess", "ForeignChqOther", "ForeignChqMPlus", "ForeignChqCCC", "ServiceCAccountFee", "ServiceCAccountFeeMonthly", "ServiceCAccountFeeQuarterly", "ServiceCBalanceHandling", "ServiceCFixedTariff", "ServiceCBusiDepAccBreakage", "ServiceCMonitorDaily", "ServiceCManagementFee", "ServiceCMinimumMonthlyFee", "ServiceCMonitorMonthly", "ServiceCMonitorWeekly", "ServiceCSecurityFee", "ServiceCMT940AccountFirst", "ServiceCMT940AccountSubsequent", "ServiceCOther", "CounterCoinHandling", "CounterCashIn", "CounterCashInNotUs", "CounterCashOut", "CounterCashX", "CounterForeignCashMax", "CounterForeignNoteHandling", "CounterForeignCashOut", "CounterCashFeeRate", "CounterForeignCashOutTx", "CounterCounterLodgement", "CounterCashDropLodgement", "CounterNotesLodged", "CounterNotesOut", "CounterCashInOwn", "CounterPaidTrans", "CounterCashFeePercent"]
                                           },
                                           "Other": {
                                             "description": "Describe other fee type",
@@ -2506,7 +2817,7 @@
                               "additionalProperties": false
                             }
                           },
-                          "required": ["ProductSubType", "Fees"],
+                          "required": ["ProductState", "Fees"],
                           "additionalProperties": false
                         },
                         "minItems": 1
@@ -3238,8 +3549,8 @@
                               "description": "Indicates whether the account has any feature",
                               "type": "boolean"
                             },
-                            "ProductSubType": {
-                              "description": "Describes if the offering is promotional, regular or a description of a future state",
+                            "ProductState": {
+                              "description": "Describes if the offering is promotional or a description of a future state.",
                               "type": "string",
                               "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
@@ -3326,8 +3637,8 @@
                           "description": "Card Price",
                           "type": "object",
                           "properties": {
-                            "ProductSubType": {
-                              "description": "Describes if the offering is promotional, regular or a description of a future state",
+                            "ProductState": {
+                              "description": "Describes if the offering is promotional or a description of a future state.",
                               "type": "string",
                               "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
@@ -3363,7 +3674,7 @@
                               "additionalProperties": false
                             }
                           },
-                          "required": ["ProductSubType", "CAPricingItem"],
+                          "required": ["ProductState", "CAPricingItem"],
                           "additionalProperties": false
                         },
                         "minItems": 1
@@ -3582,7 +3893,7 @@
                                     "CalculationFrequency": {
                                       "description": "How often is interest applied to account",
                                       "type": "string",
-                                      "enum": ["Month", "Week", "Year"]
+                                      "enum": ["Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight"]
                                     },
                                     "PaymentMethod": {
                                       "description": "Credit Interest Payment Method Code",
@@ -3675,8 +3986,8 @@
                           "description": "Overdraft",
                           "type": "object",
                           "properties": {
-                            "InterestProductSubType": {
-                              "description": "Describes if the offering is promotional, regular or a description of a future state",
+                            "OverdraftProductState": {
+                              "description": "Describes if the offering is promotional or a description of a future state.",
                               "type": "string",
                               "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
@@ -3699,164 +4010,516 @@
                               "type": "string",
                               "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                             },
-                            "OverdraftPricing": {
-                              "description": "Overdraft Pricing",
-                              "type": "object",
-                              "properties": {
-                                "ApplicableTo": {
-                                  "description": "Personal Interest Tiers",
-                                  "type": "object",
-                                  "properties": {
-                                    "InterestTierSME": {
-                                      "description": "Identifier for tier only where it has been supplied under Part 8 (article 32 or the CMA order), value reflects upper tier value",
-                                      "type": "string",
-                                      "enum": ["£5000", "£10000", "£15000", "£20000", "£25000", "Other", "TierMaximum", "TierMinimum"]
-                                    },
-                                    "InterestTierPersonal": {
-                                      "description": "Identifier for the tier",
-                                      "type": "string"
-                                    }
+                            "OverdraftTierBandSet": {
+                              "description": "Overdraft Tier Band Set",
+                              "type": "array",
+                              "items": {
+                                "description": "Tier Bandset",
+                                "type": "object",
+                                "properties": {
+                                  "CMADefinedIndicator": {
+                                    "description": "describes that the tiers and bands are set by the CMA order, as opposed to be set by the banks",
+                                    "type": "boolean"
                                   },
-                                  "minProperties": 1,
-                                  "maxProperties": 1,
-                                  "additionalProperties": false
-                                },
-                                "Tiers": {
-                                  "type": "array",
-                                  "items": {
-                                    "description": "Tiers",
+                                  "ArrangementType": {
+                                    "description": "Defines the arrangement of the overdraft",
+                                    "type": "string",
+                                    "enum": ["Unarranged", "Arranged", "Other"]
+                                  },
+                                  "ArrangementOtherType": {
+                                    "description": "Other Code Type",
                                     "type": "object",
                                     "properties": {
-                                      "TierType": {
-                                        "description": "Tier Type",
-                                        "type": "object",
-                                        "properties": {
-                                          "ArrangedOverdraftInterestTier": {
-                                            "description": "Arranged overdraft interest tier",
-                                            "type": "string",
-                                            "minLength": 1,
-                                            "maxLength": 10
-                                          },
-                                          "UnarrangedOverdraftInterestTier": {
-                                            "description": "Unarranged overdraft interest tier",
-                                            "type": "string",
-                                            "minLength": 1,
-                                            "maxLength": 10
-                                          }
-                                        },
-                                        "minProperties": 1,
-                                        "maxProperties": 1,
-                                        "additionalProperties": false
-                                      },
-                                      "TierValueMinimum": {
-                                        "description": "Lower value of interest tier",
+                                      "Code": {
+                                        "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
                                         "type": "string",
-                                        "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                        "minLength": 4,
+                                        "maxLength": 4
                                       },
-                                      "TierValueMaximum": {
-                                        "description": "Max Value of interest tier",
+                                      "Name": {
+                                        "description": "Name of 'Other' code set value applicable to specified attribute",
                                         "type": "string",
                                         "minLength": 1,
-                                        "maxLength": 15
+                                        "maxLength": 256
+                                      },
+                                      "Description": {
+                                        "description": "Description for 'Other' code set value applicable to specified attribute",
+                                        "type": "string"
                                       }
                                     },
                                     "additionalProperties": false
                                   },
-                                  "minItems": 1
+                                  "TierBandSetIdentification": {
+                                    "description": "Identification of the set of tiers or bands",
+                                    "type": "string"
+                                  },
+                                  "EAR": {
+                                    "description": "EAR of the Overdraft Set",
+                                    "type": "string",
+                                    "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                                  },
+                                  "FeesAndCharges": {
+                                    "description": "Type of fee or charge",
+                                    "type": "array",
+                                    "items": {
+                                      "description": "Overdraft Fees Charges",
+                                      "type": "object",
+                                      "properties": {
+                                        "FeeChargeType": {
+                                          "description": "Type of fee or charge",
+                                          "type": "string",
+                                          "enum": ["Periodic", "Minimum", "Maximum", "Setup", "Review", "Renewal", "MinimumSetup", "MaximumSetup", "Total", "Item", "EmergencyLending", "Other"]
+                                        },
+                                        "FeeChargeOtherType": {
+                                          "description": "Other Code Type",
+                                          "type": "object",
+                                          "properties": {
+                                            "Code": {
+                                              "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 4,
+                                              "maxLength": 4
+                                            },
+                                            "Name": {
+                                              "description": "Name of 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 1,
+                                              "maxLength": 256
+                                            },
+                                            "Description": {
+                                              "description": "Description for 'Other' code set value applicable to specified attribute",
+                                              "type": "string"
+                                            }
+                                          },
+                                          "additionalProperties": false
+                                        },
+                                        "FeeChargeAmount": {
+                                          "description": "Charge applied to tier",
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                        },
+                                        "FeeChargeRate": {
+                                          "description": "Fee charge rate applied to tier",
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                                        },
+                                        "FeeChargeRateType": {
+                                          "description": "Rate type other than EAR",
+                                          "type": "string",
+                                          "enum": ["Gross", "Net", "Other"]
+                                        },
+                                        "FeeChargeRateOtherType": {
+                                          "description": "Other Code Type",
+                                          "type": "object",
+                                          "properties": {
+                                            "Code": {
+                                              "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 4,
+                                              "maxLength": 4
+                                            },
+                                            "Name": {
+                                              "description": "Name of 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 1,
+                                              "maxLength": 256
+                                            },
+                                            "Description": {
+                                              "description": "Description for 'Other' code set value applicable to specified attribute",
+                                              "type": "string"
+                                            }
+                                          },
+                                          "additionalProperties": false
+                                        },
+                                        "FeeChargeApplicationFrequency": {
+                                          "description": "Frequency with which the rate, or amount is charged",
+                                          "type": "string",
+                                          "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
+                                        },
+                                        "FeeChargeOtherApplicationFrequency": {
+                                          "description": "Other Code Type",
+                                          "type": "object",
+                                          "properties": {
+                                            "Code": {
+                                              "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 4,
+                                              "maxLength": 4
+                                            },
+                                            "Name": {
+                                              "description": "Name of 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 1,
+                                              "maxLength": 256
+                                            },
+                                            "Description": {
+                                              "description": "Description for 'Other' code set value applicable to specified attribute",
+                                              "type": "string"
+                                            }
+                                          },
+                                          "additionalProperties": false
+                                        },
+                                        "FeeChargeCalculationFrequency": {
+                                          "description": "Frequency with which the rate, or amount is calculated",
+                                          "type": "string",
+                                          "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
+                                        },
+                                        "FeeChargeOtherCalculationFrequency": {
+                                          "description": "Other Code Type",
+                                          "type": "object",
+                                          "properties": {
+                                            "Code": {
+                                              "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 4,
+                                              "maxLength": 4
+                                            },
+                                            "Name": {
+                                              "description": "Name of 'Other' code set value applicable to specified attribute",
+                                              "type": "string",
+                                              "minLength": 1,
+                                              "maxLength": 256
+                                            },
+                                            "Description": {
+                                              "description": "Description for 'Other' code set value applicable to specified attribute",
+                                              "type": "string"
+                                            }
+                                          },
+                                          "additionalProperties": false
+                                        }
+                                      },
+                                      "required": ["FeeChargeType"],
+                                      "additionalProperties": false
+                                    }
+                                  },
+                                  "BufferAmount": {
+                                    "description": "Amount on overdraft that is prearranged",
+                                    "type": "string",
+                                    "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                  },
+                                  "OverdraftTierBand": {
+                                    "type": "array",
+                                    "items": {
+                                      "description": "Tiers",
+                                      "type": "object",
+                                      "properties": {
+                                        "TierBandIdentification": {
+                                          "description": "Identification of the tier or band",
+                                          "type": "string"
+                                        },
+                                        "TierValueMinimum": {
+                                          "description": "Minimum value of the tier",
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                        },
+                                        "TierValueMaximum": {
+                                          "description": "Maximum value of the tier",
+                                          "type": "string",
+                                          "minLength": 1,
+                                          "maxLength": 15
+                                        },
+                                        "EAR": {
+                                          "description": "EAR of the Tier",
+                                          "type": "string",
+                                          "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                                        },
+                                        "FeesAndCharges": {
+                                          "type": "array",
+                                          "items": {
+                                            "description": "Overdraft Fees Charges",
+                                            "type": "object",
+                                            "properties": {
+                                              "FeeChargeType": {
+                                                "description": "Type of fee or charge",
+                                                "type": "string",
+                                                "enum": ["Periodic", "Minimum", "Maximum", "Setup", "Review", "Renewal", "MinimumSetup", "MaximumSetup", "Total", "Item", "EmergencyLending", "Other"]
+                                              },
+                                              "FeeChargeOtherType": {
+                                                "description": "Other Code Type",
+                                                "type": "object",
+                                                "properties": {
+                                                  "Code": {
+                                                    "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 4,
+                                                    "maxLength": 4
+                                                  },
+                                                  "Name": {
+                                                    "description": "Name of 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 1,
+                                                    "maxLength": 256
+                                                  },
+                                                  "Description": {
+                                                    "description": "Description for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "additionalProperties": false
+                                              },
+                                              "FeeChargeAmount": {
+                                                "description": "Charge applied to tier",
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                              },
+                                              "FeeChargeRate": {
+                                                "description": "Fee charge rate applied to tier",
+                                                "type": "string",
+                                                "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                                              },
+                                              "FeeChargeRateType": {
+                                                "description": "Rate type other than EAR",
+                                                "type": "string",
+                                                "enum": ["Gross", "Net", "Other"]
+                                              },
+                                              "FeeChargeRateOtherType": {
+                                                "description": "Other Code Type",
+                                                "type": "object",
+                                                "properties": {
+                                                  "Code": {
+                                                    "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 4,
+                                                    "maxLength": 4
+                                                  },
+                                                  "Name": {
+                                                    "description": "Name of 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 1,
+                                                    "maxLength": 256
+                                                  },
+                                                  "Description": {
+                                                    "description": "Description for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "additionalProperties": false
+                                              },
+                                              "FeeChargeApplicationFrequency": {
+                                                "description": "Frequency with which the rate, or amount is charged",
+                                                "type": "string",
+                                                "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
+                                              },
+                                              "FeeChargeOtherApplicationFrequency": {
+                                                "description": "Other Code Type",
+                                                "type": "object",
+                                                "properties": {
+                                                  "Code": {
+                                                    "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 4,
+                                                    "maxLength": 4
+                                                  },
+                                                  "Name": {
+                                                    "description": "Name of 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 1,
+                                                    "maxLength": 256
+                                                  },
+                                                  "Description": {
+                                                    "description": "Description for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "additionalProperties": false
+                                              },
+                                              "FeeChargeCalculationFrequency": {
+                                                "description": "Frequency with which the rate, or amount is calculated",
+                                                "type": "string",
+                                                "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
+                                              },
+                                              "FeeChargeOtherCalculationFrequency": {
+                                                "description": "Other Code Type",
+                                                "type": "object",
+                                                "properties": {
+                                                  "Code": {
+                                                    "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 4,
+                                                    "maxLength": 4
+                                                  },
+                                                  "Name": {
+                                                    "description": "Name of 'Other' code set value applicable to specified attribute",
+                                                    "type": "string",
+                                                    "minLength": 1,
+                                                    "maxLength": 256
+                                                  },
+                                                  "Description": {
+                                                    "description": "Description for 'Other' code set value applicable to specified attribute",
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "additionalProperties": false
+                                              }
+                                            },
+                                            "required": ["FeeChargeType"],
+                                            "additionalProperties": false
+                                          },
+                                          "uniqueItems": true
+                                        },
+                                        "Notes": {
+                                          "description": "Notes on the Overdraft",
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": ["TierValueMinimum", "TierValueMaximum"],
+                                      "additionalProperties": false
+                                    }
+                                  },
+                                  "Notes": {
+                                    "description": "Notes on the Overdraft",
+                                    "type": "string"
+                                  }
                                 },
-                                "InterestRateEARpa": {
-                                  "description": "Interest rate applied to tier",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                                "required": ["CMADefinedIndicator", "ArrangementType"],
+                                "additionalProperties": false
+                              }
+                            },
+                            "FeeChargeNegotiableIndicator": {
+                              "description": "Fee Charge negotiable Indicator",
+                              "type": "string",
+                              "enum": ["No", "Yes"]
+                            },
+                            "FeesAndCharges": {
+                              "type": "array",
+                              "items": {
+                                "description": "Overdraft Fees Charges",
+                                "type": "object",
+                                "properties": {
+                                  "FeeChargeType": {
+                                    "description": "Type of fee or charge",
+                                    "type": "string",
+                                    "enum": ["Periodic", "Minimum", "Maximum", "Setup", "Review", "Renewal", "MinimumSetup", "MaximumSetup", "Total", "Item", "EmergencyLending", "Other"]
+                                  },
+                                  "FeeChargeOtherType": {
+                                    "description": "Other Code Type",
+                                    "type": "object",
+                                    "properties": {
+                                      "Code": {
+                                        "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 4,
+                                        "maxLength": 4
+                                      },
+                                      "Name": {
+                                        "description": "Name of 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 256
+                                      },
+                                      "Description": {
+                                        "description": "Description for 'Other' code set value applicable to specified attribute",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  },
+                                  "FeeChargeAmount": {
+                                    "description": "Charge applied to tier",
+                                    "type": "string",
+                                    "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                                  },
+                                  "FeeChargeRate": {
+                                    "description": "Fee charge rate applied to tier",
+                                    "type": "string",
+                                    "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
+                                  },
+                                  "FeeChargeRateType": {
+                                    "description": "Rate type other than EAR",
+                                    "type": "string",
+                                    "enum": ["Gross", "Net", "Other"]
+                                  },
+                                  "FeeChargeRateOtherType": {
+                                    "description": "Other Code Type",
+                                    "type": "object",
+                                    "properties": {
+                                      "Code": {
+                                        "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 4,
+                                        "maxLength": 4
+                                      },
+                                      "Name": {
+                                        "description": "Name of 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 256
+                                      },
+                                      "Description": {
+                                        "description": "Description for 'Other' code set value applicable to specified attribute",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  },
+                                  "FeeChargeApplicationFrequency": {
+                                    "description": "Frequency with which the rate, or amount is charged",
+                                    "type": "string",
+                                    "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
+                                  },
+                                  "FeeChargeOtherApplicationFrequency": {
+                                    "description": "Other Code Type",
+                                    "type": "object",
+                                    "properties": {
+                                      "Code": {
+                                        "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 4,
+                                        "maxLength": 4
+                                      },
+                                      "Name": {
+                                        "description": "Name of 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 256
+                                      },
+                                      "Description": {
+                                        "description": "Description for 'Other' code set value applicable to specified attribute",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  },
+                                  "FeeChargeCalculationFrequency": {
+                                    "description": "Frequency with which the rate, or amount is calculated",
+                                    "type": "string",
+                                    "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
+                                  },
+                                  "FeeChargeOtherCalculationFrequency": {
+                                    "description": "Other Code Type",
+                                    "type": "object",
+                                    "properties": {
+                                      "Code": {
+                                        "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 4,
+                                        "maxLength": 4
+                                      },
+                                      "Name": {
+                                        "description": "Name of 'Other' code set value applicable to specified attribute",
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 256
+                                      },
+                                      "Description": {
+                                        "description": "Description for 'Other' code set value applicable to specified attribute",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  }
                                 },
-                                "RepresentativeRate": {
-                                  "description": "Interest rate at AER",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
-                                },
-                                "InterestNotes": {
-                                  "description": "Optional additional notes to supplement the interest details",
-                                  "type": "string"
-                                },
-                                "TotalOverdraftChargeAmount": {
-                                  "description": "All charges that a customer could incur as a result of exceeding or attempting to exceed a Pre-agreed credit limit",
-                                  "type": "string",
-                                  "enum": ["Banded", "Tiered", "Whole"]
-                                },
-                                "MinUnarrangedOverdraftAmount": {
-                                  "description": "Minimum Unarranged Overdraft Amount if applicable",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                },
-                                "InterestRate": {
-                                  "description": "interest rate applied to tier",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
-                                },
-                                "InterestRateCalculationFrequency": {
-                                  "description": "Frequency at which interest is calculated and accrued",
-                                  "type": "string",
-                                  "enum": ["Annual", "Daily", "Monthly", "Quarterly"]
-                                },
-                                "InterestApplicationFrequency": {
-                                  "description": "When the interest is applied",
-                                  "type": "string",
-                                  "enum": ["Annual", "Daily", "Monthly", "Quarterly", "StatementDate"]
-                                },
-                                "DailyCharge": {
-                                  "description": "Maximum daily overdraft charge",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                },
-                                "MonthlyCharge": {
-                                  "description": "Maximum monthly overdraft charge",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                },
-                                "ItemCharge": {
-                                  "description": "Arranged overdraft item charge",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                },
-                                "OtherCharge": {
-                                  "description": "Other flat charge levied when overdrawn (Arranged)",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                },
-                                "OverdraftNotes": {
-                                  "description": "Supplementary notes for overdrafts",
-                                  "type": "string"
-                                },
-                                "RatesAreNegotiable": {
-                                  "description": "Value that expresses if the rates are negotiable",
-                                  "type": "string",
-                                  "enum": ["No", "Yes"]
-                                },
-                                "IndicativeRate": {
-                                  "description": "Indicative Rate that the client will get",
-                                  "type": "string"
-                                },
-                                "BufferAmount": {
-                                  "description": "Amount on overdraft that is prearranged",
-                                  "type": "string",
-                                  "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                                }
-                              },
-                              "required": ["ApplicableTo", "Tiers"],
-                              "additionalProperties": false
+                                "required": ["FeeChargeType"],
+                                "additionalProperties": false
+                              }
                             },
                             "MaximumMonthlyOverdraftCharge": {
-                              "description": "Maximum monthly overdraft charge",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                            },
-                            "MaximumDailyOverdraftCharge": {
-                              "description": "Maximum daily overdraft charge",
+                              "description": "Maximum Monthly Charge (MMC) for Overdraft fee and charges.",
                               "type": "string",
                               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "OverdraftType": {
-                              "description": "Opposite of repayable on demand",
+                              "description": "Defines if the overdraft facility is committed ",
                               "type": "string",
                               "enum": ["Committed", "OnDemand"]
                             },
@@ -3864,50 +4527,9 @@
                               "description": "The duration of the overdraft, if it is non permanent",
                               "type": "string"
                             },
-                            "SetUpFeesAmount": {
-                              "description": "Fees to set up the overdraft",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                            },
-                            "SetUpFeesRate": {
-                              "description": "Rate to set up the overdraft",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
-                            },
-                            "ReviewFee": {
-                              "description": "Fee to review overdraft limit",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                            },
-                            "MinimumFee": {
-                              "description": "Minimum overdraft fee",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                            },
-                            "AnnualRenewalRate": {
-                              "description": "Rate to renew overdraft",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
-                            },
-                            "AnnualRenewalFee": {
-                              "description": "Fee payable per term for overdraft",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                            },
-                            "MinimumSetupFee": {
-                              "description": "The minimum amount charged for an overdraft set up",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
-                            },
-                            "RenewalRate": {
-                              "description": "Rate to renew overdraft",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
-                            },
-                            "MinimumRenewalFee": {
-                              "description": "The minimum amount charged for the annual renewal",
-                              "type": "string",
-                              "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
+                            "Notes": {
+                              "description": "Notes on the overdraft",
+                              "type": "string"
                             }
                           },
                           "additionalProperties": false
@@ -3919,8 +4541,8 @@
                           "description": "Fees And Charges",
                           "type": "object",
                           "properties": {
-                            "ProductSubType": {
-                              "description": "Describes if the offering is promotional, regular or a description of a future state",
+                            "ProductState": {
+                              "description": "Describes if the offering is promotional or a description of a future state.",
                               "type": "string",
                               "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
@@ -3973,7 +4595,7 @@
                                           "FeeType": {
                                             "description": "A description of the Fee type",
                                             "type": "string",
-                                            "enum": ["ATMDonation", "ATMDeposATMPaidIn", "ReportCertBalance", "ATMAbroadConVisaCredit", "ATMAbroadConVisaDebit", "ATMCardnetEnvIn", "ATMCashGroupATMCreditCard", "ATMCashNonGroupATMCredittcard", "ATMCashGroupATMDebitCard", "ATMCashNonGroupATMDebitcard", "ATMConGroupATM", "ATMAbroad", "ATMForeignCashDebCard", "ATMAbroadGoldVisaDebit", "ATMSpainCashCard", "ATMSpainDebitCard", "ATMSpainConversionDebitCard", "ATMSpainConversionCashCard", "ATMNonSterlingWithdrawal", "ATMAbroadVisaCredit", "ATMAbroadVisaDebit", "ATMAbroadConVisaGoldDebit", "ATMWidthdrawCash", "BACSOnLineAncilliary", "BACSBatch", "BACSOnLineFile", "BACSFileItem", "BACSOnLineSetup ", "BACSItem", "BACSItemInterbranch", "BACSBulkBatch", "BACSOnLineOverlimit", "BACSOnLinePayment", "BACSRecallItem", "BACSOnLineService", "BACSBulkInternet", "BACSTELDirDebSmartCard", "BACSTELDirDebWebInit", "BACSTELirDebWebInit", "BACSTELDirDebOverlimit", "BACSTELDirDebPayment", "BACSTELDirDebService", "BACSTELDirDebAncilliary", "BACSDirectItemProfile", "BACSTELAncilliary", "BACSTELSmartCard", "BACSTELFile", "BACSTELSetup ", "BACSTELOverlimit", "BACSTELPayment", "BACSTELService", "CHAPSOutBranch", "CHAPSCancellation", "CHAPSOutOnlineDepositAcc", "CHAPSIn", "CHAPSOutInterBank", "CHAPSInterBank", "CHAPSOutPost", "CHAPSOutInterBranch", "CHAPSOut", "CHAPSOutOnline", "CHAPSandForeignPay", "CHAPSOutManual", "CardCardReplacement", "DraftsCounter", "DraftsBankers", "DraftsIntlPayableAbroad", "DraftsLostStolen", "CardPersonalisedCard", "DraftsIntlStoppedCancelled", "EuroChqXLess", "EuroChqXPlus", "FPSOutFutureDated", "FPSOutImmediate", "FPSOut", "FPSOutOwn", "FPSInBranch", "FPSUKPayUrgent", "LegalArticlesReport", "LegalSealing", "LegalBondAndGuarantee", "LegalCourtOrder", "LegalCoSearch", "LegalDepositAssignment", "LegalGuaranteePrep", "LegalLifePolicyPrepCo", "LegalLifePolicyPrepPersonal", "LegalPriorityPariPassu", "LegalSubordinationAgreement", "DirDebDirectDebitAdmin", "DirDebDirectDebitCancel", "IntlPayBIBForeignLimit", "IntlPayCreditTransCust", "IntlPayCreditTransNonCust", "IntlPayUrgentPaymentForeign", "IntlPayExpressMoneyMover", "IntlPayEEAPayUrgent", "IntlPayIrishPayUrgent", "IntlPayEEAPay", "IntlPayForeignIn1CPlus", "IntlPayForeignPaymentInUKAcc", "IntlPayForeignCharge", "IntlPayForeignCancellation", "IntlPayForeignStandardEUEuroBIC", "IntlPayFXFeeRate", "IntlPayForeignInternet", "IntlPayForeign", "IntlPayForeignInbound", "IntlPayFXPaymentOut", "IntlPayForeignInSub1C", "IntlPayFXRate", "IntlPayForeignStandardEUEuroNoBIC", "IntlPayFXPaymentOutIR", "IntlPayFXFee", "IntlPayPurchaseNonSterling", "IntlPayPostPaymentForeign", "IntlPayPurchaseRateNonSterling", "IntlPayPaymentTracing", "IntlPayStandardMoneyMover", "IntlPayMT101Transaction", "IntlPayTransNonSterling", "IntlPayTransRateNonSterling", "IntlPayForeignUrgentEUEuroBIC", "IntlPayForeignUrgentEUEuroNoBIC", "IntlPayUrgentPaymentGroup", "IntlPayUrgentPaymentUK", "IntlPayUSAPayUrgent", "IntlPayCurrencyPurchase", "IntlPayWorldpayPayment", "IntlPayCurrencyWithdraw", "InvPayBankDetailsWrong", "InvPayForeignBCNR", "InvPayForeignRecall", "InvGeneralInq", "InvOldInstruction", "InvPayPaymentRecall", "InvPayReturnDebitXVLess", "InvPayReturnDebitXVPlus", "InvPayStopPayment", "InvPayStandingOrdUnpaid", "SafeKeepAccess", "SafeKeepDeedMedium", "SafeKeepingEnvelope", "SafeKeepingInspection", "SafeKeepingLargeItem", "SafeKeepMultipleItems", "SafeKeepingParcel", "SafeKeepDeedSmall", "SafeKeepOneItem", "SafeKeepSafeCustody", "LoanArrangementFeePC", "LoanArrangement", "LoanEarlyRepayment", "LoanLatePayment", "LoanSMEUnsecuredLoan", "LoanTieredArrangement", "NightSafeNightSafeBankOpen", "NightSafeCreditSub5K", "NightSafeNightSafe", "NightSafeNightSafePaidIn", "OverdraftAnnualReview", "OverdraftTempOverdraft", "OverdraftUnauthorisedBorrowing", "POPostOfficeCounterCredit", "POPostOfficeCashCredit", "POPostOfficeCashOut", "POPostOfficeWithdrawal", "ChqBookTheftLossAllStopped", "ChqIssuedCurrencyAcc", "ChqCopy", "ChqDraft", "ChqIn", "ChqDraftSterling", "ChqOutIssued", "ChqSpecialChqPresentation", "ChqCounterCheque", "ChqChequeswithStatement", "ChqStopped", "ChqTrans", "ChqDraftFX", "ChqForeignCourier", "ChqForeignNegTenThou", "ChqForeignNegHundred", "ChequeForeignBankDivi", "ChqForeignNegFiftyThou", "ChqPensionCheque", "ChequeForeignOtherDivi", "ChqForeignNegFiveThou", "ChqForeignNegMax", "ChqForeignGBPMMDPlus", "ChqGiftCheque", "ChqCounterLodgement", "ChqCashDropLodgement", "ChqChequePhotocopy", "ChqPostOfficeCredit", "ChqPostOfficeChequeCollected", "ChqChequeRetrieval", "ChqReconcilliationPerTrans", "ChqSpecialPresentationCount", "ChqSpecialPresentationPTT", "ChqUnpaidCharge", "ChqUnpaidTransIn", "ChqUnpaidTransOut", "ChqUnpaidCheque", "ReportAuditLetter", "ReportFAXAdviceAdditional", "ReportTelAdviceAdditional", "ReportCreditHistory", "ReportCertInterestDuplicate", "ReportCertInterest", "ReportCreditHistoryAdditionalInYear", "ReportForeignStatusEnqElec", "ReportForeignStatusEnq", "ReportCashBackorInterestAnal", "ReportStatementChqDaily", "ReportStatementChqFortnightly", "ReportStatementChqMonthly", "ReportStatementChqWeekly", "ReportStatementAndDiviChq", "ReportReference", "ReportReferralItem", "ReportStatementByATM", "ReportStatementByBranch", "ReportStatementCopyRegular", "ReportStatusEnquiry", "ReportStatementFrequent", "ReportStatementMonthly", "ReportStatementCopy1", "ReportStatementToBranch", "ReportSMSTextMiniStatementorAlert", "ReportStatementFortnightly", "ReportSMSTextMiniStatementWoM", "ReportSMSTextAlertBalance", "ReportSMSTextAlert", "ReportTaxCert", "ReportWeeklyStatement", "ReportTextMessageBanking", "SEPACancellation", "SEPABranch", "SEPACredit", "SEPADirectDebit", "SEPAIn", "SEPAEuro", "SEPAOut", "SEPAUnpaid", "SEPAWinbitsAnnual Service", "SEPAWinbitsTransaction", "TransBillPaymentBranch", "TransBillCollect", "TransTelephoneBillPayment", "TransBankPayment", "TransBillPaymentTelephone", "TransCorrespondentBankFee", "TransCreditTransferUKDifferent", "TransCreditTransferUKSame", "TransCredit", "TransCreditTransfer", "TransBranchCredit", "TransDebit", "TransDebCardDeb", "TransUKDirDeb", "TransManualDeb", "TransBuyForeignWithGBP", "TransGoodValueReq", "TransSWIFTOutUKForeign", "TransInconpleteInstruction", "TransManualEntries", "TransManualTrans", "TransNonSterling", "TransPOSSaleForeign", "TransPriPaymentPost", "TransPOSSaleUK", "TransReturnPayment", "TransReconciliationPerTrans", "TransStandingOrdAdmin", "TransStandingOrd", "TransStandingOrdManPay", "TransTravellersChqOtherBank", "TransTelBusiPriPaymentForeignToUKAcc", "TransTeleItem", "TransTelBusiPriPaymentToGrpAcc", "TransTravellersChqRate", "TransTransferExGroup", "TransUnauthorisedPaidTrans", "TransUrgentPaymentPostal", "TransUnpaidTrans", "TransTelBusiPriPaymentToNonGrpAcc", "TransSWIFTOutNonEEASterling", "AutoAutoCredit", "AutoAutomatedEntries", "AutoAutoCreditPhoneInet", "AutoAutomatedTrans", "AutoDebitCardCommercial", "AutoFPSAutoCredit", "VisaConvertAbroadForeign", "VisaBureauDeChange", "VisaTravellersChqorCurrency", "OnlineInternetBillPayment", "OnlineBusinessOnlineEuroPayment", "OnlineBusinessOnlineUrgentEuroPayment", "OnlineBusinessOnlineForeignPayment", "OnlineInterbankTransfer", "OnlineInterbankPerTransfer", "OnlineInterbranchTransfer", "OnlineInterbranchPerTransfer", "OnlineSubscriptionMonthly", "OnlineBankingPayment", "OnlineBankingSubscription", "OnlinePOSSale", "OnlinePersonalCustAncillarys", "OnlinePersonalCustService", "OnlinePersonalCustOverlimits", "OnlineReplacementCardReader", "OnlinePersonalCustSetUp", "OnlinePersonalCustTransaction", "OnlinePaymentinGBPtoUK", "OnlineUrgentPayment", "OnlinePaymentinUSDtoUS", "OnlineBulkDirectDebSterling", "ForeignChqSent", "ForeignChqSelf", "ForeignChqEncashment", "ForeignFXInwardsCust", "ForeignFXTransfersROI", "ForeignFXForwardTrans", "ForeignFXTransfersBOI", "ForeignExMaintenance", "ForeignFXInwardsNonCust", "ForeignFXOutwards", "ForeignPurchase", "ForeignStatusRep", "ForeignChqDraft", "ForeignChqCLess", "ForeignChqMLess", "ForeignChqOther", "ForeignChqMPlus", "ForeignChqCCC", "ServiceCAccountFee", "ServiceCAccountFeeMonthly", "ServiceCAccountFeeQuarterly", "ServiceCBalanceHandling", "ServiceCFixedTariff", "ServiceCBusiDepAccBreakage", "ServiceCMonitorDaily", "ServiceCManagementFee", "ServiceCMinimumMonthlyFee", "ServiceCMonitorMonthly", "ServiceCMonitorWeekly", "ServiceCSecurityFee", "ServiceCMT940AccountFirst", "ServiceCMT940AccountSubsequent", "ServiceCOther", "CounterCoinHandling", "CounterCashIn", "CounterCashInNotUs", "CounterCashOut", "CounterCashX", "CounterForeignCashMax", "CounterForeignNoteHandling", "CounterForeignCashOut", "CounterCashFeeRate", "CounterForeignCashOutTx", "CounterCounterLodgement", "CounterCashDropLodgement", "CounterNotesLodged", "CounterNotesOut", "CounterCashInOwn", "CounterPaidTrans", "CounterCashFeePercent"]
+                                            "enum": ["Other", "ATMDonation", "ATMDeposATMPaidIn", "ReportCertBalance", "ATMAbroadConVisaCredit", "ATMAbroadConVisaDebit", "ATMCardnetEnvIn", "ATMCashGroupATMCreditCard", "ATMCashNonGroupATMCredittcard", "ATMCashGroupATMDebitCard", "ATMCashNonGroupATMDebitcard", "ATMConGroupATM", "ATMAbroad", "ATMForeignCashDebCard", "ATMAbroadGoldVisaDebit", "ATMSpainCashCard", "ATMSpainDebitCard", "ATMSpainConversionDebitCard", "ATMSpainConversionCashCard", "ATMNonSterlingWithdrawal", "ATMAbroadVisaCredit", "ATMAbroadVisaDebit", "ATMAbroadConVisaGoldDebit", "ATMWidthdrawCash", "BACSOnLineAncilliary", "BACSBatch", "BACSOnLineFile", "BACSFileItem", "BACSOnLineSetup ", "BACSItem", "BACSItemInterbranch", "BACSBulkBatch", "BACSOnLineOverlimit", "BACSOnLinePayment", "BACSRecallItem", "BACSOnLineService", "BACSBulkInternet", "BACSTELDirDebSmartCard", "BACSTELDirDebWebInit", "BACSTELirDebWebInit", "BACSTELDirDebOverlimit", "BACSTELDirDebPayment", "BACSTELDirDebService", "BACSTELDirDebAncilliary", "BACSDirectItemProfile", "BACSTELAncilliary", "BACSTELSmartCard", "BACSTELFile", "BACSTELSetup ", "BACSTELOverlimit", "BACSTELPayment", "BACSTELService", "CHAPSOutBranch", "CHAPSCancellation", "CHAPSOutOnlineDepositAcc", "CHAPSIn", "CHAPSOutInterBank", "CHAPSInterBank", "CHAPSOutPost", "CHAPSOutInterBranch", "CHAPSOut", "CHAPSOutOnline", "CHAPSandForeignPay", "CHAPSOutManual", "CardCardReplacement", "DraftsCounter", "DraftsBankers", "DraftsIntlPayableAbroad", "DraftsLostStolen", "CardPersonalisedCard", "DraftsIntlStoppedCancelled", "EuroChqXLess", "EuroChqXPlus", "FPSOutFutureDated", "FPSOutImmediate", "FPSOut", "FPSOutOwn", "FPSInBranch", "FPSUKPayUrgent", "LegalArticlesReport", "LegalSealing", "LegalBondAndGuarantee", "LegalCourtOrder", "LegalCoSearch", "LegalDepositAssignment", "LegalGuaranteePrep", "LegalLifePolicyPrepCo", "LegalLifePolicyPrepPersonal", "LegalPriorityPariPassu", "LegalSubordinationAgreement", "DirDebDirectDebitAdmin", "DirDebDirectDebitCancel", "IntlPayBIBForeignLimit", "IntlPayCreditTransCust", "IntlPayCreditTransNonCust", "IntlPayUrgentPaymentForeign", "IntlPayExpressMoneyMover", "IntlPayEEAPayUrgent", "IntlPayIrishPayUrgent", "IntlPayEEAPay", "IntlPayForeignIn1CPlus", "IntlPayForeignPaymentInUKAcc", "IntlPayForeignCharge", "IntlPayForeignCancellation", "IntlPayForeignStandardEUEuroBIC", "IntlPayFXFeeRate", "IntlPayForeignInternet", "IntlPayForeign", "IntlPayForeignInbound", "IntlPayFXPaymentOut", "IntlPayForeignInSub1C", "IntlPayFXRate", "IntlPayForeignStandardEUEuroNoBIC", "IntlPayFXPaymentOutIR", "IntlPayFXFee", "IntlPayPurchaseNonSterling", "IntlPayPostPaymentForeign", "IntlPayPurchaseRateNonSterling", "IntlPayPaymentTracing", "IntlPayStandardMoneyMover", "IntlPayMT101Transaction", "IntlPayTransNonSterling", "IntlPayTransRateNonSterling", "IntlPayForeignUrgentEUEuroBIC", "IntlPayForeignUrgentEUEuroNoBIC", "IntlPayUrgentPaymentGroup", "IntlPayUrgentPaymentUK", "IntlPayUSAPayUrgent", "IntlPayCurrencyPurchase", "IntlPayWorldpayPayment", "IntlPayCurrencyWithdraw", "InvPayBankDetailsWrong", "InvPayForeignBCNR", "InvPayForeignRecall", "InvGeneralInq", "InvOldInstruction", "InvPayPaymentRecall", "InvPayReturnDebitXVLess", "InvPayReturnDebitXVPlus", "InvPayStopPayment", "InvPayStandingOrdUnpaid", "SafeKeepAccess", "SafeKeepDeedMedium", "SafeKeepingEnvelope", "SafeKeepingInspection", "SafeKeepingLargeItem", "SafeKeepMultipleItems", "SafeKeepingParcel", "SafeKeepDeedSmall", "SafeKeepOneItem", "SafeKeepSafeCustody", "LoanArrangementFeePC", "LoanArrangement", "LoanEarlyRepayment", "LoanLatePayment", "LoanSMEUnsecuredLoan", "LoanTieredArrangement", "NightSafeNightSafeBankOpen", "NightSafeCreditSub5K", "NightSafeNightSafe", "NightSafeNightSafePaidIn", "OverdraftAnnualReview", "OverdraftTempOverdraft", "OverdraftUnauthorisedBorrowing", "POPostOfficeCounterCredit", "POPostOfficeCashCredit", "POPostOfficeCashOut", "POPostOfficeWithdrawal", "ChqBookTheftLossAllStopped", "ChqIssuedCurrencyAcc", "ChqCopy", "ChqDraft", "ChqIn", "ChqDraftSterling", "ChqOutIssued", "ChqSpecialChqPresentation", "ChqCounterCheque", "ChqChequeswithStatement", "ChqStopped", "ChqTrans", "ChqDraftFX", "ChqForeignCourier", "ChqForeignNegTenThou", "ChqForeignNegHundred", "ChequeForeignBankDivi", "ChqForeignNegFiftyThou", "ChqPensionCheque", "ChequeForeignOtherDivi", "ChqForeignNegFiveThou", "ChqForeignNegMax", "ChqForeignGBPMMDPlus", "ChqGiftCheque", "ChqCounterLodgement", "ChqCashDropLodgement", "ChqChequePhotocopy", "ChqPostOfficeCredit", "ChqPostOfficeChequeCollected", "ChqChequeRetrieval", "ChqReconcilliationPerTrans", "ChqSpecialPresentationCount", "ChqSpecialPresentationPTT", "ChqUnpaidCharge", "ChqUnpaidTransIn", "ChqUnpaidTransOut", "ChqUnpaidCheque", "ReportAuditLetter", "ReportFAXAdviceAdditional", "ReportTelAdviceAdditional", "ReportCreditHistory", "ReportCertInterestDuplicate", "ReportCertInterest", "ReportCreditHistoryAdditionalInYear", "ReportForeignStatusEnqElec", "ReportForeignStatusEnq", "ReportCashBackorInterestAnal", "ReportStatementChqDaily", "ReportStatementChqFortnightly", "ReportStatementChqMonthly", "ReportStatementChqWeekly", "ReportStatementAndDiviChq", "ReportReference", "ReportReferralItem", "ReportStatementByATM", "ReportStatementByBranch", "ReportStatementCopyRegular", "ReportStatusEnquiry", "ReportStatementFrequent", "ReportStatementMonthly", "ReportStatementCopy1", "ReportStatementToBranch", "ReportSMSTextMiniStatementorAlert", "ReportStatementFortnightly", "ReportSMSTextMiniStatementWoM", "ReportSMSTextAlertBalance", "ReportSMSTextAlert", "ReportTaxCert", "ReportWeeklyStatement", "ReportTextMessageBanking", "SEPACancellation", "SEPABranch", "SEPACredit", "SEPADirectDebit", "SEPAIn", "SEPAEuro", "SEPAOut", "SEPAUnpaid", "SEPAWinbitsAnnual Service", "SEPAWinbitsTransaction", "TransBillPaymentBranch", "TransBillCollect", "TransTelephoneBillPayment", "TransBankPayment", "TransBillPaymentTelephone", "TransCorrespondentBankFee", "TransCreditTransferUKDifferent", "TransCreditTransferUKSame", "TransCredit", "TransCreditTransfer", "TransBranchCredit", "TransDebit", "TransDebCardDeb", "TransUKDirDeb", "TransManualDeb", "TransBuyForeignWithGBP", "TransGoodValueReq", "TransSWIFTOutUKForeign", "TransInconpleteInstruction", "TransManualEntries", "TransManualTrans", "TransNonSterling", "TransPOSSaleForeign", "TransPriPaymentPost", "TransPOSSaleUK", "TransReturnPayment", "TransReconciliationPerTrans", "TransStandingOrdAdmin", "TransStandingOrd", "TransStandingOrdManPay", "TransTravellersChqOtherBank", "TransTelBusiPriPaymentForeignToUKAcc", "TransTeleItem", "TransTelBusiPriPaymentToGrpAcc", "TransTravellersChqRate", "TransTransferExGroup", "TransUnauthorisedPaidTrans", "TransUrgentPaymentPostal", "TransUnpaidTrans", "TransTelBusiPriPaymentToNonGrpAcc", "TransSWIFTOutNonEEASterling", "AutoAutoCredit", "AutoAutomatedEntries", "AutoAutoCreditPhoneInet", "AutoAutomatedTrans", "AutoDebitCardCommercial", "AutoFPSAutoCredit", "VisaConvertAbroadForeign", "VisaBureauDeChange", "VisaTravellersChqorCurrency", "OnlineInternetBillPayment", "OnlineBusinessOnlineEuroPayment", "OnlineBusinessOnlineUrgentEuroPayment", "OnlineBusinessOnlineForeignPayment", "OnlineInterbankTransfer", "OnlineInterbankPerTransfer", "OnlineInterbranchTransfer", "OnlineInterbranchPerTransfer", "OnlineSubscriptionMonthly", "OnlineBankingPayment", "OnlineBankingSubscription", "OnlinePOSSale", "OnlinePersonalCustAncillarys", "OnlinePersonalCustService", "OnlinePersonalCustOverlimits", "OnlineReplacementCardReader", "OnlinePersonalCustSetUp", "OnlinePersonalCustTransaction", "OnlinePaymentinGBPtoUK", "OnlineUrgentPayment", "OnlinePaymentinUSDtoUS", "OnlineBulkDirectDebSterling", "ForeignChqSent", "ForeignChqSelf", "ForeignChqEncashment", "ForeignFXInwardsCust", "ForeignFXTransfersROI", "ForeignFXForwardTrans", "ForeignFXTransfersBOI", "ForeignExMaintenance", "ForeignFXInwardsNonCust", "ForeignFXOutwards", "ForeignPurchase", "ForeignStatusRep", "ForeignChqDraft", "ForeignChqCLess", "ForeignChqMLess", "ForeignChqOther", "ForeignChqMPlus", "ForeignChqCCC", "ServiceCAccountFee", "ServiceCAccountFeeMonthly", "ServiceCAccountFeeQuarterly", "ServiceCBalanceHandling", "ServiceCFixedTariff", "ServiceCBusiDepAccBreakage", "ServiceCMonitorDaily", "ServiceCManagementFee", "ServiceCMinimumMonthlyFee", "ServiceCMonitorMonthly", "ServiceCMonitorWeekly", "ServiceCSecurityFee", "ServiceCMT940AccountFirst", "ServiceCMT940AccountSubsequent", "ServiceCOther", "CounterCoinHandling", "CounterCashIn", "CounterCashInNotUs", "CounterCashOut", "CounterCashX", "CounterForeignCashMax", "CounterForeignNoteHandling", "CounterForeignCashOut", "CounterCashFeeRate", "CounterForeignCashOutTx", "CounterCounterLodgement", "CounterCashDropLodgement", "CounterNotesLodged", "CounterNotesOut", "CounterCashInOwn", "CounterPaidTrans", "CounterCashFeePercent"]
                                           },
                                           "Other": {
                                             "description": "Describe other fee type",
@@ -4067,7 +4689,7 @@
                               "additionalProperties": false
                             }
                           },
-                          "required": ["ProductSubType", "Fees"],
+                          "required": ["ProductState", "Fees"],
                           "additionalProperties": false
                         },
                         "minItems": 1
@@ -4734,8 +5356,8 @@
                           "description": "Loan Item",
                           "type": "object",
                           "properties": {
-                            "ProductSubType": {
-                              "description": "Describes if the offering is promotional, regular or a description of a future state",
+                            "ProductState": {
+                              "description": "Describes if the offering is promotional or a description of a future state.",
                               "type": "string",
                               "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
@@ -4829,7 +5451,7 @@
                               "type": "boolean"
                             }
                           },
-                          "required": ["ProductSubType", "CCARegulatedEntity", "IsALowInterestRepaymentStartPossible", "IsThisAnInterestOnlyLoan", "WillTheLoanBePaidInTrancheDrawdowns"],
+                          "required": ["ProductState", "CCARegulatedEntity", "IsALowInterestRepaymentStartPossible", "IsThisAnInterestOnlyLoan", "WillTheLoanBePaidInTrancheDrawdowns"],
                           "additionalProperties": false
                         }
                       },
@@ -4998,8 +5620,8 @@
                           "description": "Fees And Charges",
                           "type": "object",
                           "properties": {
-                            "ProductSubType": {
-                              "description": "Describes if the offering is promotional, regular or a description of a future state",
+                            "ProductState": {
+                              "description": "Describes if the offering is promotional or a description of a future state.",
                               "type": "string",
                               "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                             },
@@ -5052,7 +5674,7 @@
                                           "FeeType": {
                                             "description": "A description of the Fee type",
                                             "type": "string",
-                                            "enum": ["ATMDonation", "ATMDeposATMPaidIn", "ReportCertBalance", "ATMAbroadConVisaCredit", "ATMAbroadConVisaDebit", "ATMCardnetEnvIn", "ATMCashGroupATMCreditCard", "ATMCashNonGroupATMCredittcard", "ATMCashGroupATMDebitCard", "ATMCashNonGroupATMDebitcard", "ATMConGroupATM", "ATMAbroad", "ATMForeignCashDebCard", "ATMAbroadGoldVisaDebit", "ATMSpainCashCard", "ATMSpainDebitCard", "ATMSpainConversionDebitCard", "ATMSpainConversionCashCard", "ATMNonSterlingWithdrawal", "ATMAbroadVisaCredit", "ATMAbroadVisaDebit", "ATMAbroadConVisaGoldDebit", "ATMWidthdrawCash", "BACSOnLineAncilliary", "BACSBatch", "BACSOnLineFile", "BACSFileItem", "BACSOnLineSetup ", "BACSItem", "BACSItemInterbranch", "BACSBulkBatch", "BACSOnLineOverlimit", "BACSOnLinePayment", "BACSRecallItem", "BACSOnLineService", "BACSBulkInternet", "BACSTELDirDebSmartCard", "BACSTELDirDebWebInit", "BACSTELirDebWebInit", "BACSTELDirDebOverlimit", "BACSTELDirDebPayment", "BACSTELDirDebService", "BACSTELDirDebAncilliary", "BACSDirectItemProfile", "BACSTELAncilliary", "BACSTELSmartCard", "BACSTELFile", "BACSTELSetup ", "BACSTELOverlimit", "BACSTELPayment", "BACSTELService", "CHAPSOutBranch", "CHAPSCancellation", "CHAPSOutOnlineDepositAcc", "CHAPSIn", "CHAPSOutInterBank", "CHAPSInterBank", "CHAPSOutPost", "CHAPSOutInterBranch", "CHAPSOut", "CHAPSOutOnline", "CHAPSandForeignPay", "CHAPSOutManual", "CardCardReplacement", "DraftsCounter", "DraftsBankers", "DraftsIntlPayableAbroad", "DraftsLostStolen", "CardPersonalisedCard", "DraftsIntlStoppedCancelled", "EuroChqXLess", "EuroChqXPlus", "FPSOutFutureDated", "FPSOutImmediate", "FPSOut", "FPSOutOwn", "FPSInBranch", "FPSUKPayUrgent", "LegalArticlesReport", "LegalSealing", "LegalBondAndGuarantee", "LegalCourtOrder", "LegalCoSearch", "LegalDepositAssignment", "LegalGuaranteePrep", "LegalLifePolicyPrepCo", "LegalLifePolicyPrepPersonal", "LegalPriorityPariPassu", "LegalSubordinationAgreement", "DirDebDirectDebitAdmin", "DirDebDirectDebitCancel", "IntlPayBIBForeignLimit", "IntlPayCreditTransCust", "IntlPayCreditTransNonCust", "IntlPayUrgentPaymentForeign", "IntlPayExpressMoneyMover", "IntlPayEEAPayUrgent", "IntlPayIrishPayUrgent", "IntlPayEEAPay", "IntlPayForeignIn1CPlus", "IntlPayForeignPaymentInUKAcc", "IntlPayForeignCharge", "IntlPayForeignCancellation", "IntlPayForeignStandardEUEuroBIC", "IntlPayFXFeeRate", "IntlPayForeignInternet", "IntlPayForeign", "IntlPayForeignInbound", "IntlPayFXPaymentOut", "IntlPayForeignInSub1C", "IntlPayFXRate", "IntlPayForeignStandardEUEuroNoBIC", "IntlPayFXPaymentOutIR", "IntlPayFXFee", "IntlPayPurchaseNonSterling", "IntlPayPostPaymentForeign", "IntlPayPurchaseRateNonSterling", "IntlPayPaymentTracing", "IntlPayStandardMoneyMover", "IntlPayMT101Transaction", "IntlPayTransNonSterling", "IntlPayTransRateNonSterling", "IntlPayForeignUrgentEUEuroBIC", "IntlPayForeignUrgentEUEuroNoBIC", "IntlPayUrgentPaymentGroup", "IntlPayUrgentPaymentUK", "IntlPayUSAPayUrgent", "IntlPayCurrencyPurchase", "IntlPayWorldpayPayment", "IntlPayCurrencyWithdraw", "InvPayBankDetailsWrong", "InvPayForeignBCNR", "InvPayForeignRecall", "InvGeneralInq", "InvOldInstruction", "InvPayPaymentRecall", "InvPayReturnDebitXVLess", "InvPayReturnDebitXVPlus", "InvPayStopPayment", "InvPayStandingOrdUnpaid", "SafeKeepAccess", "SafeKeepDeedMedium", "SafeKeepingEnvelope", "SafeKeepingInspection", "SafeKeepingLargeItem", "SafeKeepMultipleItems", "SafeKeepingParcel", "SafeKeepDeedSmall", "SafeKeepOneItem", "SafeKeepSafeCustody", "LoanArrangementFeePC", "LoanArrangement", "LoanEarlyRepayment", "LoanLatePayment", "LoanSMEUnsecuredLoan", "LoanTieredArrangement", "NightSafeNightSafeBankOpen", "NightSafeCreditSub5K", "NightSafeNightSafe", "NightSafeNightSafePaidIn", "OverdraftAnnualReview", "OverdraftTempOverdraft", "OverdraftUnauthorisedBorrowing", "POPostOfficeCounterCredit", "POPostOfficeCashCredit", "POPostOfficeCashOut", "POPostOfficeWithdrawal", "ChqBookTheftLossAllStopped", "ChqIssuedCurrencyAcc", "ChqCopy", "ChqDraft", "ChqIn", "ChqDraftSterling", "ChqOutIssued", "ChqSpecialChqPresentation", "ChqCounterCheque", "ChqChequeswithStatement", "ChqStopped", "ChqTrans", "ChqDraftFX", "ChqForeignCourier", "ChqForeignNegTenThou", "ChqForeignNegHundred", "ChequeForeignBankDivi", "ChqForeignNegFiftyThou", "ChqPensionCheque", "ChequeForeignOtherDivi", "ChqForeignNegFiveThou", "ChqForeignNegMax", "ChqForeignGBPMMDPlus", "ChqGiftCheque", "ChqCounterLodgement", "ChqCashDropLodgement", "ChqChequePhotocopy", "ChqPostOfficeCredit", "ChqPostOfficeChequeCollected", "ChqChequeRetrieval", "ChqReconcilliationPerTrans", "ChqSpecialPresentationCount", "ChqSpecialPresentationPTT", "ChqUnpaidCharge", "ChqUnpaidTransIn", "ChqUnpaidTransOut", "ChqUnpaidCheque", "ReportAuditLetter", "ReportFAXAdviceAdditional", "ReportTelAdviceAdditional", "ReportCreditHistory", "ReportCertInterestDuplicate", "ReportCertInterest", "ReportCreditHistoryAdditionalInYear", "ReportForeignStatusEnqElec", "ReportForeignStatusEnq", "ReportCashBackorInterestAnal", "ReportStatementChqDaily", "ReportStatementChqFortnightly", "ReportStatementChqMonthly", "ReportStatementChqWeekly", "ReportStatementAndDiviChq", "ReportReference", "ReportReferralItem", "ReportStatementByATM", "ReportStatementByBranch", "ReportStatementCopyRegular", "ReportStatusEnquiry", "ReportStatementFrequent", "ReportStatementMonthly", "ReportStatementCopy1", "ReportStatementToBranch", "ReportSMSTextMiniStatementorAlert", "ReportStatementFortnightly", "ReportSMSTextMiniStatementWoM", "ReportSMSTextAlertBalance", "ReportSMSTextAlert", "ReportTaxCert", "ReportWeeklyStatement", "ReportTextMessageBanking", "SEPACancellation", "SEPABranch", "SEPACredit", "SEPADirectDebit", "SEPAIn", "SEPAEuro", "SEPAOut", "SEPAUnpaid", "SEPAWinbitsAnnual Service", "SEPAWinbitsTransaction", "TransBillPaymentBranch", "TransBillCollect", "TransTelephoneBillPayment", "TransBankPayment", "TransBillPaymentTelephone", "TransCorrespondentBankFee", "TransCreditTransferUKDifferent", "TransCreditTransferUKSame", "TransCredit", "TransCreditTransfer", "TransBranchCredit", "TransDebit", "TransDebCardDeb", "TransUKDirDeb", "TransManualDeb", "TransBuyForeignWithGBP", "TransGoodValueReq", "TransSWIFTOutUKForeign", "TransInconpleteInstruction", "TransManualEntries", "TransManualTrans", "TransNonSterling", "TransPOSSaleForeign", "TransPriPaymentPost", "TransPOSSaleUK", "TransReturnPayment", "TransReconciliationPerTrans", "TransStandingOrdAdmin", "TransStandingOrd", "TransStandingOrdManPay", "TransTravellersChqOtherBank", "TransTelBusiPriPaymentForeignToUKAcc", "TransTeleItem", "TransTelBusiPriPaymentToGrpAcc", "TransTravellersChqRate", "TransTransferExGroup", "TransUnauthorisedPaidTrans", "TransUrgentPaymentPostal", "TransUnpaidTrans", "TransTelBusiPriPaymentToNonGrpAcc", "TransSWIFTOutNonEEASterling", "AutoAutoCredit", "AutoAutomatedEntries", "AutoAutoCreditPhoneInet", "AutoAutomatedTrans", "AutoDebitCardCommercial", "AutoFPSAutoCredit", "VisaConvertAbroadForeign", "VisaBureauDeChange", "VisaTravellersChqorCurrency", "OnlineInternetBillPayment", "OnlineBusinessOnlineEuroPayment", "OnlineBusinessOnlineUrgentEuroPayment", "OnlineBusinessOnlineForeignPayment", "OnlineInterbankTransfer", "OnlineInterbankPerTransfer", "OnlineInterbranchTransfer", "OnlineInterbranchPerTransfer", "OnlineSubscriptionMonthly", "OnlineBankingPayment", "OnlineBankingSubscription", "OnlinePOSSale", "OnlinePersonalCustAncillarys", "OnlinePersonalCustService", "OnlinePersonalCustOverlimits", "OnlineReplacementCardReader", "OnlinePersonalCustSetUp", "OnlinePersonalCustTransaction", "OnlinePaymentinGBPtoUK", "OnlineUrgentPayment", "OnlinePaymentinUSDtoUS", "OnlineBulkDirectDebSterling", "ForeignChqSent", "ForeignChqSelf", "ForeignChqEncashment", "ForeignFXInwardsCust", "ForeignFXTransfersROI", "ForeignFXForwardTrans", "ForeignFXTransfersBOI", "ForeignExMaintenance", "ForeignFXInwardsNonCust", "ForeignFXOutwards", "ForeignPurchase", "ForeignStatusRep", "ForeignChqDraft", "ForeignChqCLess", "ForeignChqMLess", "ForeignChqOther", "ForeignChqMPlus", "ForeignChqCCC", "ServiceCAccountFee", "ServiceCAccountFeeMonthly", "ServiceCAccountFeeQuarterly", "ServiceCBalanceHandling", "ServiceCFixedTariff", "ServiceCBusiDepAccBreakage", "ServiceCMonitorDaily", "ServiceCManagementFee", "ServiceCMinimumMonthlyFee", "ServiceCMonitorMonthly", "ServiceCMonitorWeekly", "ServiceCSecurityFee", "ServiceCMT940AccountFirst", "ServiceCMT940AccountSubsequent", "ServiceCOther", "CounterCoinHandling", "CounterCashIn", "CounterCashInNotUs", "CounterCashOut", "CounterCashX", "CounterForeignCashMax", "CounterForeignNoteHandling", "CounterForeignCashOut", "CounterCashFeeRate", "CounterForeignCashOutTx", "CounterCounterLodgement", "CounterCashDropLodgement", "CounterNotesLodged", "CounterNotesOut", "CounterCashInOwn", "CounterPaidTrans", "CounterCashFeePercent"]
+                                            "enum": ["Other", "ATMDonation", "ATMDeposATMPaidIn", "ReportCertBalance", "ATMAbroadConVisaCredit", "ATMAbroadConVisaDebit", "ATMCardnetEnvIn", "ATMCashGroupATMCreditCard", "ATMCashNonGroupATMCredittcard", "ATMCashGroupATMDebitCard", "ATMCashNonGroupATMDebitcard", "ATMConGroupATM", "ATMAbroad", "ATMForeignCashDebCard", "ATMAbroadGoldVisaDebit", "ATMSpainCashCard", "ATMSpainDebitCard", "ATMSpainConversionDebitCard", "ATMSpainConversionCashCard", "ATMNonSterlingWithdrawal", "ATMAbroadVisaCredit", "ATMAbroadVisaDebit", "ATMAbroadConVisaGoldDebit", "ATMWidthdrawCash", "BACSOnLineAncilliary", "BACSBatch", "BACSOnLineFile", "BACSFileItem", "BACSOnLineSetup ", "BACSItem", "BACSItemInterbranch", "BACSBulkBatch", "BACSOnLineOverlimit", "BACSOnLinePayment", "BACSRecallItem", "BACSOnLineService", "BACSBulkInternet", "BACSTELDirDebSmartCard", "BACSTELDirDebWebInit", "BACSTELirDebWebInit", "BACSTELDirDebOverlimit", "BACSTELDirDebPayment", "BACSTELDirDebService", "BACSTELDirDebAncilliary", "BACSDirectItemProfile", "BACSTELAncilliary", "BACSTELSmartCard", "BACSTELFile", "BACSTELSetup ", "BACSTELOverlimit", "BACSTELPayment", "BACSTELService", "CHAPSOutBranch", "CHAPSCancellation", "CHAPSOutOnlineDepositAcc", "CHAPSIn", "CHAPSOutInterBank", "CHAPSInterBank", "CHAPSOutPost", "CHAPSOutInterBranch", "CHAPSOut", "CHAPSOutOnline", "CHAPSandForeignPay", "CHAPSOutManual", "CardCardReplacement", "DraftsCounter", "DraftsBankers", "DraftsIntlPayableAbroad", "DraftsLostStolen", "CardPersonalisedCard", "DraftsIntlStoppedCancelled", "EuroChqXLess", "EuroChqXPlus", "FPSOutFutureDated", "FPSOutImmediate", "FPSOut", "FPSOutOwn", "FPSInBranch", "FPSUKPayUrgent", "LegalArticlesReport", "LegalSealing", "LegalBondAndGuarantee", "LegalCourtOrder", "LegalCoSearch", "LegalDepositAssignment", "LegalGuaranteePrep", "LegalLifePolicyPrepCo", "LegalLifePolicyPrepPersonal", "LegalPriorityPariPassu", "LegalSubordinationAgreement", "DirDebDirectDebitAdmin", "DirDebDirectDebitCancel", "IntlPayBIBForeignLimit", "IntlPayCreditTransCust", "IntlPayCreditTransNonCust", "IntlPayUrgentPaymentForeign", "IntlPayExpressMoneyMover", "IntlPayEEAPayUrgent", "IntlPayIrishPayUrgent", "IntlPayEEAPay", "IntlPayForeignIn1CPlus", "IntlPayForeignPaymentInUKAcc", "IntlPayForeignCharge", "IntlPayForeignCancellation", "IntlPayForeignStandardEUEuroBIC", "IntlPayFXFeeRate", "IntlPayForeignInternet", "IntlPayForeign", "IntlPayForeignInbound", "IntlPayFXPaymentOut", "IntlPayForeignInSub1C", "IntlPayFXRate", "IntlPayForeignStandardEUEuroNoBIC", "IntlPayFXPaymentOutIR", "IntlPayFXFee", "IntlPayPurchaseNonSterling", "IntlPayPostPaymentForeign", "IntlPayPurchaseRateNonSterling", "IntlPayPaymentTracing", "IntlPayStandardMoneyMover", "IntlPayMT101Transaction", "IntlPayTransNonSterling", "IntlPayTransRateNonSterling", "IntlPayForeignUrgentEUEuroBIC", "IntlPayForeignUrgentEUEuroNoBIC", "IntlPayUrgentPaymentGroup", "IntlPayUrgentPaymentUK", "IntlPayUSAPayUrgent", "IntlPayCurrencyPurchase", "IntlPayWorldpayPayment", "IntlPayCurrencyWithdraw", "InvPayBankDetailsWrong", "InvPayForeignBCNR", "InvPayForeignRecall", "InvGeneralInq", "InvOldInstruction", "InvPayPaymentRecall", "InvPayReturnDebitXVLess", "InvPayReturnDebitXVPlus", "InvPayStopPayment", "InvPayStandingOrdUnpaid", "SafeKeepAccess", "SafeKeepDeedMedium", "SafeKeepingEnvelope", "SafeKeepingInspection", "SafeKeepingLargeItem", "SafeKeepMultipleItems", "SafeKeepingParcel", "SafeKeepDeedSmall", "SafeKeepOneItem", "SafeKeepSafeCustody", "LoanArrangementFeePC", "LoanArrangement", "LoanEarlyRepayment", "LoanLatePayment", "LoanSMEUnsecuredLoan", "LoanTieredArrangement", "NightSafeNightSafeBankOpen", "NightSafeCreditSub5K", "NightSafeNightSafe", "NightSafeNightSafePaidIn", "OverdraftAnnualReview", "OverdraftTempOverdraft", "OverdraftUnauthorisedBorrowing", "POPostOfficeCounterCredit", "POPostOfficeCashCredit", "POPostOfficeCashOut", "POPostOfficeWithdrawal", "ChqBookTheftLossAllStopped", "ChqIssuedCurrencyAcc", "ChqCopy", "ChqDraft", "ChqIn", "ChqDraftSterling", "ChqOutIssued", "ChqSpecialChqPresentation", "ChqCounterCheque", "ChqChequeswithStatement", "ChqStopped", "ChqTrans", "ChqDraftFX", "ChqForeignCourier", "ChqForeignNegTenThou", "ChqForeignNegHundred", "ChequeForeignBankDivi", "ChqForeignNegFiftyThou", "ChqPensionCheque", "ChequeForeignOtherDivi", "ChqForeignNegFiveThou", "ChqForeignNegMax", "ChqForeignGBPMMDPlus", "ChqGiftCheque", "ChqCounterLodgement", "ChqCashDropLodgement", "ChqChequePhotocopy", "ChqPostOfficeCredit", "ChqPostOfficeChequeCollected", "ChqChequeRetrieval", "ChqReconcilliationPerTrans", "ChqSpecialPresentationCount", "ChqSpecialPresentationPTT", "ChqUnpaidCharge", "ChqUnpaidTransIn", "ChqUnpaidTransOut", "ChqUnpaidCheque", "ReportAuditLetter", "ReportFAXAdviceAdditional", "ReportTelAdviceAdditional", "ReportCreditHistory", "ReportCertInterestDuplicate", "ReportCertInterest", "ReportCreditHistoryAdditionalInYear", "ReportForeignStatusEnqElec", "ReportForeignStatusEnq", "ReportCashBackorInterestAnal", "ReportStatementChqDaily", "ReportStatementChqFortnightly", "ReportStatementChqMonthly", "ReportStatementChqWeekly", "ReportStatementAndDiviChq", "ReportReference", "ReportReferralItem", "ReportStatementByATM", "ReportStatementByBranch", "ReportStatementCopyRegular", "ReportStatusEnquiry", "ReportStatementFrequent", "ReportStatementMonthly", "ReportStatementCopy1", "ReportStatementToBranch", "ReportSMSTextMiniStatementorAlert", "ReportStatementFortnightly", "ReportSMSTextMiniStatementWoM", "ReportSMSTextAlertBalance", "ReportSMSTextAlert", "ReportTaxCert", "ReportWeeklyStatement", "ReportTextMessageBanking", "SEPACancellation", "SEPABranch", "SEPACredit", "SEPADirectDebit", "SEPAIn", "SEPAEuro", "SEPAOut", "SEPAUnpaid", "SEPAWinbitsAnnual Service", "SEPAWinbitsTransaction", "TransBillPaymentBranch", "TransBillCollect", "TransTelephoneBillPayment", "TransBankPayment", "TransBillPaymentTelephone", "TransCorrespondentBankFee", "TransCreditTransferUKDifferent", "TransCreditTransferUKSame", "TransCredit", "TransCreditTransfer", "TransBranchCredit", "TransDebit", "TransDebCardDeb", "TransUKDirDeb", "TransManualDeb", "TransBuyForeignWithGBP", "TransGoodValueReq", "TransSWIFTOutUKForeign", "TransInconpleteInstruction", "TransManualEntries", "TransManualTrans", "TransNonSterling", "TransPOSSaleForeign", "TransPriPaymentPost", "TransPOSSaleUK", "TransReturnPayment", "TransReconciliationPerTrans", "TransStandingOrdAdmin", "TransStandingOrd", "TransStandingOrdManPay", "TransTravellersChqOtherBank", "TransTelBusiPriPaymentForeignToUKAcc", "TransTeleItem", "TransTelBusiPriPaymentToGrpAcc", "TransTravellersChqRate", "TransTransferExGroup", "TransUnauthorisedPaidTrans", "TransUrgentPaymentPostal", "TransUnpaidTrans", "TransTelBusiPriPaymentToNonGrpAcc", "TransSWIFTOutNonEEASterling", "AutoAutoCredit", "AutoAutomatedEntries", "AutoAutoCreditPhoneInet", "AutoAutomatedTrans", "AutoDebitCardCommercial", "AutoFPSAutoCredit", "VisaConvertAbroadForeign", "VisaBureauDeChange", "VisaTravellersChqorCurrency", "OnlineInternetBillPayment", "OnlineBusinessOnlineEuroPayment", "OnlineBusinessOnlineUrgentEuroPayment", "OnlineBusinessOnlineForeignPayment", "OnlineInterbankTransfer", "OnlineInterbankPerTransfer", "OnlineInterbranchTransfer", "OnlineInterbranchPerTransfer", "OnlineSubscriptionMonthly", "OnlineBankingPayment", "OnlineBankingSubscription", "OnlinePOSSale", "OnlinePersonalCustAncillarys", "OnlinePersonalCustService", "OnlinePersonalCustOverlimits", "OnlineReplacementCardReader", "OnlinePersonalCustSetUp", "OnlinePersonalCustTransaction", "OnlinePaymentinGBPtoUK", "OnlineUrgentPayment", "OnlinePaymentinUSDtoUS", "OnlineBulkDirectDebSterling", "ForeignChqSent", "ForeignChqSelf", "ForeignChqEncashment", "ForeignFXInwardsCust", "ForeignFXTransfersROI", "ForeignFXForwardTrans", "ForeignFXTransfersBOI", "ForeignExMaintenance", "ForeignFXInwardsNonCust", "ForeignFXOutwards", "ForeignPurchase", "ForeignStatusRep", "ForeignChqDraft", "ForeignChqCLess", "ForeignChqMLess", "ForeignChqOther", "ForeignChqMPlus", "ForeignChqCCC", "ServiceCAccountFee", "ServiceCAccountFeeMonthly", "ServiceCAccountFeeQuarterly", "ServiceCBalanceHandling", "ServiceCFixedTariff", "ServiceCBusiDepAccBreakage", "ServiceCMonitorDaily", "ServiceCManagementFee", "ServiceCMinimumMonthlyFee", "ServiceCMonitorMonthly", "ServiceCMonitorWeekly", "ServiceCSecurityFee", "ServiceCMT940AccountFirst", "ServiceCMT940AccountSubsequent", "ServiceCOther", "CounterCoinHandling", "CounterCashIn", "CounterCashInNotUs", "CounterCashOut", "CounterCashX", "CounterForeignCashMax", "CounterForeignNoteHandling", "CounterForeignCashOut", "CounterCashFeeRate", "CounterForeignCashOutTx", "CounterCounterLodgement", "CounterCashDropLodgement", "CounterNotesLodged", "CounterNotesOut", "CounterCashInOwn", "CounterPaidTrans", "CounterCashFeePercent"]
                                           },
                                           "Other": {
                                             "description": "Describe other fee type",
@@ -5146,7 +5768,7 @@
                               "additionalProperties": false
                             }
                           },
-                          "required": ["ProductSubType", "Fees"],
+                          "required": ["ProductState", "Fees"],
                           "additionalProperties": false
                         },
                         "minItems": 1
