@@ -97,13 +97,13 @@
                       "description": "Open Banking License",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["https://openbanking.org.uk/open-licence"]
+                      "enum": ["https://www.openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
                       "description": "Open Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["https://openbanking.org.uk/terms"]
+                      "enum": ["https://www.openbanking.org.uk/terms"]
                     }
                   },
                   "required": ["LastUpdated", "TotalResults", "Agreement", "License", "TermsOfUse"],
@@ -841,13 +841,13 @@
                       "description": "Open Banking License",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["https://openbanking.org.uk/open-licence"]
+                      "enum": ["https://www.openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
                       "description": "Open Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["https://openbanking.org.uk/terms"]
+                      "enum": ["https://www.openbanking.org.uk/terms"]
                     }
                   },
                   "required": ["LastUpdated", "TotalResults", "Agreement", "License", "TermsOfUse"],
@@ -1442,13 +1442,13 @@
                       "description": "Open Banking License",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["https://openbanking.org.uk/open-licence"]
+                      "enum": ["https://www.openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
                       "description": "Open Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["https://openbanking.org.uk/terms"]
+                      "enum": ["https://www.openbanking.org.uk/terms"]
                     }
                   },
                   "required": ["LastUpdated", "TotalResults", "Agreement", "License", "TermsOfUse"],
@@ -3313,13 +3313,13 @@
                       "description": "Open Banking License",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["https://openbanking.org.uk/open-licence"]
+                      "enum": ["https://www.openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
                       "description": "Open Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["https://openbanking.org.uk/terms"]
+                      "enum": ["https://www.openbanking.org.uk/terms"]
                     }
                   },
                   "required": ["LastUpdated", "TotalResults", "Agreement", "License", "TermsOfUse"],
@@ -5185,13 +5185,13 @@
                       "description": "Open Banking License",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["https://openbanking.org.uk/open-licence"]
+                      "enum": ["https://www.openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
                       "description": "Open Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["https://openbanking.org.uk/terms"]
+                      "enum": ["https://www.openbanking.org.uk/terms"]
                     }
                   },
                   "required": ["LastUpdated", "TotalResults", "Agreement", "License", "TermsOfUse"],
@@ -6265,13 +6265,13 @@
                       "description": "Open Banking License",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["https://openbanking.org.uk/open-licence"]
+                      "enum": ["https://www.openbanking.org.uk/open-licence"]
                     },
                     "TermsOfUse": {
                       "description": "Open Banking Terms of Use",
                       "type": "string",
                       "format": "uri",
-                      "enum": ["https://openbanking.org.uk/terms"]
+                      "enum": ["https://www.openbanking.org.uk/terms"]
                     }
                   },
                   "required": ["LastUpdated", "TotalResults", "Agreement", "License", "TermsOfUse"],
