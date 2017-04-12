@@ -1,74 +1,51 @@
 {
-  "id": "http://localhost:8000/schemas/v1.3/sme_loan.json#",
   "description": "SME Loan",
   "type": "object",
   "properties": {
     "Organisation": {
-      "id": "http://localhost:8000/schemas/v1.3/definitions/common/organisation.json#",
       "description": "Organisation",
       "type": "object",
       "properties": {
-        "ParentOrganisation": {
-          "description": "Parent organisation",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/organisation_identification.json#",
+        "Brand": {
+          "description": "Brand of the Acquirer of transactions captured by the ATM",
+          "type": "object",
+          "properties": {
+            "BrandName": {
+              "description": "Brand of the Acquirer of transactions captured by the ATM",
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 140
+            }
+          },
+          "required": ["BrandName"],
+          "additionalProperties": false
+        },
+        "BrandOwner": {
+          "description": "Unique and unambiguous way of identifying an organisation.",
           "type": "object",
           "properties": {
             "LEI": {
-              "description": "The LEI ID of the organisation",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/lei_identifier.json#",
+              "description": "Legal entity identification as an alternate identification for a party.",
               "type": "string",
               "pattern": "^[A-Z0-9]{18,18}[0-9]{2,2}$"
             },
-            "BIC": {
-              "description": "The BIC from the organisation",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/any_bic_identifier.json#",
+            "AnyBIC": {
+              "description": "Code allocated to a financial institution or non financial institution by the ISO 9362 Registration Authority as described in ISO 9362 'Banking - Banking telecommunication messages - Business identifier code (BIC)'",
               "type": "string",
               "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
             },
-            "OrganisationName": {
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/organisation_name.json#",
-              "description": "Organisation Name",
-              "type": "object",
-              "properties": {
-                "LegalName": {
-                  "description": "Legal Name of the organisation",
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_35_text.json#",
-                  "type": "string",
-                  "minLength": 1,
-                  "maxLength": 35
-                }
-              },
-              "required": ["LegalName"],
-              "additionalProperties": false
-            }
-          },
-          "required": ["OrganisationName"],
-          "additionalProperties": false
-        },
-        "Brand": {
-          "description": "Brand",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/brand.json#",
-          "type": "object",
-          "properties": {
-            "TrademarkIPOCode": {
-              "description": "The Intellectual Property Office (IPO) is the official body responsible for intellectual property (IP) rights including patents, designs, trademarks and copyright. (Code: UK or EU only)",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/trademark_ipo_code.json#",
-              "type": "string",
-              "enum": ["UK", "EU"]
-            },
-            "TrademarkID": {
-              "description": "The trademark number that has been registered with the Intellectual Property Office. Note: The 2 letter IPO prefix should be omitted",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_35_text.json#",
+            "FullLegalName": {
+              "description": "Name by which a party is known and which is usually used to identify that party.",
               "type": "string",
               "minLength": 1,
-              "maxLength": 35
+              "maxLength": 350
             }
           },
-          "required": ["TrademarkIPOCode", "TrademarkID"],
+          "required": ["FullLegalName"],
           "additionalProperties": false
         }
       },
-      "required": ["ParentOrganisation", "Brand"],
+      "required": ["Brand", "BrandOwner"],
       "additionalProperties": false
     },
     "ProductName": {
@@ -85,7 +62,6 @@
     },
     "ProductTypeName": {
       "description": "Descriptive code for the product category",
-      "id": "http://localhost:8000/schemas/v1.3/definitions/smel/smel_product_type.json#",
       "type": "string",
       "enum": ["FlexibleBusinessLoan", "SmallBusinessLoan", "SmeUnsecuredLoan"]
     },
@@ -100,10 +76,9 @@
     "ProductSegment": {
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/smel/smel_product_segment.json#",
         "description": "Marketing or industry segment that the product is applicable for. Gives the sector or segment that the Loan is designed for",
         "type": "string",
-        "enum": ["AgricultureSector", "AllSegmentsCorporate", "Corporate", "FixedGroup", "FlexibleBusinessLoan", "GovernmentScheme", "NewCustomersOnly", "SmallLoan", "SpecialisedSector", "SwitchersOnly"]
+        "enum": ["AgricultureSector", "AllSegmentsCorporate", "Business", "Corporate", "FixedGroup", "FlexibleBusinessLoan", "GovernmentScheme", "NewCustomersOnly", "SmallLoan", "SpecialisedSector", "SwitchersOnly"]
       },
       "minItems": 1
     },
@@ -123,7 +98,6 @@
       "description": "Ways to interact with the bank",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/smel/customer_access_channels_code.json#",
         "description": "",
         "type": "string",
         "enum": ["Branch", "MobileBankingApp", "Online", "Phone", "Post", "PostOffice", "Text"]
@@ -134,7 +108,6 @@
       "description": "Currency of the Account. Default to GBP at present",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
         "description": "Active or Historic Currency Code",
         "type": "string",
         "pattern": "[A-Z]{3}"
@@ -151,13 +124,11 @@
     },
     "MinimumLoanAmount": {
       "description": "Minimum loan amount",
-      "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
       "type": "string",
       "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
     },
     "MaximumLoanAmount": {
       "description": "Maximum loan amount",
-      "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
       "type": "string",
       "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
     },
@@ -168,27 +139,23 @@
     "LoanItem": {
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/loan/loan_item.json#",
         "description": "Loan Item",
         "type": "object",
         "properties": {
           "ProductState": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/common/product_state_code.json#",
             "description": "Describes if the offering is promotional or a description of a future state.",
             "type": "string",
             "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
           },
           "StartPromotionOrFutureTerms": {
             "description": "Describes the start date",
-            "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
             "type": "string",
-            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+            "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
           },
           "StopPromotionOrFutureTerms": {
             "description": "Describes the end date",
-            "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
             "type": "string",
-            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+            "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
           },
           "LengthPromotionalInDays": {
             "description": "Describes the length if only a duration is given instead of a date in days",
@@ -196,25 +163,21 @@
           },
           "DateOfChange": {
             "description": "Date of the change if it refers to future terms",
-            "id": "http://localhost:8000/schemas/v0/definitions/common/date.json#",
             "type": "string",
-            "pattern": "^[0-9]{4}-(0[1-9]|(1[1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
+            "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
           },
           "LoanPricing": {
             "type": "array",
             "items": {
-              "id": "http://localhost:8000/schemas/v1.3/definitions/loan/loan_pricing.json#",
               "description": "Loan Pricing",
               "type": "object",
               "properties": {
                 "SizeIncrement": {
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/interest_tier_sme_code.json#",
                   "description": "Identifier for tier only where it has been supplied under Part 8 (article 32 or the CMA order), value reflects upper tier value",
                   "type": "string",
                   "enum": ["£5000", "£10000", "£15000", "£20000", "£25000", "Other", "TierMaximum", "TierMinimum"]
                 },
                 "LoanLengthIncrement": {
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/loan/loan_length_increment.json#",
                   "description": "Loan Length Increments",
                   "type": "string",
                   "enum": ["1 year", "2 years", "3 years", "4 years", "5 years"]
@@ -222,7 +185,6 @@
                 "RepaymentFrequency": {
                   "type": "array",
                   "items": {
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/repayment_frequency_code.json#",
                     "description": "Repayment Frequency Code",
                     "type": "string",
                     "enum": ["Daily", "Flexible", "Fortnightly", "HalfYearly", "Monthly", "Quarterly", "Weekly", "Yearly"]
@@ -231,13 +193,11 @@
                   "uniqueItems": true
                 },
                 "LoanSizeBandLower": {
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                   "description": "Monetary amount without currency",
                   "type": "string",
                   "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                 },
                 "LoanSizeBandUpper": {
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                   "description": "Monetary amount without currency",
                   "type": "string",
                   "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
@@ -252,7 +212,6 @@
                   "type": "string"
                 },
                 "RateComparisonType": {
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/rate_comparison_type_code.json#",
                   "description": "Rate Comparison Type",
                   "type": "string",
                   "enum": ["APR", "AER", "Gross", "Net", "RepApr"]
@@ -283,7 +242,6 @@
       }
     },
     "Eligibility": {
-      "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/eligibility.json#",
       "description": "Eligibility",
       "type": "object",
       "properties": {
@@ -316,20 +274,17 @@
           "type": "boolean"
         },
         "SingleJointIncome": {
-          "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/single_joint_income_code.json#",
           "description": "Minimum Income Source. For certain products a minimum income is required. This can be mandated as to the single income or to a joint income. This field describes this",
           "type": "string",
           "enum": ["Joint", "SoleIncome", "SoleOrJoint", "Turnover"]
         },
         "MinimumIncomeTurnoverAmount": {
           "description": "Minimum income / Turnover required to hold the product",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "MinimumIncomeTurnoverCurrency": {
           "description": "Minimum income / Turnover Currency",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -343,19 +298,16 @@
         },
         "MinimumIncomeFrequency": {
           "description": "The frequency that the minimum mentioned before is deposited in the account. Yearly is very important for premium accounts",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/minimum_income_frequency_code.json#",
           "type": "string",
           "enum": ["AcademicTerm", "HalfYearly", "Monthly", "Quarterly", "Weekly", "Yearly"]
         },
         "AnnualBusinessTurnover": {
           "description": "Annual Business Turnover",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "AnnualBusinessTurnoverCurrency": {
           "description": "Annual Business Turnover Currency",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -365,9 +317,8 @@
         },
         "ResidencyRestrictedRegion": {
           "description": "Indicates a customer must be current resident of a geographic area/country",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/region.json#",
           "type": "string",
-          "enum": ["UK", "EEA", "EU", "EFTA", "GB - ENG", "GB - NIR", "GB - SCT", "GB - WLS", "IRL"]
+          "enum": ["EEA", "EFTA", "England", "EU", "NorthernIreland", "RepublicOfIreland", "Scotland", "UK", "Wales"]
         },
         "MaxNumberOfAccounts": {
           "description": "Maximum number of the same prodcut the customer may hold",
@@ -383,13 +334,11 @@
         },
         "OpeningDepositMinimum": {
           "description": "Minimum Amount to be held on account",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "OpeningDepositMinimumCurrency": {
           "description": "The currency of the Minimum Amount to be depositing at opening",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -399,13 +348,11 @@
         },
         "MinimumOperatingBalance": {
           "description": "Minimum Operating Balance",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "MinimumOperatingBalanceCurrency": {
           "description": "Minimum Operating Balance currency",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -415,13 +362,11 @@
         },
         "OpeningDepositMaximumAmount": {
           "description": "Maximum Amount to be depositing at opening",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "OpeningDepositMaximumCurrency": {
           "description": "The currency of the Minimum Amount to be depositing at opening",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -431,7 +376,6 @@
         },
         "EligibilityType": {
           "description": "Eligibility type",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/eligibility_type_code.json#",
           "type": "string",
           "enum": ["AnyBusinessCustomer", "BusinessOnly", "CreditCard", "CreditScoring", "EmailAddress", "ExistingCustomers", "IdAndV", "Mortgage", "NoArrearsOnLoan", "NoCustomerInArrears", "NoOverOverdraftThirtyDays", "NoSoleUkAccountOrBankrupt", "NTB", "NTBBusiness", "SoleStudentAccount", "SoleUkAccount", "StudentsOnly", "TwoMonthsOfCourseStart", "UCASFulltimeTwoYears"]
         },
@@ -446,7 +390,6 @@
         "MarketingEligibility": {
           "type": "array",
           "items": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/marketing_eligibility_code.json#",
             "description": "Specific eligibility for marketing",
             "type": "string",
             "enum": ["ExistingCustomers", "NewCustomersOnly", "SwitchersOnly", "StartUp"]
@@ -460,30 +403,25 @@
     "FeesAndCharges": {
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fees_and_charges.json#",
         "description": "Fees And Charges",
         "type": "object",
         "properties": {
           "ProductState": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/common/product_state_code.json#",
             "description": "Describes if the offering is promotional or a description of a future state.",
             "type": "string",
             "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
           },
           "Fees": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fees.json#",
             "description": "Fees",
             "type": "object",
             "properties": {
               "StartPromotionOrFutureTerms": {
                 "description": "Describes the start date",
-                "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                 "type": "string",
                 "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
               },
               "StopPromotionOrFutureTerms": {
                 "description": "Describes the end date",
-                "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                 "type": "string",
                 "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
               },
@@ -493,7 +431,6 @@
               },
               "DateOfChange": {
                 "description": "Date of the change if it refers to future terms",
-                "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                 "type": "string",
                 "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
               },
@@ -508,26 +445,22 @@
               "FeeDetails": {
                 "type": "array",
                 "items": {
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fee_details.json#",
                   "description": "Fee Details",
                   "type": "object",
                   "properties": {
                     "FeeSubType": {
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fee_subtype_code.json#",
                       "description": "Fee Sub Type code",
                       "type": "string",
                       "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                     },
                     "FeeDetail": {
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fee_detail.json#",
                       "description": "Fee Detail",
                       "type": "object",
                       "properties": {
                         "FeeType": {
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fee_code.json#",
                           "description": "A description of the Fee type",
                           "type": "string",
-                          "enum": ["Other", "ATMDonation", "ATMDeposATMPaidIn", "ReportCertBalance", "ATMAbroadConVisaCredit", "ATMAbroadConVisaDebit", "ATMCardnetEnvIn", "ATMCashGroupATMCreditCard", "ATMCashNonGroupATMCredittcard", "ATMCashGroupATMDebitCard", "ATMCashNonGroupATMDebitcard", "ATMConGroupATM", "ATMAbroad", "ATMForeignCashDebCard", "ATMAbroadGoldVisaDebit", "ATMSpainCashCard", "ATMSpainDebitCard", "ATMSpainConversionDebitCard", "ATMSpainConversionCashCard", "ATMNonSterlingWithdrawal", "ATMAbroadVisaCredit", "ATMAbroadVisaDebit", "ATMAbroadConVisaGoldDebit", "ATMWidthdrawCash", "BACSOnLineAncilliary", "BACSBatch", "BACSOnLineFile", "BACSFileItem", "BACSOnLineSetup ", "BACSItem", "BACSItemInterbranch", "BACSBulkBatch", "BACSOnLineOverlimit", "BACSOnLinePayment", "BACSRecallItem", "BACSOnLineService", "BACSBulkInternet", "BACSTELDirDebSmartCard", "BACSTELDirDebWebInit", "BACSTELirDebWebInit", "BACSTELDirDebOverlimit", "BACSTELDirDebPayment", "BACSTELDirDebService", "BACSTELDirDebAncilliary", "BACSDirectItemProfile", "BACSTELAncilliary", "BACSTELSmartCard", "BACSTELFile", "BACSTELSetup ", "BACSTELOverlimit", "BACSTELPayment", "BACSTELService", "CHAPSOutBranch", "CHAPSCancellation", "CHAPSOutOnlineDepositAcc", "CHAPSIn", "CHAPSOutInterBank", "CHAPSInterBank", "CHAPSOutPost", "CHAPSOutInterBranch", "CHAPSOut", "CHAPSOutOnline", "CHAPSandForeignPay", "CHAPSOutManual", "CardCardReplacement", "DraftsCounter", "DraftsBankers", "DraftsIntlPayableAbroad", "DraftsLostStolen", "CardPersonalisedCard", "DraftsIntlStoppedCancelled", "EuroChqXLess", "EuroChqXPlus", "FPSOutFutureDated", "FPSOutImmediate", "FPSOut", "FPSOutOwn", "FPSInBranch", "FPSUKPayUrgent", "LegalArticlesReport", "LegalSealing", "LegalBondAndGuarantee", "LegalCourtOrder", "LegalCoSearch", "LegalDepositAssignment", "LegalGuaranteePrep", "LegalLifePolicyPrepCo", "LegalLifePolicyPrepPersonal", "LegalPriorityPariPassu", "LegalSubordinationAgreement", "DirDebDirectDebitAdmin", "DirDebDirectDebitCancel", "IntlPayBIBForeignLimit", "IntlPayCreditTransCust", "IntlPayCreditTransNonCust", "IntlPayUrgentPaymentForeign", "IntlPayExpressMoneyMover", "IntlPayEEAPayUrgent", "IntlPayIrishPayUrgent", "IntlPayEEAPay", "IntlPayForeignIn1CPlus", "IntlPayForeignPaymentInUKAcc", "IntlPayForeignCharge", "IntlPayForeignCancellation", "IntlPayForeignStandardEUEuroBIC", "IntlPayFXFeeRate", "IntlPayForeignInternet", "IntlPayForeign", "IntlPayForeignInbound", "IntlPayFXPaymentOut", "IntlPayForeignInSub1C", "IntlPayFXRate", "IntlPayForeignStandardEUEuroNoBIC", "IntlPayFXPaymentOutIR", "IntlPayFXFee", "IntlPayPurchaseNonSterling", "IntlPayPostPaymentForeign", "IntlPayPurchaseRateNonSterling", "IntlPayPaymentTracing", "IntlPayStandardMoneyMover", "IntlPayMT101Transaction", "IntlPayTransNonSterling", "IntlPayTransRateNonSterling", "IntlPayForeignUrgentEUEuroBIC", "IntlPayForeignUrgentEUEuroNoBIC", "IntlPayUrgentPaymentGroup", "IntlPayUrgentPaymentUK", "IntlPayUSAPayUrgent", "IntlPayCurrencyPurchase", "IntlPayWorldpayPayment", "IntlPayCurrencyWithdraw", "InvPayBankDetailsWrong", "InvPayForeignBCNR", "InvPayForeignRecall", "InvGeneralInq", "InvOldInstruction", "InvPayPaymentRecall", "InvPayReturnDebitXVLess", "InvPayReturnDebitXVPlus", "InvPayStopPayment", "InvPayStandingOrdUnpaid", "SafeKeepAccess", "SafeKeepDeedMedium", "SafeKeepingEnvelope", "SafeKeepingInspection", "SafeKeepingLargeItem", "SafeKeepMultipleItems", "SafeKeepingParcel", "SafeKeepDeedSmall", "SafeKeepOneItem", "SafeKeepSafeCustody", "LoanArrangementFeePC", "LoanArrangement", "LoanEarlyRepayment", "LoanLatePayment", "LoanSMEUnsecuredLoan", "LoanTieredArrangement", "NightSafeNightSafeBankOpen", "NightSafeCreditSub5K", "NightSafeNightSafe", "NightSafeNightSafePaidIn", "OverdraftAnnualReview", "OverdraftTempOverdraft", "OverdraftUnauthorisedBorrowing", "POPostOfficeCounterCredit", "POPostOfficeCashCredit", "POPostOfficeCashOut", "POPostOfficeWithdrawal", "ChqBookTheftLossAllStopped", "ChqIssuedCurrencyAcc", "ChqCopy", "ChqDraft", "ChqIn", "ChqDraftSterling", "ChqOutIssued", "ChqSpecialChqPresentation", "ChqCounterCheque", "ChqChequeswithStatement", "ChqStopped", "ChqTrans", "ChqDraftFX", "ChqForeignCourier", "ChqForeignNegTenThou", "ChqForeignNegHundred", "ChequeForeignBankDivi", "ChqForeignNegFiftyThou", "ChqPensionCheque", "ChequeForeignOtherDivi", "ChqForeignNegFiveThou", "ChqForeignNegMax", "ChqForeignGBPMMDPlus", "ChqGiftCheque", "ChqCounterLodgement", "ChqCashDropLodgement", "ChqChequePhotocopy", "ChqPostOfficeCredit", "ChqPostOfficeChequeCollected", "ChqChequeRetrieval", "ChqReconcilliationPerTrans", "ChqSpecialPresentationCount", "ChqSpecialPresentationPTT", "ChqUnpaidCharge", "ChqUnpaidTransIn", "ChqUnpaidTransOut", "ChqUnpaidCheque", "ReportAuditLetter", "ReportFAXAdviceAdditional", "ReportTelAdviceAdditional", "ReportCreditHistory", "ReportCertInterestDuplicate", "ReportCertInterest", "ReportCreditHistoryAdditionalInYear", "ReportForeignStatusEnqElec", "ReportForeignStatusEnq", "ReportCashBackorInterestAnal", "ReportStatementChqDaily", "ReportStatementChqFortnightly", "ReportStatementChqMonthly", "ReportStatementChqWeekly", "ReportStatementAndDiviChq", "ReportReference", "ReportReferralItem", "ReportStatementByATM", "ReportStatementByBranch", "ReportStatementCopyRegular", "ReportStatusEnquiry", "ReportStatementFrequent", "ReportStatementMonthly", "ReportStatementCopy1", "ReportStatementToBranch", "ReportSMSTextMiniStatementorAlert", "ReportStatementFortnightly", "ReportSMSTextMiniStatementWoM", "ReportSMSTextAlertBalance", "ReportSMSTextAlert", "ReportTaxCert", "ReportWeeklyStatement", "ReportTextMessageBanking", "SEPACancellation", "SEPABranch", "SEPACredit", "SEPADirectDebit", "SEPAIn", "SEPAEuro", "SEPAOut", "SEPAUnpaid", "SEPAWinbitsAnnual Service", "SEPAWinbitsTransaction", "TransBillPaymentBranch", "TransBillCollect", "TransTelephoneBillPayment", "TransBankPayment", "TransBillPaymentTelephone", "TransCorrespondentBankFee", "TransCreditTransferUKDifferent", "TransCreditTransferUKSame", "TransCredit", "TransCreditTransfer", "TransBranchCredit", "TransDebit", "TransDebCardDeb", "TransUKDirDeb", "TransManualDeb", "TransBuyForeignWithGBP", "TransGoodValueReq", "TransSWIFTOutUKForeign", "TransInconpleteInstruction", "TransManualEntries", "TransManualTrans", "TransNonSterling", "TransPOSSaleForeign", "TransPriPaymentPost", "TransPOSSaleUK", "TransReturnPayment", "TransReconciliationPerTrans", "TransStandingOrdAdmin", "TransStandingOrd", "TransStandingOrdManPay", "TransTravellersChqOtherBank", "TransTelBusiPriPaymentForeignToUKAcc", "TransTeleItem", "TransTelBusiPriPaymentToGrpAcc", "TransTravellersChqRate", "TransTransferExGroup", "TransUnauthorisedPaidTrans", "TransUrgentPaymentPostal", "TransUnpaidTrans", "TransTelBusiPriPaymentToNonGrpAcc", "TransSWIFTOutNonEEASterling", "AutoAutoCredit", "AutoAutomatedEntries", "AutoAutoCreditPhoneInet", "AutoAutomatedTrans", "AutoDebitCardCommercial", "AutoFPSAutoCredit", "VisaConvertAbroadForeign", "VisaBureauDeChange", "VisaTravellersChqorCurrency", "OnlineInternetBillPayment", "OnlineBusinessOnlineEuroPayment", "OnlineBusinessOnlineUrgentEuroPayment", "OnlineBusinessOnlineForeignPayment", "OnlineInterbankTransfer", "OnlineInterbankPerTransfer", "OnlineInterbranchTransfer", "OnlineInterbranchPerTransfer", "OnlineSubscriptionMonthly", "OnlineBankingPayment", "OnlineBankingSubscription", "OnlinePOSSale", "OnlinePersonalCustAncillarys", "OnlinePersonalCustService", "OnlinePersonalCustOverlimits", "OnlineReplacementCardReader", "OnlinePersonalCustSetUp", "OnlinePersonalCustTransaction", "OnlinePaymentinGBPtoUK", "OnlineUrgentPayment", "OnlinePaymentinUSDtoUS", "OnlineBulkDirectDebSterling", "ForeignChqSent", "ForeignChqSelf", "ForeignChqEncashment", "ForeignFXInwardsCust", "ForeignFXTransfersROI", "ForeignFXForwardTrans", "ForeignFXTransfersBOI", "ForeignExMaintenance", "ForeignFXInwardsNonCust", "ForeignFXOutwards", "ForeignPurchase", "ForeignStatusRep", "ForeignChqDraft", "ForeignChqCLess", "ForeignChqMLess", "ForeignChqOther", "ForeignChqMPlus", "ForeignChqCCC", "ServiceCAccountFee", "ServiceCAccountFeeMonthly", "ServiceCAccountFeeQuarterly", "ServiceCBalanceHandling", "ServiceCFixedTariff", "ServiceCBusiDepAccBreakage", "ServiceCMonitorDaily", "ServiceCManagementFee", "ServiceCMinimumMonthlyFee", "ServiceCMonitorMonthly", "ServiceCMonitorWeekly", "ServiceCSecurityFee", "ServiceCMT940AccountFirst", "ServiceCMT940AccountSubsequent", "ServiceCOther", "CounterCoinHandling", "CounterCashIn", "CounterCashInNotUs", "CounterCashOut", "CounterCashX", "CounterForeignCashMax", "CounterForeignNoteHandling", "CounterForeignCashOut", "CounterCashFeeRate", "CounterForeignCashOutTx", "CounterCounterLodgement", "CounterCashDropLodgement", "CounterNotesLodged", "CounterNotesOut", "CounterCashInOwn", "CounterPaidTrans", "CounterCashFeePercent"]
+                          "enum": ["Other", "ATMDonation", "ATMDeposATMPaidIn", "ReportCertBalance", "ATMAbroadConVisaCredit", "ATMAbroadConVisaDebit", "ATMCardnetEnvIn", "ATMCashGroupATMCreditCard", "ATMCashNonGroupATMCredittcard", "ATMCashGroupATMDebitCard", "ATMCashNonGroupATMDebitcard", "ATMConGroupATM", "ATMAbroad", "ATMForeignCashDebCard", "ATMAbroadGoldVisaDebit", "ATMSpainCashCard", "ATMSpainDebitCard", "ATMSpainConversionDebitCard", "ATMSpainConversionCashCard", "ATMNonSterlingWithdrawal", "ATMAbroadVisaCredit", "ATMAbroadVisaDebit", "ATMAbroadConVisaGoldDebit", "ATMWidthdrawCash", "BACSOnLineAncilliary", "BACSBatch", "BACSOnLineFile", "BACSFileItem", "BACSOnLineSetup", "BACSItem", "BACSItemInterbranch", "BACSBulkBatch", "BACSOnLineOverlimit", "BACSOnLinePayment", "BACSRecallItem", "BACSOnLineService", "BACSBulkInternet", "BACSTELDirDebSmartCard", "BACSTELDirDebWebInit", "BACSTELirDebWebInit", "BACSTELDirDebOverlimit", "BACSTELDirDebPayment", "BACSTELDirDebService", "BACSTELDirDebAncilliary", "BACSDirectItemProfile", "BACSTELAncilliary", "BACSTELSmartCard", "BACSTELFile", "BACSTELSetup", "BACSTELOverlimit", "BACSTELPayment", "BACSTELService", "CHAPSOutBranch", "CHAPSCancellation", "CHAPSOutOnlineDepositAcc", "CHAPSIn", "CHAPSOutInterBank", "CHAPSInterBank", "CHAPSOutPost", "CHAPSOutInterBranch", "CHAPSOut", "CHAPSOutOnline", "CHAPSandForeignPay", "CHAPSOutManual", "CardCardReplacement", "DraftsCounter", "DraftsBankers", "DraftsIntlPayableAbroad", "DraftsLostStolen", "CardPersonalisedCard", "DraftsIntlStoppedCancelled", "EuroChqXLess", "EuroChqXPlus", "FPSOutFutureDated", "FPSOutImmediate", "FPSOut", "FPSOutOwn", "FPSInBranch", "FPSUKPayUrgent", "LegalArticlesReport", "LegalSealing", "LegalBondAndGuarantee", "LegalCourtOrder", "LegalCoSearch", "LegalDepositAssignment", "LegalGuaranteePrep", "LegalLifePolicyPrepCo", "LegalLifePolicyPrepPersonal", "LegalPriorityPariPassu", "LegalSubordinationAgreement", "DirDebDirectDebitAdmin", "DirDebDirectDebitCancel", "IntlPayBIBForeignLimit", "IntlPayCreditTransCust", "IntlPayCreditTransNonCust", "IntlPayUrgentPaymentForeign", "IntlPayExpressMoneyMover", "IntlPayEEAPayUrgent", "IntlPayIrishPayUrgent", "IntlPayEEAPay", "IntlPayForeignIn1CPlus", "IntlPayForeignPaymentInUKAcc", "IntlPayForeignCharge", "IntlPayForeignCancellation", "IntlPayForeignStandardEUEuroBIC", "IntlPayFXFeeRate", "IntlPayForeignInternet", "IntlPayForeign", "IntlPayForeignInbound", "IntlPayFXPaymentOut", "IntlPayForeignInSub1C", "IntlPayFXRate", "IntlPayForeignStandardEUEuroNoBIC", "IntlPayFXPaymentOutIR", "IntlPayFXFee", "IntlPayPurchaseNonSterling", "IntlPayPostPaymentForeign", "IntlPayPurchaseRateNonSterling", "IntlPayPaymentTracing", "IntlPayStandardMoneyMover", "IntlPayMT101Transaction", "IntlPayTransNonSterling", "IntlPayTransRateNonSterling", "IntlPayForeignUrgentEUEuroBIC", "IntlPayForeignUrgentEUEuroNoBIC", "IntlPayUrgentPaymentGroup", "IntlPayUrgentPaymentUK", "IntlPayUSAPayUrgent", "IntlPayCurrencyPurchase", "IntlPayWorldpayPayment", "IntlPayCurrencyWithdraw", "InvPayBankDetailsWrong", "InvPayForeignBCNR", "InvPayForeignRecall", "InvGeneralInq", "InvOldInstruction", "InvPayPaymentRecall", "InvPayReturnDebitXVLess", "InvPayReturnDebitXVPlus", "InvPayStopPayment", "InvPayStandingOrdUnpaid", "SafeKeepAccess", "SafeKeepDeedMedium", "SafeKeepingEnvelope", "SafeKeepingInspection", "SafeKeepingLargeItem", "SafeKeepMultipleItems", "SafeKeepingParcel", "SafeKeepDeedSmall", "SafeKeepOneItem", "SafeKeepSafeCustody", "LoanArrangementFeePC", "LoanArrangement", "LoanEarlyRepayment", "LoanLatePayment", "LoanSMEUnsecuredLoan", "LoanTieredArrangement", "NightSafeNightSafeBankOpen", "NightSafeCreditSub5K", "NightSafeNightSafe", "NightSafeNightSafePaidIn", "OverdraftAnnualReview", "OverdraftTempOverdraft", "OverdraftUnauthorisedBorrowing", "POPostOfficeCounterCredit", "POPostOfficeCashCredit", "POPostOfficeCashOut", "POPostOfficeWithdrawal", "ChqBookTheftLossAllStopped", "ChqIssuedCurrencyAcc", "ChqCopy", "ChqDraft", "ChqIn", "ChqDraftSterling", "ChqOutIssued", "ChqSpecialChqPresentation", "ChqCounterCheque", "ChqChequeswithStatement", "ChqStopped", "ChqTrans", "ChqDraftFX", "ChqForeignCourier", "ChqForeignNegTenThou", "ChqForeignNegHundred", "ChequeForeignBankDivi", "ChqForeignNegFiftyThou", "ChqPensionCheque", "ChequeForeignOtherDivi", "ChqForeignNegFiveThou", "ChqForeignNegMax", "ChqForeignGBPMMDPlus", "ChqGiftCheque", "ChqCounterLodgement", "ChqCashDropLodgement", "ChqChequePhotocopy", "ChqPostOfficeCredit", "ChqPostOfficeChequeCollected", "ChqChequeRetrieval", "ChqReconcilliationPerTrans", "ChqSpecialPresentationCount", "ChqSpecialPresentationPTT", "ChqUnpaidCharge", "ChqUnpaidTransIn", "ChqUnpaidTransOut", "ChqUnpaidCheque", "ReportAuditLetter", "ReportFAXAdviceAdditional", "ReportTelAdviceAdditional", "ReportCreditHistory", "ReportCertInterestDuplicate", "ReportCertInterest", "ReportCreditHistoryAdditionalInYear", "ReportForeignStatusEnqElec", "ReportForeignStatusEnq", "ReportCashBackorInterestAnal", "ReportStatementChqDaily", "ReportStatementChqFortnightly", "ReportStatementChqMonthly", "ReportStatementChqWeekly", "ReportStatementAndDiviChq", "ReportReference", "ReportReferralItem", "ReportStatementByATM", "ReportStatementByBranch", "ReportStatementCopyRegular", "ReportStatusEnquiry", "ReportStatementFrequent", "ReportStatementMonthly", "ReportStatementCopy1", "ReportStatementToBranch", "ReportSMSTextMiniStatementorAlert", "ReportStatementFortnightly", "ReportSMSTextMiniStatementWoM", "ReportSMSTextAlertBalance", "ReportSMSTextAlert", "ReportTaxCert", "ReportWeeklyStatement", "ReportTextMessageBanking", "SEPACancellation", "SEPABranch", "SEPACredit", "SEPADirectDebit", "SEPAIn", "SEPAEuro", "SEPAOut", "SEPAUnpaid", "SEPAWinbitsAnnualService", "SEPAWinbitsTransaction", "TransBillPaymentBranch", "TransBillCollect", "TransTelephoneBillPayment", "TransBankPayment", "TransBillPaymentTelephone", "TransCorrespondentBankFee", "TransCreditTransferUKDifferent", "TransCreditTransferUKSame", "TransCredit", "TransCreditTransfer", "TransBranchCredit", "TransDebit", "TransDebCardDeb", "TransUKDirDeb", "TransManualDeb", "TransBuyForeignWithGBP", "TransGoodValueReq", "TransSWIFTOutUKForeign", "TransInconpleteInstruction", "TransManualEntries", "TransManualTrans", "TransNonSterling", "TransPOSSaleForeign", "TransPriPaymentPost", "TransPOSSaleUK", "TransReturnPayment", "TransReconciliationPerTrans", "TransStandingOrdAdmin", "TransStandingOrd", "TransStandingOrdManPay", "TransTravellersChqOtherBank", "TransTelBusiPriPaymentForeignToUKAcc", "TransTeleItem", "TransTelBusiPriPaymentToGrpAcc", "TransTravellersChqRate", "TransTransferExGroup", "TransUnauthorisedPaidTrans", "TransUrgentPaymentPostal", "TransUnpaidTrans", "TransTelBusiPriPaymentToNonGrpAcc", "TransSWIFTOutNonEEASterling", "AutoAutoCredit", "AutoAutomatedEntries", "AutoAutoCreditPhoneInet", "AutoAutomatedTrans", "AutoDebitCardCommercial", "AutoFPSAutoCredit", "VisaConvertAbroadForeign", "VisaBureauDeChange", "VisaTravellersChqorCurrency", "OnlineInternetBillPayment", "OnlineBusinessOnlineEuroPayment", "OnlineBusinessOnlineUrgentEuroPayment", "OnlineBusinessOnlineForeignPayment", "OnlineInterbankTransfer", "OnlineInterbankPerTransfer", "OnlineInterbranchTransfer", "OnlineInterbranchPerTransfer", "OnlineSubscriptionMonthly", "OnlineBankingPayment", "OnlineBankingSubscription", "OnlinePOSSale", "OnlinePersonalCustAncillarys", "OnlinePersonalCustService", "OnlinePersonalCustOverlimits", "OnlineReplacementCardReader", "OnlinePersonalCustSetUp", "OnlinePersonalCustTransaction", "OnlinePaymentinGBPtoUK", "OnlineUrgentPayment", "OnlinePaymentinUSDtoUS", "OnlineBulkDirectDebSterling", "ForeignChqSent", "ForeignChqSelf", "ForeignChqEncashment", "ForeignFXInwardsCust", "ForeignFXTransfersROI", "ForeignFXForwardTrans", "ForeignFXTransfersBOI", "ForeignExMaintenance", "ForeignFXInwardsNonCust", "ForeignFXOutwards", "ForeignPurchase", "ForeignStatusRep", "ForeignChqDraft", "ForeignChqCLess", "ForeignChqMLess", "ForeignChqOther", "ForeignChqMPlus", "ForeignChqCCC", "ServiceCAccountFee", "ServiceCAccountFeeMonthly", "ServiceCAccountFeeQuarterly", "ServiceCBalanceHandling", "ServiceCFixedTariff", "ServiceCBusiDepAccBreakage", "ServiceCMonitorDaily", "ServiceCManagementFee", "ServiceCMinimumMonthlyFee", "ServiceCMonitorMonthly", "ServiceCMonitorWeekly", "ServiceCSecurityFee", "ServiceCMT940AccountFirst", "ServiceCMT940AccountSubsequent", "ServiceCOther", "CounterCoinHandling", "CounterCashIn", "CounterCashInNotUs", "CounterCashOut", "CounterCashX", "CounterForeignCashMax", "CounterForeignNoteHandling", "CounterForeignCashOut", "CounterCashFeeRate", "CounterForeignCashOutTx", "CounterCounterLodgement", "CounterCashDropLodgement", "CounterNotesLodged", "CounterNotesOut", "CounterCashInOwn", "CounterPaidTrans", "CounterCashFeePercent"]
                         },
                         "Other": {
                           "description": "Describe other fee type",
@@ -535,13 +468,11 @@
                         },
                         "StartPromotionOrFutureTerms": {
                           "description": "Describes the start date",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         },
                         "StopPromotionOrFutureTerms": {
                           "description": "Describes the end date",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         },
@@ -551,42 +482,35 @@
                         },
                         "DateOfChange": {
                           "description": "Date of the change if it refers to future terms",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         },
                         "FeeSubDetails": {
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fee_sub_details.json#",
                           "description": "Fee Sub Details",
                           "type": "object",
                           "properties": {
                             "FeeFrequency": {
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fee_frequency_code.json#",
                               "description": "Triggering frequency of the fee",
                               "type": "string",
                               "enum": ["AcademicTerm", "AccountClosing", "AccountOpening", "AtTimeOfLoanRepayment", "ChargingPeriod", "Daily", "EveryFiveBusinessDays", "Item", "Monthly", "OnAccountAnniversary", "PerHour", "PerOccurrence", "PerSheet", "PerTransactionAmount", "PerTransactionPercentage", "Quarterly", "SixMonthly", "StartOfLoan", "StatementMonthly", "Weekly", "Yearly"]
                             },
                             "FeeAmount": {
                               "description": "Fee in GBP",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                               "type": "string",
                               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "FeeMin": {
                               "description": "Fee in GBP",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                               "type": "string",
                               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "FeeMax": {
                               "description": "Fee in GBP",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                               "type": "string",
                               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "FeeRate": {
                               "description": "% Rate",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
                               "type": "string",
                               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                             },
@@ -596,7 +520,6 @@
                             },
                             "RepresentativeRate": {
                               "description": "Representative Rate",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
                               "type": "string",
                               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                             },
@@ -637,7 +560,6 @@
       "minItems": 1
     },
     "Benefits": {
-      "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit.json#",
       "description": "Benefit",
       "type": "object",
       "properties": {
@@ -648,30 +570,25 @@
         "BenefitGroup": {
           "type": "array",
           "items": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit_group.json#",
             "description": "Benefit Interest Group",
             "type": "object",
             "properties": {
               "BenefitSubType": {
-                "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit_subtype_code.json#",
                 "description": "Benefit Subtype Code",
                 "type": "string",
                 "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
               },
               "BenefitItem": {
-                "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit_item.json#",
                 "description": "Benefit Item",
                 "type": "object",
                 "properties": {
                   "StartPromotionOrFutureTerms": {
                     "description": "Describes the start date",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
                   "StopPromotionOrFutureTerms": {
                     "description": "Describes the end date",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
@@ -681,14 +598,12 @@
                   },
                   "DateOfChange": {
                     "description": "Date of the change if it refers to future terms",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
                   "BenefitDetail": {
                     "type": "array",
                     "items": {
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benfit_detail.json#",
                       "description": "Benefit detail",
                       "type": "object",
                       "properties": {
@@ -715,7 +630,6 @@
                         "CriteriaType": {
                           "type": "array",
                           "items": {
-                            "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit_criteria_type.json#",
                             "description": "Criteria that is required in order to be eligible for the Benefit",
                             "type": "string",
                             "enum": ["CashDeposit", "Deposit", "DirectDebit", "InitialDeposit", "InternetLogon", "MobileLogon", "RegularDeposit"]
@@ -723,13 +637,11 @@
                         },
                         "MinimumCriteria": {
                           "description": "Minimum amount for the criteria",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                           "type": "string",
                           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                         },
                         "MaximumCriteria": {
                           "description": "Maximum amount for the criteria",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                           "type": "string",
                           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                         },
@@ -743,13 +655,11 @@
                         },
                         "PromotionStartDate": {
                           "description": "If the benefit is temporal the start date is when the benefit comes into effect",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         },
                         "PromotionEndDate": {
                           "description": "If the benefit is temporal the end date is when the benefit is no longer applicable",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         }
@@ -761,7 +671,6 @@
                 "additionalProperties": false
               }
             },
-            "required": ["BenefitItem"],
             "additionalProperties": false
           }
         }

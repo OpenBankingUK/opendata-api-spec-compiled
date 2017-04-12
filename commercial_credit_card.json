@@ -1,74 +1,51 @@
 {
-  "id": "http://localhost:8000/schemas/v1.3/commercial_credit_card.json#",
   "description": "Commercial Credit Card",
   "type": "object",
   "properties": {
     "Organisation": {
-      "id": "http://localhost:8000/schemas/v1.3/definitions/common/organisation.json#",
       "description": "Organisation",
       "type": "object",
       "properties": {
-        "ParentOrganisation": {
-          "description": "Parent organisation",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/organisation_identification.json#",
+        "Brand": {
+          "description": "Brand of the Acquirer of transactions captured by the ATM",
+          "type": "object",
+          "properties": {
+            "BrandName": {
+              "description": "Brand of the Acquirer of transactions captured by the ATM",
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 140
+            }
+          },
+          "required": ["BrandName"],
+          "additionalProperties": false
+        },
+        "BrandOwner": {
+          "description": "Unique and unambiguous way of identifying an organisation.",
           "type": "object",
           "properties": {
             "LEI": {
-              "description": "The LEI ID of the organisation",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/lei_identifier.json#",
+              "description": "Legal entity identification as an alternate identification for a party.",
               "type": "string",
               "pattern": "^[A-Z0-9]{18,18}[0-9]{2,2}$"
             },
-            "BIC": {
-              "description": "The BIC from the organisation",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/any_bic_identifier.json#",
+            "AnyBIC": {
+              "description": "Code allocated to a financial institution or non financial institution by the ISO 9362 Registration Authority as described in ISO 9362 'Banking - Banking telecommunication messages - Business identifier code (BIC)'",
               "type": "string",
               "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
             },
-            "OrganisationName": {
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/organisation_name.json#",
-              "description": "Organisation Name",
-              "type": "object",
-              "properties": {
-                "LegalName": {
-                  "description": "Legal Name of the organisation",
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_35_text.json#",
-                  "type": "string",
-                  "minLength": 1,
-                  "maxLength": 35
-                }
-              },
-              "required": ["LegalName"],
-              "additionalProperties": false
-            }
-          },
-          "required": ["OrganisationName"],
-          "additionalProperties": false
-        },
-        "Brand": {
-          "description": "Brand",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/brand.json#",
-          "type": "object",
-          "properties": {
-            "TrademarkIPOCode": {
-              "description": "The Intellectual Property Office (IPO) is the official body responsible for intellectual property (IP) rights including patents, designs, trademarks and copyright. (Code: UK or EU only)",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/trademark_ipo_code.json#",
-              "type": "string",
-              "enum": ["UK", "EU"]
-            },
-            "TrademarkID": {
-              "description": "The trademark number that has been registered with the Intellectual Property Office. Note: The 2 letter IPO prefix should be omitted",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_35_text.json#",
+            "FullLegalName": {
+              "description": "Name by which a party is known and which is usually used to identify that party.",
               "type": "string",
               "minLength": 1,
-              "maxLength": 35
+              "maxLength": 350
             }
           },
-          "required": ["TrademarkIPOCode", "TrademarkID"],
+          "required": ["FullLegalName"],
           "additionalProperties": false
         }
       },
-      "required": ["ParentOrganisation", "Brand"],
+      "required": ["Brand", "BrandOwner"],
       "additionalProperties": false
     },
     "ProductName": {
@@ -77,7 +54,6 @@
     },
     "ProductType": {
       "description": "Descriptive code for the product category",
-      "id": "http://localhost:8000/schemas/v1.3/definitions/ccc_product_type.json#",
       "type": "string",
       "enum": ["CommercialCreditCards"]
     },
@@ -85,7 +61,6 @@
       "description": "Marketing or industry segment that the product is designed for",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/ccc_segments.json#",
         "description": "Marketing or industry segment that the product is designed for",
         "type": "string",
         "enum": ["Cashback", "Corporate", "General", "Reward", "SME"]
@@ -133,30 +108,25 @@
       "minItems": 1
     },
     "Details": {
-      "id": "http://localhost:8000/schemas/v1.3/definitions/ccc/ccc_group.json#",
       "description": "Commercial Credit Card Group ",
       "type": "object",
       "properties": {
         "CCSubType": {
-          "id": "http://localhost:8000/schemas/v1.3/definitions/ccc_subtype_code.json#",
           "description": "CCC Subtype Code",
           "type": "string",
           "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
         },
         "CommercialCreditCardItem": {
-          "id": "http://localhost:8000/schemas/v1.3/definitions/ccc/ccc_item.json#",
           "description": "Commercial Credit Card Item ",
           "type": "object",
           "properties": {
             "StartPromotionOrFutureTerms": {
               "description": "Describes the start date",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
               "type": "string",
               "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
             },
             "StopPromotionOrFutureTerms": {
               "description": "Describes the end date",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
               "type": "string",
               "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
             },
@@ -166,64 +136,54 @@
             },
             "DateOfChange": {
               "description": "Date of the change if it refers to future terms",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
               "type": "string",
               "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
             },
             "MinimumCreditLimit": {
               "description": "Minimum £500, maximum subject to status",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "RepaymentFrequency": {
               "description": "Repayment frequency",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/repayment_frequency_code.json#",
               "type": "string",
               "enum": ["Daily", "Flexible", "Fortnightly", "HalfYearly", "Monthly", "Quarterly", "Weekly", "Yearly"]
             },
             "APRRate": {
               "description": "Annual Percentage Rate",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "BalanceTransferInterestRatePeriod": {
-              "id": "http://localhost:8000/schemas/v1.3/definitions/ccc/balance_transfer_interest_rate_period_code.json#",
               "description": "The period used to define the specific interest rate for balance transfers",
               "type": "string",
               "enum": ["Annual", "Monthly"]
             },
             "PurchaseRate": {
               "description": "Purchase rate",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "BalanceTransferRate": {
               "description": "Balance transfer rate",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "CashAdvanceRate": {
               "description": "Cash advance rate",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "OverLimitFee": {
               "description": "Fee applicable if the card was credited over its limit",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "MaximumNumberOfCardsPermitted": {
               "description": "The maximum numbers of cards per account",
-              "type": "integer"
+              "type": "string"
             },
             "CardScheme": {
-              "id": "http://localhost:8000/schemas/v1.3/definitions/ccc/card_scheme_code.json#",
               "description": "Card Scheme Code",
               "type": "string",
               "enum": ["Cashcard", "CreditMastercard", "CreditVisa"]
@@ -254,43 +214,36 @@
             },
             "IssuingEmergencyCardsFees": {
               "description": "Amount payable for issuing an emergency card",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "AnnualFeeAmount": {
               "description": "Standard fee on the card",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "ChequeFeePercent": {
               "description": "Percentage fee on convenience cheques",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "CashbackPercent": {
               "description": "Percent of cashback on amount spend",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "FeesOnCheque": {
               "description": "Percentage fee on a convenince cheques",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "MinimumRepaymentPercentage": {
               "description": "Minimum repayment as percentage",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "MinimumRepaymentAmount": {
               "description": "Minimum repayment amount",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
@@ -308,7 +261,6 @@
             },
             "MinimumLendingAmount": {
               "description": "The minimum lending available",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
@@ -322,85 +274,71 @@
             },
             "PaymentSchemeExchangeRate": {
               "description": "The base exchange rate used in settlement of the transaction between issuer and scheme",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "ExchangeRateAdjustment": {
               "description": "The margin added, by certain card issuers, to the scheme rate in order to arrive at the exchange rate qouted as the reference exchange rate to the cardholder",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "PaymentSchemeExchangeFee": {
               "description": "Any payment network fee applied to some or all non-sterling transactions that the card issuer recover directly from the cardholder",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "PaymentSchemeExchangeFeeRate": {
               "description": "Any payment network fee rate applied to some or all non-sterling transactions that the card issuer recover directly from the cardholder",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "NonSterlingTransactionFee": {
               "description": "A fee applied to all non-Sterling card transactions",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "NonSterlingTransactionFeeRate": {
               "description": "A fee rate applied to all non-Sterling card transactions",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "NonSterlingPurchaseFee": {
               "description": "An additional fee applied to certain card retail transactions",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "NonSterlingPurchaseFeeRate": {
               "description": "An additional fee rate applied to certain card retail transactions",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "NonSterlingCashFee": {
               "description": "An additional fee applied to certain card cash withdrawals. This fee also applies to cash near fees such as gambling",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "NonSterlingCashFeeRate": {
               "description": "An additional fee rate applied to certain card cash withdrawals. This fee also applies to cash near fees such as gambling",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "ForeignPurchaseFee": {
               "description": "Additional card fee applied to sterling retail transactions made abroad",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "ForeignPurchaseFeeRate": {
               "description": "Additional card fee rate applied to sterling retail transactions made abroad",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             },
             "ForeignCashFee": {
               "description": "Additional card fee applied to sterling cash withdrawal made abroad",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
               "type": "string",
               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
             },
             "ForeignCashFeeRate": {
               "description": "Additional card fee rate applied to sterling cash withdrawal made abroad",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
               "type": "string",
               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
             }
@@ -413,7 +351,6 @@
       "additionalProperties": false
     },
     "Eligibility": {
-      "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/eligibility.json#",
       "description": "Eligibility",
       "type": "object",
       "properties": {
@@ -446,20 +383,17 @@
           "type": "boolean"
         },
         "SingleJointIncome": {
-          "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/single_joint_income_code.json#",
           "description": "Minimum Income Source. For certain products a minimum income is required. This can be mandated as to the single income or to a joint income. This field describes this",
           "type": "string",
           "enum": ["Joint", "SoleIncome", "SoleOrJoint", "Turnover"]
         },
         "MinimumIncomeTurnoverAmount": {
           "description": "Minimum income / Turnover required to hold the product",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "MinimumIncomeTurnoverCurrency": {
           "description": "Minimum income / Turnover Currency",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -473,19 +407,16 @@
         },
         "MinimumIncomeFrequency": {
           "description": "The frequency that the minimum mentioned before is deposited in the account. Yearly is very important for premium accounts",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/minimum_income_frequency_code.json#",
           "type": "string",
           "enum": ["AcademicTerm", "HalfYearly", "Monthly", "Quarterly", "Weekly", "Yearly"]
         },
         "AnnualBusinessTurnover": {
           "description": "Annual Business Turnover",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "AnnualBusinessTurnoverCurrency": {
           "description": "Annual Business Turnover Currency",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -495,9 +426,8 @@
         },
         "ResidencyRestrictedRegion": {
           "description": "Indicates a customer must be current resident of a geographic area/country",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/region.json#",
           "type": "string",
-          "enum": ["UK", "EEA", "EU", "EFTA", "GB - ENG", "GB - NIR", "GB - SCT", "GB - WLS", "IRL"]
+          "enum": ["EEA", "EFTA", "England", "EU", "NorthernIreland", "RepublicOfIreland", "Scotland", "UK", "Wales"]
         },
         "MaxNumberOfAccounts": {
           "description": "Maximum number of the same prodcut the customer may hold",
@@ -513,13 +443,11 @@
         },
         "OpeningDepositMinimum": {
           "description": "Minimum Amount to be held on account",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "OpeningDepositMinimumCurrency": {
           "description": "The currency of the Minimum Amount to be depositing at opening",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -529,13 +457,11 @@
         },
         "MinimumOperatingBalance": {
           "description": "Minimum Operating Balance",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "MinimumOperatingBalanceCurrency": {
           "description": "Minimum Operating Balance currency",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -545,13 +471,11 @@
         },
         "OpeningDepositMaximumAmount": {
           "description": "Maximum Amount to be depositing at opening",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "OpeningDepositMaximumCurrency": {
           "description": "The currency of the Minimum Amount to be depositing at opening",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -561,7 +485,6 @@
         },
         "EligibilityType": {
           "description": "Eligibility type",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/eligibility_type_code.json#",
           "type": "string",
           "enum": ["AnyBusinessCustomer", "BusinessOnly", "CreditCard", "CreditScoring", "EmailAddress", "ExistingCustomers", "IdAndV", "Mortgage", "NoArrearsOnLoan", "NoCustomerInArrears", "NoOverOverdraftThirtyDays", "NoSoleUkAccountOrBankrupt", "NTB", "NTBBusiness", "SoleStudentAccount", "SoleUkAccount", "StudentsOnly", "TwoMonthsOfCourseStart", "UCASFulltimeTwoYears"]
         },
@@ -576,7 +499,6 @@
         "MarketingEligibility": {
           "type": "array",
           "items": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/marketing_eligibility_code.json#",
             "description": "Specific eligibility for marketing",
             "type": "string",
             "enum": ["ExistingCustomers", "NewCustomersOnly", "SwitchersOnly", "StartUp"]
@@ -588,7 +510,6 @@
       "additionalProperties": false
     },
     "Benefits": {
-      "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit.json#",
       "description": "Benefit",
       "type": "object",
       "properties": {
@@ -599,30 +520,25 @@
         "BenefitGroup": {
           "type": "array",
           "items": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit_group.json#",
             "description": "Benefit Interest Group",
             "type": "object",
             "properties": {
               "BenefitSubType": {
-                "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit_subtype_code.json#",
                 "description": "Benefit Subtype Code",
                 "type": "string",
                 "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
               },
               "BenefitItem": {
-                "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit_item.json#",
                 "description": "Benefit Item",
                 "type": "object",
                 "properties": {
                   "StartPromotionOrFutureTerms": {
                     "description": "Describes the start date",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
                   "StopPromotionOrFutureTerms": {
                     "description": "Describes the end date",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
@@ -632,14 +548,12 @@
                   },
                   "DateOfChange": {
                     "description": "Date of the change if it refers to future terms",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
                   "BenefitDetail": {
                     "type": "array",
                     "items": {
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benfit_detail.json#",
                       "description": "Benefit detail",
                       "type": "object",
                       "properties": {
@@ -666,7 +580,6 @@
                         "CriteriaType": {
                           "type": "array",
                           "items": {
-                            "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit_criteria_type.json#",
                             "description": "Criteria that is required in order to be eligible for the Benefit",
                             "type": "string",
                             "enum": ["CashDeposit", "Deposit", "DirectDebit", "InitialDeposit", "InternetLogon", "MobileLogon", "RegularDeposit"]
@@ -674,13 +587,11 @@
                         },
                         "MinimumCriteria": {
                           "description": "Minimum amount for the criteria",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                           "type": "string",
                           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                         },
                         "MaximumCriteria": {
                           "description": "Maximum amount for the criteria",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                           "type": "string",
                           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                         },
@@ -694,13 +605,11 @@
                         },
                         "PromotionStartDate": {
                           "description": "If the benefit is temporal the start date is when the benefit comes into effect",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         },
                         "PromotionEndDate": {
                           "description": "If the benefit is temporal the end date is when the benefit is no longer applicable",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         }
@@ -712,7 +621,6 @@
                 "additionalProperties": false
               }
             },
-            "required": ["BenefitItem"],
             "additionalProperties": false
           }
         }

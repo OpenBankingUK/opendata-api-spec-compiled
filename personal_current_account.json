@@ -1,74 +1,51 @@
 {
-  "id": "http://localhost:8000/schemas/v1.3/personal_current_account.json#",
   "description": "Personal Current Account",
   "type": "object",
   "properties": {
     "Organisation": {
-      "id": "http://localhost:8000/schemas/v1.3/definitions/common/organisation.json#",
       "description": "Organisation",
       "type": "object",
       "properties": {
-        "ParentOrganisation": {
-          "description": "Parent organisation",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/organisation_identification.json#",
+        "Brand": {
+          "description": "Brand of the Acquirer of transactions captured by the ATM",
+          "type": "object",
+          "properties": {
+            "BrandName": {
+              "description": "Brand of the Acquirer of transactions captured by the ATM",
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 140
+            }
+          },
+          "required": ["BrandName"],
+          "additionalProperties": false
+        },
+        "BrandOwner": {
+          "description": "Unique and unambiguous way of identifying an organisation.",
           "type": "object",
           "properties": {
             "LEI": {
-              "description": "The LEI ID of the organisation",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/lei_identifier.json#",
+              "description": "Legal entity identification as an alternate identification for a party.",
               "type": "string",
               "pattern": "^[A-Z0-9]{18,18}[0-9]{2,2}$"
             },
-            "BIC": {
-              "description": "The BIC from the organisation",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/any_bic_identifier.json#",
+            "AnyBIC": {
+              "description": "Code allocated to a financial institution or non financial institution by the ISO 9362 Registration Authority as described in ISO 9362 'Banking - Banking telecommunication messages - Business identifier code (BIC)'",
               "type": "string",
               "pattern": "[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?"
             },
-            "OrganisationName": {
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/organisation_name.json#",
-              "description": "Organisation Name",
-              "type": "object",
-              "properties": {
-                "LegalName": {
-                  "description": "Legal Name of the organisation",
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_35_text.json#",
-                  "type": "string",
-                  "minLength": 1,
-                  "maxLength": 35
-                }
-              },
-              "required": ["LegalName"],
-              "additionalProperties": false
-            }
-          },
-          "required": ["OrganisationName"],
-          "additionalProperties": false
-        },
-        "Brand": {
-          "description": "Brand",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/brand.json#",
-          "type": "object",
-          "properties": {
-            "TrademarkIPOCode": {
-              "description": "The Intellectual Property Office (IPO) is the official body responsible for intellectual property (IP) rights including patents, designs, trademarks and copyright. (Code: UK or EU only)",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/trademark_ipo_code.json#",
-              "type": "string",
-              "enum": ["UK", "EU"]
-            },
-            "TrademarkID": {
-              "description": "The trademark number that has been registered with the Intellectual Property Office. Note: The 2 letter IPO prefix should be omitted",
-              "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_35_text.json#",
+            "FullLegalName": {
+              "description": "Name by which a party is known and which is usually used to identify that party.",
               "type": "string",
               "minLength": 1,
-              "maxLength": 35
+              "maxLength": 350
             }
           },
-          "required": ["TrademarkIPOCode", "TrademarkID"],
+          "required": ["FullLegalName"],
           "additionalProperties": false
         }
       },
-      "required": ["ParentOrganisation", "Brand"],
+      "required": ["Brand", "BrandOwner"],
       "additionalProperties": false
     },
     "ProductType": {
@@ -83,7 +60,6 @@
     "ProductSegment": {
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/ca/ca_product_segment.json#",
         "description": "Marketing or industry segment that the product is designed for",
         "type": "string",
         "enum": ["Basic", "Business", "General", "Graduate", "International", "Packaged", "Personal", "Premium", "Reward", "SME", "Student", "YoungAdult", "Youth"]
@@ -100,7 +76,6 @@
     },
     "CardWithdrawalLimit": {
       "description": "The daily Limit that a customer can get via the ATM. This describes the default limit rather than the maximum",
-      "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
       "type": "string",
       "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
     },
@@ -120,7 +95,6 @@
       "description": "Ways to interact with the bank when managing account",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/access_channels_code.json#",
         "description": "Channel",
         "type": "string",
         "enum": ["ATM", "Branch", "BusinessCommercialCentre", "CallCentre", "MobileApps", "MobileBanking", "Online", "Phone", "Post", "PostOffice", "RelationshipManager", "Text"]
@@ -131,7 +105,6 @@
       "description": "Card Type available",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/common/card_type_code.json#",
         "description": "Indicates the card scheme",
         "type": "string",
         "enum": ["BasicCard", "BusinessQuickLodgeCard", "Cashcard", "ContactlessCashcard", "ContactlessDebitMastercard", "ContactlessDebitVisa", "DebitMastercard", "VisaDebit", "DepositCard", "OperatorCard", "POCACard"]
@@ -146,7 +119,6 @@
       "description": "Mobile wallet supported by this product. A mobile wallet being any electronic device that allows an individual to make electronic commerce transactions",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/ca/mobile_wallet_code.json#",
         "description": "Mobile wallet supported by this product. A mobile wallet being any electronic device that allows an individual to make electronic commerce transactions",
         "type": "string",
         "enum": ["AndroidPay", "ApplePay", "IssuerMobileApp", "MobileBankingApp", "Other", "PayM", "SamsungPay", "VodafoneWallet"]
@@ -168,7 +140,6 @@
       "description": "Describes the type of credit scoring",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/ca/account_opening_credit_score_code.json#",
         "description": "Indicates the type of scoring",
         "type": "string",
         "enum": ["Hard", "Soft"]
@@ -185,7 +156,6 @@
     "CreditScoringPartOfAccountOpeningIDVerificationIsAHardOrSoftCreditScore": {
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/ca/account_opening_credit_score_code.json#",
         "description": "Indicates the type of scoring",
         "type": "string",
         "enum": ["Hard", "Soft"]
@@ -200,7 +170,6 @@
     },
     "MaximumMonthlyCharge": {
       "description": "The maximum Relevant Charges that could accrue",
-      "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
       "type": "string",
       "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
     },
@@ -217,7 +186,6 @@
       "description": "Currency of the Account. Default to GBP at present",
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
         "description": "Active or Historic Currency Code",
         "type": "string",
         "pattern": "[A-Z]{3}"
@@ -231,7 +199,6 @@
     "Feature": {
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/feature/feature.json#",
         "description": "Account Features",
         "type": "object",
         "properties": {
@@ -240,20 +207,17 @@
             "type": "boolean"
           },
           "ProductState": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/common/product_state_code.json#",
             "description": "Describes if the offering is promotional or a description of a future state.",
             "type": "string",
             "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
           },
           "StartPromotionOrFutureTerms": {
             "description": "Describes the start date",
-            "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
             "type": "string",
             "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
           },
           "StopPromotionOrFutureTerms": {
             "description": "Describes the end date",
-            "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
             "type": "string",
             "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
           },
@@ -263,7 +227,6 @@
           },
           "DateOfChange": {
             "description": "Date of the change if it refers to future terms",
-            "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
             "type": "string",
             "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
           },
@@ -271,25 +234,21 @@
             "description": "Feature details",
             "type": "array",
             "items": {
-              "id": "http://localhost:8000/schemas/v1.3/definitions/feature/feature_details.json#",
               "description": "Feature Details",
               "type": "object",
               "properties": {
                 "FeatureSubType": {
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/feature_subtype_code.json#",
                   "description": "",
                   "type": "string",
                   "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                 },
                 "StartPromotionOrFutureTerms": {
                   "description": "Describes the start date",
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                   "type": "string",
                   "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                 },
                 "StopPromotionOrFutureTerms": {
                   "description": "Describes the end date",
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                   "type": "string",
                   "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                 },
@@ -299,7 +258,6 @@
                 },
                 "DateOfChange": {
                   "description": "Date of the change if it refers to future terms",
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                   "type": "string",
                   "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                 },
@@ -333,30 +291,25 @@
     "CAPricing": {
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/ca/card_price.json#",
         "description": "Card Price",
         "type": "object",
         "properties": {
           "ProductState": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/common/product_state_code.json#",
             "description": "Describes if the offering is promotional or a description of a future state.",
             "type": "string",
             "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
           },
           "CAPricingItem": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/ca/card_pricing_details.json#",
             "description": "Card Pricing",
             "type": "object",
             "properties": {
               "StartPromotionOrFutureTerms": {
                 "description": "Describes the start date",
-                "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                 "type": "string",
                 "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
               },
               "StopPromotionOrFutureTerms": {
                 "description": "Describes the end date",
-                "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                 "type": "string",
                 "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
               },
@@ -366,13 +319,11 @@
               },
               "DateOfChange": {
                 "description": "Date of the change if it refers to future terms",
-                "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                 "type": "string",
                 "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
               },
               "ExchangeRateAdjustment": {
                 "description": "The margin added, by certain card issuers, to the scheme rate in order to arrive at the exchange rate qouted as the reference exchange rate to the cardholder",
-                "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
                 "type": "string",
                 "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
               }
@@ -386,7 +337,6 @@
       "minItems": 1
     },
     "Eligibility": {
-      "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/eligibility.json#",
       "description": "Eligibility",
       "type": "object",
       "properties": {
@@ -419,20 +369,17 @@
           "type": "boolean"
         },
         "SingleJointIncome": {
-          "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/single_joint_income_code.json#",
           "description": "Minimum Income Source. For certain products a minimum income is required. This can be mandated as to the single income or to a joint income. This field describes this",
           "type": "string",
           "enum": ["Joint", "SoleIncome", "SoleOrJoint", "Turnover"]
         },
         "MinimumIncomeTurnoverAmount": {
           "description": "Minimum income / Turnover required to hold the product",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "MinimumIncomeTurnoverCurrency": {
           "description": "Minimum income / Turnover Currency",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -446,19 +393,16 @@
         },
         "MinimumIncomeFrequency": {
           "description": "The frequency that the minimum mentioned before is deposited in the account. Yearly is very important for premium accounts",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/minimum_income_frequency_code.json#",
           "type": "string",
           "enum": ["AcademicTerm", "HalfYearly", "Monthly", "Quarterly", "Weekly", "Yearly"]
         },
         "AnnualBusinessTurnover": {
           "description": "Annual Business Turnover",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "AnnualBusinessTurnoverCurrency": {
           "description": "Annual Business Turnover Currency",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -468,9 +412,8 @@
         },
         "ResidencyRestrictedRegion": {
           "description": "Indicates a customer must be current resident of a geographic area/country",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/region.json#",
           "type": "string",
-          "enum": ["UK", "EEA", "EU", "EFTA", "GB - ENG", "GB - NIR", "GB - SCT", "GB - WLS", "IRL"]
+          "enum": ["EEA", "EFTA", "England", "EU", "NorthernIreland", "RepublicOfIreland", "Scotland", "UK", "Wales"]
         },
         "MaxNumberOfAccounts": {
           "description": "Maximum number of the same prodcut the customer may hold",
@@ -486,13 +429,11 @@
         },
         "OpeningDepositMinimum": {
           "description": "Minimum Amount to be held on account",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "OpeningDepositMinimumCurrency": {
           "description": "The currency of the Minimum Amount to be depositing at opening",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -502,13 +443,11 @@
         },
         "MinimumOperatingBalance": {
           "description": "Minimum Operating Balance",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "MinimumOperatingBalanceCurrency": {
           "description": "Minimum Operating Balance currency",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -518,13 +457,11 @@
         },
         "OpeningDepositMaximumAmount": {
           "description": "Maximum Amount to be depositing at opening",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
           "type": "string",
           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
         },
         "OpeningDepositMaximumCurrency": {
           "description": "The currency of the Minimum Amount to be depositing at opening",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/common/active_or_historic_currency_code.json#",
           "type": "string",
           "pattern": "[A-Z]{3}"
         },
@@ -534,7 +471,6 @@
         },
         "EligibilityType": {
           "description": "Eligibility type",
-          "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/eligibility_type_code.json#",
           "type": "string",
           "enum": ["AnyBusinessCustomer", "BusinessOnly", "CreditCard", "CreditScoring", "EmailAddress", "ExistingCustomers", "IdAndV", "Mortgage", "NoArrearsOnLoan", "NoCustomerInArrears", "NoOverOverdraftThirtyDays", "NoSoleUkAccountOrBankrupt", "NTB", "NTBBusiness", "SoleStudentAccount", "SoleUkAccount", "StudentsOnly", "TwoMonthsOfCourseStart", "UCASFulltimeTwoYears"]
         },
@@ -549,7 +485,6 @@
         "MarketingEligibility": {
           "type": "array",
           "items": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/eligibility/marketing_eligibility_code.json#",
             "description": "Specific eligibility for marketing",
             "type": "string",
             "enum": ["ExistingCustomers", "NewCustomersOnly", "SwitchersOnly", "StartUp"]
@@ -561,7 +496,6 @@
       "additionalProperties": false
     },
     "CreditInterest": {
-      "id": "http://localhost:8000/schemas/v1.3/definitions/crit/crit.json#",
       "description": "Credit Interest",
       "type": "object",
       "properties": {
@@ -572,30 +506,25 @@
         "CreditInterestGroup": {
           "type": "array",
           "items": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/crit/crit_group.json#",
             "description": "Credit Interest Group",
             "type": "object",
             "properties": {
               "InterestTierSubType": {
-                "id": "http://localhost:8000/schemas/v1.3/definitions/crit/interest_tier_subtype_code.json#",
                 "description": "Describes if the offering is promotional, regular or a description of a future state",
                 "type": "string",
                 "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
               },
               "CreditInterestItem": {
-                "id": "http://localhost:8000/schemas/v1.3/definitions/crit/crit_item.json#",
                 "description": "Credit Interest item",
                 "type": "object",
                 "properties": {
                   "StartPromotionOrFutureTerms": {
                     "description": "Describes the start date",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
                   "StopPromotionOrFutureTerms": {
                     "description": "Describes the end date",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
@@ -605,36 +534,30 @@
                   },
                   "DateOfChange": {
                     "description": "Date of the change if it refers to future terms",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
                   "StartDate": {
                     "description": "If interest is charged on a specific date range as start date (often used for promotion)",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
                   "EndDate": {
                     "description": "If interest is charged on a specific date range as end date (often used for promotion)",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
                   "CalculationFrequency": {
                     "description": "How often is interest applied to account",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/crit/calculation_frequency_code.json#",
                     "type": "string",
                     "enum": ["Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight"]
                   },
                   "PaymentMethod": {
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/crit/payment_method_code.json#",
                     "description": "Credit Interest Payment Method Code",
                     "type": "string",
                     "enum": ["Compound", "PayAway", "SelfCredit", "SimpleInterest"]
                   },
                   "InterestRateType": {
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/crit/crit_interest_rate_type.json#",
                     "description": "Credit Interest Payment Rate Type",
                     "type": "string",
                     "enum": ["Fixed", "Variable"]
@@ -644,7 +567,6 @@
                     "type": "integer"
                   },
                   "CalculationMethod": {
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/crit/crit_calculation_method.json#",
                     "description": "Method for interest calculation",
                     "type": "string",
                     "enum": ["Banded", "Tiered", "Whole"]
@@ -652,7 +574,6 @@
                   "InterestTiers": {
                     "type": "array",
                     "items": {
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/crit/crit_interest_tiers.json#",
                       "description": "Credit Interest Tiers",
                       "type": "object",
                       "properties": {
@@ -662,44 +583,37 @@
                         },
                         "TierValueMinimum": {
                           "description": "Lower value of interest tier",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                           "type": "string",
                           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                         },
                         "DailyChargeForMinimum": {
                           "description": "Special charge on tiered overdraft",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                           "type": "string",
                           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                         },
                         "TierValueMaximum": {
                           "description": "Max Value of interst tier",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_15_text.json#",
                           "type": "string",
                           "minLength": 1,
                           "maxLength": 15
                         },
                         "DailyChargeForMaximum": {
                           "description": "Special charge on tiered overdraft",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                           "type": "string",
                           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                         },
                         "Rate": {
                           "description": "Rate being paid by the bank (gross)",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
                           "type": "string",
                           "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                         },
                         "RateComparisonType": {
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/rate_comparison_type_code.json#",
                           "description": "Rate Comparison Type",
                           "type": "string",
                           "enum": ["APR", "AER", "Gross", "Net", "RepApr"]
                         },
                         "APRAERRate": {
                           "description": "AER or APR Rate for comparison",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
                           "type": "string",
                           "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                         }
@@ -726,25 +640,21 @@
     "Overdraft": {
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft.json#",
         "description": "Overdraft",
         "type": "object",
         "properties": {
           "OverdraftProductState": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/common/product_state_code.json#",
             "description": "Describes if the offering is promotional or a description of a future state.",
             "type": "string",
             "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
           },
           "StartPromotionOrFutureTerms": {
             "description": "Describes the start date",
-            "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
             "type": "string",
             "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
           },
           "StopPromotionOrFutureTerms": {
             "description": "Describes the end date",
-            "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
             "type": "string",
             "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
           },
@@ -754,7 +664,6 @@
           },
           "DateOfChange": {
             "description": "Date of the change if it refers to future terms",
-            "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
             "type": "string",
             "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
           },
@@ -762,7 +671,6 @@
             "description": "Overdraft Tier Band Set",
             "type": "array",
             "items": {
-              "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_tier_bandset.json#",
               "description": "Tier Bandset",
               "type": "object",
               "properties": {
@@ -772,25 +680,21 @@
                 },
                 "ArrangementType": {
                   "description": "Defines the arrangement of the overdraft",
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_arrangement_type_code.json#",
                   "type": "string",
                   "enum": ["Unarranged", "Arranged", "Other"]
                 },
                 "ArrangementOtherType": {
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/other_code_type.json#",
                   "description": "Other Code Type",
                   "type": "object",
                   "properties": {
                     "Code": {
                       "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/common/code_mnemonic.json#",
                       "type": "string",
                       "minLength": 4,
                       "maxLength": 4
                     },
                     "Name": {
                       "description": "Name of 'Other' code set value applicable to specified attribute",
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_256_text.json#",
                       "type": "string",
                       "minLength": 1,
                       "maxLength": 256
@@ -808,7 +712,6 @@
                 },
                 "EAR": {
                   "description": "EAR of the Overdraft Set",
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
                   "type": "string",
                   "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                 },
@@ -816,31 +719,26 @@
                   "description": "Type of fee or charge",
                   "type": "array",
                   "items": {
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charges_type.json#",
                     "description": "Overdraft Fees Charges",
                     "type": "object",
                     "properties": {
                       "FeeChargeType": {
                         "description": "Type of fee or charge",
-                        "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charge_type_code.json#",
                         "type": "string",
                         "enum": ["Periodic", "Minimum", "Maximum", "Setup", "Review", "Renewal", "MinimumSetup", "MaximumSetup", "Total", "Item", "EmergencyLending", "Other"]
                       },
                       "FeeChargeOtherType": {
-                        "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/other_code_type.json#",
                         "description": "Other Code Type",
                         "type": "object",
                         "properties": {
                           "Code": {
                             "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
-                            "id": "http://localhost:8000/schemas/v1.3/definitions/common/code_mnemonic.json#",
                             "type": "string",
                             "minLength": 4,
                             "maxLength": 4
                           },
                           "Name": {
                             "description": "Name of 'Other' code set value applicable to specified attribute",
-                            "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_256_text.json#",
                             "type": "string",
                             "minLength": 1,
                             "maxLength": 256
@@ -854,37 +752,31 @@
                       },
                       "FeeChargeAmount": {
                         "description": "Charge applied to tier",
-                        "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                         "type": "string",
                         "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                       },
                       "FeeChargeRate": {
                         "description": "Fee charge rate applied to tier",
-                        "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
                         "type": "string",
                         "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                       },
                       "FeeChargeRateType": {
                         "description": "Rate type other than EAR",
-                        "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charge_rate_type_code.json#",
                         "type": "string",
                         "enum": ["Gross", "Net", "Other"]
                       },
                       "FeeChargeRateOtherType": {
-                        "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/other_code_type.json#",
                         "description": "Other Code Type",
                         "type": "object",
                         "properties": {
                           "Code": {
                             "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
-                            "id": "http://localhost:8000/schemas/v1.3/definitions/common/code_mnemonic.json#",
                             "type": "string",
                             "minLength": 4,
                             "maxLength": 4
                           },
                           "Name": {
                             "description": "Name of 'Other' code set value applicable to specified attribute",
-                            "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_256_text.json#",
                             "type": "string",
                             "minLength": 1,
                             "maxLength": 256
@@ -898,25 +790,21 @@
                       },
                       "FeeChargeApplicationFrequency": {
                         "description": "Frequency with which the rate, or amount is charged",
-                        "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charge_frequency_code.json#",
                         "type": "string",
                         "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
                       },
                       "FeeChargeOtherApplicationFrequency": {
-                        "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/other_code_type.json#",
                         "description": "Other Code Type",
                         "type": "object",
                         "properties": {
                           "Code": {
                             "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
-                            "id": "http://localhost:8000/schemas/v1.3/definitions/common/code_mnemonic.json#",
                             "type": "string",
                             "minLength": 4,
                             "maxLength": 4
                           },
                           "Name": {
                             "description": "Name of 'Other' code set value applicable to specified attribute",
-                            "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_256_text.json#",
                             "type": "string",
                             "minLength": 1,
                             "maxLength": 256
@@ -929,26 +817,22 @@
                         "additionalProperties": false
                       },
                       "FeeChargeCalculationFrequency": {
-                        "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charge_frequency_code.json#",
                         "description": "Frequency with which the rate, or amount is calculated",
                         "type": "string",
                         "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
                       },
                       "FeeChargeOtherCalculationFrequency": {
-                        "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/other_code_type.json#",
                         "description": "Other Code Type",
                         "type": "object",
                         "properties": {
                           "Code": {
                             "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
-                            "id": "http://localhost:8000/schemas/v1.3/definitions/common/code_mnemonic.json#",
                             "type": "string",
                             "minLength": 4,
                             "maxLength": 4
                           },
                           "Name": {
                             "description": "Name of 'Other' code set value applicable to specified attribute",
-                            "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_256_text.json#",
                             "type": "string",
                             "minLength": 1,
                             "maxLength": 256
@@ -967,14 +851,12 @@
                 },
                 "BufferAmount": {
                   "description": "Amount on overdraft that is prearranged",
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                   "type": "string",
                   "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                 },
                 "OverdraftTierBand": {
                   "type": "array",
                   "items": {
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_tier_band.json#",
                     "description": "Tiers",
                     "type": "object",
                     "properties": {
@@ -984,51 +866,43 @@
                       },
                       "TierValueMinimum": {
                         "description": "Minimum value of the tier",
-                        "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                         "type": "string",
                         "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                       },
                       "TierValueMaximum": {
                         "description": "Maximum value of the tier",
-                        "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_15_text.json#",
                         "type": "string",
                         "minLength": 1,
                         "maxLength": 15
                       },
                       "EAR": {
                         "description": "EAR of the Tier",
-                        "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
                         "type": "string",
                         "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                       },
                       "FeesAndCharges": {
                         "type": "array",
                         "items": {
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charges_type.json#",
                           "description": "Overdraft Fees Charges",
                           "type": "object",
                           "properties": {
                             "FeeChargeType": {
                               "description": "Type of fee or charge",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charge_type_code.json#",
                               "type": "string",
                               "enum": ["Periodic", "Minimum", "Maximum", "Setup", "Review", "Renewal", "MinimumSetup", "MaximumSetup", "Total", "Item", "EmergencyLending", "Other"]
                             },
                             "FeeChargeOtherType": {
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/other_code_type.json#",
                               "description": "Other Code Type",
                               "type": "object",
                               "properties": {
                                 "Code": {
                                   "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
-                                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/code_mnemonic.json#",
                                   "type": "string",
                                   "minLength": 4,
                                   "maxLength": 4
                                 },
                                 "Name": {
                                   "description": "Name of 'Other' code set value applicable to specified attribute",
-                                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_256_text.json#",
                                   "type": "string",
                                   "minLength": 1,
                                   "maxLength": 256
@@ -1042,37 +916,31 @@
                             },
                             "FeeChargeAmount": {
                               "description": "Charge applied to tier",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                               "type": "string",
                               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "FeeChargeRate": {
                               "description": "Fee charge rate applied to tier",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
                               "type": "string",
                               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                             },
                             "FeeChargeRateType": {
                               "description": "Rate type other than EAR",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charge_rate_type_code.json#",
                               "type": "string",
                               "enum": ["Gross", "Net", "Other"]
                             },
                             "FeeChargeRateOtherType": {
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/other_code_type.json#",
                               "description": "Other Code Type",
                               "type": "object",
                               "properties": {
                                 "Code": {
                                   "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
-                                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/code_mnemonic.json#",
                                   "type": "string",
                                   "minLength": 4,
                                   "maxLength": 4
                                 },
                                 "Name": {
                                   "description": "Name of 'Other' code set value applicable to specified attribute",
-                                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_256_text.json#",
                                   "type": "string",
                                   "minLength": 1,
                                   "maxLength": 256
@@ -1086,25 +954,21 @@
                             },
                             "FeeChargeApplicationFrequency": {
                               "description": "Frequency with which the rate, or amount is charged",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charge_frequency_code.json#",
                               "type": "string",
                               "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
                             },
                             "FeeChargeOtherApplicationFrequency": {
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/other_code_type.json#",
                               "description": "Other Code Type",
                               "type": "object",
                               "properties": {
                                 "Code": {
                                   "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
-                                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/code_mnemonic.json#",
                                   "type": "string",
                                   "minLength": 4,
                                   "maxLength": 4
                                 },
                                 "Name": {
                                   "description": "Name of 'Other' code set value applicable to specified attribute",
-                                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_256_text.json#",
                                   "type": "string",
                                   "minLength": 1,
                                   "maxLength": 256
@@ -1117,26 +981,22 @@
                               "additionalProperties": false
                             },
                             "FeeChargeCalculationFrequency": {
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charge_frequency_code.json#",
                               "description": "Frequency with which the rate, or amount is calculated",
                               "type": "string",
                               "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
                             },
                             "FeeChargeOtherCalculationFrequency": {
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/other_code_type.json#",
                               "description": "Other Code Type",
                               "type": "object",
                               "properties": {
                                 "Code": {
                                   "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
-                                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/code_mnemonic.json#",
                                   "type": "string",
                                   "minLength": 4,
                                   "maxLength": 4
                                 },
                                 "Name": {
                                   "description": "Name of 'Other' code set value applicable to specified attribute",
-                                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_256_text.json#",
                                   "type": "string",
                                   "minLength": 1,
                                   "maxLength": 256
@@ -1174,38 +1034,32 @@
           },
           "FeeChargeNegotiableIndicator": {
             "description": "Fee Charge negotiable Indicator",
-            "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/negotiable_code.json#",
             "type": "string",
             "enum": ["No", "Yes"]
           },
           "FeesAndCharges": {
             "type": "array",
             "items": {
-              "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charges_type.json#",
               "description": "Overdraft Fees Charges",
               "type": "object",
               "properties": {
                 "FeeChargeType": {
                   "description": "Type of fee or charge",
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charge_type_code.json#",
                   "type": "string",
                   "enum": ["Periodic", "Minimum", "Maximum", "Setup", "Review", "Renewal", "MinimumSetup", "MaximumSetup", "Total", "Item", "EmergencyLending", "Other"]
                 },
                 "FeeChargeOtherType": {
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/other_code_type.json#",
                   "description": "Other Code Type",
                   "type": "object",
                   "properties": {
                     "Code": {
                       "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/common/code_mnemonic.json#",
                       "type": "string",
                       "minLength": 4,
                       "maxLength": 4
                     },
                     "Name": {
                       "description": "Name of 'Other' code set value applicable to specified attribute",
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_256_text.json#",
                       "type": "string",
                       "minLength": 1,
                       "maxLength": 256
@@ -1219,37 +1073,31 @@
                 },
                 "FeeChargeAmount": {
                   "description": "Charge applied to tier",
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                   "type": "string",
                   "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                 },
                 "FeeChargeRate": {
                   "description": "Fee charge rate applied to tier",
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
                   "type": "string",
                   "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                 },
                 "FeeChargeRateType": {
                   "description": "Rate type other than EAR",
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charge_rate_type_code.json#",
                   "type": "string",
                   "enum": ["Gross", "Net", "Other"]
                 },
                 "FeeChargeRateOtherType": {
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/other_code_type.json#",
                   "description": "Other Code Type",
                   "type": "object",
                   "properties": {
                     "Code": {
                       "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/common/code_mnemonic.json#",
                       "type": "string",
                       "minLength": 4,
                       "maxLength": 4
                     },
                     "Name": {
                       "description": "Name of 'Other' code set value applicable to specified attribute",
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_256_text.json#",
                       "type": "string",
                       "minLength": 1,
                       "maxLength": 256
@@ -1263,25 +1111,21 @@
                 },
                 "FeeChargeApplicationFrequency": {
                   "description": "Frequency with which the rate, or amount is charged",
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charge_frequency_code.json#",
                   "type": "string",
                   "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
                 },
                 "FeeChargeOtherApplicationFrequency": {
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/other_code_type.json#",
                   "description": "Other Code Type",
                   "type": "object",
                   "properties": {
                     "Code": {
                       "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/common/code_mnemonic.json#",
                       "type": "string",
                       "minLength": 4,
                       "maxLength": 4
                     },
                     "Name": {
                       "description": "Name of 'Other' code set value applicable to specified attribute",
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_256_text.json#",
                       "type": "string",
                       "minLength": 1,
                       "maxLength": 256
@@ -1294,26 +1138,22 @@
                   "additionalProperties": false
                 },
                 "FeeChargeCalculationFrequency": {
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_fee_charge_frequency_code.json#",
                   "description": "Frequency with which the rate, or amount is calculated",
                   "type": "string",
                   "enum": ["AcademicTerm", "Daily", "Weekly", "Monthly", "Quarterly", "Half-Yearly", "Yearly", "Overnight", "Other"]
                 },
                 "FeeChargeOtherCalculationFrequency": {
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/other_code_type.json#",
                   "description": "Other Code Type",
                   "type": "object",
                   "properties": {
                     "Code": {
                       "description": "Code mnemonic for 'Other' code set value applicable to specified attribute",
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/common/code_mnemonic.json#",
                       "type": "string",
                       "minLength": 4,
                       "maxLength": 4
                     },
                     "Name": {
                       "description": "Name of 'Other' code set value applicable to specified attribute",
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/common/max_256_text.json#",
                       "type": "string",
                       "minLength": 1,
                       "maxLength": 256
@@ -1332,12 +1172,10 @@
           },
           "MaximumMonthlyOverdraftCharge": {
             "description": "Maximum Monthly Charge (MMC) for Overdraft fee and charges.",
-            "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
             "type": "string",
             "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
           },
           "OverdraftType": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/ovd/overdraft_type_code.json#",
             "description": "Defines if the overdraft facility is committed ",
             "type": "string",
             "enum": ["Committed", "OnDemand"]
@@ -1357,30 +1195,25 @@
     "FeesAndCharges": {
       "type": "array",
       "items": {
-        "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fees_and_charges.json#",
         "description": "Fees And Charges",
         "type": "object",
         "properties": {
           "ProductState": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/common/product_state_code.json#",
             "description": "Describes if the offering is promotional or a description of a future state.",
             "type": "string",
             "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
           },
           "Fees": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fees.json#",
             "description": "Fees",
             "type": "object",
             "properties": {
               "StartPromotionOrFutureTerms": {
                 "description": "Describes the start date",
-                "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                 "type": "string",
                 "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
               },
               "StopPromotionOrFutureTerms": {
                 "description": "Describes the end date",
-                "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                 "type": "string",
                 "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
               },
@@ -1390,7 +1223,6 @@
               },
               "DateOfChange": {
                 "description": "Date of the change if it refers to future terms",
-                "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                 "type": "string",
                 "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
               },
@@ -1405,26 +1237,22 @@
               "FeeDetails": {
                 "type": "array",
                 "items": {
-                  "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fee_details.json#",
                   "description": "Fee Details",
                   "type": "object",
                   "properties": {
                     "FeeSubType": {
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fee_subtype_code.json#",
                       "description": "Fee Sub Type code",
                       "type": "string",
                       "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
                     },
                     "FeeDetail": {
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fee_detail.json#",
                       "description": "Fee Detail",
                       "type": "object",
                       "properties": {
                         "FeeType": {
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fee_code.json#",
                           "description": "A description of the Fee type",
                           "type": "string",
-                          "enum": ["Other", "ATMDonation", "ATMDeposATMPaidIn", "ReportCertBalance", "ATMAbroadConVisaCredit", "ATMAbroadConVisaDebit", "ATMCardnetEnvIn", "ATMCashGroupATMCreditCard", "ATMCashNonGroupATMCredittcard", "ATMCashGroupATMDebitCard", "ATMCashNonGroupATMDebitcard", "ATMConGroupATM", "ATMAbroad", "ATMForeignCashDebCard", "ATMAbroadGoldVisaDebit", "ATMSpainCashCard", "ATMSpainDebitCard", "ATMSpainConversionDebitCard", "ATMSpainConversionCashCard", "ATMNonSterlingWithdrawal", "ATMAbroadVisaCredit", "ATMAbroadVisaDebit", "ATMAbroadConVisaGoldDebit", "ATMWidthdrawCash", "BACSOnLineAncilliary", "BACSBatch", "BACSOnLineFile", "BACSFileItem", "BACSOnLineSetup ", "BACSItem", "BACSItemInterbranch", "BACSBulkBatch", "BACSOnLineOverlimit", "BACSOnLinePayment", "BACSRecallItem", "BACSOnLineService", "BACSBulkInternet", "BACSTELDirDebSmartCard", "BACSTELDirDebWebInit", "BACSTELirDebWebInit", "BACSTELDirDebOverlimit", "BACSTELDirDebPayment", "BACSTELDirDebService", "BACSTELDirDebAncilliary", "BACSDirectItemProfile", "BACSTELAncilliary", "BACSTELSmartCard", "BACSTELFile", "BACSTELSetup ", "BACSTELOverlimit", "BACSTELPayment", "BACSTELService", "CHAPSOutBranch", "CHAPSCancellation", "CHAPSOutOnlineDepositAcc", "CHAPSIn", "CHAPSOutInterBank", "CHAPSInterBank", "CHAPSOutPost", "CHAPSOutInterBranch", "CHAPSOut", "CHAPSOutOnline", "CHAPSandForeignPay", "CHAPSOutManual", "CardCardReplacement", "DraftsCounter", "DraftsBankers", "DraftsIntlPayableAbroad", "DraftsLostStolen", "CardPersonalisedCard", "DraftsIntlStoppedCancelled", "EuroChqXLess", "EuroChqXPlus", "FPSOutFutureDated", "FPSOutImmediate", "FPSOut", "FPSOutOwn", "FPSInBranch", "FPSUKPayUrgent", "LegalArticlesReport", "LegalSealing", "LegalBondAndGuarantee", "LegalCourtOrder", "LegalCoSearch", "LegalDepositAssignment", "LegalGuaranteePrep", "LegalLifePolicyPrepCo", "LegalLifePolicyPrepPersonal", "LegalPriorityPariPassu", "LegalSubordinationAgreement", "DirDebDirectDebitAdmin", "DirDebDirectDebitCancel", "IntlPayBIBForeignLimit", "IntlPayCreditTransCust", "IntlPayCreditTransNonCust", "IntlPayUrgentPaymentForeign", "IntlPayExpressMoneyMover", "IntlPayEEAPayUrgent", "IntlPayIrishPayUrgent", "IntlPayEEAPay", "IntlPayForeignIn1CPlus", "IntlPayForeignPaymentInUKAcc", "IntlPayForeignCharge", "IntlPayForeignCancellation", "IntlPayForeignStandardEUEuroBIC", "IntlPayFXFeeRate", "IntlPayForeignInternet", "IntlPayForeign", "IntlPayForeignInbound", "IntlPayFXPaymentOut", "IntlPayForeignInSub1C", "IntlPayFXRate", "IntlPayForeignStandardEUEuroNoBIC", "IntlPayFXPaymentOutIR", "IntlPayFXFee", "IntlPayPurchaseNonSterling", "IntlPayPostPaymentForeign", "IntlPayPurchaseRateNonSterling", "IntlPayPaymentTracing", "IntlPayStandardMoneyMover", "IntlPayMT101Transaction", "IntlPayTransNonSterling", "IntlPayTransRateNonSterling", "IntlPayForeignUrgentEUEuroBIC", "IntlPayForeignUrgentEUEuroNoBIC", "IntlPayUrgentPaymentGroup", "IntlPayUrgentPaymentUK", "IntlPayUSAPayUrgent", "IntlPayCurrencyPurchase", "IntlPayWorldpayPayment", "IntlPayCurrencyWithdraw", "InvPayBankDetailsWrong", "InvPayForeignBCNR", "InvPayForeignRecall", "InvGeneralInq", "InvOldInstruction", "InvPayPaymentRecall", "InvPayReturnDebitXVLess", "InvPayReturnDebitXVPlus", "InvPayStopPayment", "InvPayStandingOrdUnpaid", "SafeKeepAccess", "SafeKeepDeedMedium", "SafeKeepingEnvelope", "SafeKeepingInspection", "SafeKeepingLargeItem", "SafeKeepMultipleItems", "SafeKeepingParcel", "SafeKeepDeedSmall", "SafeKeepOneItem", "SafeKeepSafeCustody", "LoanArrangementFeePC", "LoanArrangement", "LoanEarlyRepayment", "LoanLatePayment", "LoanSMEUnsecuredLoan", "LoanTieredArrangement", "NightSafeNightSafeBankOpen", "NightSafeCreditSub5K", "NightSafeNightSafe", "NightSafeNightSafePaidIn", "OverdraftAnnualReview", "OverdraftTempOverdraft", "OverdraftUnauthorisedBorrowing", "POPostOfficeCounterCredit", "POPostOfficeCashCredit", "POPostOfficeCashOut", "POPostOfficeWithdrawal", "ChqBookTheftLossAllStopped", "ChqIssuedCurrencyAcc", "ChqCopy", "ChqDraft", "ChqIn", "ChqDraftSterling", "ChqOutIssued", "ChqSpecialChqPresentation", "ChqCounterCheque", "ChqChequeswithStatement", "ChqStopped", "ChqTrans", "ChqDraftFX", "ChqForeignCourier", "ChqForeignNegTenThou", "ChqForeignNegHundred", "ChequeForeignBankDivi", "ChqForeignNegFiftyThou", "ChqPensionCheque", "ChequeForeignOtherDivi", "ChqForeignNegFiveThou", "ChqForeignNegMax", "ChqForeignGBPMMDPlus", "ChqGiftCheque", "ChqCounterLodgement", "ChqCashDropLodgement", "ChqChequePhotocopy", "ChqPostOfficeCredit", "ChqPostOfficeChequeCollected", "ChqChequeRetrieval", "ChqReconcilliationPerTrans", "ChqSpecialPresentationCount", "ChqSpecialPresentationPTT", "ChqUnpaidCharge", "ChqUnpaidTransIn", "ChqUnpaidTransOut", "ChqUnpaidCheque", "ReportAuditLetter", "ReportFAXAdviceAdditional", "ReportTelAdviceAdditional", "ReportCreditHistory", "ReportCertInterestDuplicate", "ReportCertInterest", "ReportCreditHistoryAdditionalInYear", "ReportForeignStatusEnqElec", "ReportForeignStatusEnq", "ReportCashBackorInterestAnal", "ReportStatementChqDaily", "ReportStatementChqFortnightly", "ReportStatementChqMonthly", "ReportStatementChqWeekly", "ReportStatementAndDiviChq", "ReportReference", "ReportReferralItem", "ReportStatementByATM", "ReportStatementByBranch", "ReportStatementCopyRegular", "ReportStatusEnquiry", "ReportStatementFrequent", "ReportStatementMonthly", "ReportStatementCopy1", "ReportStatementToBranch", "ReportSMSTextMiniStatementorAlert", "ReportStatementFortnightly", "ReportSMSTextMiniStatementWoM", "ReportSMSTextAlertBalance", "ReportSMSTextAlert", "ReportTaxCert", "ReportWeeklyStatement", "ReportTextMessageBanking", "SEPACancellation", "SEPABranch", "SEPACredit", "SEPADirectDebit", "SEPAIn", "SEPAEuro", "SEPAOut", "SEPAUnpaid", "SEPAWinbitsAnnual Service", "SEPAWinbitsTransaction", "TransBillPaymentBranch", "TransBillCollect", "TransTelephoneBillPayment", "TransBankPayment", "TransBillPaymentTelephone", "TransCorrespondentBankFee", "TransCreditTransferUKDifferent", "TransCreditTransferUKSame", "TransCredit", "TransCreditTransfer", "TransBranchCredit", "TransDebit", "TransDebCardDeb", "TransUKDirDeb", "TransManualDeb", "TransBuyForeignWithGBP", "TransGoodValueReq", "TransSWIFTOutUKForeign", "TransInconpleteInstruction", "TransManualEntries", "TransManualTrans", "TransNonSterling", "TransPOSSaleForeign", "TransPriPaymentPost", "TransPOSSaleUK", "TransReturnPayment", "TransReconciliationPerTrans", "TransStandingOrdAdmin", "TransStandingOrd", "TransStandingOrdManPay", "TransTravellersChqOtherBank", "TransTelBusiPriPaymentForeignToUKAcc", "TransTeleItem", "TransTelBusiPriPaymentToGrpAcc", "TransTravellersChqRate", "TransTransferExGroup", "TransUnauthorisedPaidTrans", "TransUrgentPaymentPostal", "TransUnpaidTrans", "TransTelBusiPriPaymentToNonGrpAcc", "TransSWIFTOutNonEEASterling", "AutoAutoCredit", "AutoAutomatedEntries", "AutoAutoCreditPhoneInet", "AutoAutomatedTrans", "AutoDebitCardCommercial", "AutoFPSAutoCredit", "VisaConvertAbroadForeign", "VisaBureauDeChange", "VisaTravellersChqorCurrency", "OnlineInternetBillPayment", "OnlineBusinessOnlineEuroPayment", "OnlineBusinessOnlineUrgentEuroPayment", "OnlineBusinessOnlineForeignPayment", "OnlineInterbankTransfer", "OnlineInterbankPerTransfer", "OnlineInterbranchTransfer", "OnlineInterbranchPerTransfer", "OnlineSubscriptionMonthly", "OnlineBankingPayment", "OnlineBankingSubscription", "OnlinePOSSale", "OnlinePersonalCustAncillarys", "OnlinePersonalCustService", "OnlinePersonalCustOverlimits", "OnlineReplacementCardReader", "OnlinePersonalCustSetUp", "OnlinePersonalCustTransaction", "OnlinePaymentinGBPtoUK", "OnlineUrgentPayment", "OnlinePaymentinUSDtoUS", "OnlineBulkDirectDebSterling", "ForeignChqSent", "ForeignChqSelf", "ForeignChqEncashment", "ForeignFXInwardsCust", "ForeignFXTransfersROI", "ForeignFXForwardTrans", "ForeignFXTransfersBOI", "ForeignExMaintenance", "ForeignFXInwardsNonCust", "ForeignFXOutwards", "ForeignPurchase", "ForeignStatusRep", "ForeignChqDraft", "ForeignChqCLess", "ForeignChqMLess", "ForeignChqOther", "ForeignChqMPlus", "ForeignChqCCC", "ServiceCAccountFee", "ServiceCAccountFeeMonthly", "ServiceCAccountFeeQuarterly", "ServiceCBalanceHandling", "ServiceCFixedTariff", "ServiceCBusiDepAccBreakage", "ServiceCMonitorDaily", "ServiceCManagementFee", "ServiceCMinimumMonthlyFee", "ServiceCMonitorMonthly", "ServiceCMonitorWeekly", "ServiceCSecurityFee", "ServiceCMT940AccountFirst", "ServiceCMT940AccountSubsequent", "ServiceCOther", "CounterCoinHandling", "CounterCashIn", "CounterCashInNotUs", "CounterCashOut", "CounterCashX", "CounterForeignCashMax", "CounterForeignNoteHandling", "CounterForeignCashOut", "CounterCashFeeRate", "CounterForeignCashOutTx", "CounterCounterLodgement", "CounterCashDropLodgement", "CounterNotesLodged", "CounterNotesOut", "CounterCashInOwn", "CounterPaidTrans", "CounterCashFeePercent"]
+                          "enum": ["Other", "ATMDonation", "ATMDeposATMPaidIn", "ReportCertBalance", "ATMAbroadConVisaCredit", "ATMAbroadConVisaDebit", "ATMCardnetEnvIn", "ATMCashGroupATMCreditCard", "ATMCashNonGroupATMCredittcard", "ATMCashGroupATMDebitCard", "ATMCashNonGroupATMDebitcard", "ATMConGroupATM", "ATMAbroad", "ATMForeignCashDebCard", "ATMAbroadGoldVisaDebit", "ATMSpainCashCard", "ATMSpainDebitCard", "ATMSpainConversionDebitCard", "ATMSpainConversionCashCard", "ATMNonSterlingWithdrawal", "ATMAbroadVisaCredit", "ATMAbroadVisaDebit", "ATMAbroadConVisaGoldDebit", "ATMWidthdrawCash", "BACSOnLineAncilliary", "BACSBatch", "BACSOnLineFile", "BACSFileItem", "BACSOnLineSetup", "BACSItem", "BACSItemInterbranch", "BACSBulkBatch", "BACSOnLineOverlimit", "BACSOnLinePayment", "BACSRecallItem", "BACSOnLineService", "BACSBulkInternet", "BACSTELDirDebSmartCard", "BACSTELDirDebWebInit", "BACSTELirDebWebInit", "BACSTELDirDebOverlimit", "BACSTELDirDebPayment", "BACSTELDirDebService", "BACSTELDirDebAncilliary", "BACSDirectItemProfile", "BACSTELAncilliary", "BACSTELSmartCard", "BACSTELFile", "BACSTELSetup", "BACSTELOverlimit", "BACSTELPayment", "BACSTELService", "CHAPSOutBranch", "CHAPSCancellation", "CHAPSOutOnlineDepositAcc", "CHAPSIn", "CHAPSOutInterBank", "CHAPSInterBank", "CHAPSOutPost", "CHAPSOutInterBranch", "CHAPSOut", "CHAPSOutOnline", "CHAPSandForeignPay", "CHAPSOutManual", "CardCardReplacement", "DraftsCounter", "DraftsBankers", "DraftsIntlPayableAbroad", "DraftsLostStolen", "CardPersonalisedCard", "DraftsIntlStoppedCancelled", "EuroChqXLess", "EuroChqXPlus", "FPSOutFutureDated", "FPSOutImmediate", "FPSOut", "FPSOutOwn", "FPSInBranch", "FPSUKPayUrgent", "LegalArticlesReport", "LegalSealing", "LegalBondAndGuarantee", "LegalCourtOrder", "LegalCoSearch", "LegalDepositAssignment", "LegalGuaranteePrep", "LegalLifePolicyPrepCo", "LegalLifePolicyPrepPersonal", "LegalPriorityPariPassu", "LegalSubordinationAgreement", "DirDebDirectDebitAdmin", "DirDebDirectDebitCancel", "IntlPayBIBForeignLimit", "IntlPayCreditTransCust", "IntlPayCreditTransNonCust", "IntlPayUrgentPaymentForeign", "IntlPayExpressMoneyMover", "IntlPayEEAPayUrgent", "IntlPayIrishPayUrgent", "IntlPayEEAPay", "IntlPayForeignIn1CPlus", "IntlPayForeignPaymentInUKAcc", "IntlPayForeignCharge", "IntlPayForeignCancellation", "IntlPayForeignStandardEUEuroBIC", "IntlPayFXFeeRate", "IntlPayForeignInternet", "IntlPayForeign", "IntlPayForeignInbound", "IntlPayFXPaymentOut", "IntlPayForeignInSub1C", "IntlPayFXRate", "IntlPayForeignStandardEUEuroNoBIC", "IntlPayFXPaymentOutIR", "IntlPayFXFee", "IntlPayPurchaseNonSterling", "IntlPayPostPaymentForeign", "IntlPayPurchaseRateNonSterling", "IntlPayPaymentTracing", "IntlPayStandardMoneyMover", "IntlPayMT101Transaction", "IntlPayTransNonSterling", "IntlPayTransRateNonSterling", "IntlPayForeignUrgentEUEuroBIC", "IntlPayForeignUrgentEUEuroNoBIC", "IntlPayUrgentPaymentGroup", "IntlPayUrgentPaymentUK", "IntlPayUSAPayUrgent", "IntlPayCurrencyPurchase", "IntlPayWorldpayPayment", "IntlPayCurrencyWithdraw", "InvPayBankDetailsWrong", "InvPayForeignBCNR", "InvPayForeignRecall", "InvGeneralInq", "InvOldInstruction", "InvPayPaymentRecall", "InvPayReturnDebitXVLess", "InvPayReturnDebitXVPlus", "InvPayStopPayment", "InvPayStandingOrdUnpaid", "SafeKeepAccess", "SafeKeepDeedMedium", "SafeKeepingEnvelope", "SafeKeepingInspection", "SafeKeepingLargeItem", "SafeKeepMultipleItems", "SafeKeepingParcel", "SafeKeepDeedSmall", "SafeKeepOneItem", "SafeKeepSafeCustody", "LoanArrangementFeePC", "LoanArrangement", "LoanEarlyRepayment", "LoanLatePayment", "LoanSMEUnsecuredLoan", "LoanTieredArrangement", "NightSafeNightSafeBankOpen", "NightSafeCreditSub5K", "NightSafeNightSafe", "NightSafeNightSafePaidIn", "OverdraftAnnualReview", "OverdraftTempOverdraft", "OverdraftUnauthorisedBorrowing", "POPostOfficeCounterCredit", "POPostOfficeCashCredit", "POPostOfficeCashOut", "POPostOfficeWithdrawal", "ChqBookTheftLossAllStopped", "ChqIssuedCurrencyAcc", "ChqCopy", "ChqDraft", "ChqIn", "ChqDraftSterling", "ChqOutIssued", "ChqSpecialChqPresentation", "ChqCounterCheque", "ChqChequeswithStatement", "ChqStopped", "ChqTrans", "ChqDraftFX", "ChqForeignCourier", "ChqForeignNegTenThou", "ChqForeignNegHundred", "ChequeForeignBankDivi", "ChqForeignNegFiftyThou", "ChqPensionCheque", "ChequeForeignOtherDivi", "ChqForeignNegFiveThou", "ChqForeignNegMax", "ChqForeignGBPMMDPlus", "ChqGiftCheque", "ChqCounterLodgement", "ChqCashDropLodgement", "ChqChequePhotocopy", "ChqPostOfficeCredit", "ChqPostOfficeChequeCollected", "ChqChequeRetrieval", "ChqReconcilliationPerTrans", "ChqSpecialPresentationCount", "ChqSpecialPresentationPTT", "ChqUnpaidCharge", "ChqUnpaidTransIn", "ChqUnpaidTransOut", "ChqUnpaidCheque", "ReportAuditLetter", "ReportFAXAdviceAdditional", "ReportTelAdviceAdditional", "ReportCreditHistory", "ReportCertInterestDuplicate", "ReportCertInterest", "ReportCreditHistoryAdditionalInYear", "ReportForeignStatusEnqElec", "ReportForeignStatusEnq", "ReportCashBackorInterestAnal", "ReportStatementChqDaily", "ReportStatementChqFortnightly", "ReportStatementChqMonthly", "ReportStatementChqWeekly", "ReportStatementAndDiviChq", "ReportReference", "ReportReferralItem", "ReportStatementByATM", "ReportStatementByBranch", "ReportStatementCopyRegular", "ReportStatusEnquiry", "ReportStatementFrequent", "ReportStatementMonthly", "ReportStatementCopy1", "ReportStatementToBranch", "ReportSMSTextMiniStatementorAlert", "ReportStatementFortnightly", "ReportSMSTextMiniStatementWoM", "ReportSMSTextAlertBalance", "ReportSMSTextAlert", "ReportTaxCert", "ReportWeeklyStatement", "ReportTextMessageBanking", "SEPACancellation", "SEPABranch", "SEPACredit", "SEPADirectDebit", "SEPAIn", "SEPAEuro", "SEPAOut", "SEPAUnpaid", "SEPAWinbitsAnnualService", "SEPAWinbitsTransaction", "TransBillPaymentBranch", "TransBillCollect", "TransTelephoneBillPayment", "TransBankPayment", "TransBillPaymentTelephone", "TransCorrespondentBankFee", "TransCreditTransferUKDifferent", "TransCreditTransferUKSame", "TransCredit", "TransCreditTransfer", "TransBranchCredit", "TransDebit", "TransDebCardDeb", "TransUKDirDeb", "TransManualDeb", "TransBuyForeignWithGBP", "TransGoodValueReq", "TransSWIFTOutUKForeign", "TransInconpleteInstruction", "TransManualEntries", "TransManualTrans", "TransNonSterling", "TransPOSSaleForeign", "TransPriPaymentPost", "TransPOSSaleUK", "TransReturnPayment", "TransReconciliationPerTrans", "TransStandingOrdAdmin", "TransStandingOrd", "TransStandingOrdManPay", "TransTravellersChqOtherBank", "TransTelBusiPriPaymentForeignToUKAcc", "TransTeleItem", "TransTelBusiPriPaymentToGrpAcc", "TransTravellersChqRate", "TransTransferExGroup", "TransUnauthorisedPaidTrans", "TransUrgentPaymentPostal", "TransUnpaidTrans", "TransTelBusiPriPaymentToNonGrpAcc", "TransSWIFTOutNonEEASterling", "AutoAutoCredit", "AutoAutomatedEntries", "AutoAutoCreditPhoneInet", "AutoAutomatedTrans", "AutoDebitCardCommercial", "AutoFPSAutoCredit", "VisaConvertAbroadForeign", "VisaBureauDeChange", "VisaTravellersChqorCurrency", "OnlineInternetBillPayment", "OnlineBusinessOnlineEuroPayment", "OnlineBusinessOnlineUrgentEuroPayment", "OnlineBusinessOnlineForeignPayment", "OnlineInterbankTransfer", "OnlineInterbankPerTransfer", "OnlineInterbranchTransfer", "OnlineInterbranchPerTransfer", "OnlineSubscriptionMonthly", "OnlineBankingPayment", "OnlineBankingSubscription", "OnlinePOSSale", "OnlinePersonalCustAncillarys", "OnlinePersonalCustService", "OnlinePersonalCustOverlimits", "OnlineReplacementCardReader", "OnlinePersonalCustSetUp", "OnlinePersonalCustTransaction", "OnlinePaymentinGBPtoUK", "OnlineUrgentPayment", "OnlinePaymentinUSDtoUS", "OnlineBulkDirectDebSterling", "ForeignChqSent", "ForeignChqSelf", "ForeignChqEncashment", "ForeignFXInwardsCust", "ForeignFXTransfersROI", "ForeignFXForwardTrans", "ForeignFXTransfersBOI", "ForeignExMaintenance", "ForeignFXInwardsNonCust", "ForeignFXOutwards", "ForeignPurchase", "ForeignStatusRep", "ForeignChqDraft", "ForeignChqCLess", "ForeignChqMLess", "ForeignChqOther", "ForeignChqMPlus", "ForeignChqCCC", "ServiceCAccountFee", "ServiceCAccountFeeMonthly", "ServiceCAccountFeeQuarterly", "ServiceCBalanceHandling", "ServiceCFixedTariff", "ServiceCBusiDepAccBreakage", "ServiceCMonitorDaily", "ServiceCManagementFee", "ServiceCMinimumMonthlyFee", "ServiceCMonitorMonthly", "ServiceCMonitorWeekly", "ServiceCSecurityFee", "ServiceCMT940AccountFirst", "ServiceCMT940AccountSubsequent", "ServiceCOther", "CounterCoinHandling", "CounterCashIn", "CounterCashInNotUs", "CounterCashOut", "CounterCashX", "CounterForeignCashMax", "CounterForeignNoteHandling", "CounterForeignCashOut", "CounterCashFeeRate", "CounterForeignCashOutTx", "CounterCounterLodgement", "CounterCashDropLodgement", "CounterNotesLodged", "CounterNotesOut", "CounterCashInOwn", "CounterPaidTrans", "CounterCashFeePercent"]
                         },
                         "Other": {
                           "description": "Describe other fee type",
@@ -1432,13 +1260,11 @@
                         },
                         "StartPromotionOrFutureTerms": {
                           "description": "Describes the start date",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         },
                         "StopPromotionOrFutureTerms": {
                           "description": "Describes the end date",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         },
@@ -1448,42 +1274,35 @@
                         },
                         "DateOfChange": {
                           "description": "Date of the change if it refers to future terms",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         },
                         "FeeSubDetails": {
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fee_sub_details.json#",
                           "description": "Fee Sub Details",
                           "type": "object",
                           "properties": {
                             "FeeFrequency": {
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/fees/fee_frequency_code.json#",
                               "description": "Triggering frequency of the fee",
                               "type": "string",
                               "enum": ["AcademicTerm", "AccountClosing", "AccountOpening", "AtTimeOfLoanRepayment", "ChargingPeriod", "Daily", "EveryFiveBusinessDays", "Item", "Monthly", "OnAccountAnniversary", "PerHour", "PerOccurrence", "PerSheet", "PerTransactionAmount", "PerTransactionPercentage", "Quarterly", "SixMonthly", "StartOfLoan", "StatementMonthly", "Weekly", "Yearly"]
                             },
                             "FeeAmount": {
                               "description": "Fee in GBP",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                               "type": "string",
                               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "FeeMin": {
                               "description": "Fee in GBP",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                               "type": "string",
                               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "FeeMax": {
                               "description": "Fee in GBP",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                               "type": "string",
                               "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                             },
                             "FeeRate": {
                               "description": "% Rate",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
                               "type": "string",
                               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                             },
@@ -1493,7 +1312,6 @@
                             },
                             "RepresentativeRate": {
                               "description": "Representative Rate",
-                              "id": "http://localhost:8000/schemas/v1.3/definitions/common/percentage.json",
                               "type": "string",
                               "pattern": "^-?\\d{1,3}\\.\\d{1,4}$"
                             },
@@ -1534,7 +1352,6 @@
       "minItems": 1
     },
     "Benefits": {
-      "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit.json#",
       "description": "Benefit",
       "type": "object",
       "properties": {
@@ -1545,30 +1362,25 @@
         "BenefitGroup": {
           "type": "array",
           "items": {
-            "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit_group.json#",
             "description": "Benefit Interest Group",
             "type": "object",
             "properties": {
               "BenefitSubType": {
-                "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit_subtype_code.json#",
                 "description": "Benefit Subtype Code",
                 "type": "string",
                 "enum": ["FutureMultipleTerms", "Promotional", "Regular"]
               },
               "BenefitItem": {
-                "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit_item.json#",
                 "description": "Benefit Item",
                 "type": "object",
                 "properties": {
                   "StartPromotionOrFutureTerms": {
                     "description": "Describes the start date",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
                   "StopPromotionOrFutureTerms": {
                     "description": "Describes the end date",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
@@ -1578,14 +1390,12 @@
                   },
                   "DateOfChange": {
                     "description": "Date of the change if it refers to future terms",
-                    "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                     "type": "string",
                     "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                   },
                   "BenefitDetail": {
                     "type": "array",
                     "items": {
-                      "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benfit_detail.json#",
                       "description": "Benefit detail",
                       "type": "object",
                       "properties": {
@@ -1612,7 +1422,6 @@
                         "CriteriaType": {
                           "type": "array",
                           "items": {
-                            "id": "http://localhost:8000/schemas/v1.3/definitions/benefits/benefit_criteria_type.json#",
                             "description": "Criteria that is required in order to be eligible for the Benefit",
                             "type": "string",
                             "enum": ["CashDeposit", "Deposit", "DirectDebit", "InitialDeposit", "InternetLogon", "MobileLogon", "RegularDeposit"]
@@ -1620,13 +1429,11 @@
                         },
                         "MinimumCriteria": {
                           "description": "Minimum amount for the criteria",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                           "type": "string",
                           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                         },
                         "MaximumCriteria": {
                           "description": "Maximum amount for the criteria",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/amount.json",
                           "type": "string",
                           "pattern": "^-?\\d{1,10}\\.\\d{1,2}$"
                         },
@@ -1640,13 +1447,11 @@
                         },
                         "PromotionStartDate": {
                           "description": "If the benefit is temporal the start date is when the benefit comes into effect",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         },
                         "PromotionEndDate": {
                           "description": "If the benefit is temporal the end date is when the benefit is no longer applicable",
-                          "id": "http://localhost:8000/schemas/v1.3/definitions/common/date.json#",
                           "type": "string",
                           "pattern": "^[0-9]{4}-(0[1-9]|(1[0|1|2]))-((0[1-9])|((1|2)[0-9])|(30|31))$"
                         }
@@ -1658,7 +1463,6 @@
                 "additionalProperties": false
               }
             },
-            "required": ["BenefitItem"],
             "additionalProperties": false
           }
         }
@@ -1667,5 +1471,5 @@
       "additionalProperties": false
     }
   },
-  "required": ["Organisation", "ProductType", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Currency", "OverdraftOffered", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"]
+  "required": ["Organisation", "ProductType", "ProductName", "ProductSegment", "InternationalPaymentsSupported", "ProductIdentifier", "CardWithdrawalLimit", "ProductDescription", "TsandCs", "AccessChannels", "CardType", "Contactless", "ChequeBookAvailable", "CreditScoringPartOfAccountOpeningForGettingAnAccount", "ProductURL", "Currency", "OverdraftOffered", "CAPricing", "Eligibility", "CreditInterest", "FeesAndCharges", "Benefits"]
 }
