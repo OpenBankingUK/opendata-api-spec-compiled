@@ -495,11 +495,6 @@
                 "type": "string",
                 "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
                 "default": "nosniff"
-              },
-              "Status Code": {
-                "type": "integer",
-                "description": "The HTTP status code defining the error",
-                "default": 400
               }
             },
             "schema": {
@@ -539,11 +534,6 @@
                 "type": "string",
                 "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
                 "default": "nosniff"
-              },
-              "Status Code": {
-                "type": "integer",
-                "description": "The HTTP status code defining the error",
-                "default": 400
               }
             },
             "schema": {
@@ -583,11 +573,6 @@
                 "type": "string",
                 "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
                 "default": "nosniff"
-              },
-              "Status Code": {
-                "type": "integer",
-                "description": "The HTTP status code defining the error",
-                "default": 400
               }
             },
             "schema": {
@@ -627,11 +612,6 @@
                 "type": "string",
                 "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
                 "default": "nosniff"
-              },
-              "Status Code": {
-                "type": "integer",
-                "description": "The HTTP status code defining the error",
-                "default": 400
               }
             },
             "schema": {
@@ -671,11 +651,6 @@
                 "type": "string",
                 "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
                 "default": "nosniff"
-              },
-              "Status Code": {
-                "type": "integer",
-                "description": "The HTTP status code defining the error",
-                "default": 400
               }
             },
             "schema": {
@@ -715,11 +690,6 @@
                 "type": "string",
                 "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
                 "default": "nosniff"
-              },
-              "Status Code": {
-                "type": "integer",
-                "description": "The HTTP status code defining the error",
-                "default": 400
               }
             },
             "schema": {
@@ -1096,11 +1066,6 @@
                 "type": "string",
                 "description": "Ensures each page has a content type and prevents browsers from doing MIME type sniffing",
                 "default": "nosniff"
-              },
-              "Status Code": {
-                "type": "integer",
-                "description": "The HTTP status code defining the error",
-                "default": 400
               }
             },
             "schema": {
