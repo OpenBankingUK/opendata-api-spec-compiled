@@ -1,17 +1,16 @@
 # Open Data API Specification
 
-Open Banking is creating standards which enable data providers to supply information in a uniform format via APIs.
-These API specifications can be used by anyone to build APIs providing up-to-date location information about branches
-and ATMs, and detailed product information for personal and business current accounts, unsecured loans for lending
-to small to medium enterprises and commercial credit cards. As a developer, you can use these specifications to build applications
-that make it easier for personal and business customers to compare what’s offered by different banks.
+The Open Data API specifications allow API providers (e.g. banks, building societies and ATM providers) to develop API endpoints which can then be accessed by API users (e.g. third party developers) to build mobile and web applications for banking customers.
 
-These API specifications are currently a pre-release beta and thus not yet supported.
-Please register at https://www.openbanking.org.uk/contact/register/
-to get access to updates and support from March 2017, when these specifications are scheduled for public release.
-Please note, use of these specifications is subject to our Open Licence terms, which are available at https://www.openbanking.org.uk/open-licence/ .
- 
-This repository is used as a publishing endpoint for our deliverables:
+These specifications allow providers to supply up to date, standardised, information about the latest available products and services so that, for example, a comparison website can more easily and accurately gather information, and thereby develop better services for end customers.
+
+Specifications for version 2 of the Open Data API are now available at https://www.openbanking.org.uk/open-data-apis/. 
+
+Version 2 is a significant upgrade. New API providers should use these standards. Existing API providers should update to version 2 as soon as they can. Clarification of live dates for version 2 will be posted here soon.
+
+> Please note: This reposititory contains specifications for versions 1 as defined below. Once version 2 is live, this repository will be deleted.
+
+This repository is used as a publishing endpoint for versions 1.2.4 and 1.3.0 as follows:
 
 * `opendata.raml` - RAML specification
 * `opendata-swagger.json` - Swagger specification
@@ -24,7 +23,3 @@ Additionally, it contains JSON schemas for the following resources, as separate 
 * Business Current Account
 * Unsecured SME Loan
 * Commercial Credit Card
-
-Publishing occurs automatically, based on stable commits from the `opendata-api-spec` repository.
-
-For more information about Open Banking, please visit https://www.openbanking.org.uk
