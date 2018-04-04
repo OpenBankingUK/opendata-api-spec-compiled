@@ -1,0 +1,386 @@
+{
+  "meta": {
+    "Agreement": "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions",
+    "TotalResults": 17,
+    "LastUpdated": "2018-02-13T10:45:13.166Z",
+    "License": "https://www.openbanking.org.uk/open-licence/",
+    "TermsOfUse": "https://www.openbanking.org.uk/terms/"
+  },
+  "data": [
+    {
+      "name": "Adam & Company",
+      "brands": [
+        "Adam & Company"
+      ],
+      "baseUrl": "https://openapi.adambank.com/open-banking",
+      "supportedAPIs": {
+        "business-current-accounts": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "Allied Irish Bank (GB)",
+      "brands": [
+        "Allied Irish Bank (GB)"
+      ],
+      "baseUrl": "https://openapi.aibgb.co.uk/open-banking",
+      "supportedAPIs": {
+        "business-current-accounts": [
+          "v2.1"
+        ],
+        "unsecured-sme-loans": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "Bank of Ireland (UK)",
+      "brands": [
+        "Bank of Ireland (UK)"
+      ],
+      "baseUrl": "https://openapi.bankofireland.com/open-banking",
+      "supportedAPIs": {
+        "atms": [
+          "v2.1"
+        ],
+        "branches": [
+          "v2.1"
+        ],
+        "personal-current-accounts": [
+          "v2.1"
+        ],
+        "business-current-accounts": [
+          "v2.1"
+        ],
+        "unsecured-sme-loans": [
+          "v2.1"
+        ],
+        "commercial-credit-cards": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "Bank of Scotland",
+      "brands": [
+        "Bank of Scotland"
+      ],
+      "baseUrl": "https://api.bankofscotland.co.uk/open-banking",
+      "supportedAPIs": {
+        "atms": [
+          "v2.1"
+        ],
+        "branches": [
+          "v2.1"
+        ],
+        "personal-current-accounts": [
+          "v2.1"
+        ],
+        "business-current-accounts": [
+          "v2.1"
+        ],
+        "unsecured-sme-loans": [
+          "v2.1"
+        ],
+        "commercial-credit-cards": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "Barclays Bank",
+      "brands": [
+        "Barclays Bank"
+      ],
+      "baseUrl": "https://atlas.api.barclays/open-banking",
+      "supportedAPIs": {
+        "atms": [
+          "v2.1"
+        ],
+        "branches": [
+          "v2.1"
+        ],
+        "personal-current-accounts": [
+          "v2.1"
+        ],
+        "business-current-accounts": [
+          "v2.1"
+        ],
+        "unsecured-sme-loans": [
+          "v2.1"
+        ],
+        "commercial-credit-cards": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "Coutts",
+      "brands": [
+        "Coutts"
+      ],
+      "baseUrl": "https://openapi.coutts.com/open-banking",
+      "supportedAPIs": {
+        "business-current-accounts": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "Danske Bank",
+      "brands": [
+        "Danske Bank"
+      ],
+      "baseUrl": "https://obp-data.danskebank.com/open-banking",
+      "supportedAPIs": {
+        "atms": [
+          "v2.1"
+        ],
+        "branches": [
+          "v2.1"
+        ],
+        "personal-current-accounts": [
+          "v2.1"
+        ],
+        "business-current-accounts": [
+          "v2.1"
+        ],
+        "unsecured-sme-loans": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "Esme",
+      "brands": [
+        "Esme"
+      ],
+      "baseUrl": "https://openapi.esmeloans.com/open-banking",
+      "supportedAPIs": {
+        "unsecured-sme-loans": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "First Trust Bank",
+      "brands": [
+        "First Trust Bank"
+      ],
+      "baseUrl": "https://openapi.firsttrustbank.co.uk/open-banking",
+      "supportedAPIs": {
+        "atms": [
+          "v2.1"
+        ],
+        "branches": [
+          "v2.1"
+        ],
+        "personal-current-accounts": [
+          "v2.1"
+        ],
+        "business-current-accounts": [
+          "v2.1"
+        ],
+        "unsecured-sme-loans": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "Halifax",
+      "brands": [
+        "Halifax"
+      ],
+      "baseUrl": "https://api.halifax.co.uk/open-banking",
+      "supportedAPIs": {
+        "atms": [
+          "v2.1"
+        ],
+        "branches": [
+          "v2.1"
+        ],
+        "personal-current-accounts": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "HSBC Group",
+      "brands": [
+        "HSBC Group"
+      ],
+      "baseUrl": "https://api.hsbc.com/open-banking",
+      "supportedAPIs": {
+        "atms": [
+          "v2.1"
+        ],
+        "branches": [
+          "v2.1"
+        ],
+        "personal-current-accounts": [
+          "v2.1"
+        ],
+        "business-current-accounts": [
+          "v2.1"
+        ],
+        "unsecured-sme-loans": [
+          "v2.1"
+        ],
+        "commercial-credit-cards": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "Lloyds Bank",
+      "brands": [
+        "Lloyds Bank"
+      ],
+      "baseUrl": "https://api.lloydsbank.com/open-banking",
+      "supportedAPIs": {
+        "atms": [
+          "v2.1"
+        ],
+        "branches": [
+          "v2.1"
+        ],
+        "personal-current-accounts": [
+          "v2.1"
+        ],
+        "business-current-accounts": [
+          "v2.1"
+        ],
+        "unsecured-sme-loans": [
+          "v2.1"
+        ],
+        "commercial-credit-cards": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "Nationwide Building Society",
+      "brands": [
+        "Nationwide"
+      ],
+      "baseUrl": "https://openapi.nationwide.co.uk/open-banking",
+      "supportedAPIs": {
+        "atms": [
+          "v2.1"
+        ],
+        "branches": [
+          "v2.1"
+        ],
+        "personal-current-accounts": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "NatWest",
+      "brands": [
+        "NatWest"
+      ],
+      "baseUrl": "https://openapi.natwest.com/open-banking",
+      "supportedAPIs": {
+        "atms": [
+          "v2.1"
+        ],
+        "branches": [
+          "v2.1"
+        ],
+        "personal-current-accounts": [
+          "v2.1"
+        ],
+        "business-current-accounts": [
+          "v2.1"
+        ],
+        "unsecured-sme-loans": [
+          "v2.1"
+        ],
+        "commercial-credit-cards": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "Royal Bank of Scotland",
+      "brands": [
+        "Royal Bank of Scotland"
+      ],
+      "baseUrl": "https://openapi.rbs.co.uk/open-banking",
+      "supportedAPIs": {
+        "atms": [
+          "v2.1"
+        ],
+        "branches": [
+          "v2.1"
+        ],
+        "personal-current-accounts": [
+          "v2.1"
+        ],
+        "business-current-accounts": [
+          "v2.1"
+        ],
+        "unsecured-sme-loans": [
+          "v2.1"
+        ],
+        "commercial-credit-cards": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "Santander UK",
+      "brands": [
+        "Santander UK"
+      ],
+      "baseUrl": "https://openbanking.santander.co.uk/sanuk/external/open-banking",
+      "supportedAPIs": {
+        "atms": [
+          "v2.1"
+        ],
+        "branches": [
+          "v2.1"
+        ],
+        "personal-current-accounts": [
+          "v2.1"
+        ],
+        "business-current-accounts": [
+          "v2.1"
+        ],
+        "unsecured-sme-loans": [
+          "v2.1"
+        ],
+        "commercial-credit-cards": [
+          "v2.1"
+        ]
+      }
+    },
+    {
+      "name": "Ulster Bank",
+      "brands": [
+        "Ulster Bank"
+      ],
+      "baseUrl": "https://openapi.ulsterbank.co.uk/open-banking",
+      "supportedAPIs": {
+        "atms": [
+          "v2.1"
+        ],
+        "branches": [
+          "v2.1"
+        ],
+        "personal-current-accounts": [
+          "v2.1"
+        ],
+        "business-current-accounts": [
+          "v2.1"
+        ],
+        "unsecured-sme-loans": [
+          "v2.1"
+        ]
+      }
+    }
+  ]
+}
