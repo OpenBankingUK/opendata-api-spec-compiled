@@ -42,22 +42,22 @@
       "baseUrl": "https://openapi.bankofireland.com/open-banking",
       "supportedAPIs": {
         "atms": [
-          "v2.1"
+          "v2.2"
         ],
         "branches": [
-          "v2.1"
+          "v2.2"
         ],
         "personal-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "business-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "unsecured-sme-loans": [
-          "v2.1"
+          "v2.2"
         ],
         "commercial-credit-cards": [
-          "v2.1"
+          "v2.2"
         ]
       }
     },
