@@ -1,0 +1,30 @@
+{
+   "meta": {
+      "Agreement": "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions",
+      "TotalResults": 8,
+      "LastUpdated": "2018-07-30T10:45:13.166Z",
+      "License": "https://www.openbanking.org.uk/open-licence/",
+      "TermsOfUse": "https://www.openbanking.org.uk/terms/"
+   },
+   "data": {
+      "survey_results": [{
+            "product_type": "PCA",
+            "downloadURLs": [
+               "https://sqm.openbanking.org.uk/cma-service-quality-metrics/v1.0/product-type/pca/area/GB/export-type/full/wave/latest",
+               "https://sqm.openbanking.org.uk/cma-service-quality-metrics/v1.0/product-type/pca/area/NI/export-type/full/wave/latest",
+               "https://sqm.openbanking.org.uk/cma-service-quality-metrics/v1.0/product-type/pca/area/GB/export-type/aggregated/wave/latest",
+               "https://sqm.openbanking.org.uk/cma-service-quality-metrics/v1.0/product-type/pca/area/NI/export-type/aggregated/wave/latest"
+            ]
+         },
+         {
+            "product_type": "BCA",
+            "downloadURLs": [
+               "https://sqm.openbanking.org.uk/cma-service-quality-metrics/v1.0/product-type/bca/area/GB/export-type/full/wave/latest",
+               "https://sqm.openbanking.org.uk/cma-service-quality-metrics/v1.0/product-type/bca/area/NI/export-type/full/wave/latest",
+               "https://sqm.openbanking.org.uk/cma-service-quality-metrics/v1.0/product-type/bca/area/GB/export-type/aggregated/wave/latest",
+               "https://sqm.openbanking.org.uk/cma-service-quality-metrics/v1.0/product-type/bca/area/NI/export-type/aggregated/wave/latest"
+            ]
+         }
+      ]
+   }
+}
