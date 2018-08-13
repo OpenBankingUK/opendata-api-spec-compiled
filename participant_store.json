@@ -276,6 +276,20 @@
         ],
         "commercial-credit-cards": [
           "v2.1"
+        ],
+        "fca-metrics": [
+          {
+            "metrics-type": "fca-service-metrics",
+            "product-type": "pca",
+            "specification-version": "v1.0",
+            "downloadURL": "https://api.hsbc.com/open-banking/v1.0/fca-service-metrics/pca"
+          },
+          {
+            "metrics-type": "fca-service-metrics",
+            "product-type": "bca",
+            "specification-version": "v1.0",
+            "downloadURL": "https://api.hsbc.com/open-banking/v1.0/fca-service-metrics/bca"
+          }
         ]
       }
     },
@@ -452,6 +466,20 @@
         ],
         "commercial-credit-cards": [
           "v2.1"
+        ],
+        "fca-metrics": [
+          {
+            "metrics-type": "fca-service-metrics",
+            "product-type": "pca",
+            "specification-version": "v1.0",
+            "downloadURL": "https://openbanking.santander.co.uk/sanuk/external/open-banking/v1.0/fca-service-metrics/pca"
+          },
+          {
+            "metrics-type": "fca-service-metrics",
+            "product-type": "bca",
+            "specification-version": "v1.0",
+            "downloadURL": "https://openbanking.santander.co.uk/sanuk/external/open-banking/v1.0/fca-service-metrics/bca"
+          }
         ]
       }
     },
