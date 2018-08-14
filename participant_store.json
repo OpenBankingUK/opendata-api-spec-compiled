@@ -58,20 +58,6 @@
         ],
         "commercial-credit-cards": [
           "v2.2"
-        ],
-        "fca-metrics": [
-          {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "pca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://openapi.bankofireland.com/open-banking/v1.0/fca-personal-current-accounts"
-          },
-          {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "bca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://openapi.bankofireland.com/open-banking/v1.0/fca-business-current-accounts"
-          }
         ]
       }
     },
@@ -97,18 +83,14 @@
         "unsecured-sme-loans": [
           "v2.1"
         ],
-        "fca-metrics": [
+        "fca-service-metrics": [
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "pca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://api.bankofscotland.co.uk/open-banking/v1.0/fca-service-metrics/pca"
+            "version": "v1.0",
+            "product-type": "pca"
           },
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "bca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://api.bankofscotland.co.uk/open-banking/v1.0/fca-service-metrics/bca"
+            "version": "v1.0",
+            "product-type": "bca"
           }
         ]
       }
@@ -174,18 +156,14 @@
         "unsecured-sme-loans": [
           "v2.1"
         ],
-        "fca-metrics": [
+        "fca-service-metrics": [
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "pca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://obp-data.danskebank.com/open-banking/v1.0/fca-service-metrics/pca"
+            "version": "v1.0",
+            "product-type": "pca"
           },
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "bca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://obp-data.danskebank.com/open-banking/v1.0/fca-service-metrics/bca"
+            "version": "v1.0",
+            "product-type": "bca"
           }
         ]
       }
@@ -242,12 +220,10 @@
         "personal-current-accounts": [
           "v2.1"
         ],
-        "fca-metrics": [
+        "fca-service-metrics": [
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "pca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://api.halifax.co.uk/open-banking/v1.0/fca-service-metrics/pca"
+            "version": "v1.0",
+            "product-type": "pca"
           }
         ]
       }
@@ -277,18 +253,14 @@
         "commercial-credit-cards": [
           "v2.1"
         ],
-        "fca-metrics": [
+        "fca-service-metrics": [
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "pca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://api.hsbc.com/open-banking/v1.0/fca-service-metrics/pca"
+            "version": "v1.0",
+            "product-type": "pca"
           },
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "bca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://api.hsbc.com/open-banking/v1.0/fca-service-metrics/bca"
+            "version": "v1.0",
+            "product-type": "bca"
           }
         ]
       }
@@ -318,18 +290,14 @@
         "commercial-credit-cards": [
           "v2.1"
         ],
-        "fca-metrics": [
+        "fca-service-metrics": [
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "pca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://api.lloydsbank.com/open-banking/v1.0/fca-service-metrics/pca"
+            "version": "v1.0",
+            "product-type": "pca"
           },
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "bca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://api.lloydsbank.com/open-banking/v1.0/fca-service-metrics/bca"
+            "version": "v1.0",
+            "product-type": "bca"
           }
         ]
       }
@@ -350,12 +318,10 @@
         "personal-current-accounts": [
           "v2.1"
         ],
-        "fca-metrics": [
+        "fca-service-metrics": [
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "pca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://nationwide-building-society-stg.apigee.net/open-banking/v1.0/fca-service-metrics/pca"
+            "version": "v1.0",
+            "product-type": "pca"
           }
         ]
       }
@@ -385,18 +351,14 @@
         "commercial-credit-cards": [
           "v2.1"
         ],
-        "fca-metrics": [
+        "fca-service-metrics": [
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "pca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://openapi.natwest.com/open-banking/v1.0/fca-service-metrics/pca"
+            "version": "v1.0",
+            "product-type": "pca"
           },
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "bca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://openapi.natwest.com/open-banking/v1.0/fca-service-metrics/bca"
+            "version": "v1.0",
+            "product-type": "bca"
           }
         ]
       }
@@ -426,18 +388,14 @@
         "commercial-credit-cards": [
           "v2.1"
         ],
-        "fca-metrics": [
+        "fca-service-metrics": [
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "pca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://openapi.rbs.co.uk/open-banking/v1.0/fca-service-metrics/pca"
+            "version": "v1.0",
+            "product-type": "pca"
           },
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "bca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://openapi.rbs.co.uk/open-banking/v1.0/fca-service-metrics/bca"
+            "version": "v1.0",
+            "product-type": "bca"
           }
         ]
       }
@@ -467,18 +425,14 @@
         "commercial-credit-cards": [
           "v2.1"
         ],
-        "fca-metrics": [
+        "fca-service-metrics": [
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "pca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://openbanking.santander.co.uk/sanuk/external/open-banking/v1.0/fca-service-metrics/pca"
+            "version": "v1.0",
+            "product-type": "pca"
           },
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "bca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://openbanking.santander.co.uk/sanuk/external/open-banking/v1.0/fca-service-metrics/bca"
+            "version": "v1.0",
+            "product-type": "bca"
           }
         ]
       }
@@ -505,18 +459,14 @@
         "unsecured-sme-loans": [
           "v2.1"
         ],
-        "fca-metrics": [
+        "fca-service-metrics": [
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "pca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://openapi.ulsterbank.co.uk/open-banking/v1.0/fca-service-metrics/pca"
+            "version": "v1.0",
+            "product-type": "pca"
           },
           {
-            "metrics-type": "fca-service-metrics",
-            "product-type": "bca",
-            "specification-version": "v1.0",
-            "downloadURL": "https://openapi.ulsterbank.co.uk/open-banking/v1.0/fca-service-metrics/bca"
+            "version": "v1.0",
+            "product-type": "bca"
           }
         ]
       }
