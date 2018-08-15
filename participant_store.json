@@ -31,6 +31,12 @@
         ],
         "unsecured-sme-loans": [
           "v2.1"
+        ],
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "bca"
+          }
         ]
       }
     },
@@ -221,6 +227,16 @@
         ],
         "unsecured-sme-loans": [
           "v2.1"
+        ],
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          },
+          {
+            "version": "v1.0",
+            "product-type": "bca"
+          }
         ]
       }
     },
