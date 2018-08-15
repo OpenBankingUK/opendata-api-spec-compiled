@@ -58,6 +58,16 @@
         ],
         "commercial-credit-cards": [
           "v2.2"
+        ],
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          },
+          {
+            "version": "v1.0",
+            "product-type": "bca"
+          }
         ]
       }
     },
@@ -83,8 +93,15 @@
         "unsecured-sme-loans": [
           "v2.1"
         ],
-        "commercial-credit-cards": [
-          "v2.1"
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          },
+          {
+            "version": "v1.0",
+            "product-type": "bca"
+          }
         ]
       }
     },
@@ -112,6 +129,16 @@
         ],
         "commercial-credit-cards": [
           "v2.1"
+        ],
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          },
+          {
+            "version": "v1.0",
+            "product-type": "bca"
+          }
         ]
       }
     },
@@ -148,6 +175,16 @@
         ],
         "unsecured-sme-loans": [
           "v2.1"
+        ],
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          },
+          {
+            "version": "v1.0",
+            "product-type": "bca"
+          }
         ]
       }
     },
@@ -202,6 +239,12 @@
         ],
         "personal-current-accounts": [
           "v2.1"
+        ],
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          }
         ]
       }
     },
@@ -229,6 +272,16 @@
         ],
         "commercial-credit-cards": [
           "v2.1"
+        ],
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          },
+          {
+            "version": "v1.0",
+            "product-type": "bca"
+          }
         ]
       }
     },
@@ -256,6 +309,16 @@
         ],
         "commercial-credit-cards": [
           "v2.1"
+        ],
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          },
+          {
+            "version": "v1.0",
+            "product-type": "bca"
+          }
         ]
       }
     },
@@ -274,6 +337,12 @@
         ],
         "personal-current-accounts": [
           "v2.1"
+        ],
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          }
         ]
       }
     },
@@ -301,6 +370,16 @@
         ],
         "commercial-credit-cards": [
           "v2.1"
+        ],
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          },
+          {
+            "version": "v1.0",
+            "product-type": "bca"
+          }
         ]
       }
     },
@@ -328,6 +407,16 @@
         ],
         "commercial-credit-cards": [
           "v2.1"
+        ],
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          },
+          {
+            "version": "v1.0",
+            "product-type": "bca"
+          }
         ]
       }
     },
@@ -355,6 +444,16 @@
         ],
         "commercial-credit-cards": [
           "v2.1"
+        ],
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          },
+          {
+            "version": "v1.0",
+            "product-type": "bca"
+          }
         ]
       }
     },
@@ -379,6 +478,16 @@
         ],
         "unsecured-sme-loans": [
           "v2.1"
+        ],
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          },
+          {
+            "version": "v1.0",
+            "product-type": "bca"
+          }
         ]
       }
     }
