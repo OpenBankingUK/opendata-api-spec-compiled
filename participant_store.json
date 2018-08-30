@@ -15,7 +15,7 @@
       "baseUrl": "https://openapi.adambank.com/open-banking",
       "supportedAPIs": {
         "business-current-accounts": [
-          "v2.1"
+          "v2.2"
         ]
       }
     },
@@ -27,10 +27,10 @@
       "baseUrl": "https://openapi.aibgb.co.uk/open-banking",
       "supportedAPIs": {
         "business-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "unsecured-sme-loans": [
-          "v2.1"
+          "v2.2"
         ],
         "fca-service-metrics": [
           {
@@ -85,19 +85,19 @@
       "baseUrl": "https://api.bankofscotland.co.uk/open-banking",
       "supportedAPIs": {
         "atms": [
-          "v2.1"
+          "v2.2"
         ],
         "branches": [
-          "v2.1"
+          "v2.2"
         ],
         "personal-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "business-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "unsecured-sme-loans": [
-          "v2.1"
+          "v2.2"
         ],
         "fca-service-metrics": [
           {
@@ -119,22 +119,22 @@
       "baseUrl": "https://atlas.api.barclays/open-banking",
       "supportedAPIs": {
         "atms": [
-          "v2.1"
+          "v2.2"
         ],
         "branches": [
-          "v2.1"
+          "v2.2"
         ],
         "personal-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "business-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "unsecured-sme-loans": [
-          "v2.1"
+          "v2.2"
         ],
         "commercial-credit-cards": [
-          "v2.1"
+          "v2.2"
         ],
         "fca-service-metrics": [
           {
@@ -156,7 +156,7 @@
       "baseUrl": "https://openapi.coutts.com/open-banking",
       "supportedAPIs": {
         "business-current-accounts": [
-          "v2.1"
+          "v2.2"
         ]
       }
     },
@@ -168,19 +168,19 @@
       "baseUrl": "https://obp-data.danskebank.com/open-banking",
       "supportedAPIs": {
         "atms": [
-          "v2.1"
+          "v2.2"
         ],
         "branches": [
-          "v2.1"
+          "v2.2"
         ],
         "personal-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "business-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "unsecured-sme-loans": [
-          "v2.1"
+          "v2.2"
         ],
         "fca-service-metrics": [
           {
@@ -202,7 +202,7 @@
       "baseUrl": "https://openapi.esmeloans.com/open-banking",
       "supportedAPIs": {
         "unsecured-sme-loans": [
-          "v2.1"
+          "v2.2"
         ]
       }
     },
@@ -214,19 +214,19 @@
       "baseUrl": "https://openapi.firsttrustbank.co.uk/open-banking",
       "supportedAPIs": {
         "atms": [
-          "v2.1"
+          "v2.2"
         ],
         "branches": [
-          "v2.1"
+          "v2.2"
         ],
         "personal-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "business-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "unsecured-sme-loans": [
-          "v2.1"
+          "v2.2"
         ],
         "fca-service-metrics": [
           {
@@ -248,13 +248,13 @@
       "baseUrl": "https://api.halifax.co.uk/open-banking",
       "supportedAPIs": {
         "atms": [
-          "v2.1"
+          "v2.2"
         ],
         "branches": [
-          "v2.1"
+          "v2.2"
         ],
         "personal-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "fca-service-metrics": [
           {
@@ -272,22 +272,22 @@
       "baseUrl": "https://api.hsbc.com/open-banking",
       "supportedAPIs": {
         "atms": [
-          "v2.1"
+          "v2.2"
         ],
         "branches": [
-          "v2.1"
+          "v2.2"
         ],
         "personal-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "business-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "unsecured-sme-loans": [
-          "v2.1"
+          "v2.2"
         ],
         "commercial-credit-cards": [
-          "v2.1"
+          "v2.2"
         ],
         "fca-service-metrics": [
           {
@@ -309,22 +309,22 @@
       "baseUrl": "https://api.lloydsbank.com/open-banking",
       "supportedAPIs": {
         "atms": [
-          "v2.1"
+          "v2.2"
         ],
         "branches": [
-          "v2.1"
+          "v2.2"
         ],
         "personal-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "business-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "unsecured-sme-loans": [
-          "v2.1"
+          "v2.2"
         ],
         "commercial-credit-cards": [
-          "v2.1"
+          "v2.2"
         ],
         "fca-service-metrics": [
           {
@@ -346,13 +346,13 @@
       "baseUrl": "https://openapi.nationwide.co.uk/open-banking",
       "supportedAPIs": {
         "atms": [
-          "v2.1"
+          "v2.2"
         ],
         "branches": [
-          "v2.1"
+          "v2.2"
         ],
         "personal-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "fca-service-metrics": [
           {
@@ -370,22 +370,22 @@
       "baseUrl": "https://openapi.natwest.com/open-banking",
       "supportedAPIs": {
         "atms": [
-          "v2.1"
+          "v2.2"
         ],
         "branches": [
-          "v2.1"
+          "v2.2"
         ],
         "personal-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "business-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "unsecured-sme-loans": [
-          "v2.1"
+          "v2.2"
         ],
         "commercial-credit-cards": [
-          "v2.1"
+          "v2.2"
         ],
         "fca-service-metrics": [
           {
@@ -407,22 +407,22 @@
       "baseUrl": "https://openapi.rbs.co.uk/open-banking",
       "supportedAPIs": {
         "atms": [
-          "v2.1"
+          "v2.2"
         ],
         "branches": [
-          "v2.1"
+          "v2.2"
         ],
         "personal-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "business-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "unsecured-sme-loans": [
-          "v2.1"
+          "v2.2"
         ],
         "commercial-credit-cards": [
-          "v2.1"
+          "v2.2"
         ],
         "fca-service-metrics": [
           {
@@ -444,22 +444,22 @@
       "baseUrl": "https://openbanking.santander.co.uk/sanuk/external/open-banking",
       "supportedAPIs": {
         "atms": [
-          "v2.1"
+          "v2.2"
         ],
         "branches": [
-          "v2.1"
+          "v2.2"
         ],
         "personal-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "business-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "unsecured-sme-loans": [
-          "v2.1"
+          "v2.2"
         ],
         "commercial-credit-cards": [
-          "v2.1"
+          "v2.2"
         ],
         "fca-service-metrics": [
           {
@@ -481,19 +481,19 @@
       "baseUrl": "https://openapi.ulsterbank.co.uk/open-banking",
       "supportedAPIs": {
         "atms": [
-          "v2.1"
+          "v2.2"
         ],
         "branches": [
-          "v2.1"
+          "v2.2"
         ],
         "personal-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "business-current-accounts": [
-          "v2.1"
+          "v2.2"
         ],
         "unsecured-sme-loans": [
-          "v2.1"
+          "v2.2"
         ],
         "fca-service-metrics": [
           {
