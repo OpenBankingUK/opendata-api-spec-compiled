@@ -26,6 +26,9 @@
       ],
       "baseUrl": "https://openapi.aibgb.co.uk/open-banking",
       "supportedAPIs": {
+        "personal-current-accounts": [
+          "v2.2"
+        ],
         "business-current-accounts": [
           "v2.2"
         ],
