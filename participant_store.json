@@ -1,7 +1,7 @@
 {
   "meta": {
     "Agreement": "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions",
-    "TotalResults": 17,
+    "TotalResults": 20,
     "LastUpdated": "2018-02-13T10:45:13.166Z",
     "License": "https://www.openbanking.org.uk/open-licence/",
     "TermsOfUse": "https://www.openbanking.org.uk/terms/"
@@ -506,6 +506,59 @@
           {
             "version": "v1.0",
             "product-type": "bca"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Clydesdale Bank PLC",
+      "brands": [
+        "Clydesdale Bank PLC"
+      ],
+      "baseUrl": "https://api-ib.cybservices.co.uk/ibapi/v2/banks/CB/open-banking",
+      "supportedAPIs": {
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          },
+          {
+            "version": "v1.0",
+            "product-type": "bca"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Yorkshire Bank",
+      "brands": [
+        "Yorkshire Bank"
+      ],
+      "baseUrl": "https://api-ib.cybservices.co.uk/ibapi/v2/banks/YB/open-banking",
+      "supportedAPIs": {
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
+          },
+          {
+            "version": "v1.0",
+            "product-type": "bca"
+          }
+        ]
+      }
+    },
+    {
+      "name": "B",
+      "brands": [
+        "B"
+      ],
+      "baseUrl": "https://api-ib.cybservices.co.uk/ibapi/v2/banks/B/open-banking",
+      "supportedAPIs": {
+        "fca-service-metrics": [
+          {
+            "version": "v1.0",
+            "product-type": "pca"
           }
         ]
       }
