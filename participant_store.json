@@ -549,11 +549,11 @@
       }
     },
     {
-      "name": "B",
+      "name": "VM",
       "brands": [
-        "B"
+        "VM"
       ],
-      "baseUrl": "https://api-ib.cybservices.co.uk/ibapi/v2/banks/B/open-banking",
+      "baseUrl": "https://api-ib.cybservices.co.uk/ibapi/v2/banks/VM/open-banking/v1.0/fca-service-metrics/pca",
       "supportedAPIs": {
         "fca-service-metrics": [
           {
